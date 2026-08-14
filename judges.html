@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ジャッジ分析 | トランポリン大会リザルト</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main id="app">
+  <div class="card">
+    <h2>ジャッジ分析（審判別採点分布）</h2>
+    <p class="meta" id="dataversion">読み込み中…</p>
+    <div class="notice">
+      ここに出しているのは、同じ演技を見た審判どうしの<strong>採点の差</strong>です。
+      観測された採点差であり、審判の能力評価ではありません。
+      順位づけはしていません（並び順は母数の多い順です）。
+    </div>
+    <p class="meta">
+      指標は生の平均Eではなく<strong>パネル内差</strong>（その審判のE − 同じ演技のパネル中央値）です。
+      生の平均を使うと、強い選手を多く担当した審判の平均が高く出てしまうためです。
+    </p>
+    <div class="controls">
+      <label>母集団<select id="pop"></select></label>
+      <button class="primary" id="csv">CSVで書き出す</button>
+    </div>
+    <p class="meta"><strong id="condition">—</strong></p>
+    <p class="meta" id="condition-note"></p>
+    <p class="meta" id="summary"></p>
+  </div>
+
+  <div class="card">
+    <div id="judges"></div>
+  </div>
+
+  <div class="card">
+    <h2>審判データが無い大会</h2>
+    <div id="coverage"></div>
+  </div>
+</main>
+<script type="module" src="js/judges.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "_comment": "同姓同名の別人を分ける / 表記ゆれで分かれた同一人物をまとめる。普段は空でよい。自動判定はしない。",
+  "_split_example": {
+    "name": "山田 太郎",
+    "groups": [
+      { "athlete_id": "yamada-taro-1", "meets": ["2025-05-17", "2025-08-01"] },
+      { "athlete_id": "yamada-taro-2", "meets": ["2026-07-24"] }
+    ]
+  },
+  "_merge_example": { "athlete_id": "shiro-eito", "names": ["城 瑛斗", "城　瑛斗"] },
+  "split": [],
+  "merge": []
+}
