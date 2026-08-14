@@ -19,11 +19,13 @@ from . import config
 
 # 旧字体・異体字の揺れ。**実データで同一人物の表記ゆれを確認できた分だけ**変換する。
 # 推測で広げると、本当に別姓の選手（澤田/沢田など）を誤って1人にまとめてしまう。
-#   髙橋/高橋・宮﨑/宮崎・畦﨑/畦崎・髙垣/高垣・古瀨/古瀬 の6組で確認済み
+# 渡邊/渡辺・齋/斎・齊/斉・曾/曽 は実データで統合される組が無く、入れても効かないので入れない。
+#   髙橋/高橋・宮﨑/宮崎・畦﨑/畦崎・髙垣/高垣・古瀨/古瀬・草ヶ谷/草ケ谷 の7組で確認済み
 NAME_VARIANTS = {
     '﨑': '崎',
     '髙': '高',
     '瀨': '瀬',
+    'ヶ': 'ケ',      # 草ヶ谷 剛 と 草ケ谷 剛（同一人物・所属だけ違う）
 }
 
 # 所属は人物の同定に使わないので、表示をそろえる目的でもう少し広く吸収してよい。
@@ -60,6 +62,9 @@ def athlete_id(name):
     digest = hashlib.sha1(name.encode('utf-8')).hexdigest()[:10]
     return 'a-%s' % digest
 
+
+# 国際大会の Representing は「JPN」「KAZ, 1」のような国コード。所属クラブではない。
+COUNTRY_CODE = re.compile(r'^[A-Z]{3}(, ?\d+)?$')
 
 _JUDGE_MERGE = None
 
@@ -150,13 +155,17 @@ def build_athletes(performances, overrides):
             'meets': set(),
             'sources': set(),
             'birth_dates': set(),
+            'disciplines': set(),
             'n_performances': 0,
         })
         a['names_seen'].add(p['athlete_name'])
         a['n_performances'] += 1
+        a['disciplines'].add(p['discipline'])
         a['meets'].add(p['meet_id'])
         a['sources'].add(p['source'])
-        if p['club']:
+        # 国際大会の「所属」は JPN・KAZ のような国コードで、クラブ名ではない。
+        # 所属履歴（転籍が見える表示）に混ぜると意味が壊れるので外す。
+        if p['club'] and not COUNTRY_CODE.match(p['club']):
             a['clubs'].setdefault(p['date'][:4], set()).add(p['club'])
         if p.get('birth_date'):
             a['birth_dates'].add(p['birth_date'])
@@ -172,6 +181,10 @@ def build_athletes(performances, overrides):
             'sources': sorted(a['sources']),
             'n_meets': len(a['meets']),
             'n_performances': a['n_performances'],
+            # Phase 1 の画面は個人種目しか出さない。DMT・タンブリング・シンクロだけの選手は
+            # 選手ページに1件も並ばないので、空の画面を出さずに理由を書けるようにする。
+            'has_individual': config.PHASE1_DISCIPLINE in a['disciplines'],
+            'disciplines': sorted(a['disciplines']),
         }
         others = sorted(n for n in a['names_seen'] if n != a['name'])
         if others:

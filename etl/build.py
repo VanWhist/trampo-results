@@ -75,7 +75,9 @@ def main(argv=None):
     for entry in overrides['merge']:
         for n in entry.get('names', []):
             merged_names.add(normalize.normalize_name(n))
-    variants, already_merged = name_variants.find_candidates(performances, merged_names)
+    readings = name_variants.surname_readings(overrides)
+    variants, already_merged = name_variants.find_candidates(
+        performances, merged_names, readings)
     name_variants.write_report(variants, already_merged, config.VARIANTS_MD)
 
     print('検証…')

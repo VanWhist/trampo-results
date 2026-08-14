@@ -1,5 +1,5 @@
 {
-  "_comment": "同姓同名の別人を分ける / 表記ゆれで分かれた同一人物をまとめる。普段は空でよい。自動判定はしない。",
+  "_comment": "同姓同名の別人を分ける / 表記ゆれで分かれた同一人物をまとめる。自動判定はしない。候補は docs/選手の表記ゆれ候補.md（ETLが毎回生成）にある。",
   "_split_example": {
     "name": "山田 太郎",
     "groups": [
@@ -7,7 +7,33 @@
       { "athlete_id": "yamada-taro-2", "meets": ["2026-07-24"] }
     ]
   },
-  "_merge_example": { "athlete_id": "shiro-eito", "names": ["城 瑛斗", "城　瑛斗"] },
+  "_merge_note": "2026-08-14 Vanさん承認。国内大会は日本語表記・国際大会はローマ字表記のため別IDになっていたもの。生年月日の一致と出場日が重ならないことをETLで確認済み。生年月日が YYYY-01-01 の選手は生年＋読み＋同姓内で唯一であることをVanさんが確認。",
   "split": [],
-  "merge": []
+  "merge": [
+    { "athlete_id": "a-kishi-daiki",      "names": ["岸 大貴", "KISHI Daiki"] },
+    { "athlete_id": "a-matsumoto-yusei",  "names": ["松本 悠生", "MATSUMOTO Yusei"] },
+    { "athlete_id": "a-misawa-yuka",      "names": ["三澤 優華", "MISAWA Yuka"] },
+    { "athlete_id": "a-miyano-hayato",    "names": ["宮野 隼人", "MIYANO Hayato"] },
+    { "athlete_id": "a-mori-hikaru",      "names": ["森 ひかる", "MORI Hikaru"] },
+    { "athlete_id": "a-nishioka-ryusei",  "names": ["西岡 隆成", "NISHIOKA Ryusei"] },
+    { "athlete_id": "a-sakurai-ena",      "names": ["櫻井 愛菜", "SAKURAI Ena"] },
+    { "athlete_id": "a-sawada-momo",      "names": ["澤田 守杏", "SAWADA Momo"] },
+    { "athlete_id": "a-tanaka-saki",      "names": ["田中 沙季", "TANAKA Saki"] },
+    { "athlete_id": "a-unno-hiroto",      "names": ["海野 大透", "UNNO Hiroto"] },
+
+    { "athlete_id": "a-ishida-misaki",    "names": ["石田 美咲希", "ISHIDA Misaki"] },
+    { "athlete_id": "a-mita-yasufumi",    "names": ["美田 靖文", "MITA Yasufumi"] },
+    { "athlete_id": "a-yamazaki-riku",    "names": ["山崎 凌空", "YAMAZAKI Riku"] },
+    { "athlete_id": "a-tanaka-kiko",      "names": ["田中 希湖", "TANAKA Kiko"] },
+
+    { "athlete_id": "a-iida-mayu",        "names": ["飯田 麻友", "IIDA Mayu"] },
+    { "athlete_id": "a-minami-takuto",    "names": ["南 拓斗", "MINAMI Takuto"] },
+    { "athlete_id": "a-ozawa-kohei",      "names": ["小澤 航平", "OZAWA Kohei"] },
+    { "athlete_id": "a-saito-ryu",        "names": ["齋藤 瑠", "SAITO Ryu"] },
+    { "athlete_id": "a-sato-ayumi",       "names": ["佐藤 歩実", "SATO Ayumi"] },
+    { "athlete_id": "a-sugiura-himena",   "names": ["杉浦 姫菜", "SUGIURA Himena"] },
+    { "athlete_id": "a-sugiura-yumena",   "names": ["杉浦 夢菜", "SUGIURA Yumena"] },
+    { "athlete_id": "a-tsuboi-yukina",    "names": ["坪井 侑奈", "TSUBOI Yukina"] },
+    { "athlete_id": "a-watanabe-kotomi",  "names": ["渡邊 琴美", "WATANABE Kotomi"] }
+  ]
 }

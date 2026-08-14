@@ -29,6 +29,7 @@ function renderSearch(query) {
       el('th', { class: 'no-sort', text: '所属（新しい順）' }),
       el('th', { class: 'no-sort num', text: '演技' }),
       el('th', { class: 'no-sort num', text: '大会' }),
+      el('th', { class: 'no-sort', text: '' }),
     ])),
     el('tbody', {}, hits.slice(0, 200).map((a) => el('tr', {}, [
       el('td', {}, el('span', {
@@ -38,6 +39,8 @@ function renderSearch(query) {
       el('td', { class: 'meta', text: clubsText(a) }),
       el('td', { class: 'num', text: a.n_performances }),
       el('td', { class: 'num', text: a.n_meets }),
+      el('td', { class: 'meta',
+        text: a.has_individual ? '' : (a.disciplines || []).join('・') + 'のみ' }),
     ]))),
   ]));
   box.append(list);
@@ -90,6 +93,12 @@ function renderAthlete(id) {
   }
   // 所属は「属性」であって名寄せの鍵ではない。転籍しても同じ選手として扱う。
   box.append(el('p', { class: 'meta', text: '選手の同定は氏名だけで行っています（所属・生年月日は鍵にしていません）。' }));
+
+  if (!a.has_individual) {
+    box.append(el('div', { class: 'notice',
+      text: 'この選手は個人種目の記録がありません（' + (a.disciplines || []).join('・')
+        + 'のみ）。この画面は個人種目だけを表示しています。' }));
+  }
 
   const missing = mine.filter((p) => p.total === null || p.total === undefined).length;
   if (missing) {
