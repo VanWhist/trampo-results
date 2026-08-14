@@ -34,6 +34,12 @@
     { "athlete_id": "a-sugiura-himena",   "names": ["杉浦 姫菜", "SUGIURA Himena"] },
     { "athlete_id": "a-sugiura-yumena",   "names": ["杉浦 夢菜", "SUGIURA Yumena"] },
     { "athlete_id": "a-tsuboi-yukina",    "names": ["坪井 侑奈", "TSUBOI Yukina"] },
-    { "athlete_id": "a-watanabe-kotomi",  "names": ["渡邊 琴美", "WATANABE Kotomi"] }
-  ]
+    { "athlete_id": "a-watanabe-kotomi",  "names": ["渡邊 琴美", "WATANABE Kotomi"] },
+
+    { "athlete_id": "a-kusagaya-takeshi", "names": ["草ケ谷 剛", "KUSAGAYA Takeshi"] },
+    { "athlete_id": "a-matayoshi-kento",  "names": ["又吉 健斗", "MATAYOSHI Kento"] },
+    { "athlete_id": "a-fukai-takumi",     "names": ["深井 拓海", "FUKAI Takumi"] },
+    { "athlete_id": "a-kitaori-eri",      "names": ["北折 愛里", "KITAORI Eri"] }
+  ],
+  "_pending": "SEKIGUCHI Yuina（関口 結菜が有力だがDMTに同生年が7名）と SHIMIZU Rei（清水姓9名。澪は「みお」と読むのが一般的で断定できない）は保留。どちらもタンブリング・DMTのみで、Phase 1の画面には出ない。warningsに残す。"
 }

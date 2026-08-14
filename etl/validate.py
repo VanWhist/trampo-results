@@ -188,6 +188,13 @@ def run(performances, athletes, competitions, judges, panels, name_variants_=Non
                 rep.warn('選手の表記ゆれ',
                          '%s は候補が %d人います。docs/選手の表記ゆれ候補.md を見て選んでください'
                          % (c['romanized'], len(c['matches'])))
+            elif not c['matches']:
+                # 絞りきれなかったものも必ず残す。黙って消えると、
+                # 「確認して統合不要と判断した」のか「見落とした」のか分からなくなる。
+                rep.warn('選手の表記ゆれ',
+                         '%s は日本語表記側を1人に絞れませんでした（同条件の候補 %d人）。'
+                         'docs/選手の表記ゆれ候補.md を見て判断してください'
+                         % (c['romanized'], c['loose_total']))
 
     rep.note('選手数', '%d名' % len(athletes))
     rep.note('大会数', '%d' % len(competitions))
