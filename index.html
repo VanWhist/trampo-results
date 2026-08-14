@@ -7,58 +7,49 @@
      元データはPDF中心で氏名検索に引っかかりにくいが、このサイトはHTMLなので
      そのままだと選手名・審判名が検索結果に出る。URLを知っていれば見られる状態は変わらない。 -->
 <meta name="robots" content="noindex, nofollow">
-<title>リザルト一覧 | トランポリン大会リザルト</title>
+<title>リザルト | トランポリン大会リザルト</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <main id="app">
-  <div class="card">
-    <h2>リザルト一覧</h2>
-    <p class="meta" id="dataversion">読み込み中…</p>
-    <div class="controls">
-      <label>検索（選手名・大会名・所属）
-        <input type="search" id="q" placeholder="例：城 瑛斗">
-      </label>
+  <!-- 入口は検索。いきなり8,175件の表は出さない -->
+  <div class="card hero">
+    <label class="hero-search">
+      <span class="hero-label">選手・所属・大会をさがす</span>
+      <input type="search" id="q" autocomplete="off"
+             placeholder="選手名・所属・大会名を検索　例：城 瑛斗">
+    </label>
+    <div id="suggest" class="suggest" hidden></div>
+    <div class="hero-actions">
+      <button class="chip" id="toggle-filters" aria-expanded="false">詳しく絞り込む ▼</button>
+      <button class="chip" id="show-all">すべての記録を見る</button>
+      <button class="chip" id="reset" hidden>条件をクリア</button>
+      <button class="chip" id="csv" hidden>CSVで書き出す</button>
+    </div>
+    <div class="controls" id="filters" hidden>
       <label>年<select id="f-year"></select></label>
       <label>大会<select id="f-meet"></select></label>
       <label>区分<select id="f-category"></select></label>
       <label>ラウンド<select id="f-round"></select></label>
       <label>演技<select id="f-routine"></select></label>
-      <button class="chip" id="reset">条件をクリア</button>
-      <button class="primary" id="csv">CSVで書き出す</button>
     </div>
-    <p class="meta"><strong id="count">—</strong>　<span id="missing"></span></p>
-    <p class="meta">
-      取れなかった値は空欄（—）にしています。0点ではありません。
-      大阪府の記録は所属・順位が公開されておらず、決勝は合計点・D・Tがありません。
-    </p>
+    <div id="note-slot"></div>
   </div>
 
-  <div class="card">
-    <div class="table-wrap">
-      <table id="table">
-        <thead>
-          <tr>
-            <th data-key="date">大会日</th>
-            <th data-key="meet_name">大会</th>
-            <th data-key="category">区分</th>
-            <th data-key="round">ラウンド</th>
-            <th data-key="routine" data-numeric="1" class="num">演技</th>
-            <th data-key="athlete_name">選手</th>
-            <th data-key="club">所属</th>
-            <th data-key="rank" data-numeric="1" class="num">順位</th>
-            <th data-key="total" data-numeric="1" class="num">合計</th>
-            <th data-key="D" data-numeric="1" class="num">D</th>
-            <th data-key="E" data-numeric="1" class="num">E</th>
-            <th data-key="T" data-numeric="1" class="num">T</th>
-            <th data-key="HD" data-numeric="1" class="num">HD</th>
-            <th data-key="n_elements" data-numeric="1" class="num">技数</th>
-            <th class="no-sort"></th>
-          </tr>
-        </thead>
-        <tbody id="tbody"></tbody>
-      </table>
+  <!-- 初期表示：最近の大会。ここから入る -->
+  <div class="card" id="recent-card">
+    <h2>最近の大会</h2>
+    <p class="meta">大会を選ぶと、その大会の記録を表示します。</p>
+    <div id="recent" class="meet-grid"></div>
+  </div>
+
+  <div class="card" id="results-card" hidden>
+    <div class="results-head">
+      <h2 id="results-title">検索結果</h2>
+      <div class="pager" id="pager-top"></div>
     </div>
+    <div id="results"></div>
+    <div class="pager pager-bottom" id="pager-bottom"></div>
   </div>
 </main>
 <script type="module" src="js/index.js"></script>

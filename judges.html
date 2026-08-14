@@ -14,21 +14,18 @@
 <main id="app">
   <div class="card">
     <h2>ジャッジ分析（審判別採点分布）</h2>
-    <p class="meta" id="dataversion">読み込み中…</p>
-    <div class="notice">
-      ここに出しているのは、同じ演技を見た審判どうしの<strong>採点の差</strong>です。
-      観測された採点差であり、審判の能力評価ではありません。
-      順位づけはしていません（並び順は母数の多い順です）。
-    </div>
-    <p class="meta">
-      指標は生の平均Eではなく<strong>パネル内差</strong>（その審判のE − 同じ演技のパネル中央値）です。
-      生の平均を使うと、強い選手を多く担当した審判の平均が高く出てしまうためです。
-    </p>
-    <p class="meta">
-      国内大会は日本語表記、国際大会はローマ字表記で審判名が記録されているため、
-      <strong>両方で審判をしている人は別々に並ぶことがあります</strong>（例：山本 宜史 と YAMAMOTO Norifumi）。
-      推測で結合すると別人を混ぜる恐れがあるため、人が確認するまで分けたままにしています。
-    </p>
+    <div id="note-slot"></div>
+
+    <!-- 入口。表をそのまま出さない。ただし「低め◯名」を主役にもしない（順位づけの画面にしないため） -->
+    <div class="summary-cards" id="summary"></div>
+
+    <div class="hero-actions" id="quick"></div>
+
+    <label class="hero-search compact">
+      <span class="hero-label">審判をさがす</span>
+      <input type="search" id="jq" autocomplete="off" placeholder="審判名で検索">
+    </label>
+
     <div class="controls">
       <label>母集団<select id="pop"></select></label>
       <label>大会<select id="f-meet"></select></label>
@@ -36,15 +33,19 @@
       <label>男女<select id="f-sex"></select></label>
       <label>ラウンド<select id="f-round"></select></label>
       <button class="chip" id="reset">絞り込みをクリア</button>
-      <button class="primary" id="csv">CSVで書き出す</button>
+      <button class="chip" id="csv">CSVで書き出す</button>
     </div>
     <p class="meta"><strong id="condition">—</strong></p>
     <p class="meta" id="condition-note"></p>
-    <p class="meta" id="summary"></p>
   </div>
 
   <div class="card">
+    <div class="results-head">
+      <h2 id="list-title">審判一覧</h2>
+      <div class="pager" id="pager-top"></div>
+    </div>
     <div id="judges"></div>
+    <div class="pager pager-bottom" id="pager-bottom"></div>
   </div>
 
   <div class="card">

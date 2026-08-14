@@ -2,7 +2,10 @@
 // その選手の全大会の出場履歴と、所属の履歴（転籍が見える）を出す。
 
 import * as data from './data.js';
-import { el, clear, cell, num, sourceBadge, mountNav, makeSortable, downloadCsv, errorBox } from './ui.js';
+import {
+  el, clear, cell, num, sourceBadge, mountNav, makeSortable, downloadCsv, errorBox,
+  isNarrow, onWidthChange, noteLayers,
+} from './ui.js';
 import { openDetail } from './detail.js';
 
 let athletes = [];
@@ -101,12 +104,57 @@ function renderAthlete(id) {
   }
 
   const missing = mine.filter((p) => p.total === null || p.total === undefined).length;
-  if (missing) {
-    box.append(el('div', { class: 'notice',
-      text: '合計点が公開されていない演技が ' + missing + ' 件あります（大阪府の決勝）。空欄で表示しています。' }));
+  const interrupted = mine.filter((p) => p.interrupted).length;
+  if (missing || interrupted) {
+    box.append(noteLayers(
+      '一部の演技は合計点などが取得できていません',
+      [
+        missing ? el('p', { class: 'meta', text: '合計点・D・Tが公開されていない演技が ' + missing
+          + ' 件あります（大阪府の決勝は明細ページしかないため）。空欄（—）で表示しています。0点ではありません。' }) : null,
+        interrupted ? el('p', { class: 'meta', text: '中断した演技が ' + interrupted
+          + ' 件あります。消していません。演技詳細で「中断（技数7）」のように明示し、'
+          + '技数を超えた位置は空欄にしています。' }) : null,
+      ].filter(Boolean)));
   }
 
   const wrap = clear(document.getElementById('history'));
+  const renderCards = (list) => el('div', { class: 'card-list' }, list.map((p) => el('article', { class: 'rec' }, [
+    el('div', { class: 'rec-head' }, [
+      el('span', { class: 'rec-name', text: p.date }),
+      el('span', { class: 'rec-total', text: num(p.total, 2) ?? '—' }),
+    ]),
+    el('div', { class: 'rec-meta' }, [document.createTextNode(p.meet_name + ' '), sourceBadge(p.official)]),
+    el('div', { class: 'rec-tags' }, [
+      el('span', { class: 'badge plain', text: p.category }),
+      p.round ? el('span', { class: 'badge plain', text: p.round }) : null,
+      p.routine ? el('span', { class: 'badge plain', text: p.routine + '本目' }) : null,
+      p.rank ? el('span', { class: 'badge plain', text: p.rank + '位' }) : null,
+      p.interrupted ? el('span', { class: 'badge flag', text: '中断' }) : null,
+    ]),
+    el('dl', { class: 'rec-sub' }, [
+      ['D', num(p.D, 1)], ['E', num(p.E, 1)], ['T', num(p.T, 2)], ['HD', num(p.HD, 2)],
+      ['技数', p.n_elements ?? null],
+    ].flatMap(([k, v]) => [
+      el('dt', { text: k }),
+      el('dd', { class: v === null || v === undefined ? 'blank' : '', text: v ?? '—' }),
+    ])),
+    el('button', { class: 'chip', text: '演技の詳細', onclick: () => openDetail(p, meets.get(p.meet_id)) }),
+  ])));
+
+  document.getElementById('csv').onclick = () => downloadCsv(
+    a.name + '_出場履歴.csv',
+    ['大会日', '大会名', '出典', '区分', 'ラウンド', '演技', '所属', '順位', '合計', 'D', 'E', 'T', 'HD', '技数'],
+    mine.map((p) => [p.date, p.meet_name, p.official ? '公式' : '非公式', p.category,
+      p.round || '', p.routine || '', p.club || '', p.rank || '',
+      num(p.total, 2) ?? '', num(p.D, 1) ?? '', num(p.E, 1) ?? '', num(p.T, 2) ?? '',
+      num(p.HD, 2) ?? '', p.n_elements ?? '']));
+  document.getElementById('csv').hidden = false;
+
+  // 狭い画面ではカード表示。表の横スクロールは最終手段。
+  if (isNarrow()) {
+    wrap.append(renderCards([...mine]));
+    return;
+  }
   wrap.append(el('div', { class: 'table-wrap' }, el('table', { id: 'htable' }, [
     el('thead', {}, el('tr', {}, [
       ['date', '大会日'], ['meet_name', '大会'], ['category', '区分'], ['round', 'ラウンド'],
@@ -142,15 +190,6 @@ function renderAthlete(id) {
     }
   };
   makeSortable(document.getElementById('htable'), mine, render, { key: 'date', dir: -1 });
-
-  document.getElementById('csv').onclick = () => downloadCsv(
-    a.name + '_出場履歴.csv',
-    ['大会日', '大会名', '出典', '区分', 'ラウンド', '演技', '所属', '順位', '合計', 'D', 'E', 'T', 'HD', '技数'],
-    mine.map((p) => [p.date, p.meet_name, p.official ? '公式' : '非公式', p.category,
-      p.round || '', p.routine || '', p.club || '', p.rank || '',
-      num(p.total, 2) ?? '', num(p.D, 1) ?? '', num(p.E, 1) ?? '', num(p.T, 2) ?? '',
-      num(p.HD, 2) ?? '', p.n_elements ?? '']));
-  document.getElementById('csv').hidden = false;
 }
 
 function route() {
@@ -173,6 +212,7 @@ async function main() {
     const q = document.getElementById('q');
     q.addEventListener('input', () => renderSearch(q.value.trim()));
     window.addEventListener('hashchange', route);
+    onWidthChange(() => route());     // 表↔カードの切り替え
     renderSearch('');
     route();
   } catch (err) {

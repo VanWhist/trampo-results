@@ -45,6 +45,7 @@ export function navbar(active) {
     ['index.html', 'リザルト'],
     ['athlete.html', '選手'],
     ['judges.html', 'ジャッジ分析'],
+    ['about.html', 'データについて'],
   ];
   return el('header', { class: 'site' }, [
     el('h1', { text: 'トランポリン大会リザルト' }),
@@ -101,6 +102,88 @@ export function makeSortable(table, rows, render, initial) {
   }
   apply();
   return { update(next) { rows = next; apply(); } };
+}
+
+// ---- ページング -------------------------------------------------------------
+// 検索・絞り込み・ソートは常に全件を対象にし、**表示だけ**を切り出す。
+// 以前は先頭3000件だけを描画していたため、3,001件目以降にどうやっても到達できず、
+// 欠測を含む行（ソートで末尾に送られる）が事実上見えなくなっていた。
+export const PER_PAGE = 50;
+
+export function paginate(list, page, perPage = PER_PAGE) {
+  const pages = Math.max(1, Math.ceil(list.length / perPage));
+  const current = Math.min(Math.max(1, page), pages);
+  const start = (current - 1) * perPage;
+  return {
+    items: list.slice(start, start + perPage),
+    page: current,
+    pages,
+    from: list.length ? start + 1 : 0,
+    to: Math.min(start + perPage, list.length),
+    total: list.length,
+  };
+}
+
+/** 「8,175件中 132件　1–50件を表示　‹ 前へ 1 / 3 次へ ›」 */
+export function renderPager(node, view, grandTotal, onGo) {
+  clear(node);
+  const n = (v) => v.toLocaleString('ja-JP');
+  node.append(el('span', { class: 'pager-count' }, [
+    el('strong', { text: n(grandTotal) + '件中 ' + n(view.total) + '件' }),
+    document.createTextNode(view.total
+      ? '　' + n(view.from) + '–' + n(view.to) + '件を表示'
+      : '　該当なし'),
+  ]));
+  if (view.pages <= 1) return;
+  node.append(el('span', { class: 'pager-nav' }, [
+    el('button', { class: 'chip', text: '‹ 前へ', disabled: view.page <= 1,
+      onclick: () => onGo(view.page - 1) }),
+    el('span', { class: 'pager-pos', text: view.page + ' / ' + view.pages }),
+    el('button', { class: 'chip', text: '次へ ›', disabled: view.page >= view.pages,
+      onclick: () => onGo(view.page + 1) }),
+    el('button', { class: 'chip', text: '最後 »', disabled: view.page >= view.pages,
+      onclick: () => onGo(view.pages) }),
+  ]));
+}
+
+// ---- 狭い画面ではカード表示に切り替える -------------------------------------
+// 表の横スクロールは最終手段。1件＝1カードにして、主な情報だけを大きく出す。
+const NARROW = window.matchMedia('(max-width: 700px)');
+
+export function isNarrow() {
+  return NARROW.matches;
+}
+
+export function onWidthChange(fn) {
+  const handler = () => fn(NARROW.matches);
+  if (NARROW.addEventListener) NARROW.addEventListener('change', handler);
+  else NARROW.addListener(handler);
+}
+
+// ---- 注記の3層構造 -----------------------------------------------------------
+// 注記は消さない。毎回全文を通過させるのをやめるだけ。
+//   第1層 … 一行だけ常時表示
+//   第2層 … クリックで展開
+//   第3層 … 「データについて」ページ
+export function noteLayers(headline, detailNodes, aboutAnchor) {
+  const body = el('div', { class: 'note-body', hidden: true }, detailNodes);
+  const toggle = el('button', {
+    class: 'link-button', text: '詳しく見る',
+    onclick: () => {
+      body.hidden = !body.hidden;
+      toggle.textContent = body.hidden ? '詳しく見る' : '閉じる';
+    },
+  });
+  return el('div', { class: 'note' }, [
+    el('div', { class: 'note-head' }, [
+      el('span', { class: 'note-icon', text: 'ⓘ' }),
+      el('span', { text: headline }),
+      toggle,
+      aboutAnchor === false ? null
+        : el('a', { class: 'note-more', href: 'about.html', text: 'データについて' }),
+    ]),
+    body,
+  ]);
 }
 
 export function downloadCsv(filename, header, rows) {
