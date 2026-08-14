@@ -29,6 +29,7 @@ OVERRIDES = os.path.join(HERE, 'athlete_overrides.json')
 JUDGE_OVERRIDES = os.path.join(HERE, 'judge_overrides.json')
 EXPECTED_COUNTS = os.path.join(HERE, 'expected_counts.json')
 REPORT_MD = os.path.join(REPO, 'docs', '検証レポート_ETL.md')
+VARIANTS_MD = os.path.join(REPO, 'docs', '選手の表記ゆれ候補.md')
 
 PARSER_VERSION = '1.0.0'
 

@@ -82,7 +82,7 @@ def judge_panel_diff(performances, panels, judges):
             else:
                 trend = '中立'
             entries.append({
-                'judge_key': judge_key,
+                'judge_id': judge_key,
                 'name': info.get('name', ''),
                 'club': info.get('club', ''),
                 'n': n,
@@ -100,6 +100,70 @@ def judge_panel_diff(performances, panels, judges):
         entries.sort(key=lambda e: (-e['n'], e['name']))
         out[pop_name] = entries
     return out
+
+
+def judge_diff_rows(performances, panels, judges):
+    """審判差の生データを、画面で絞り込めるだけの粒度で持たせる。
+
+    指示書7-4の「大会・区分・男女・ラウンドで絞り込む」は、組み合わせが多すぎて
+    事前に全通り計算できない。1行＝1審判×1演技のパネル差だけを渡し、絞り込みが
+    かかったときだけブラウザ側で平均を取り直す（既定の表示は事前集計を使う）。
+
+    列名を毎行くり返さないよう、値は配列で持つ。
+        [審判の番号, 差×1000, 大会の番号, 区分の番号, 男女, ラウンドの番号, 母集団]
+        母集団 … 0=全演技のみ / 1=完遂 / 2=完遂かつ予選通過者
+    """
+    advanced = set()
+    for p in performances:
+        if p['round'] in ('準決勝', '決勝') and p.get('athlete_id'):
+            advanced.add((p['meet_id'], p['category'], p['athlete_id']))
+
+    judge_ids, meet_ids, categories, rounds = [], [], [], []
+    index = {}
+
+    def idx(bucket, key):
+        k = (id(bucket), key)
+        if k not in index:
+            index[k] = len(bucket)
+            bucket.append(key)
+        return index[k]
+
+    rows = []
+    for p in performances:
+        if p['discipline'] != config.PHASE1_DISCIPLINE:
+            continue
+        panel = panels.get(p.get('panel_key') or '')
+        if not panel or not panel.get('e_slots'):
+            continue
+        marks = {label: v for label, v in (p.get('judge_E') or {}).items()
+                 if panel['e_slots'].get(label)}
+        if len(marks) < 3:
+            continue
+        median = _median(list(marks.values()))
+        if p['n_elements'] != 10:
+            pop = 0
+        elif (p['meet_id'], p['category'], p.get('athlete_id')) in advanced:
+            pop = 2
+        else:
+            pop = 1
+        m = idx(meet_ids, p['meet_id'])
+        c = idx(categories, p['category'])
+        r = idx(rounds, p['round'] or '')
+        s = {'male': 1, 'female': 2}.get(p.get('sex'), 0)
+        for label, value in marks.items():
+            rows.append([idx(judge_ids, panel['e_slots'][label]),
+                         int(round((value - median) * 1000)), m, c, s, r, pop])
+
+    return {
+        'columns': ['judge', 'diff_x1000', 'meet', 'category', 'sex', 'round', 'pop'],
+        'judges': [{'judge_id': j, 'name': judges.get(j, {}).get('name', ''),
+                    'club': judges.get(j, {}).get('club', '')} for j in judge_ids],
+        'meets': meet_ids,
+        'categories': categories,
+        'rounds': rounds,
+        'sexes': ['', 'male', 'female'],
+        'rows': rows,
+    }
 
 
 def athlete_summary(performances):

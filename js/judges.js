@@ -32,18 +32,84 @@ const POPULATIONS = {
 };
 
 let diff = null;
+let rows = null;          // 絞り込みがかかったときだけ使う生データ
 let meets = [];
+let meetMap = new Map();
+let thresholds = { minN: 100, strict: -0.1, lenient: 0.1 };
 let state = { pop: 'qualified', meet: '', category: '', sex: '', round: '' };
 
+const POP_CODE = { all: [0, 1, 2], complete: [1, 2], qualified: [2] };
+
+function filtered() {
+  return state.meet || state.category || state.sex || state.round;
+}
+
+// 絞り込みがあるときは、事前集計ではなく生データから平均を取り直す。
+// 組み合わせが多すぎて事前に全通り計算できないため。19,000行なので一瞬で終わる。
+function recompute() {
+  const pops = POP_CODE[state.pop];
+  const mi = state.meet ? rows.meets.indexOf(state.meet) : -1;
+  const ci = state.category ? rows.categories.indexOf(state.category) : -1;
+  const ri = state.round ? rows.rounds.indexOf(state.round) : -1;
+  const si = state.sex ? rows.sexes.indexOf(state.sex) : -1;
+
+  const acc = new Map();
+  for (const r of rows.rows) {
+    if (!pops.includes(r[6])) continue;
+    if (mi >= 0 && r[2] !== mi) continue;
+    if (ci >= 0 && r[3] !== ci) continue;
+    if (si >= 0 && r[4] !== si) continue;
+    if (ri >= 0 && r[5] !== ri) continue;
+    let a = acc.get(r[0]);
+    if (!a) { a = { diffs: [], meets: new Set(), cats: new Set() }; acc.set(r[0], a); }
+    a.diffs.push(r[1] / 1000);
+    a.meets.add(r[2]);
+    a.cats.add(rows.categories[r[3]]);
+  }
+
+  const out = [];
+  for (const [ji, a] of acc) {
+    const j = rows.judges[ji];
+    const n = a.diffs.length;
+    const mean = a.diffs.reduce((s, v) => s + v, 0) / n;
+    const sorted = [...a.diffs].sort((x, y) => x - y);
+    const med = n % 2 ? sorted[(n - 1) / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2;
+    const sd = Math.sqrt(a.diffs.reduce((s, v) => s + (v - mean) ** 2, 0) / n);
+    const enough = n >= thresholds.minN;
+    const trend = !enough ? 'データ不足'
+      : mean <= thresholds.strict ? '辛め'
+      : mean >= thresholds.lenient ? '甘め' : '中立';
+    out.push({
+      judge_id: j.judge_id, name: j.name, club: j.club, n,
+      n_meets: a.meets.size,
+      n_seasons: new Set([...a.meets].map((i) => (meetMap.get(rows.meets[i]) || {}).season)).size,
+      categories: [...a.cats].sort(),
+      mean_diff: enough ? mean : null,
+      median_diff: enough ? med : null,
+      sd: enough ? sd : null,
+      trend, has_trend: enough,
+    });
+  }
+  out.sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, 'ja'));
+  return out;
+}
+
 function render() {
-  const entries = diff[state.pop];
+  const entries = filtered() ? recompute() : diff[state.pop];
   const box = clear(document.getElementById('judges'));
 
   const withTrend = entries.filter((e) => e.has_trend);
   const without = entries.filter((e) => !e.has_trend);
 
+  const extra = [
+    state.meet ? '大会：' + ((meetMap.get(state.meet) || {}).name || state.meet) : null,
+    state.category ? '区分：' + state.category : null,
+    state.sex ? '男女：' + (state.sex === 'male' ? '男子' : '女子') : null,
+    state.round ? 'ラウンド：' + state.round : null,
+  ].filter(Boolean);
   document.getElementById('condition').textContent =
-    '今見ている条件：' + POPULATIONS[state.pop].label;
+    '今見ている条件：' + POPULATIONS[state.pop].label
+    + (extra.length ? '／' + extra.join('／') : '');
   document.getElementById('condition-note').textContent = POPULATIONS[state.pop].note;
   document.getElementById('summary').textContent =
     '審判 ' + entries.length + ' 名／このうち母数100演技以上は ' + withTrend.length + ' 名'
@@ -93,6 +159,12 @@ function render() {
   }
 }
 
+function fill(id, pairs, label) {
+  const sel = clear(document.getElementById(id));
+  sel.append(el('option', { value: '', text: label }));
+  for (const [value, text] of pairs) sel.append(el('option', { value, text }));
+}
+
 function signed(v) {
   if (v === null || v === undefined) return '—';
   return (v >= 0 ? '+' : '') + Number(v).toFixed(3);
@@ -114,11 +186,14 @@ function renderCoverage() {
 async function main() {
   mountNav('judges.html');
   try {
-    const [d, ms, manifest] = await Promise.all([
-      data.judgeDiff(), data.competitions(), data.manifest(),
+    const [d, ms, manifest, rw] = await Promise.all([
+      data.judgeDiff(), data.competitions(), data.manifest(), data.judgeDiffRows(),
     ]);
     diff = d;
+    rows = rw;
     meets = ms;
+    meetMap = new Map(ms.map((c) => [c.meet_id, c]));
+    thresholds = manifest.judgeThresholds;
     document.getElementById('dataversion').textContent =
       'データ ' + manifest.dataVersion + '／判定の閾値 平均パネル差 ±'
       + Math.abs(manifest.judgeThresholds.lenient) + '／母数の下限 '
@@ -131,10 +206,31 @@ async function main() {
     picker.value = state.pop;
     picker.addEventListener('change', () => { state.pop = picker.value; render(); });
 
+    // 指示書7-4：大会・区分・男女・ラウンドで絞り込めるようにする
+    const judgeMeets = ms.filter((c) => rows.meets.includes(c.meet_id));
+    fill('f-meet', judgeMeets.map((c) => [c.meet_id, c.date + ' ' + c.name]), '大会（すべて）');
+    fill('f-category', [...rows.categories].sort().map((c) => [c, c]), '区分（すべて）');
+    fill('f-sex', [['male', '男子'], ['female', '女子']], '男女（すべて）');
+    fill('f-round', rows.rounds.filter(Boolean).map((r) => [r, r]), 'ラウンド（すべて）');
+    for (const [id, key] of [['f-meet', 'meet'], ['f-category', 'category'],
+      ['f-sex', 'sex'], ['f-round', 'round']]) {
+      const node = document.getElementById(id);
+      node.addEventListener('change', () => { state[key] = node.value; render(); });
+    }
+    document.getElementById('reset').addEventListener('click', () => {
+      for (const [id, key] of [['f-meet', 'meet'], ['f-category', 'category'],
+        ['f-sex', 'sex'], ['f-round', 'round']]) {
+        document.getElementById(id).value = '';
+        state[key] = '';
+      }
+      render();
+    });
+
     document.getElementById('csv').addEventListener('click', () => {
+      const list = filtered() ? recompute() : diff[state.pop];
       downloadCsv('ジャッジ分析_' + state.pop + '.csv',
         ['審判', '所属', 'n', '大会数', 'シーズン数', '平均パネル差', '中央値パネル差', '標準偏差', '傾向', 'カテゴリ'],
-        diff[state.pop].map((e) => [e.name, e.club, e.n, e.n_meets, e.n_seasons,
+        list.map((e) => [e.name, e.club, e.n, e.n_meets, e.n_seasons,
           e.has_trend ? e.mean_diff : '', e.has_trend ? e.median_diff : '',
           e.has_trend ? e.sd : '', e.trend, (e.categories || []).join('｜')]));
     });

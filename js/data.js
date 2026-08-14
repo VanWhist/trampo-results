@@ -39,6 +39,7 @@ export const athletes = () => load('athletes.json');
 export const judges = () => load('judges.json');
 export const panels = () => load('panels.json');
 export const judgeDiff = () => load('summary/judge_panel_diff.json');
+export const judgeDiffRows = () => load('summary/judge_diff_rows.json');
 export const deductionSummary = () => load('summary/deductions.json');
 export const details = (meetId) => load('details/' + meetId + '.json');
 

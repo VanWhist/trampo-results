@@ -12,7 +12,7 @@ import os
 import sys
 import time
 
-from . import aggregate, config, normalize, validate
+from . import aggregate, config, name_variants, normalize, validate
 from .sources import nishinihon, osaka, sporttech
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -70,8 +70,17 @@ def main(argv=None):
         n = validate.accept_counts(performances)
         print('大会別件数の基準を更新しました（%d大会）' % n)
 
+    # 日本語表記／ローマ字表記に分かれた同一人物の候補を洗い出す（自動では結合しない）
+    merged_names = set()
+    for entry in overrides['merge']:
+        for n in entry.get('names', []):
+            merged_names.add(normalize.normalize_name(n))
+    variants, already_merged = name_variants.find_candidates(performances, merged_names)
+    name_variants.write_report(variants, already_merged, config.VARIANTS_MD)
+
     print('検証…')
-    rep = validate.run(performances, athletes, competitions, judges, panels)
+    rep = validate.run(performances, athletes, competitions, judges, panels,
+                       name_variants_=(variants, already_merged))
     print('  ' + rep.summary())
 
     print('事前集計…')
@@ -143,6 +152,9 @@ def main(argv=None):
     sizes['panels.json'] = _write(os.path.join(config.DATA_OUT, 'panels.json'), panels)
     sizes['summary/judge_panel_diff.json'] = _write(
         os.path.join(config.DATA_OUT, 'summary', 'judge_panel_diff.json'), judge_diff)
+    sizes['summary/judge_diff_rows.json'] = _write(
+        os.path.join(config.DATA_OUT, 'summary', 'judge_diff_rows.json'),
+        aggregate.judge_diff_rows(performances, panels, judges))
     sizes['summary/deductions.json'] = _write(
         os.path.join(config.DATA_OUT, 'summary', 'deductions.json'), ded_summary)
 

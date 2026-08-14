@@ -42,7 +42,7 @@ class Report(object):
             self.passed, len(self.warnings), len(self.errors))
 
 
-def run(performances, athletes, competitions, judges, panels):
+def run(performances, athletes, competitions, judges, panels, name_variants_=None):
     rep = Report()
 
     # ---- ソース別の件数 ----------------------------------------------------
@@ -168,6 +168,26 @@ def run(performances, athletes, competitions, judges, panels):
         rep.warn('審判の表記ゆれ',
                  '%s（所属JPN）は国内大会では日本語表記の別IDになっている可能性があります。'
                  'judge_overrides.json で統合できます' % j['name'])
+
+    # ---- 選手の表記ゆれ（国内は日本語／国際はローマ字） ---------------------
+    # 抜けるのはW杯・アジア選手権に出るトップ層なので、放置すると選手ページから
+    # 国際大会の記録だけが落ちる。審判と同じく自動では結合せず、毎回候補を出す。
+    if name_variants_:
+        variants, already = name_variants_
+        confident = [c for c in variants if len(c['matches']) == 1]
+        rep.note('選手の表記ゆれ候補',
+                 '%d名（うち候補が1人に絞れたもの %d名／統合済み %d名）'
+                 % (len(variants), len(confident), already))
+        for c in confident:
+            rep.warn('選手の表記ゆれ',
+                     '%s は %s と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。'
+                     'athlete_overrides.json で統合できます'
+                     % (c['romanized'], c['matches'][0]['name']))
+        for c in variants:
+            if len(c['matches']) > 1:
+                rep.warn('選手の表記ゆれ',
+                         '%s は候補が %d人います。docs/選手の表記ゆれ候補.md を見て選んでください'
+                         % (c['romanized'], len(c['matches'])))
 
     rep.note('選手数', '%d名' % len(athletes))
     rep.note('大会数', '%d' % len(competitions))

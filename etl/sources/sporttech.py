@@ -49,6 +49,29 @@ def _num(value):
     return value if isinstance(value, (int, float)) else None
 
 
+def _is_ascii(text):
+    return all(ord(ch) < 128 for ch in text or '')
+
+
+# 国内大会の Competition には SexCategory が入っていない（国際大会だけ入る）。
+# 区分名から補う。フィルタにも、表記ゆれ候補の絞り込みにも使う。
+_SEX_WORDS = (
+    ('female', ('女子', "Women", 'Female', 'WOMEN')),
+    ('male', ('男子', 'Men', 'Male', 'MEN')),
+)
+
+
+def _sex(comp):
+    raw = (comp.get('SexCategory') or '').strip().lower()
+    if raw in ('male', 'female'):
+        return raw
+    title = comp.get('Title') or ''
+    for sex, words in _SEX_WORDS:
+        if any(w in title for w in words):
+            return sex
+    return ''
+
+
 def _deducts(frame):
     """Deducts_G（12要素）を位置別に開く。
 
@@ -223,7 +246,7 @@ def extract(meet_dir, year, kind_label):
             'official': config.SOURCES['sporttech']['official'],
             'discipline': discipline,
             'category': (comp.get('Title') or '').strip(),
-            'sex': (comp.get('SexCategory') or '').strip(),
+            'sex': _sex(comp),
             'age_group': (comp.get('AgeGroup') or '').strip(),
             'round': round_label,
             'round_raw': kind,
@@ -316,9 +339,19 @@ def load_all():
                 existing = judges.get(key)
                 if existing is None:
                     judges[key] = judge
-                else:
-                    existing['meets'].extend(judge['meets'])
-                    if judge['club'] and judge['club'] not in existing['club']:
+                    judge['names_seen'] = [judge['name']]
+                    continue
+                existing['meets'].extend(judge['meets'])
+                if judge['name'] not in existing['names_seen']:
+                    existing['names_seen'].append(judge['name'])
+                # judge_overrides で日本語表記とローマ字表記を統合した場合、
+                # 表示は日本語表記を優先する。国際大会の所属は国名（JPN）でしかないので、
+                # 所属も日本語表記の記録側を優先する。
+                if _is_ascii(existing['name']) and not _is_ascii(judge['name']):
+                    existing['name'] = judge['name']
+                jp_side = not _is_ascii(judge['name'])
+                if judge['club'] and (jp_side or not existing['club']):
+                    if jp_side or _is_ascii(existing['name']):
                         existing['club'] = judge['club']
             panels.update(pn)
     return competitions, performances, judges, panels
