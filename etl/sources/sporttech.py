@@ -12,6 +12,7 @@
   7. ETotalsT_G のスロット n → E(n+1)。有効値は 0・100 を除いたもの
 """
 import glob
+import hashlib
 import io
 import json
 import os
@@ -287,13 +288,13 @@ def _number_routines(performances):
 
 
 def _slug(text):
-    keep = []
-    for ch in text:
-        if ch.isalnum():
-            keep.append(ch)
-        elif ch in ' 　_-':
-            keep.append('-')
-    return ''.join(keep)[:40].strip('-')
+    """大会IDに使う短い識別子。
+
+    大会名をそのまま使うと日本語のファイル名（data/details/<meet_id>.json）になり、
+    サーバや環境によってURLの扱いが変わって事故になる。ASCIIだけにする。
+    大会名は competitions.json に持っているので、IDが読めなくても困らない。
+    """
+    return hashlib.sha1(text.encode('utf-8')).hexdigest()[:6]
 
 
 def load_all():
