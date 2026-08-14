@@ -3,6 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 検索エンジンにインデックスさせない（robots.txt と対で効かせる）。
+     元データはPDF中心で氏名検索に引っかかりにくいが、このサイトはHTMLなので
+     そのままだと選手名・審判名が検索結果に出る。URLを知っていれば見られる状態は変わらない。 -->
+<meta name="robots" content="noindex, nofollow">
 <title>リザルト一覧 | トランポリン大会リザルト</title>
 <link rel="stylesheet" href="css/style.css">
 </head>

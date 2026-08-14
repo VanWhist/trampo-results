@@ -6,8 +6,17 @@
 """
 import os
 
+HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(HERE)
+
 # ---- 入力（読むだけ。絶対に書き換えない） ----------------------------------
-RAW_ROOT = r'<作業フォルダ>\トランポリンルール\大会リザルト'
+# 生データの置き場所。既定はリポジトリの1つ上の「トランポリンルール\大会リザルト」。
+# 別の場所に置いている場合は環境変数 TRAMPO_RAW_ROOT で指定する。
+#     Windows PowerShell:  $env:TRAMPO_RAW_ROOT = "D:\...\大会リザルト"
+#     Git Bash:            export TRAMPO_RAW_ROOT="/d/.../大会リザルト"
+# 個人のフォルダ構成をリポジトリに残さないため、絶対パスは直接書かない。
+RAW_ROOT = os.environ.get('TRAMPO_RAW_ROOT') or os.path.normpath(
+    os.path.join(REPO, os.pardir, 'トランポリンルール', '大会リザルト'))
 
 SPORTTECH_DIRS = [
     ('2025', 'sporttech_国内大会', '国内'),
@@ -22,8 +31,6 @@ CSV_OSAKA_SUMMARY = os.path.join(RAW_ROOT, '_大阪府pweb_演技サマリー.cs
 CSV_NISHI = os.path.join(RAW_ROOT, '_西日本53th_全演技.csv')
 
 # ---- 出力 ------------------------------------------------------------------
-HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(HERE)
 DATA_OUT = os.path.join(REPO, 'data')
 OVERRIDES = os.path.join(HERE, 'athlete_overrides.json')
 JUDGE_OVERRIDES = os.path.join(HERE, 'judge_overrides.json')
