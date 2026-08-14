@@ -17,6 +17,11 @@
 
 * { box-sizing: border-box; }
 
+/* hidden 属性を必ず効かせる。
+   ブラウザ標準の [hidden]{display:none} は、こちらが書いた .controls{display:flex} のような
+   クラス指定に負ける。実際、絞り込みが hidden を付けても畳まれないまま公開されていた。 */
+[hidden] { display: none !important; }
+
 body {
   margin: 0;
   background: var(--bg);
@@ -250,6 +255,8 @@ table.mini th, table.mini td { padding: 4px 8px; white-space: normal; }
 .trend-warn { font-size: 12.5px; margin-top: 6px; opacity: .85; }
 
 .meta.small { font-size: 11.5px; }
+/* 傾向バッジの意味。誤解されやすいのは詳細より一覧のバッジなので、すぐ下に短く置く */
+.trend-hint { margin-top: 2px; line-height: 1.35; white-space: normal; max-width: 22em; }
 pre.code { background: #f2f4f7; border-radius: 8px; padding: 8px 10px; font-size: 13px; overflow-x: auto; }
 details summary { cursor: pointer; padding: 4px 0; }
 

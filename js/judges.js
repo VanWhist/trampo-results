@@ -48,6 +48,31 @@ const TREND = {
 
 const DISCLAIMER = '※「選手の最終得点がその分だけ低くなる／高くなる」という意味ではありません。';
 
+// 一覧の傾向バッジこそ誤解されやすいので、詳細だけに置かず、バッジのそばにも意味を添える。
+function meaning(e) {
+  if (!e.has_trend) {
+    return '母数が ' + thresholds.minN + '演技に満たないため、傾向値を出していません。';
+  }
+  const d = Math.abs(e.mean_diff).toFixed(2);
+  const dir = e.mean_diff < 0 ? '低い' : e.mean_diff > 0 ? '高い' : '同じ';
+  return '同じ演技を見た他の審判の中心値より、平均 ' + d + '点' + dir + '採点。' + DISCLAIMER;
+}
+
+function trendBadge(e) {
+  // ホバー（スマホは長押し）で全文が出るようにしておく
+  return el('span', {
+    class: 'badge ' + TREND[e.trend].cls, text: TREND[e.trend].label, title: meaning(e),
+  });
+}
+
+/** バッジのすぐ下に置く短い1行。表を崩さない長さにする。 */
+function hint(e) {
+  if (!e.has_trend) return '母数 ' + thresholds.minN + '演技未満';
+  const d = Math.abs(e.mean_diff).toFixed(2);
+  const dir = e.mean_diff < 0 ? '低い' : e.mean_diff > 0 ? '高い' : '同じ';
+  return '中心値より平均' + d + '点' + dir + '／最終得点が変わる意味ではありません';
+}
+
 let diff = null;
 let rows = null;
 let meets = [];
@@ -197,7 +222,10 @@ function renderTable(items) {
       el('td', { class: 'num', text: e.n_meets }),
       el('td', { class: e.has_trend ? 'num' : 'num blank', text: e.has_trend ? signed(e.mean_diff) : '—' }),
       el('td', { class: e.has_trend ? 'num' : 'num blank', text: e.has_trend ? num(e.sd, 3) : '—' }),
-      el('td', {}, el('span', { class: 'badge ' + TREND[e.trend].cls, text: TREND[e.trend].label })),
+      el('td', {}, [
+        trendBadge(e),
+        el('div', { class: 'meta small trend-hint', text: hint(e) }),
+      ]),
     ]))),
   ]));
 }
@@ -206,8 +234,9 @@ function renderCards(items) {
   return el('div', { class: 'card-list' }, items.map((e) => el('article', { class: 'rec' }, [
     el('div', { class: 'rec-head' }, [
       el('span', { class: 'link rec-name', text: e.name || '（氏名なし）', onclick: () => openJudge(e) }),
-      el('span', { class: 'badge ' + TREND[e.trend].cls, text: TREND[e.trend].label }),
+      trendBadge(e),
     ]),
+    el('div', { class: 'meta small trend-hint', text: hint(e) }),
     e.club ? el('div', { class: 'rec-meta', text: e.club }) : null,
     el('dl', { class: 'rec-sub' }, [
       ['演技数(n)', e.n], ['大会数', e.n_meets],
@@ -368,6 +397,15 @@ async function main() {
     thresholds = manifest.judgeThresholds;
 
     buildNote();
+
+    const toggle = document.getElementById('toggle-filters');
+    toggle.addEventListener('click', () => {
+      const box = document.getElementById('filters');
+      box.hidden = !box.hidden;
+      toggle.setAttribute('aria-expanded', String(!box.hidden));
+      toggle.textContent = box.hidden ? '条件を変える ▼' : '条件を閉じる ▲';
+      document.getElementById('reset').hidden = box.hidden;
+    });
 
     const picker = clear(document.getElementById('pop'));
     for (const [key, v] of Object.entries(POPULATIONS)) {

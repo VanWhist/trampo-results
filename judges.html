@@ -26,14 +26,17 @@
       <input type="search" id="jq" autocomplete="off" placeholder="審判名で検索">
     </label>
 
-    <div class="controls">
+    <div class="hero-actions">
+      <button class="chip" id="toggle-filters" aria-expanded="false">条件を変える ▼</button>
+      <button class="chip" id="reset" hidden>絞り込みをクリア</button>
+      <button class="chip" id="csv">CSVで書き出す</button>
+    </div>
+    <div class="controls" id="filters" hidden>
       <label>母集団<select id="pop"></select></label>
       <label>大会<select id="f-meet"></select></label>
       <label>区分<select id="f-category"></select></label>
       <label>男女<select id="f-sex"></select></label>
       <label>ラウンド<select id="f-round"></select></label>
-      <button class="chip" id="reset">絞り込みをクリア</button>
-      <button class="chip" id="csv">CSVで書き出す</button>
     </div>
     <p class="meta"><strong id="condition">—</strong></p>
     <p class="meta" id="condition-note"></p>
