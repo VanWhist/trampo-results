@@ -26,6 +26,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 DATA_OUT = os.path.join(REPO, 'data')
 OVERRIDES = os.path.join(HERE, 'athlete_overrides.json')
+JUDGE_OVERRIDES = os.path.join(HERE, 'judge_overrides.json')
+EXPECTED_COUNTS = os.path.join(HERE, 'expected_counts.json')
 REPORT_MD = os.path.join(REPO, 'docs', '検証レポート_ETL.md')
 
 PARSER_VERSION = '1.0.0'

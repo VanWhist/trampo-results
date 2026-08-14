@@ -1,0 +1,5 @@
+{
+  "_comment": "同じ審判が国内大会（日本語表記）と国際大会（ローマ字表記）で別IDになるのを人が確認して統合する。自動判定はしない。候補は docs/審判の表記ゆれ候補.md にある。",
+  "_example": { "judge_id": "j-yamamoto-norifumi", "names": ["山本 宜史", "YAMAMOTO Norifumi"] },
+  "merge": []
+}

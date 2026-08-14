@@ -49,10 +49,17 @@ def main():
     counts = {}
     for p in perfs:
         counts[p['source']] = counts.get(p['source'], 0) + 1
+    # 実装時（2026-08-14）の件数。大会が増えればこれより増えるのが正しい。
+    # 減っていたら取りこぼしなので NG にする。
     expected = {'sporttech': 5969, 'osaka_pweb': 1293, 'nishinihon': 913}
-    ok = all(counts.get(k) == v for k, v in expected.items())
-    check('1', '個人演技数がソース別の期待値と一致',
-          ok, '実測 %s\n期待 %s（大阪府は決勝266を追加し重複掲載36を除いた数）' % (counts, expected))
+    short = {k: v - counts.get(k, 0) for k, v in expected.items() if counts.get(k, 0) < v}
+    grew = {k: counts.get(k, 0) - v for k, v in expected.items() if counts.get(k, 0) > v}
+    detail = '実測 %s\n実装時 %s（大阪府は決勝266を追加し重複掲載36を除いた数）' % (counts, expected)
+    if grew:
+        detail += '\n実装時より増えています %s … 大会を足したぶんかを確認してください' % grew
+    if short:
+        detail += '\n実装時より減っています %s … 取りこぼしです' % short
+    check('1', '個人演技数が実装時の件数以上（減っていない）', not short, detail)
 
     # 2. 城 瑛斗が3ソースまたいで1人にまとまり、所属が履歴表示される
     shiro = [a for a in athletes if a['name'] == '城 瑛斗']

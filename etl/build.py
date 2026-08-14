@@ -37,8 +37,10 @@ def _write(path, payload):
     return os.path.getsize(path)
 
 
-def main():
+def main(argv=None):
     started = time.time()
+    argv = sys.argv[1:] if argv is None else argv
+    accept = '--accept-counts' in argv
     data_version = time.strftime('%Y-%m-%d') + '-01'
 
     print('生データを読みます…')
@@ -63,6 +65,10 @@ def main():
     overrides = normalize.load_overrides()
     athletes = normalize.build_athletes(performances, overrides)
     print('  選手 %d名' % len(athletes))
+
+    if accept:
+        n = validate.accept_counts(performances)
+        print('大会別件数の基準を更新しました（%d大会）' % n)
 
     print('検証…')
     rep = validate.run(performances, athletes, competitions, judges, panels)

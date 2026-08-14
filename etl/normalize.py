@@ -61,12 +61,22 @@ def athlete_id(name):
     return 'a-%s' % digest
 
 
+_JUDGE_MERGE = None
+
+
 def judge_id(name):
     """審判のIDも氏名だけを鍵にする。
 
     大会ごとのIDにすると、同じ審判が大会ごとに別人になってしまい、
     「大会をまたいだ同一審判の追跡」という審判データを持つ意味が失われる。
+    表記ゆれ（日本語／ローマ字）の統合は judge_overrides.json で人が指定する。
     """
+    global _JUDGE_MERGE
+    if _JUDGE_MERGE is None:
+        _JUDGE_MERGE = load_judge_overrides()
+    manual = _JUDGE_MERGE.get(name)
+    if manual:
+        return manual
     digest = hashlib.sha1(name.encode('utf-8')).hexdigest()[:10]
     return 'j-%s' % digest
 
@@ -79,6 +89,25 @@ def load_overrides():
     data.setdefault('split', [])
     data.setdefault('merge', [])
     return data
+
+
+def load_judge_overrides():
+    """審判の表記ゆれの手動統合。
+
+    国内大会は日本語表記、国際大会はローマ字表記なので、両方で審判をしている人は
+    そのままだと別IDになる（山本 宜史 と YAMAMOTO Norifumi など）。
+    読みを機械的に当てにいくと別人を混ぜる危険があるので、人が確認して1行足す形にする。
+    候補は docs/審判の表記ゆれ候補.md にまとめてある。
+    """
+    if not os.path.exists(config.JUDGE_OVERRIDES):
+        return {}
+    with io.open(config.JUDGE_OVERRIDES, encoding='utf-8') as fh:
+        data = json.load(fh)
+    mapping = {}
+    for entry in data.get('merge', []):
+        for name in entry.get('names', []):
+            mapping[normalize_name(name)] = entry['judge_id']
+    return mapping
 
 
 def build_athletes(performances, overrides):

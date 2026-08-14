@@ -6,10 +6,14 @@
   ・合計も完全一致を要求せず、許容幅を持たせてフラグを立てる
 """
 import collections
+import io
+import json
+import os
 
 from . import config
 
-# 各ソースの期待件数（個人種目）。ズレたら取りこぼしを疑う。
+# 各ソースの期待件数（個人種目）。実装指示書 第9章の受け入れ基準の数字。
+# 大会が増えるとここは増えるので、判定は「大会ごとの件数」（etl/expected_counts.json）で行う。
 EXPECTED = {
     'sporttech': 5969,
     'osaka_pweb': 1293,   # 予選1,027＋決勝266。重複掲載36件を除いた数
@@ -46,9 +50,15 @@ def run(performances, athletes, competitions, judges, panels):
                                  if p['discipline'] == config.PHASE1_DISCIPLINE)
     for source, expected in EXPECTED.items():
         got = counts.get(source, 0)
-        rep.note('件数_%s' % source, '%d（期待 %d）' % (got, expected))
+        base = '%d' % got
         if got != expected:
-            rep.error('件数', '%s の個人演技が %d 件。期待値 %d と一致しない' % (source, got, expected))
+            base += '（実装時 %d）' % expected
+        rep.note('件数_%s' % source, base)
+
+    # ---- 大会ごとの件数を前回と突き合わせる --------------------------------
+    # 大会が増えれば合計は増えるので、合計の一致は判定に使わない。
+    # 「すでに取り込んだ大会の件数が変わっていないか」を見るのが本当のチェック。
+    _check_meet_counts(rep, performances, competitions)
 
     # ---- 必須列 ------------------------------------------------------------
     required = ('performance_id', 'meet_id', 'date', 'source', 'discipline',
@@ -148,6 +158,17 @@ def run(performances, athletes, competitions, judges, panels):
     rep.note('審判名まで特定', '%d件' % sum(1 for p in individual if p.get('panel_key')))
 
     # ---- 選手 --------------------------------------------------------------
+    # ---- 審判の表記ゆれ（国内は日本語／国際はローマ字） ---------------------
+    # 両方で審判をしている人は、そのままだと別IDになる。自動では結合せず、
+    # 候補を毎回レポートに出して、人が judge_overrides.json に足せるようにする。
+    jp_candidates = [j for j in judges.values()
+                     if all(ord(ch) < 128 for ch in j['name']) and 'JPN' in (j['club'] or '')]
+    rep.note('審判の表記ゆれ候補', '%d名（ローマ字表記で所属JPN）' % len(jp_candidates))
+    for j in jp_candidates:
+        rep.warn('審判の表記ゆれ',
+                 '%s（所属JPN）は国内大会では日本語表記の別IDになっている可能性があります。'
+                 'judge_overrides.json で統合できます' % j['name'])
+
     rep.note('選手数', '%d名' % len(athletes))
     rep.note('大会数', '%d' % len(competitions))
     rep.note('審判数', '%d名' % len(judges))
@@ -161,6 +182,75 @@ def run(performances, athletes, competitions, judges, panels):
         rep.note('選手数_%s' % source, '%d名' % len(ids))
 
     return rep
+
+
+def _check_meet_counts(rep, performances, competitions):
+    """大会ごとの個人演技数を前回のスナップショットと比べる。
+
+    ・すでに取り込んだ大会の件数が変わった → **エラー**（取りこぼしか二重取り込み）
+    ・大会が増えた                       → 警告（新しい大会を足したのだから正常）
+    ・大会が消えた                       → **エラー**（生データを消したか読めていない）
+
+    新しい大会を足したあと、内容を確認してから次のコマンドで基準を更新する:
+        python -m etl.build --accept-counts
+    """
+    got = collections.Counter()
+    for p in performances:
+        if p['discipline'] == config.PHASE1_DISCIPLINE:
+            got[p['meet_id']] += 1
+    names = {c['meet_id']: '%s %s' % (c['date'], c['name']) for c in competitions}
+
+    if not os.path.exists(config.EXPECTED_COUNTS):
+        rep.note('大会別件数の基準', '未作成（今回の結果を基準として保存します）')
+        _write_counts(got)
+        return
+
+    with io.open(config.EXPECTED_COUNTS, encoding='utf-8') as fh:
+        expected = json.load(fh).get('meets', {})
+
+    added, changed, removed = [], [], []
+    for meet_id, n in sorted(got.items()):
+        if meet_id not in expected:
+            added.append((meet_id, n))
+        elif expected[meet_id] != n:
+            changed.append((meet_id, expected[meet_id], n))
+    for meet_id, n in sorted(expected.items()):
+        if meet_id not in got:
+            removed.append((meet_id, n))
+
+    for meet_id, before, after in changed:
+        rep.error('大会別件数', '%s の個人演技が %d件 → %d件 に変わりました。'
+                  '取りこぼしか二重取り込みの可能性があります'
+                  % (names.get(meet_id, meet_id), before, after))
+    for meet_id, n in removed:
+        rep.error('大会別件数', '%s（%d件）が今回は読めていません' % (meet_id, n))
+    for meet_id, n in added:
+        rep.warn('大会別件数', '%s を新しく取り込みました（個人 %d件）。'
+                 '内容を確認したら `python -m etl.build --accept-counts` で基準を更新してください'
+                 % (names.get(meet_id, meet_id), n))
+
+    rep.note('大会別件数', '既存 %d大会は前回と一致／新規 %d大会／消えた大会 %d'
+             % (len(got) - len(added) - len(changed), len(added), len(removed)))
+
+
+def _write_counts(counts):
+    os.makedirs(os.path.dirname(config.EXPECTED_COUNTS), exist_ok=True)
+    with io.open(config.EXPECTED_COUNTS, 'w', encoding='utf-8') as fh:
+        json.dump({
+            '_comment': '大会ごとの個人演技数。ETLが前回と比べて取りこぼしを検知するために使う。'
+                        '新しい大会を足したら `python -m etl.build --accept-counts` で更新する。',
+            'meets': dict(sorted(counts.items())),
+        }, fh, ensure_ascii=False, indent=2)
+
+
+def accept_counts(performances):
+    """新しい大会の件数を基準として受け入れる（--accept-counts）。"""
+    counts = collections.Counter()
+    for p in performances:
+        if p['discipline'] == config.PHASE1_DISCIPLINE:
+            counts[p['meet_id']] += 1
+    _write_counts(counts)
+    return len(counts)
 
 
 def write_report(rep, path, data_version):

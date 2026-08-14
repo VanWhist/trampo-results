@@ -3,16 +3,17 @@
 dataVersion: `2026-08-14-01`
 
 ```
-10706 records passed / 0 warnings / 0 errors
+10706 records passed / 6 warnings / 0 errors
 ```
 
 ## 集計
 
 | 項目 | 値 |
 |---|---|
-| 件数_sporttech | 5969（期待 5969） |
-| 件数_osaka_pweb | 1293（期待 1293） |
-| 件数_nishinihon | 913（期待 913） |
+| 件数_sporttech | 5969 |
+| 件数_osaka_pweb | 1293 |
+| 件数_nishinihon | 913 |
+| 大会別件数 | 既存 25大会は前回と一致／新規 0大会／消えた大会 0 |
 | E検算 | 8158件中 0件が要確認 |
 | 合計検算 | 7908件中 0件が要確認 |
 | 値域外 | 0件 |
@@ -25,6 +26,7 @@ dataVersion: `2026-08-14-01`
 | 採点未確定(State=2) | 1件 |
 | 審判別Eあり | 7261件 |
 | 審判名まで特定 | 3662件 |
+| 審判の表記ゆれ候補 | 6名（ローマ字表記で所属JPN） |
 | 選手数 | 1639名 |
 | 大会数 | 30 |
 | 審判数 | 174名 |
@@ -33,3 +35,17 @@ dataVersion: `2026-08-14-01`
 | 選手数_osaka_pweb | 234名 |
 | 選手数_nishinihon | 391名 |
 
+## 警告（6件）
+
+- 審判の表記ゆれ … 6件
+
+<details><summary>内訳</summary>
+
+- 審判の表記ゆれ SAKUMA Hiroshi（所属JPN）は国内大会では日本語表記の別IDになっている可能性があります。judge_overrides.json で統合できます
+- 審判の表記ゆれ MUTO Shinya（所属JPN）は国内大会では日本語表記の別IDになっている可能性があります。judge_overrides.json で統合できます
+- 審判の表記ゆれ IKEDA Nariaki（所属JPN）は国内大会では日本語表記の別IDになっている可能性があります。judge_overrides.json で統合できます
+- 審判の表記ゆれ YAMAMOTO Norifumi（所属JPN）は国内大会では日本語表記の別IDになっている可能性があります。judge_overrides.json で統合できます
+- 審判の表記ゆれ OKAJIMA Masaharu（所属JPN）は国内大会では日本語表記の別IDになっている可能性があります。judge_overrides.json で統合できます
+- 審判の表記ゆれ AIDA Yasushi（所属JPN）は国内大会では日本語表記の別IDになっている可能性があります。judge_overrides.json で統合できます
+
+</details>
