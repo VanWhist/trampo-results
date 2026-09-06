@@ -21,7 +21,7 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 from .. import completeness, normalize, validate
-from ..sources import nishinihon, osaka, sporttech
+from ..sources import nishinihon, nishinihon_pdf, osaka, sporttech
 
 
 def load_baseline():
@@ -29,7 +29,8 @@ def load_baseline():
     st_comps, st_perfs, _, _ = sporttech.load_all()
     _, os_perfs = osaka.load_all()
     _, nw_perfs = nishinihon.load_all()
-    perfs = st_perfs + os_perfs + nw_perfs
+    _, n54_perfs = nishinihon_pdf.load_all()
+    perfs = st_perfs + os_perfs + nw_perfs + n54_perfs
     normalize.build_athletes(perfs, normalize.load_overrides())   # 氏名の正規化を先に効かせる
     return perfs
 
@@ -52,12 +53,30 @@ def main():
     all_ok = not clean.errors
     print()
 
-    nishi = lambda cat, rnd: (lambda p: p['source'] == 'nishinihon'
-                              and p['category'] == cat and p['round'] == rnd)
+    # 第53回と第54回は区分名が同じなので、大会まで指定しないと両方に当たる。
+    def nishi(cat, rnd, meet_id='nw-2025-09-12'):
+        return lambda p: (p['source'] == 'nishinihon' and p['meet_id'] == meet_id
+                          and p['category'] == cat and p['round'] == rnd)
+
+    def nishi54(cat, rnd):
+        return nishi(cat, rnd, 'nw-2026-09-04')
 
     # 末尾28名分（＝最終ページ相当）の順位
     tail = sorted({int(p['rank']) for p in base
                    if nishi('小学生高学年 女子', '予選')(p)})[-28:]
+
+    # 第54回で実際に踏んだ2つの欠陥を種にする。
+    #   ・見出しも列見出しも無い継続ページを丸ごと読み飛ばしていた
+    #   ・ページ境界で割れた選手の2本目（所属＋Q2）を捨てていた
+    def page_of(p):
+        return (p.get('provenance') or {}).get('raw_filename', '')
+
+    cont_page = '54th_小学生高学年女子_予選.pdf p5'
+    split_pages = collections.defaultdict(set)
+    for p in base:
+        if nishi54('小学生高学年 女子', '予選')(p):
+            split_pages[p['athlete_name']].add(page_of(p))
+    split_name = sorted(n for n, pgs in split_pages.items() if len(pgs) > 1)[0]
 
     def swap_two_names(perfs):
         """1選手の行を2行ズラす。点数はそのままで氏名だけ入れ替わる。"""
@@ -100,6 +119,11 @@ def main():
          swap_two_names(base)),
         ('2行目（Q2のスコアごと）を1つズラす',
          shift_q2(base)),
+        ('継続ページを丸ごと欠落（第54回 小学生高学年女子予選 p5）',
+         without(base, lambda p: page_of(p) == cont_page)),
+        ('ページ境界で割れた選手の2本目を欠落（第54回 %s）' % split_name,
+         without(base, lambda p: nishi54('小学生高学年 女子', '予選')(p)
+                 and p['athlete_name'] == split_name and p['routine'] == 2)),
     ]
 
     for label, mutated in cases:

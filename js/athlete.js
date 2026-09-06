@@ -89,9 +89,20 @@ function renderAthlete(id) {
   if (!hist.length) {
     box.append(el('p', { class: 'meta', text: '所属が公開されている記録がありません（大阪府のデータには所属がありません）。' }));
   } else {
-    box.append(el('p', {}, hist.map((x, i) => el('span', {}, [
+    // 所属が変わらない年が続くと「2025 A → 2026 A」と同じ名前が並ぶ。
+    // 見たいのは転籍なので、中身が同じ年はシーズンだけをまとめる。
+    const runs = [];
+    hist.forEach((x) => {
+      const clubs = x.clubs.join('・');
+      const last = runs[runs.length - 1];
+      if (last && last.clubs === clubs) last.seasons.push(x.season);
+      else runs.push({ seasons: [x.season], clubs: clubs });
+    });
+    box.append(el('p', {}, runs.map((r, i) => el('span', {}, [
       i ? ' → ' : '',
-      el('strong', { text: x.season }), ' ' + x.clubs.join('・'),
+      el('strong', { text: r.seasons.length > 1
+        ? r.seasons[0] + '〜' + r.seasons[r.seasons.length - 1] : r.seasons[0] }),
+      ' ' + r.clubs,
     ]))));
   }
   // 所属は「属性」であって名寄せの鍵ではない。転籍しても同じ選手として扱う。

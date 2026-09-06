@@ -32,14 +32,23 @@ import re
 import unicodedata
 
 from . import club_fixes, config
+from .sources import nishinihon_pdf
 
-NISHI_PDF_DIR = os.path.join(config.RAW_ROOT, '2025', '西日本トランポリン協会_PDF')
+# 西日本は大会ごとにPDFの置き場が分かれる。第53回と第54回は区分名が同じなので、
+# 検査は必ず大会（meet_id）で分けて行う。混ぜると順位も1本目/2本目も二重になる。
+NISHI_PDF_DIRS = {
+    'nw-2025-09-12': os.path.join(config.RAW_ROOT, '2025', '西日本トランポリン協会_PDF'),
+    'nw-2026-09-04': os.path.join(config.RAW_ROOT, '2026', '西日本トランポリン協会_PDF'),
+}
+NISHI_LABEL = {'nw-2025-09-12': '西日本 第53回', 'nw-2026-09-04': '西日本 第54回'}
 OSAKA_INDEX = os.path.join(config.RAW_ROOT, '_大阪府pweb_区分一覧.csv')
 EXPECTED_SECTIONS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'expected_sections.json')
 
 # フッタURLの Category → CSV の種別に使う名前
 CATEGORY = {'低学年': '小学生低学年', '高学年': '小学生高学年', '中学生': '中学生',
-            '高校生': '高校生', '大学生': '大学生', '一般': '一般', 'オープン': 'オープン'}
+            '高校生': '高校生', '大学生': '大学生', '一般': '一般', 'オープン': 'オープン',
+            # 第54回はフッタURLの Category が略さず入る
+            '小学生低学年': '小学生低学年', '小学生高学年': '小学生高学年'}
 ROUND = {'予選2': '予選', '予選': '予選', '決勝': '決勝'}
 CAT_RE = '|'.join(sorted(CATEGORY, key=len, reverse=True))
 
@@ -53,7 +62,7 @@ def _nfkc(text):
     return unicodedata.normalize('NFKC', text or '')
 
 
-def read_nishinihon_pages():
+def read_nishinihon_pages(meet_id):
     """西日本PDFの全ページを読み、(種別, ラウンド) と n/N マーカーを返す。
 
     フッタURLから区分を取り、読めなければ本文の見出しから復元する。
@@ -66,11 +75,14 @@ def read_nishinihon_pages():
     import logging
     logging.getLogger('pdfminer').setLevel(logging.ERROR)
 
+    directory = NISHI_PDF_DIRS[meet_id]
+    if not os.path.isdir(directory):
+        return []
     pages = []
-    for name in sorted(os.listdir(NISHI_PDF_DIR)):
-        if not name.lower().endswith('.pdf') or '特別賞' in name:
-            continue          # 特別賞は演技リザルトではない
-        path = os.path.join(NISHI_PDF_DIR, name)
+    # 読むファイルの決め方（訂正版を正とする・特別賞とスタートリストは結果ではない）は
+    # 取り込み側と同じものを使う。別々に書くと食い違う。
+    for name in nishinihon_pdf.result_pdfs(directory):
+        path = os.path.join(directory, name)
         with pdfplumber.open(path) as pdf:
             for i, page in enumerate(pdf.pages, start=1):
                 lines = [l for l in _nfkc(page.extract_text() or '').splitlines() if l.strip()]
@@ -102,12 +114,18 @@ def _load_expected():
         return json.load(fh)
 
 
-def _sections_from_perfs(perfs, source):
-    """ETL出力側の区分×ラウンドごとの行数・選手数・順位集合。"""
+def _sections_from_perfs(perfs, source, meet_id=None):
+    """ETL出力側の区分×ラウンドごとの行数・選手数・順位集合。
+
+    meet_id を渡すとその大会だけを見る。西日本は第53回と第54回で区分名が同じなので、
+    渡さないと順位も1本目/2本目も二重に数えてしまう。
+    """
     out = collections.defaultdict(
         lambda: {'rows': 0, 'athletes': set(), 'ranks': collections.defaultdict(set)})
     for p in perfs:
         if p['source'] != source:
+            continue
+        if meet_id is not None and p['meet_id'] != meet_id:
             continue
         s = out[(p['category'], p['round'] or '')]
         s['rows'] += 1
@@ -140,25 +158,36 @@ def check_rank_continuity(sections, rep, label):
 
 
 def check_nishinihon(perfs, rep):
-    """西日本：全ページ処理済み・n/N マーカー・順位の連続性。"""
+    """西日本：全ページ処理済み・n/N マーカー・順位の連続性。大会ごとに見る。"""
     counts = {'ページ': 0, '区分': 0, '順位': 0}
-    sections = _sections_from_perfs(perfs, 'nishinihon')
-    counts['順位'] = check_rank_continuity(sections, rep, '西日本')
+    for meet_id in sorted(NISHI_PDF_DIRS):
+        for k, v in _check_nishinihon_meet(perfs, rep, meet_id).items():
+            counts[k] += v
+    return counts
 
-    pages = read_nishinihon_pages()
+
+def _check_nishinihon_meet(perfs, rep, meet_id):
+    counts = {'ページ': 0, '区分': 0, '順位': 0}
+    label = NISHI_LABEL[meet_id]
+    sections = _sections_from_perfs(perfs, 'nishinihon', meet_id)
+    if not sections:
+        return counts
+    counts['順位'] = check_rank_continuity(sections, rep, label)
+
+    pages = read_nishinihon_pages(meet_id)
     if pages is None:
         rep.note('完全性_西日本のページ検査', 'skipped（pdfplumber が無い）')
-        rep.warn('完全性', '西日本のページ検査を実行できませんでした（pdfplumber 未導入）。'
-                           '順位の連続性だけを確認しています')
+        rep.warn('完全性', '%s のページ検査を実行できませんでした（pdfplumber 未導入）。'
+                           '順位の連続性だけを確認しています' % label)
         return counts
 
     counts['ページ'] = len(pages)
     by_section = collections.defaultdict(list)
     for pg in pages:
         if pg['section'] is None:
-            rep.error('完全性', '西日本 %s p%d の区分を特定できません（フッタも本文見出しも読めない）。'
+            rep.error('完全性', '%s %s p%d の区分を特定できません（フッタも本文見出しも読めない）。'
                                 'このページの行が丸ごと落ちている可能性があります'
-                      % (pg['file'], pg['page']))
+                      % (label, pg['file'], pg['page']))
             continue
         by_section[pg['section']].append(pg)
 
@@ -167,32 +196,32 @@ def check_nishinihon(perfs, rep):
         counts['区分'] += 1
         markers = [p['marker'] for p in pgs if p['marker']]
         if len(markers) != len(pgs):
-            rep.warn('完全性', '西日本 %s %s にページ番号が読めないページがあります' % (cat, rnd))
+            rep.warn('完全性', '%s %s %s にページ番号が読めないページがあります' % (label, cat, rnd))
         if markers:
             totals = {t for _, t in markers}
             if len(totals) > 1:
-                rep.error('完全性', '西日本 %s %s のページ総数が一致しません %s'
-                          % (cat, rnd, sorted(totals)))
+                rep.error('完全性', '%s %s %s のページ総数が一致しません %s'
+                          % (label, cat, rnd, sorted(totals)))
             else:
                 total = totals.pop()
                 got = sorted(n for n, _ in markers)
                 if got != list(range(1, total + 1)):
-                    rep.error('完全性', '西日本 %s %s のページが欠けています（%d/%d ページ、番号 %s）'
-                              % (cat, rnd, len(got), total, got))
+                    rep.error('完全性', '%s %s %s のページが欠けています（%d/%d ページ、番号 %s）'
+                              % (label, cat, rnd, len(got), total, got))
         s = sections.get(section)
         if not s or not s['rows']:
-            rep.error('完全性', '西日本 %s %s は PDF に %d ページありますが、取り込んだ行が0です'
-                      % (cat, rnd, len(pgs)))
+            rep.error('完全性', '%s %s %s は PDF に %d ページありますが、取り込んだ行が0です'
+                      % (label, cat, rnd, len(pgs)))
         via_body = [p for p in pgs if p['via'] == 'body']
         if via_body:
             rep.note('完全性_フッタ破損',
-                     '西日本 %s %s p%d はフッタURLの日本語が脱落しており、本文見出しから区分を復元'
-                     % (cat, rnd, via_body[0]['page']))
+                     '%s %s %s p%d はフッタURLの日本語が脱落しており、本文見出しから区分を復元'
+                     % (label, cat, rnd, via_body[0]['page']))
 
     for section in sections:
         if section not in by_section:
-            rep.error('完全性', '西日本 %s %s は取り込まれていますが、対応するPDFページがありません'
-                      % section)
+            rep.error('完全性', '%s %s %s は取り込まれていますが、対応するPDFページがありません'
+                      % ((label,) + section))
     return counts
 
 
@@ -209,28 +238,31 @@ def check_nishinihon_pairs(perfs, rep):
     counts = {'合計照合': 0, '構造': 0}
     by = collections.defaultdict(list)
     for p in perfs:
+        # 大会で分ける。分けないと第53回と第54回の同姓同名が1人にまとまり、
+        # 1本目・2本目が4行に見えてしまう。
         if p['source'] == 'nishinihon' and p['round'] == '予選':
-            by[(p['category'], p['athlete_name'])].append(p)
+            by[(NISHI_LABEL.get(p['meet_id'], p['meet_id']),
+                p['category'], p['athlete_name'])].append(p)
 
-    for (cat, name), rs in sorted(by.items()):
+    for (label, cat, name), rs in sorted(by.items()):
         counts['構造'] += 1
         routines = sorted(r['routine'] for r in rs if r['routine'])
         if routines != [1, 2]:
-            rep.error('完全性', '西日本 %s %s の予選が1本目・2本目でそろっていません（%s）'
-                      % (cat, name, routines))
+            rep.error('完全性', '%s %s %s の予選が1本目・2本目でそろっていません（%s）'
+                      % (label, cat, name, routines))
             continue
         totals = {r.get('qualifying_total') for r in rs}
         scores = [r['total'] for r in rs]
         if len(totals) != 1 or None in totals or None in scores:
-            rep.warn('完全性', '西日本 %s %s は予選合計を照合できません' % (cat, name))
+            rep.warn('完全性', '%s %s %s は予選合計を照合できません' % (label, cat, name))
             continue
         counts['合計照合'] += 1
         want = totals.pop()
         got = round(sum(scores), 2)
         if abs(want - got) > 0.005:
-            rep.error('完全性', '西日本 %s %s の予選合計が合いません：印字 %.2f / 1本目+2本目 %.2f。'
+            rep.error('完全性', '%s %s %s の予選合計が合いません：印字 %.2f / 1本目+2本目 %.2f。'
                                 '2行目（所属とQ2）が別の選手に付いている可能性があります'
-                      % (cat, name, want, got))
+                      % (label, cat, name, want, got))
     return counts
 
 
@@ -275,10 +307,10 @@ def read_finals_clubs():
     logging.getLogger('pdfminer').setLevel(logging.ERROR)
 
     full = set()
-    for name in sorted(os.listdir(NISHI_PDF_DIR)):
+    for name in sorted(os.listdir(NISHI_PDF_DIRS['nw-2025-09-12'])):
         if not name.lower().endswith('.pdf') or '特別賞' in name:
             continue
-        with pdfplumber.open(os.path.join(NISHI_PDF_DIR, name)) as pdf:
+        with pdfplumber.open(os.path.join(NISHI_PDF_DIRS['nw-2025-09-12'], name)) as pdf:
             for page in pdf.pages:
                 if 'Q2' in (page.extract_text() or ''):
                     continue                   # 予選ページは切り詰められているので参照にしない
@@ -323,10 +355,10 @@ def measure_club_widths():
     logging.getLogger('pdfminer').setLevel(logging.ERROR)
 
     out = []
-    for name in sorted(os.listdir(NISHI_PDF_DIR)):
+    for name in sorted(os.listdir(NISHI_PDF_DIRS['nw-2025-09-12'])):
         if not name.lower().endswith('.pdf') or '特別賞' in name:
             continue
-        with pdfplumber.open(os.path.join(NISHI_PDF_DIR, name)) as pdf:
+        with pdfplumber.open(os.path.join(NISHI_PDF_DIRS['nw-2025-09-12'], name)) as pdf:
             for page_no, page in enumerate(pdf.pages, start=1):
                 words = page.extract_words()
                 for tok in [w for w in words if w['text'].endswith('Q2')]:
@@ -489,10 +521,17 @@ def check_baseline(perfs, rep, accept=False):
 
     元の変換が正しいことは保証しない。次回以降の取りこぼしを止めるためのもの。
     """
+    # 鍵に大会を含める。含めないと大会を1つ足しただけで既存の区分の値が全部動き、
+    # 「増えたぶん」と「取りこぼし」を見分けられなくなる。
+    meets = collections.defaultdict(set)
+    for p in perfs:
+        meets[p['source']].add(p['meet_id'])
     current = {}
     for source in ('nishinihon', 'osaka_pweb', 'sporttech'):
-        for (cat, rnd), s in _sections_from_perfs(perfs, source).items():
-            current['%s|%s|%s' % (source, cat, rnd)] = {'rows': s['rows'], 'athletes': len(s['athletes'])}
+        for meet_id in sorted(meets.get(source, ())):
+            for (cat, rnd), s in _sections_from_perfs(perfs, source, meet_id).items():
+                current['%s|%s|%s|%s' % (source, meet_id, cat, rnd)] = {
+                    'rows': s['rows'], 'athletes': len(s['athletes'])}
 
     saved = _load_expected()
     if saved is None or accept:
@@ -521,6 +560,39 @@ def check_baseline(perfs, rep, accept=False):
     return len(current)
 
 
+def check_wrapped_clubs(rep):
+    """第54回以降のPDF：列からあふれた所属が、切り詰めではなく折り返されているか。
+
+    第53回は列幅を超えた所属が黙って切り詰められていた（決勝ページの完全形と突き合わせ
+    3件を確定）。第54回のPDFは同じ所属を2行に折り返して印字するので、行をつなげば
+    情報は落ちない。ただし**折り返す実装だと決めつけない**。PDFごとに「実際に折り返しが
+    起きた幅」を測り、折り返さずにその幅へ達している所属があれば切り詰めの疑いとして出す。
+
+    疑いが出ても訂正はしない。完全形がPDFのどこにも無い可能性があるため、
+    件数と一覧を出すところまでにする。
+    """
+    measured = nishinihon_pdf.measure_club_lines()
+    if measured is None:
+        rep.note('完全性_第54回の所属', 'skipped（pdfplumber が無い）')
+        return 0
+    checked = suspects = 0
+    for m in measured:
+        if not m['wrapped']:
+            continue        # このPDFでは折り返しが起きておらず、幅の基準を取れない
+        limit = min(width for width, _ in m['wrapped'])
+        for width, club in m['single']:
+            checked += 1
+            if width >= limit - 1:
+                suspects += 1
+                rep.warn('完全性', '西日本 第54回 %s の所属「%s」は折り返さずに'
+                                   '折り返し幅 %.1fpt に達しています（切り詰めの疑い）'
+                         % (m['file'], club, limit))
+    rep.note('所属の折り返し(西日本 第54回)',
+             '折り返しが起きたPDF %d本で幅を実測し、1行の所属 %d件を照合 → 切り詰めの疑い %d件'
+             % (sum(1 for m in measured if m['wrapped']), checked, suspects))
+    return checked
+
+
 def run(perfs, rep, accept=False):
     """第0層をまとめて実行し、実行件数を返す。0件で緑にしないための数でもある。"""
     counts = {}
@@ -531,6 +603,7 @@ def run(perfs, rep, accept=False):
     counts.update(check_club_consistency(perfs, rep))
     counts['所属の訂正'] = club_fixes.check(rep, accept)
     counts['所属の切り詰め疑い'] = check_truncated_clubs(perfs, rep)
+    counts['所属の折り返し(第54回)'] = check_wrapped_clubs(rep)
     for k, v in check_osaka(perfs, rep).items():
         counts['大阪府_' + k] = v
     counts['区分別基準'] = check_baseline(perfs, rep, accept)
