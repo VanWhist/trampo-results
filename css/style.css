@@ -271,3 +271,34 @@ details summary { cursor: pointer; padding: 4px 0; }
   /* 押しやすさ優先。iPhoneでの誤タップを減らす */
   button.chip, .suggest-item { min-height: 44px; }
 }
+
+/* ---- 大会ページ（公式PDFと同じ並びの結果表） ------------------------------- */
+.round-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 6px; }
+.cat-btn {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+  text-align: left; padding: 10px 12px; border: 1px solid var(--line);
+  border-radius: 10px; background: #fff; cursor: pointer; min-height: 44px;
+}
+.cat-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+.cat-btn[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.cat-name { font-weight: 600; }
+.cat-n { font-size: 12px; color: var(--muted); }
+
+table.pdf-table { font-size: 13px; font-variant-numeric: tabular-nums; }
+table.pdf-table th, table.pdf-table td { padding: 3px 6px; }
+table.pdf-table .s-col { width: 2.1em; text-align: right; padding: 3px 4px; }
+table.pdf-table th.s-col { color: var(--muted); font-weight: 500; }
+table.pdf-table .rank { font-weight: 600; vertical-align: top; }
+table.pdf-table .rtn { color: var(--muted); font-size: 12px; }
+table.pdf-table .club { color: var(--muted); font-size: 12px; }
+table.pdf-table .total { font-weight: 600; vertical-align: top; }
+/* 1選手の2行（1本目・2本目）をひとかたまりに見せる */
+table.pdf-table tr.pdf-main td { border-bottom: none; }
+table.pdf-table tr.pdf-sub td { border-bottom: 1px solid var(--line); }
+table.pdf-table tr.pdf-main:hover td, table.pdf-table tr.pdf-sub:hover td { background: #f8fafc; }
+
+.rec-rank { font-weight: 600; color: var(--muted); }
+.rec-routine { border-top: 1px solid var(--line); padding-top: 6px; margin-top: 6px; }
+.rec-routine-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 13px; }
+.rec-s { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; color: var(--muted); margin: 4px 0; }

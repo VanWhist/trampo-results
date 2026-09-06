@@ -207,15 +207,7 @@ function renderSuggest() {
   }
   for (const c of meetHits) {
     box.append(el('button', { class: 'suggest-item',
-      onclick: () => {
-        document.getElementById('q').value = '';
-        state.q = '';
-        state.meet = c.meet_id;
-        state.page = 1;
-        document.getElementById('f-meet').value = c.meet_id;
-        renderSuggest();
-        render();
-      } }, [
+      onclick: () => { location.href = 'meet.html#' + encodeURIComponent(c.meet_id); } }, [
       el('span', { class: 'sug-name', text: c.name }),
       el('span', { class: 'sug-meta', text: c.date + '　' + c.n_individual + '演技' }),
       el('span', { class: 'sug-go', text: 'この大会を見る →' }),
@@ -234,16 +226,11 @@ function renderRecent() {
     .slice(0, 8);
   for (const c of recent) {
     box.append(el('button', { class: 'meet-card',
-      onclick: () => {
-        state.meet = c.meet_id;
-        state.page = 1;
-        document.getElementById('f-meet').value = c.meet_id;
-        render();
-        window.scrollTo({ top: 0 });
-      } }, [
+      onclick: () => { location.href = 'meet.html#' + encodeURIComponent(c.meet_id); } }, [
       el('div', { class: 'meet-date' }, [document.createTextNode(c.date + ' '), sourceBadge(c.official)]),
       el('div', { class: 'meet-name', text: c.name }),
-      el('div', { class: 'meet-sub', text: c.n_individual + '演技　' + c.level }),
+      el('div', { class: 'meet-sub', text: c.n_individual + '演技　' + c.level
+        + '　→ 公式と同じ並びで見る' }),
     ]));
   }
 }

@@ -27,6 +27,8 @@ PERF_FIELDS = (
     'rank', 'total', 'D', 'E', 'T', 'HD', 'Bonus', 'Pen', 'DPen', 'n_elements',
     'has_deduction_detail', 'has_judge_detail', 'interrupted',
     'check_flags', 'data_quality',
+    # 西日本の予選はPDFに「予選合計」が印字されている。計算せず印字値をそのまま出す。
+    'qualifying_total',
 )
 
 
