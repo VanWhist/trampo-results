@@ -6,6 +6,7 @@
 生データ（大会リザルト\\ 配下）は読むだけで、絶対に書き換えない。
 """
 import collections
+import hashlib
 import io
 import json
 import os
@@ -39,12 +40,46 @@ def _write(path, payload):
     return os.path.getsize(path)
 
 
+def _content_hash(sizes):
+    """書き出したJSONの中身からハッシュを作る。dataVersion を決めるのに使う。"""
+    h = hashlib.sha1()
+    for name in sorted(sizes):
+        h.update(name.encode('utf-8'))
+        with io.open(os.path.join(config.DATA_OUT, *name.split('/')), 'rb') as fh:
+            h.update(fh.read())
+    return h.hexdigest()
+
+
+def _data_version(content_hash):
+    """中身が変わったら必ず別の版にする。変わっていなければ据え置く。
+
+    dataVersion は画面がJSONを読むときのクエリに付く。日付＋連番を機械的に付けると
+    同じ日の2回目のビルドで値が変わらず、更新したのにブラウザとCDNが古いJSONを
+    使い続ける（2026-09-07に実際に踏んだ）。前回の中身と比べて決める。
+    """
+    today = time.strftime('%Y-%m-%d')
+    path = os.path.join(config.DATA_OUT, 'manifest.json')
+    prev = {}
+    if os.path.exists(path):
+        with io.open(path, encoding='utf-8') as fh:
+            prev = json.load(fh)
+    previous = prev.get('dataVersion', '')
+    if previous and prev.get('contentHash') == content_hash:
+        return previous
+    seq = 1
+    if previous.startswith(today + '-'):
+        try:
+            seq = int(previous.rsplit('-', 1)[1]) + 1
+        except ValueError:
+            seq = 2
+    return '%s-%02d' % (today, seq)
+
+
 def main(argv=None):
     started = time.time()
     argv = sys.argv[1:] if argv is None else argv
     accept = '--accept-counts' in argv
     accept_sections = '--accept-sections' in argv
-    data_version = time.strftime('%Y-%m-%d') + '-01'
 
     print('生データを読みます…')
     st_comps, st_perfs, judges, panels = sporttech.load_all()
@@ -165,8 +200,11 @@ def main(argv=None):
     sizes['summary/deductions.json'] = _write(
         os.path.join(config.DATA_OUT, 'summary', 'deductions.json'), ded_summary)
 
+    content_hash = _content_hash(sizes)
+    data_version = _data_version(content_hash)
     manifest = {
         'dataVersion': data_version,
+        'contentHash': content_hash,
         'generatedAt': time.strftime('%Y-%m-%dT%H:%M:%S'),
         'parserVersion': config.PARSER_VERSION,
         'displayMode': config.DISPLAY_MODE_DEFAULT,
