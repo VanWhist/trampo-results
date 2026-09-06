@@ -1,0 +1,101 @@
+{
+ "_comment": "西日本の所属の個別訂正。PDFで1件ずつ印字を確認したものだけを載せる。一般則は入れない（所属の印字位置・折り返し・切り詰めの規則を誤って一般化すると、正しい行まで壊すため）。",
+ "_confirmed": "2026-08-15 に pdfplumber でPDFの印字を読み、目視確認した。切り詰めの3件は決勝ページの折り返し行を結合して確定（所属列の右端x1でフィルタ）。",
+ "_reasons": {
+  "carried_over": "同点0.00で順位が並ぶ箇所で、CSVの予選1本目に隣の選手の所属が入っていた",
+  "truncated": "PDFの列幅で切り詰められ、決勝側では2行に折り返していた。連結した全体が正しい値"
+ },
+ "fixes": [
+  {
+   "athlete": "坪井 綾音",
+   "category": "大学生 女子",
+   "round": "予選",
+   "routine": 1,
+   "from": "金沢学院大学クラブ",
+   "to": "静岡産業大学クラブ",
+   "reason": "carried_over",
+   "pdf": "53th_大学生リザルト.pdf",
+   "page": 4
+  },
+  {
+   "athlete": "清坐 紗弥",
+   "category": "中学生 女子",
+   "round": "予選",
+   "routine": 1,
+   "from": "キタイスポーツクラブ",
+   "to": "キャッツアイＫＡＮＡＺＡＷＡ",
+   "reason": "carried_over",
+   "pdf": "53th_中学生リザルト.pdf",
+   "page": 7
+  },
+  {
+   "athlete": "松葉 結奈",
+   "category": "小学生高学年 女子",
+   "round": "予選",
+   "routine": 1,
+   "from": "熊本トランポリンクラブ",
+   "to": "富田林トランポリンクラブ",
+   "reason": "carried_over",
+   "pdf": "53th_小学生高学年リザルト.pdf",
+   "page": 7
+  },
+  {
+   "athlete": "西川 詩桜",
+   "category": "小学生高学年 女子",
+   "round": "予選",
+   "routine": 1,
+   "from": "熊本トランポリンクラブ",
+   "to": "神辺スポーツセンター",
+   "reason": "carried_over",
+   "pdf": "53th_小学生高学年リザルト.pdf",
+   "page": 7
+  },
+  {
+   "athlete": "鈴木 朝陽",
+   "category": "小学生高学年 男子",
+   "round": "予選",
+   "routine": 1,
+   "from": "Ambitious",
+   "to": "天竜トランポリンクラブ",
+   "reason": "carried_over",
+   "pdf": "53th_小学生高学年リザルト.pdf",
+   "page": 3
+  },
+  {
+   "athlete": "中山 心輝",
+   "category": null,
+   "round": null,
+   "routine": null,
+   "from": null,
+   "to": "社会福祉法人博光福祉会 つばさスポーツクラブ/阪南大学クラブ",
+   "reason": "truncated",
+   "pdf": "53th_一般リザルト.pdf",
+   "page": 1,
+   "note": "決勝ページの2行（…つばさスポーツク / ラブ/阪南大学クラブ）を連結した値。予選のQ2行は「Q2」の直前で切れている"
+  },
+  {
+   "athlete": "谷口 遼平",
+   "category": null,
+   "round": null,
+   "routine": null,
+   "from": "第一商事株式会社/たにぐちりょうへいトラ",
+   "to": "第一商事株式会社/たにぐちりょうへいトランポリンクラブ",
+   "reason": "truncated",
+   "pdf": "53th_一般リザルト.pdf",
+   "page": 1,
+   "note": "決勝ページの折り返し2行（…たにぐちりょうへいトラ / ンポリンクラブ）を結合した値"
+  },
+  {
+   "athlete": "岡田 陸飛",
+   "category": null,
+   "round": null,
+   "routine": null,
+   "from": "金沢トランポリンクラブ/フルタニランバー",
+   "to": "金沢トランポリンクラブ/フルタニランバー株式会社",
+   "reason": "truncated",
+   "pdf": "53th_一般リザルト.pdf",
+   "page": 1,
+   "note": "決勝ページの折り返し2行（…フルタニランバー / 株式会社）を結合した値"
+  }
+ ]
+}

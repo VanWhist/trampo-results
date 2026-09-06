@@ -171,6 +171,8 @@ def load_all():
             'official': config.SOURCES['osaka_pweb']['official'],
             'discipline': '個人',
             'category': category,
+            # 完全性チェックで一覧ページ（区分一覧CSV）と突き合わせるため、原本の区分名も残す
+            'raw_category': raw_category,
             'sex': _sex(category),
             'age_group': '',
             'round': round_label,
@@ -240,16 +242,19 @@ def _dedupe_categories(performances):
         # 情報量の多いほうを残す。
         key = (p['meet_id'], p['athlete_name'], p['routine'], p['E'])
         first = kept.get(key)
+        p['also_in_raw_categories'] = []
         if first is None:
             kept[key] = p
             order.append(p)
             continue
         if _richness(p) > _richness(first):
             p['also_in_categories'] = first['also_in_categories'] + [first['category']]
+            p['also_in_raw_categories'] = first['also_in_raw_categories'] + [first['raw_category']]
             order[order.index(first)] = p
             kept[key] = p
         else:
             first['also_in_categories'].append(p['category'])
+            first['also_in_raw_categories'].append(p['raw_category'])
     return order
 
 

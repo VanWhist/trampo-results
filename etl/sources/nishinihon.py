@@ -7,11 +7,16 @@
   2. 審判別のデータは無い（技ごとの減点までしか取れない）
   3. L列は §20.2.2 で説明できない値（L=4）を含む。恒等式には効くが、
      「着地減点」と決めつけて分析に使わないこと
+  4. 所属は**選手行の次の行**に印字される（予選はQ2のスコアと同じ行に連結、決勝は独立行）。
+     長い所属は複数行に折り返され、予選のQ2行では列幅で切り詰められることがある。
+     さらに、同点0.00で順位が並ぶ箇所では、CSVの予選1本目に隣の選手の所属が入っている。
+     一般則で直そうとすると前提を誤るので、**PDFで個別に確認した分だけ**
+     `nishinihon_club_fixes.json` で訂正する。
 """
 import csv
 import io
 
-from .. import config
+from .. import club_fixes, config
 
 MEET_ID = 'nw-2025-09-12'
 
@@ -125,4 +130,7 @@ def load_all():
                 'correction_flag': 'D空欄を0として採用（規定演技）' if d_implicit_zero else '',
             },
         })
+    club_fixes.apply(performances)
     return [competition], performances
+
+

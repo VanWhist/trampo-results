@@ -41,6 +41,7 @@ def main(argv=None):
     started = time.time()
     argv = sys.argv[1:] if argv is None else argv
     accept = '--accept-counts' in argv
+    accept_sections = '--accept-sections' in argv
     data_version = time.strftime('%Y-%m-%d') + '-01'
 
     print('生データを読みます…')
@@ -82,7 +83,8 @@ def main(argv=None):
 
     print('検証…')
     rep = validate.run(performances, athletes, competitions, judges, panels,
-                       name_variants_=(variants, already_merged))
+                       name_variants_=(variants, already_merged),
+                       accept_sections=accept_sections)
     print('  ' + rep.summary())
 
     print('事前集計…')
@@ -189,6 +191,7 @@ def main(argv=None):
             'warnings': len(rep.warnings),
             'errors': len(rep.errors),
             'notes': rep.notes,
+            'checks': rep.checks,
         },
     }
     sizes['manifest.json'] = _write(os.path.join(config.DATA_OUT, 'manifest.json'), manifest)

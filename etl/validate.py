@@ -10,7 +10,7 @@ import io
 import json
 import os
 
-from . import config
+from . import completeness, config
 
 # 各ソースの期待件数（個人種目）。実装指示書 第9章の受け入れ基準の数字。
 # 大会が増えるとここは増えるので、判定は「大会ごとの件数」（etl/expected_counts.json）で行う。
@@ -27,6 +27,8 @@ class Report(object):
         self.warnings = []
         self.errors = []
         self.notes = collections.OrderedDict()
+        # 実行件数。0件のまま緑にしないためのゲートに使う。
+        self.checks = collections.OrderedDict()
 
     def warn(self, kind, message):
         self.warnings.append((kind, message))
@@ -42,8 +44,16 @@ class Report(object):
             self.passed, len(self.warnings), len(self.errors))
 
 
-def run(performances, athletes, competitions, judges, panels, name_variants_=None):
+def run(performances, athletes, competitions, judges, panels, name_variants_=None,
+        accept_sections=False):
     rep = Report()
+
+    # ---- 第0層：完全性 -----------------------------------------------------
+    # 数値の検算は「行がそろっている」ことが前提。行が丸ごと落ちても恒等式は成立するので、
+    # 先に「原本にあるものが全部入っているか」を確かめる。
+    layer0 = completeness.run(performances, rep, accept_sections)
+    rep.checks.update(layer0)
+    rep.note('完全性の実行件数', ' / '.join('%s %s' % kv for kv in sorted(layer0.items())))
 
     # ---- ソース別の件数 ----------------------------------------------------
     counts = collections.Counter(p['source'] for p in performances
@@ -139,8 +149,16 @@ def run(performances, athletes, competitions, judges, panels, name_variants_=Non
 
         rep.passed += 1
 
+    rep.checks['E検算'] = e_checked
+    rep.checks['合計検算'] = total_checked
     rep.note('E検算', '%d件中 %d件が要確認' % (e_checked, e_flagged))
     rep.note('合計検算', '%d件中 %d件が要確認' % (total_checked, total_flagged))
+
+    # 実行件数ゲート：検証が1件も走っていないのに緑、という状態を作らない
+    for name, n in rep.checks.items():
+        if n == 0:
+            rep.error('実行件数', '%s の検証が0件です。検証が走っていないまま緑になるのを防ぐため'
+                                  'エラーにします' % name)
     rep.note('値域外', '%d件' % range_bad)
 
     # ---- 欠測の数（画面にも出す） ------------------------------------------
