@@ -14,7 +14,7 @@ import sys
 import time
 
 from . import aggregate, config, name_variants, normalize, validate
-from .sources import nishinihon, nishinihon_pdf, osaka, sporttech
+from .sources import nishinihon, nishinihon_pdf, osaka, osaka_html, sporttech
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -84,6 +84,12 @@ def main(argv=None):
     print('生データを読みます…')
     st_comps, st_perfs, judges, panels = sporttech.load_all()
     os_comps, os_perfs = osaka.load_all()
+    # 中間CSVに無い順位・所属・決勝の得点内訳を、元HTMLから補う（上書きはしない）。
+    # 補った項目は osaka_crosscheck の突き合わせから外れる。
+    filled = osaka_html.fill_missing(os_perfs)
+    if filled:
+        print('  大阪府：元HTMLから補った項目 %s'
+              % ' / '.join('%s %d' % kv for kv in sorted(filled.items())))
     nw_comps, nw_perfs = nishinihon.load_all()
     n54_comps, n54_perfs = nishinihon_pdf.load_all()   # 第54回はPDFを直接読む
 

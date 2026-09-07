@@ -10,7 +10,7 @@ import io
 import json
 import os
 
-from . import completeness, config
+from . import completeness, config, osaka_crosscheck
 
 # 各ソースの期待件数（個人種目）。実装指示書 第9章の受け入れ基準の数字。
 # 大会が増えるとここは増えるので、判定は「大会ごとの件数」（etl/expected_counts.json）で行う。
@@ -54,6 +54,10 @@ def run(performances, athletes, competitions, judges, panels, name_variants_=Non
     layer0 = completeness.run(performances, rep, accept_sections)
     rep.checks.update(layer0)
     rep.note('完全性の実行件数', ' / '.join('%s %s' % kv for kv in sorted(layer0.items())))
+
+    # ---- 第1層：同じものを別経路で読んで突き合わせる -----------------------
+    # 第0層は行がそろっていれば通る。値そのものが正しいかは別の読み方が要る。
+    rep.checks.update(osaka_crosscheck.run(performances, rep))
 
     # ---- ソース別の件数 ----------------------------------------------------
     counts = collections.Counter(p['source'] for p in performances

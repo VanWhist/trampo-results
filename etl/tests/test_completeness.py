@@ -20,8 +20,8 @@ import sys
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-from .. import completeness, normalize, validate
-from ..sources import nishinihon, nishinihon_pdf, osaka, sporttech
+from .. import completeness, normalize, osaka_crosscheck, validate
+from ..sources import nishinihon, nishinihon_pdf, osaka, osaka_html, sporttech
 
 
 def load_baseline():
@@ -30,6 +30,7 @@ def load_baseline():
     _, os_perfs = osaka.load_all()
     _, nw_perfs = nishinihon.load_all()
     _, n54_perfs = nishinihon_pdf.load_all()
+    osaka_html.fill_missing(os_perfs)      # 本番と同じく元HTMLで穴を埋める
     perfs = st_perfs + os_perfs + nw_perfs + n54_perfs
     normalize.build_athletes(perfs, normalize.load_overrides())   # 氏名の正規化を先に効かせる
     return perfs
@@ -38,6 +39,9 @@ def load_baseline():
 def run_checks(perfs):
     rep = validate.Report()
     completeness.run(perfs, rep, accept=False)
+    # 第1層も回す。氏名だけがズレる事故は第0層では止まらないので、
+    # 大阪府はここ（元HTMLとの突き合わせ）が担当する。
+    osaka_crosscheck.run(perfs, rep, write_doc=False)
     return rep
 
 
@@ -101,6 +105,20 @@ def main():
             r['total'] = moved[(i + 1) % len(moved)]
         return out
 
+    def swap_osaka_names(perfs):
+        """大阪府で氏名だけを入れ替える。点数は動かさない。
+
+        第0層は行数も順位も変わらないので通ってしまう。元HTMLとの突き合わせだけが
+        「その点数はその人のものではない」と言える。
+        """
+        out = copy.deepcopy(perfs)
+        rows = [p for p in out if p['source'] == 'osaka_pweb'
+                and p['date'] == '2025-05-10' and p['category'] == '11才～12才男子'
+                and p['routine'] == 1]
+        rows.sort(key=lambda p: p['athlete_name'])
+        rows[0]['athlete_name'], rows[1]['athlete_name'] =             rows[1]['athlete_name'], rows[0]['athlete_name']
+        return out
+
     osaka_cat = [p for p in base if p['source'] == 'osaka_pweb'][0]['raw_category']
     one_osaka = [p for p in base if p['source'] == 'osaka_pweb'][5]
 
@@ -119,6 +137,8 @@ def main():
          swap_two_names(base)),
         ('2行目（Q2のスコアごと）を1つズラす',
          shift_q2(base)),
+        ('大阪府 1選手の氏名を隣とすげ替える（点数はそのまま）',
+         swap_osaka_names(base)),
         ('継続ページを丸ごと欠落（第54回 小学生高学年女子予選 p5）',
          without(base, lambda p: page_of(p) == cont_page)),
         ('ページ境界で割れた選手の2本目を欠落（第54回 %s）' % split_name,

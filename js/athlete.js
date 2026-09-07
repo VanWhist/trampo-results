@@ -87,7 +87,7 @@ function renderAthlete(id) {
   box.append(el('h3', { text: '所属の履歴' }));
   const hist = a.club_history || [];
   if (!hist.length) {
-    box.append(el('p', { class: 'meta', text: '所属が公開されている記録がありません（大阪府のデータには所属がありません）。' }));
+    box.append(el('p', { class: 'meta', text: '所属が公開されている記録がありません。' }));
   } else {
     // 所属が変わらない年が続くと「2025 A → 2026 A」と同じ名前が並ぶ。
     // 見たいのは転籍なので、中身が同じ年はシーズンだけをまとめる。
