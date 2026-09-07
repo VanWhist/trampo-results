@@ -259,10 +259,10 @@ function renderCards(groups) {
           el('dl', { class: 'rec-sub' }, [
             ['Exe', num(r.E, 2)], ['Diff', num(r.D, 1)], ['ToF', num(r.T, 2)],
             ['HD', num(r.HD, 2)], ['Pen', num(r.Pen, 1)],
-          ].flatMap(([k, v]) => [
+          ].map(([k, v]) => el('div', {}, [
             el('dt', { text: k }),
             el('dd', { class: v === null ? 'blank' : '', text: v ?? '—' }),
-          ])),
+          ]))),
           el('button', { class: 'chip', text: '演技の詳細', onclick: () => openDetail(r, meet) }),
         ]);
       }),

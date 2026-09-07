@@ -133,10 +133,10 @@ function renderCards(items) {
     el('dl', { class: 'rec-sub' }, [
       ['D', num(p.D, 1)], ['E', num(p.E, 1)], ['T', num(p.T, 2)], ['HD', num(p.HD, 2)],
       ['技数', p.n_elements ?? null],
-    ].flatMap(([k, v]) => [
+    ].map(([k, v]) => el('div', {}, [
       el('dt', { text: k }),
       el('dd', { class: v === null || v === undefined ? 'blank' : '', text: v ?? '—' }),
-    ])),
+    ]))),
     el('button', { class: 'chip', text: '演技の詳細',
       onclick: () => openDetail(p, meets.get(p.meet_id)) }),
   ])));

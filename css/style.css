@@ -236,10 +236,13 @@ table.mini th, table.mini td { padding: 4px 8px; white-space: normal; }
 .rec-total { font-size: 20px; font-variant-numeric: tabular-nums; }
 .rec-meta { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
 .rec-tags { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+/* ラベルと値は必ず同じマスに入れる。dt と dd を直接グリッドに流すと、
+   ラベルが行末・値が次の行頭に離れて「T 10」のように読めてしまう（実際に誤読された）。 */
 .rec-sub {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px 6px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(52px, 1fr)); gap: 4px 6px;
   margin: 6px 0 8px; font-size: 13px;
 }
+.rec-sub > div { min-width: 0; }
 .rec-sub dt { color: var(--muted); font-size: 11px; }
 .rec-sub dd { margin: 0; font-variant-numeric: tabular-nums; }
 .rec-sub dd.blank { color: #b9c2cc; }

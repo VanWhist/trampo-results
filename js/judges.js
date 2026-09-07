@@ -242,10 +242,10 @@ function renderCards(items) {
       ['演技数(n)', e.n], ['大会数', e.n_meets],
       ['平均パネル差', e.has_trend ? signed(e.mean_diff) : null],
       ['ばらつき', e.has_trend ? num(e.sd, 3) : null],
-    ].flatMap(([k, v]) => [
+    ].map(([k, v]) => el('div', {}, [
       el('dt', { text: k }),
       el('dd', { class: v === null || v === undefined ? 'blank' : '', text: v ?? '—' }),
-    ])),
+    ]))),
     el('button', { class: 'chip', text: 'この審判の詳細', onclick: () => openJudge(e) }),
   ])));
 }
