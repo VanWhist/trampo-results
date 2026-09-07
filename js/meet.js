@@ -18,11 +18,16 @@
 import * as data from './data.js';
 import {
   el, clear, num, sourceBadge, mountNav, downloadCsv, errorBox,
-  isNarrow, onWidthChange, noteLayers,
+  isNarrow, onWidthChange, noteLayers, scrollToTop,
 } from './ui.js';
 import { openDetail } from './detail.js';
 
-const state = { meetId: null, category: null, round: null };
+const state = { meetId: null, category: null, round: null, showAllAthletes: false };
+
+// スマホは1選手ぶんで1画面近く使う。100名の区分（小学生高学年女子予選）だと
+// ページの高さが4万pxを超えて、区分を選び直すことも戻ることもできなくなる。
+// 並び順は公式のまま、**表示だけ**を切る（一覧ページの50件ずつと同じ考え方）。
+const MOBILE_CHUNK = 30;
 let meet = null;
 let rows = [];
 let details = {};
@@ -60,7 +65,12 @@ function renderPicker() {
     roundBox.append(el('button', {
       class: 'chip', 'aria-pressed': String(state.round === rnd),
       text: (rnd || '（ラウンド不明）') + '（' + map.get(rnd).size + '区分）',
-      onclick: () => { state.round = rnd; state.category = null; render(); },
+      onclick: () => {
+        state.round = rnd;
+        state.category = null;
+        state.showAllAthletes = false;
+        render();
+      },
     }));
   }
 
@@ -73,12 +83,24 @@ function renderPicker() {
     const n = rows.filter((r) => r.round === state.round && r.category === cat).length;
     catBox.append(el('button', {
       class: 'cat-btn', 'aria-pressed': String(state.category === cat),
-      onclick: () => { state.category = cat; render(); },
+      // スマホだと区分の一覧が画面いっぱいで、選んでも結果が下に隠れたまま。
+      // 選んだら結果まで運ぶ。
+      onclick: () => {
+        state.category = cat;
+        state.showAllAthletes = false;
+        render();
+        scrollToResult();
+      },
     }, [
       el('span', { class: 'cat-name', text: cat }),
       el('span', { class: 'cat-n', text: n + '演技' }),
     ]));
   }
+}
+
+/** 区分を選んだあと、結果表の先頭まで運ぶ。 */
+function scrollToResult() {
+  scrollToTop(document.getElementById('result-card'));
 }
 
 // ---- 結果表 -----------------------------------------------------------------
@@ -209,8 +231,7 @@ function renderTable(list) {
 }
 
 // 狭い画面では表を横スクロールさせず、1選手1カードにする。
-function renderCards(list) {
-  const groups = groupByAthlete(list);
+function renderCards(groups) {
   return el('div', { class: 'card-list' }, groups.map((g) => {
     const first = g[0];
     return el('article', { class: 'rec' }, [
@@ -259,7 +280,20 @@ function renderResult() {
     state.category + '　' + state.round;
 
   const box = clear(document.getElementById('result'));
-  box.append(isNarrow() ? renderCards(list) : renderTable(list));
+  const groups = groupByAthlete(list);
+  const cut = isNarrow() && !state.showAllAthletes && groups.length > MOBILE_CHUNK;
+  box.append(isNarrow()
+    ? renderCards(cut ? groups.slice(0, MOBILE_CHUNK) : groups)
+    : renderTable(list));
+  if (cut) {
+    box.append(el('button', { class: 'more-card',
+      onclick: () => { state.showAllAthletes = true; renderResult(); } }, [
+      el('span', { class: 'more-name',
+        text: '残り ' + (groups.length - MOBILE_CHUNK) + ' 名を表示' }),
+      el('span', { class: 'more-sub',
+        text: '全 ' + groups.length + ' 名。並びは公式リザルトのまま' }),
+    ]));
+  }
 
   const notes = [UNIT_NOTE[meet.source] || ''];
   const col = activeColumns(list);
@@ -292,12 +326,29 @@ function renderResult() {
 function render() {
   renderPicker();
   renderResult();
+  updateFab();
+}
+
+/** スマホで結果を読み進めたあと、区分の一覧まで戻れるようにする。
+ *  区分の一覧が画面から出たときだけ出す（出しっぱなしにすると結果の邪魔になる）。 */
+function updateFab() {
+  // HTMLだけ古いものがキャッシュに残っていると、このボタンが無い状態でJSが動く。
+  // 落とさずに、ボタンが無いだけの画面として成立させる。
+  const fab = document.getElementById('back-to-picker');
+  if (!fab) return;
+  const picker = document.getElementById('picker-card');
+  const card = document.getElementById('result-card');
+  fab.hidden = !(isNarrow() && !card.hidden
+    && picker.getBoundingClientRect().bottom < 0);
 }
 
 // ---- 起動 -------------------------------------------------------------------
 
 async function main() {
   mountNav('index.html');
+  const fab = document.getElementById('back-to-picker');
+  if (fab) fab.onclick = () => scrollToTop(document.getElementById('picker-card'));
+  window.addEventListener('scroll', updateFab, { passive: true });
   state.meetId = decodeURIComponent(location.hash.replace(/^#/, ''));
   try {
     const [comps, mf] = await Promise.all([data.competitions(), data.manifest()]);
@@ -345,7 +396,7 @@ async function main() {
     const map = sections();
     state.round = map.has('決勝') ? '決勝' : [...map.keys()][0] || null;
 
-    onWidthChange(() => renderResult());
+    onWidthChange(() => { renderResult(); updateFab(); });
     window.addEventListener('hashchange', () => location.reload());
     render();
   } catch (err) {

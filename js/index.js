@@ -10,7 +10,7 @@
 import * as data from './data.js';
 import {
   el, clear, cell, num, sourceBadge, mountNav, downloadCsv, errorBox,
-  paginate, renderPager, isNarrow, onWidthChange, noteLayers, PER_PAGE,
+  paginate, renderPager, isNarrow, onWidthChange, noteLayers, scrollToTop, PER_PAGE,
 } from './ui.js';
 import { openDetail } from './detail.js';
 
@@ -218,21 +218,45 @@ function renderSuggest() {
 
 // ---- 最近の大会 -------------------------------------------------------------
 
+// 初期表示に並べる数。スマホだと1列なので、多いと下の内容まで指が届かない。
+const RECENT_N = 5;
+let allMeetsOpen = false;
+
+function meetCard(c) {
+  return el('button', { class: 'meet-card',
+    onclick: () => { location.href = 'meet.html#' + encodeURIComponent(c.meet_id); } }, [
+    el('div', { class: 'meet-date' }, [document.createTextNode(c.date + ' '), sourceBadge(c.official)]),
+    el('div', { class: 'meet-name', text: c.name }),
+    el('div', { class: 'meet-sub', text: c.n_individual + '演技　' + c.level
+      + '　→ 公式と同じ並びで見る' }),
+  ]);
+}
+
 function renderRecent() {
-  const box = clear(document.getElementById('recent'));
-  const recent = [...meets.values()]
+  const all = [...meets.values()]
     .filter((c) => c.n_individual > 0)
-    .sort((a, b) => (a.date < b.date ? 1 : -1))
-    .slice(0, 8);
-  for (const c of recent) {
-    box.append(el('button', { class: 'meet-card',
-      onclick: () => { location.href = 'meet.html#' + encodeURIComponent(c.meet_id); } }, [
-      el('div', { class: 'meet-date' }, [document.createTextNode(c.date + ' '), sourceBadge(c.official)]),
-      el('div', { class: 'meet-name', text: c.name }),
-      el('div', { class: 'meet-sub', text: c.n_individual + '演技　' + c.level
-        + '　→ 公式と同じ並びで見る' }),
-    ]));
-  }
+    .sort((a, b) => (a.date < b.date ? 1 : -1));
+  const box = clear(document.getElementById('recent'));
+  for (const c of (allMeetsOpen ? all : all.slice(0, RECENT_N))) box.append(meetCard(c));
+
+  document.getElementById('recent-title').textContent =
+    allMeetsOpen ? 'すべての大会' : '最近の大会';
+
+  // 開閉のボタンは一覧の外に置く。中に入れると、開いたときに末尾まで
+  // スクロールしないと閉じられない。
+  const more = clear(document.getElementById('recent-more'));
+  if (all.length <= RECENT_N) return;
+  more.append(el('button', { class: 'more-card',
+    onclick: () => {
+      allMeetsOpen = !allMeetsOpen;
+      renderRecent();
+      if (!allMeetsOpen) scrollToTop(document.getElementById('recent-card'));
+    } }, [
+    el('span', { class: 'more-name', text: allMeetsOpen ? '最近の大会だけ表示' : 'すべての大会' }),
+    el('span', { class: 'more-sub', text: allMeetsOpen
+      ? '新しい順に ' + all.length + '大会を表示中'
+      : '全 ' + all.length + '大会を新しい順に表示' }),
+  ]));
 }
 
 // ---- 起動 -------------------------------------------------------------------

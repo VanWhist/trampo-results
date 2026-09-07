@@ -1,5 +1,22 @@
 // 画面まわりの小さな共通部品。フレームワークは使わない。
 
+/** その要素の先頭まで運ぶ。上部のヘッダは position: sticky なので、その高さぶん避ける。
+ *
+ * scrollIntoView({block:'start'}) だと要素の上端が画面の上端に来るので、見出しが
+ * ヘッダの下に隠れる（スマホでヘッダ87px）。高さは画面幅で変わるので実測する。
+ * 動きを減らす設定の人にはアニメーションしない。
+ */
+export function scrollToTop(node) {
+  if (!node || node.hidden) return;
+  const header = document.querySelector('header.site');
+  const gap = (header ? header.getBoundingClientRect().height : 0) + 8;
+  const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ? 'auto' : 'smooth';
+  window.scrollTo({ top: Math.max(0, window.scrollY + node.getBoundingClientRect().top - gap),
+                    behavior: behavior });
+}
+
+
 export function el(tag, attrs = {}, children = []) {
   const node = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) {
