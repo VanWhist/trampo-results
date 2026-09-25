@@ -17,7 +17,7 @@
 
 import * as data from './data.js';
 import {
-  el, clear, num, sourceBadge, mountNav, downloadCsv, errorBox,
+  el, PRE2017_NOTE, rulesBadge, clear, num, sourceBadge, mountNav, downloadCsv, errorBox,
   isNarrow, onWidthChange, noteLayers, scrollToTop,
 } from './ui.js';
 import { openDetail } from './detail.js';
@@ -33,7 +33,7 @@ let rows = [];
 let details = {};
 let manifest = null;
 
-const ROUND_ORDER = ['予選', '準決勝', '決勝'];
+const ROUND_ORDER = ['予選', '準々決勝', '準決勝', '決勝', '決勝1', '決勝2', '団体準決勝', '団体決勝'];
 
 // S値の単位はソースで違う。表の下に必ず出す。
 const UNIT_NOTE = {
@@ -220,6 +220,7 @@ function renderTable(list) {
       }
       tr.append(el('td', {}, [
         r.interrupted ? el('span', { class: 'badge flag', text: '中断' }) : null,
+        rulesBadge(r),
         ...(r.check_flags || []).map((f) => el('span', { class: 'badge flag', text: f })),
         el('span', { class: 'link', text: '詳細', onclick: () => openDetail(r, meet) }),
       ]));
@@ -253,6 +254,7 @@ function renderCards(groups) {
             el('span', { text: g.length > 1 ? 'Q' + r.routine : '演技' }),
             el('span', { class: 'num', text: num(r.total, 2) ?? '—' }),
             r.interrupted ? el('span', { class: 'badge flag', text: '中断' }) : null,
+            rulesBadge(r),
           ]),
           el('div', { class: 'rec-s', text: S.join(' ') + '  ｜ 着地 '
             + (det.landing ?? '·') }),
@@ -295,7 +297,8 @@ function renderResult() {
     ]));
   }
 
-  const notes = [UNIT_NOTE[meet.source] || ''];
+  // 2017年より前の規則の大会は、S の単位も E の尺度も違う
+  const notes = [meet.rules_family === 'pre2017' ? PRE2017_NOTE : (UNIT_NOTE[meet.source] || '')];
   const col = activeColumns(list);
   if (!col.rank) notes.push('このソースには順位がありません（合計の高い順に並べています）。');
   if (!list.some((r) => r.club)) notes.push('このソースには所属がありません。');
@@ -384,8 +387,8 @@ async function main() {
             + '引用するときはその旨を明示してください。' }),
       ]));
 
-    const all = await data.performances();
-    rows = all.filter((r) => r.meet_id === state.meetId);
+    // この大会の演技だけを読む（全年を読むとスマホで重い）
+    rows = await data.meetRows(state.meetId);
     try {
       details = await data.details(state.meetId);
     } catch (err) {

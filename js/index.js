@@ -9,7 +9,7 @@
 
 import * as data from './data.js';
 import {
-  el, clear, cell, num, sourceBadge, mountNav, downloadCsv, errorBox,
+  el, rulesBadge, clear, cell, num, sourceBadge, mountNav, downloadCsv, errorBox,
   paginate, renderPager, isNarrow, onWidthChange, noteLayers, scrollToTop, PER_PAGE,
 } from './ui.js';
 import { openDetail } from './detail.js';
@@ -88,6 +88,7 @@ function rowCells(p) {
     el('td', { class: 'num', text: p.n_elements ?? '—' }),
     el('td', {}, [
       p.interrupted ? el('span', { class: 'badge flag', text: '中断' }) : null,
+      rulesBadge(p),
       ...(p.check_flags || []).map((f) => el('span', { class: 'badge flag', text: f })),
       el('span', { class: 'link', text: '詳細', onclick: () => openDetail(p, meets.get(p.meet_id)) }),
     ]),
@@ -129,6 +130,7 @@ function renderCards(items) {
       p.routine ? el('span', { class: 'badge plain', text: p.routine + '本目' }) : null,
       p.rank ? el('span', { class: 'badge plain', text: p.rank + '位' }) : null,
       p.interrupted ? el('span', { class: 'badge flag', text: '中断' }) : null,
+      rulesBadge(p),
     ]),
     el('dl', { class: 'rec-sub' }, [
       ['D', num(p.D, 1)], ['E', num(p.E, 1)], ['T', num(p.T, 2)], ['HD', num(p.HD, 2)],
@@ -142,7 +144,40 @@ function renderCards(items) {
   ])));
 }
 
+// 全演技（約2万行）は、表が要るとき（検索・絞り込み・すべての記録）に初めて読む。
+// 起動時に読むとスマホで入口が開くまで待たされる。
+let rowsLoaded = false;
+let rowsLoading = null;
+
+function ensureRows() {
+  if (rowsLoaded) return Promise.resolve();
+  if (!rowsLoading) {
+    rowsLoading = data.performances().then((ps) => {
+      rows = ps;
+      rowsLoaded = true;
+    });
+  }
+  return rowsLoading;
+}
+
 function render() {
+  const show = hasCondition();
+  document.getElementById('results-card').hidden = !show;
+  document.getElementById('recent-card').hidden = show;
+  document.getElementById('reset').hidden = !show;
+  document.getElementById('csv').hidden = !show;
+  if (!show) return;
+  if (!rowsLoaded) {
+    clear(document.getElementById('results')).append(
+      el('p', { class: 'meta', text: '記録を読み込んでいます…' }));
+    for (const id of ['pager-top', 'pager-bottom']) clear(document.getElementById(id));
+    document.getElementById('results-title').textContent = titleFor();
+    ensureRows().then(render).catch((err) => {
+      document.getElementById('app').prepend(errorBox(err.message));
+    });
+    return;
+  }
+
   const filtered = rows.filter(matches);
   const view = paginate(sorted(filtered), state.page);
   state.page = view.page;
@@ -158,12 +193,6 @@ function render() {
     });
   }
   document.getElementById('results-title').textContent = titleFor();
-
-  const show = hasCondition();
-  document.getElementById('results-card').hidden = !show;
-  document.getElementById('recent-card').hidden = show;
-  document.getElementById('reset').hidden = !show;
-  document.getElementById('csv').hidden = !show;
 }
 
 function titleFor() {
@@ -299,26 +328,28 @@ function buildNote() {
 async function main() {
   mountNav('index.html');
   try {
-    const [perfs, meetList, mf, as] = await Promise.all([
-      data.performances(), data.competitions(), data.manifest(), data.athletes(),
+    const [meetList, mf, as] = await Promise.all([
+      data.competitions(), data.manifest(), data.athletes(),
     ]);
     meets = new Map(meetList.map((c) => [c.meet_id, c]));
-    rows = perfs;
     manifest = mf;
     athletes = as.filter((a) => a.has_individual);
 
     buildNote();
     renderRecent();
 
-    fillSelect('f-year', [...new Set(rows.map((p) => p.season))].sort()
+    // 絞り込みの選択肢は事前集計（manifest.facets）から作る。これのために全演技を読まない
+    const withIndividual = meetList.filter((c) => c.n_individual > 0);
+    const facets = mf.facets || {};
+    fillSelect('f-year', [...new Set(withIndividual.map((c) => c.season))].sort()
       .map((v) => ({ value: v, text: v + '年' })), '年（すべて）');
-    fillSelect('f-meet', meetList.filter((c) => c.n_individual > 0)
+    fillSelect('f-meet', withIndividual
       .map((c) => ({ value: c.meet_id, text: c.date + ' ' + c.name })), '大会（すべて）');
-    fillSelect('f-category', [...new Set(rows.map((p) => p.category))].sort()
+    fillSelect('f-category', (facets.categories || [])
       .map((v) => ({ value: v, text: v })), '区分（すべて）');
-    fillSelect('f-round', [...new Set(rows.map((p) => p.round).filter(Boolean))]
+    fillSelect('f-round', (facets.rounds || [])
       .map((v) => ({ value: v, text: v })), 'ラウンド（すべて）');
-    fillSelect('f-routine', [...new Set(rows.map((p) => p.routine).filter(Boolean))].sort()
+    fillSelect('f-routine', (facets.routines || [])
       .map((v) => ({ value: String(v), text: v + '本目' })), '演技（すべて）');
 
     const q = document.getElementById('q');
@@ -363,7 +394,8 @@ async function main() {
       render();
     });
 
-    document.getElementById('csv').addEventListener('click', () => {
+    document.getElementById('csv').addEventListener('click', async () => {
+      await ensureRows();
       const list = sorted(rows.filter(matches));
       downloadCsv('リザルト_' + manifest.dataVersion + '.csv',
         ['大会日', '大会名', '出典', '公式', '区分', 'ラウンド', '演技', '選手', '所属',

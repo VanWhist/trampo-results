@@ -47,24 +47,47 @@ export const details = (meetId) => load('details/' + meetId + '.json');
 // シンクロ・DMT・タンブリングのファイル（-other）は読まない。
 export async function performances() {
   const m = await manifest();
-  const meets = new Map((await competitions()).map((c) => [c.meet_id, c]));
   const years = await Promise.all(m.years.map((y) => load('performances/' + y + '.json')));
-  const rows = [];
-  for (const list of years) {
-    for (const p of list) {
-      const c = meets.get(p.meet_id);
-      rows.push({
-        ...p,
-        date: c.date,
-        meet_name: c.name,
-        source: c.source,
-        official: c.official,
-        level: c.level,
-        season: c.season,
-      });
-    }
+  return withMeet(years.flat());
+}
+
+/** 大会ページ用。その大会の演技だけを読む（全年を読まない）。 */
+export async function meetRows(meetId) {
+  return withMeet(await load('meets/' + meetId + '.json'));
+}
+
+/** 選手ページ用。その選手が入っている束だけを読む。 */
+export async function athleteRows(athleteId) {
+  const m = await manifest();
+  const list = await load('by_athlete/' + athleteShard(athleteId, m.athleteShards) + '.json');
+  return withMeet(list.filter((p) => p.athlete_id === athleteId));
+}
+
+/** 選手IDから束の番号を出す。etl/build.py の athlete_shard() と同じ計算（FNV-1a 32bit）。 */
+export function athleteShard(athleteId, shards) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < athleteId.length; i += 1) {
+    h ^= athleteId.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
   }
-  return rows;
+  return h % shards;
+}
+
+/** 演技の行に大会の情報（日付・大会名・出典など）を付ける。 */
+async function withMeet(list) {
+  const meets = new Map((await competitions()).map((c) => [c.meet_id, c]));
+  return list.map((p) => {
+    const c = meets.get(p.meet_id);
+    return {
+      ...p,
+      date: c.date,
+      meet_name: c.name,
+      source: c.source,
+      official: c.official,
+      level: c.level,
+      season: c.season,
+    };
+  });
 }
 
 export async function athleteMap() {

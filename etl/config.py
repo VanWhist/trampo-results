@@ -5,6 +5,7 @@
 アプリ（js/）は正規化済みJSONを表示するだけで、条件分岐を持たない。
 """
 import os
+import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -18,12 +19,35 @@ REPO = os.path.dirname(HERE)
 RAW_ROOT = os.environ.get('TRAMPO_RAW_ROOT') or os.path.normpath(
     os.path.join(REPO, os.pardir, 'トランポリンルール', '大会リザルト'))
 
-SPORTTECH_DIRS = [
-    ('2025', 'sporttech_国内大会', '国内'),
-    ('2025', 'sporttech_国際大会', '国際'),
-    ('2026', 'sporttech_国内大会', '国内'),
-    ('2026', 'sporttech_国際大会', '国際'),
-]
+# 生データにある年をすべて読む。年を足すたびにここを直す運用にすると、
+# 取得したのに取り込まれていない年が黙って出る（2026-09-25 に2015〜2024年を追加）。
+SPORTTECH_KINDS = (('sporttech_国内大会', '国内'), ('sporttech_国際大会', '国際'))
+
+
+def sporttech_dirs():
+    if not os.path.isdir(RAW_ROOT):
+        return []
+    years = sorted(y for y in os.listdir(RAW_ROOT) if re.fullmatch(r'\d{4}', y))
+    return [(y, folder, kind) for y in years for folder, kind in SPORTTECH_KINDS]
+
+
+# ---- 採点規則の世代 ----------------------------------------------------------
+# sporttech は大会ごとに規則の版を持つ（'TRA FIG 2022' / 'TRA FIG 2017' / 'TRA FIG' など）。
+# 2017年版より前（'TRA FIG'・'TRA DEN'・'TRA FIG WCh' など）は得点の組み立てが違う。
+#   ・水平移動（HD）が存在しない
+#   ・E は審判1人ぶんの尺度（10点満点）で、合計には3倍して入る
+#       合計 = D + T + 3×E + Bonus − Pen − DPen      （旧規則 4,534演技で100%成立）
+#   ・技ごとの減点も1人ぶんの尺度。今の「中央2審判の和」とは単位が違う（混ぜると約2倍ずれる）
+# 2026-09-25 に 2015〜2026年の全大会で式を確かめて決めた。
+RULES_CURRENT = 'current'      # FIG 2017年版以降
+RULES_PRE2017 = 'pre2017'
+
+
+def rules_family(rules, date):
+    """規則の版の文字列から世代を返す。版が無い（以前の取得）ときは開催日で決める。"""
+    if rules:
+        return RULES_CURRENT if re.search(r'20(1[7-9]|[2-9]\d)', rules) else RULES_PRE2017
+    return RULES_CURRENT if (date or '') >= '2017-03' else RULES_PRE2017
 
 CSV_SPORTTECH = os.path.join(RAW_ROOT, '_sporttech_全演技_ジャッジ別_v2.csv')
 CSV_OSAKA_JUDGE = os.path.join(RAW_ROOT, '_大阪府pweb_ジャッジ明細_統合.csv')
@@ -67,12 +91,17 @@ DISCIPLINE = {0: '個人', 1: 'シンクロ', 2: 'DMT', 3: 'TUM'}
 PHASE1_DISCIPLINE = '個人'
 
 # ---- ラウンド --------------------------------------------------------------
-# Stage.Kind の意味。
+# Stage.Kind の意味。sporttech の画面プログラム（static/TRA/script.min.js）にある対応表:
+#   Qualification 0 / QuarterFinal 1 / SemiFinal 2 / Final 3 / TeamSemiFinal 4 /
+#   TeamFinal 5 / Qualification2 6 / Final2 7 / Final1 8          （2026-09-25 に確認）
+#
 #   0 … 予選、3 … 決勝（v2 CSV と全件一致で確定）
-#   6 … 準決勝（個人でKind=6が出るのはW杯・全日本選手権など予選→準決勝→決勝の大会だけで、
-#              各区分24名前後。予選通過者数と一致するため準決勝と判断した）
-#   7・8 … DMT/TUM にのみ出現。Phase 1 は個人のみなので生値のまま unknown 扱いにする。
-STAGE_KIND = {0: '予選', 3: '決勝', 6: '準決勝'}
+#   1・2・4・5・7・8 … 上の公式の対応表どおり。2015〜2017年の大会で 1・2 が出る
+#   6 … **公式の名前は「Qualification2（予選2）」。** Phase 1 では構造（各区分24名前後で
+#        予選→6→決勝）から「準決勝」と推定して表示していた。どちらにするかは未決
+#        （表示と、ジャッジ分析の「予選通過者」の定義に関わるため、決めるまで変えない）
+STAGE_KIND = {0: '予選', 1: '準々決勝', 2: '準決勝', 3: '決勝', 4: '団体準決勝',
+              5: '団体決勝', 6: '準決勝', 7: '決勝2', 8: '決勝1'}
 
 # ---- E審判スロット ---------------------------------------------------------
 # ETotalsT_G のスロット番号 → E番号。実データで有効値が観測されたのは 0,1,2,3,4,7 のみ。

@@ -3,7 +3,7 @@
 
 import * as data from './data.js';
 import {
-  el, clear, cell, num, sourceBadge, mountNav, makeSortable, downloadCsv, errorBox,
+  el, rulesBadge, clear, cell, num, sourceBadge, mountNav, makeSortable, downloadCsv, errorBox,
   isNarrow, onWidthChange, noteLayers,
 } from './ui.js';
 import { openDetail } from './detail.js';
@@ -83,6 +83,13 @@ function renderAthlete(id) {
     box.append(el('p', { class: 'meta',
       text: '自己ベストは ' + s.best_total_date + '　' + s.best_total_meet + '。' }));
   }
+  // 2017年より前の規則は合計の組み立てが違う（HDなし・Eを3倍）ので、自己ベストに混ぜない
+  if (s.best_total_pre2017) {
+    box.append(el('p', { class: 'meta',
+      text: '2017年より前の規則での最高は ' + num(s.best_total_pre2017, 2) + '（'
+        + s.best_total_pre2017_date + '　' + s.best_total_pre2017_meet
+        + '）。規則が違うので自己ベストとは比べていません。' }));
+  }
 
   box.append(el('h3', { text: '所属の履歴' }));
   const hist = a.club_history || [];
@@ -141,6 +148,7 @@ function renderAthlete(id) {
       p.routine ? el('span', { class: 'badge plain', text: p.routine + '本目' }) : null,
       p.rank ? el('span', { class: 'badge plain', text: p.rank + '位' }) : null,
       p.interrupted ? el('span', { class: 'badge flag', text: '中断' }) : null,
+      rulesBadge(p),
     ]),
     el('dl', { class: 'rec-sub' }, [
       ['D', num(p.D, 1)], ['E', num(p.E, 1)], ['T', num(p.T, 2)], ['HD', num(p.HD, 2)],
@@ -195,6 +203,7 @@ function renderAthlete(id) {
         el('td', { class: 'num', text: p.n_elements ?? '—' }),
         el('td', {}, [
           p.interrupted ? el('span', { class: 'badge flag', text: '中断' }) : null,
+          rulesBadge(p),
           el('span', { class: 'link', text: ' 詳細', onclick: () => openDetail(p, meet) }),
         ]),
       ]));
@@ -203,22 +212,34 @@ function renderAthlete(id) {
   makeSortable(document.getElementById('htable'), mine, render, { key: 'date', dir: -1 });
 }
 
-function route() {
+let perfsFor = null;          // perfs が誰の演技か（同じ選手なら読み直さない）
+
+async function route() {
   const id = location.hash.replace(/^#/, '');
   document.getElementById('search-card').hidden = !!id;
   document.getElementById('athlete-card').hidden = !id;
   document.getElementById('history').hidden = !id;
-  if (id) renderAthlete(id);
+  if (!id) return;
+  if (perfsFor !== id) {
+    clear(document.getElementById('profile')).append(
+      el('p', { class: 'meta', text: '読み込んでいます…' }));
+    try {
+      perfs = await data.athleteRows(id);
+      perfsFor = id;
+    } catch (err) {
+      document.getElementById('app').prepend(errorBox(err.message));
+      return;
+    }
+  }
+  renderAthlete(id);
 }
 
 async function main() {
   mountNav('athlete.html');
   try {
-    const [as, ps, ms] = await Promise.all([
-      data.athletes(), data.performances(), data.competitions(),
-    ]);
+    // 演技は選手を開いたときに、その選手の分だけ読む（全年を読むとスマホで重い）
+    const [as, ms] = await Promise.all([data.athletes(), data.competitions()]);
     athletes = as;
-    perfs = ps;
     meets = new Map(ms.map((c) => [c.meet_id, c]));
     const q = document.getElementById('q');
     q.addEventListener('input', () => renderSearch(q.value.trim()));

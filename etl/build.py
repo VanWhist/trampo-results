@@ -30,7 +30,22 @@ PERF_FIELDS = (
     'check_flags', 'data_quality',
     # 西日本の予選はPDFに「予選合計」が印字されている。計算せず印字値をそのまま出す。
     'qualifying_total',
+    # 2017年版より前の規則の演技だけ True（HDなし・Eは1人ぶんの尺度）。今の規則は出さない
+    'pre2017',
 )
+
+# 選手ページは1人ぶんの演技しか要らない。全年の演技（約2万行）を読ませないよう、
+# 選手を束に分けて書き出す。束の決め方は js/data.js の athleteShard() と必ず同じにする。
+ATHLETE_SHARDS = 128
+
+
+def athlete_shard(athlete_id):
+    """FNV-1a（32bit）で選手IDを束の番号にする。JS 側と同じ計算。"""
+    h = 0x811c9dc5
+    for ch in athlete_id:
+        h ^= ord(ch)
+        h = (h * 0x01000193) & 0xffffffff
+    return h % ATHLETE_SHARDS
 
 
 def _write(path, payload):
@@ -161,6 +176,7 @@ def main(argv=None):
     for p in performances:
         p['has_judge_detail'] = bool(p.get('judge_E') or p.get('judge_HD'))
         suffix = '' if p['discipline'] == config.PHASE1_DISCIPLINE else '-other'
+        p['pre2017'] = (p.get('rules_family') or config.rules_family('', p['date']))             == config.RULES_PRE2017
         row = {k: p.get(k) for k in PERF_FIELDS}
         # 値が無いキーは落としてJSONを小さくする。
         # ここで `v not in (None, '', [], False)` と書くと 0.0 == False のため
@@ -174,6 +190,36 @@ def main(argv=None):
                                   x.get('routine') or 0))
         name = 'performances/%s%s.json' % (year, suffix)
         sizes[name] = _write(os.path.join(config.DATA_OUT, *name.split('/')), items)
+
+    # 画面ごとに要る分だけ読めるよう、同じ行を大会別・選手の束別にも書く（個人のみ）。
+    #   大会ページ … meets/<meet_id>.json
+    #   選手ページ … by_athlete/<束の番号>.json
+    individual_rows = [r for (y, suffix), items in by_year.items() if not suffix for r in items]
+    by_meet_rows = collections.defaultdict(list)
+    by_shard = collections.defaultdict(list)
+    for r in individual_rows:
+        by_meet_rows[r['meet_id']].append(r)
+        if r.get('athlete_id'):
+            by_shard[athlete_shard(r['athlete_id'])].append(r)
+    # 前回の書き出しが残ると、消えた大会や束の古いファイルを画面が読んでしまう
+    for sub in ('meets', 'by_athlete'):
+        folder = os.path.join(config.DATA_OUT, sub)
+        if os.path.isdir(folder):
+            for name in os.listdir(folder):
+                if name.endswith('.json'):
+                    os.remove(os.path.join(folder, name))
+    for meet_id, items in by_meet_rows.items():
+        sizes['meets/%s.json' % meet_id] = _write(
+            os.path.join(config.DATA_OUT, 'meets', '%s.json' % meet_id), items)
+    for shard in range(ATHLETE_SHARDS):
+        sizes['by_athlete/%d.json' % shard] = _write(
+            os.path.join(config.DATA_OUT, 'by_athlete', '%d.json' % shard), by_shard.get(shard, []))
+    # 入口の絞り込みの選択肢。これのために全演技を読ませない
+    facets = {
+        'categories': sorted({r['category'] for r in individual_rows if r.get('category')}),
+        'rounds': sorted({r['round'] for r in individual_rows if r.get('round')}),
+        'routines': sorted({r['routine'] for r in individual_rows if r.get('routine')}),
+    }
 
     # 大会単位の詳細（技別減点＋審判別E）。演技詳細を開いたときだけ読む。
     by_meet = collections.defaultdict(dict)
@@ -216,6 +262,8 @@ def main(argv=None):
         'displayMode': config.DISPLAY_MODE_DEFAULT,
         'phase': 1,
         'years': sorted(set(y for y, _ in by_year)),
+        'facets': facets,
+        'athleteShards': ATHLETE_SHARDS,
         'meetsWithDetails': sorted(by_meet.keys()),
         'counts': {
             'competitions': len(competitions),

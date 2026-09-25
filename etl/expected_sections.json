@@ -449,101 +449,6493 @@
    "athletes": 6,
    "rows": 12
   },
-  "sporttech|st-2025-03-01-48a905|10才以下 女子|": {
-   "athletes": 9,
+  "sporttech|st-2015-03-08-d8fc4d|10才以下 女子|予選": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2015-03-08-d8fc4d|10才以下 女子|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2015-03-08-d8fc4d|10才以下 男子|予選": {
+   "athletes": 8,
+   "rows": 15
+  },
+  "sporttech|st-2015-03-08-d8fc4d|10才以下 男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2015-03-08-d8fc4d|11-12才 女子|予選": {
+   "athletes": 10,
    "rows": 20
+  },
+  "sporttech|st-2015-03-08-d8fc4d|11-12才 女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2015-03-08-d8fc4d|11-12才 男子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2015-03-08-d8fc4d|11-12才 男子|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2015-03-08-d8fc4d|13-14才 女子|予選": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2015-03-08-d8fc4d|13-14才 女子|決勝": {
+   "athletes": 7,
+   "rows": 13
+  },
+  "sporttech|st-2015-03-08-d8fc4d|13-14才 男子|予選": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2015-03-08-d8fc4d|13-14才 男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2015-03-08-d8fc4d|15-16才 女子|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2015-03-08-d8fc4d|15-16才 女子|決勝": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2015-03-08-d8fc4d|15-16才 男子|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2015-03-08-d8fc4d|15-16才 男子|決勝": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2015-03-08-d8fc4d|17才以上 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2015-03-08-d8fc4d|17才以上 女子|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2015-03-08-d8fc4d|17才以上 男子|予選": {
+   "athletes": 16,
+   "rows": 31
+  },
+  "sporttech|st-2015-03-08-d8fc4d|17才以上 男子|決勝": {
+   "athletes": 8,
+   "rows": 15
+  },
+  "sporttech|st-2015-03-08-d8fc4d|オープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2015-03-08-d8fc4d|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2015-03-08-d8fc4d|女子|予選": {
+   "athletes": 14,
+   "rows": 28
+  },
+  "sporttech|st-2015-03-08-d8fc4d|女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2015-03-08-d8fc4d|男子|予選": {
+   "athletes": 20,
+   "rows": 39
+  },
+  "sporttech|st-2015-03-08-d8fc4d|男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2015-05-16-a67674|11-12才 女子|決勝": {
+   "athletes": 31,
+   "rows": 62
+  },
+  "sporttech|st-2015-05-16-a67674|11-12才 男子|決勝": {
+   "athletes": 26,
+   "rows": 51
+  },
+  "sporttech|st-2015-05-16-a67674|13-14才 女子|決勝": {
+   "athletes": 27,
+   "rows": 54
+  },
+  "sporttech|st-2015-05-16-a67674|13-14才 男子|決勝": {
+   "athletes": 22,
+   "rows": 44
+  },
+  "sporttech|st-2015-05-16-a67674|15-16女子|決勝": {
+   "athletes": 35,
+   "rows": 70
+  },
+  "sporttech|st-2015-05-16-a67674|15-16才 男子|決勝": {
+   "athletes": 23,
+   "rows": 46
+  },
+  "sporttech|st-2015-05-16-a67674|17才以上 女子|予選": {
+   "athletes": 64,
+   "rows": 128
+  },
+  "sporttech|st-2015-05-16-a67674|17才以上 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-05-16-a67674|17才以上 男子|予選": {
+   "athletes": 75,
+   "rows": 149
+  },
+  "sporttech|st-2015-05-16-a67674|17才以上 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-06-03-121603|Boys, 11-12|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2015-06-03-121603|Boys, 11-12|決勝": {
+   "athletes": 25,
+   "rows": 40
+  },
+  "sporttech|st-2015-06-03-121603|Boys, 13-14|予選": {
+   "athletes": 22,
+   "rows": 44
+  },
+  "sporttech|st-2015-06-03-121603|Boys, 13-14|決勝": {
+   "athletes": 28,
+   "rows": 44
+  },
+  "sporttech|st-2015-06-03-121603|Boys, 15-16|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2015-06-03-121603|Boys, 15-16|決勝": {
+   "athletes": 23,
+   "rows": 36
+  },
+  "sporttech|st-2015-06-03-121603|Girls, 11-12|予選": {
+   "athletes": 15,
+   "rows": 30
+  },
+  "sporttech|st-2015-06-03-121603|Girls, 11-12|決勝": {
+   "athletes": 27,
+   "rows": 44
+  },
+  "sporttech|st-2015-06-03-121603|Girls, 13-14|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2015-06-03-121603|Girls, 13-14|決勝": {
+   "athletes": 23,
+   "rows": 35
+  },
+  "sporttech|st-2015-06-03-121603|Girls, 15-16|予選": {
+   "athletes": 22,
+   "rows": 44
+  },
+  "sporttech|st-2015-06-03-121603|Girls, 15-16|決勝": {
+   "athletes": 24,
+   "rows": 36
+  },
+  "sporttech|st-2015-06-03-121603|Men, Open|予選": {
+   "athletes": 28,
+   "rows": 70
+  },
+  "sporttech|st-2015-06-03-121603|Men, Open|決勝": {
+   "athletes": 22,
+   "rows": 35
+  },
+  "sporttech|st-2015-06-03-121603|Men, World Cup|予選": {
+   "athletes": 105,
+   "rows": 210
+  },
+  "sporttech|st-2015-06-03-121603|Men, World Cup|決勝": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2015-06-03-121603|Men, World Cup|準決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-06-03-121603|Women, Open|予選": {
+   "athletes": 11,
+   "rows": 22
+  },
+  "sporttech|st-2015-06-03-121603|Women, Open|決勝": {
+   "athletes": 23,
+   "rows": 36
+  },
+  "sporttech|st-2015-06-03-121603|Women, World Cup|予選": {
+   "athletes": 62,
+   "rows": 124
+  },
+  "sporttech|st-2015-06-03-121603|Women, World Cup|決勝": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2015-06-03-121603|Women, World Cup|準決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-06-20-90cd64|女子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2015-06-20-90cd64|女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-06-20-90cd64|男子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2015-06-20-90cd64|男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-07-04-4bf33c|11-12才 女子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2015-07-04-4bf33c|11-12才 女子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2015-07-04-4bf33c|11-12才 男子|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2015-07-04-4bf33c|13-14才 女子|予選": {
+   "athletes": 7,
+   "rows": 16
+  },
+  "sporttech|st-2015-07-04-4bf33c|13-14才 女子|決勝": {
+   "athletes": 7,
+   "rows": 16
+  },
+  "sporttech|st-2015-07-04-4bf33c|13-14才 男子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2015-07-04-4bf33c|13-14才 男子|決勝": {
+   "athletes": 5,
+   "rows": 9
+  },
+  "sporttech|st-2015-07-04-4bf33c|15-16才 女子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2015-07-04-4bf33c|15-16才 女子|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2015-07-04-4bf33c|15-16才 男子|予選": {
+   "athletes": 3,
+   "rows": 8
+  },
+  "sporttech|st-2015-07-04-4bf33c|15-16才 男子|決勝": {
+   "athletes": 3,
+   "rows": 8
+  },
+  "sporttech|st-2015-07-04-4bf33c|17才以上 女子|予選": {
+   "athletes": 3,
+   "rows": 8
+  },
+  "sporttech|st-2015-07-04-4bf33c|17才以上 女子|決勝": {
+   "athletes": 3,
+   "rows": 8
+  },
+  "sporttech|st-2015-07-04-4bf33c|17才以上 男子|予選": {
+   "athletes": 17,
+   "rows": 38
+  },
+  "sporttech|st-2015-07-04-4bf33c|17才以上 男子|決勝": {
+   "athletes": 13,
+   "rows": 25
+  },
+  "sporttech|st-2015-08-01-a0941e|女子|予選": {
+   "athletes": 126,
+   "rows": 251
+  },
+  "sporttech|st-2015-08-01-a0941e|女子|決勝": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2015-08-01-a0941e|男子|予選": {
+   "athletes": 94,
+   "rows": 188
+  },
+  "sporttech|st-2015-08-01-a0941e|男子|決勝": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2015-10-24-08a900|シンクロ女子|予選": {
+   "athletes": 28,
+   "rows": 55
+  },
+  "sporttech|st-2015-10-24-08a900|シンクロ女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-10-24-08a900|シンクロ男子|予選": {
+   "athletes": 30,
+   "rows": 59
+  },
+  "sporttech|st-2015-10-24-08a900|シンクロ男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-10-24-08a900|個人女子|予選": {
+   "athletes": 64,
+   "rows": 128
+  },
+  "sporttech|st-2015-10-24-08a900|個人女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-10-24-08a900|個人女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2015-10-24-08a900|個人男子|予選": {
+   "athletes": 65,
+   "rows": 130
+  },
+  "sporttech|st-2015-10-24-08a900|個人男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2015-10-24-08a900|個人男子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2016-03-07-7af20f|タンブリング女子|予選": {
+   "athletes": 11,
+   "rows": 22
+  },
+  "sporttech|st-2016-03-07-7af20f|タンブリング女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2016-03-07-7af20f|タンブリング男子|予選": {
+   "athletes": 11,
+   "rows": 22
+  },
+  "sporttech|st-2016-03-07-7af20f|タンブリング男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 10才以下|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 10才以下|決勝": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 11−12才|予選": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 11−12才|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 13−14才|予選": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 13−14才|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 15−16才|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 15−16才|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 17才以上|予選": {
+   "athletes": 6,
+   "rows": 11
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 17才以上|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2016-03-07-7af20f|女子 オープン|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 10才以下|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 10才以下|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 11−12才|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 11−12才|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 13−14才|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 13−14才|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 15−16才|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 15−16才|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 17才以上|予選": {
+   "athletes": 15,
+   "rows": 29
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 17才以上|決勝": {
+   "athletes": 7,
+   "rows": 13
+  },
+  "sporttech|st-2016-03-07-7af20f|男子 オープン|決勝": {
+   "athletes": 8,
+   "rows": 15
+  },
+  "sporttech|st-2016-05-21-4b77cd|11-12才 女子|予選": {
+   "athletes": 38,
+   "rows": 76
+  },
+  "sporttech|st-2016-05-21-4b77cd|11-12才 男子|予選": {
+   "athletes": 24,
+   "rows": 48
+  },
+  "sporttech|st-2016-05-21-4b77cd|13−14才 女子|予選": {
+   "athletes": 30,
+   "rows": 59
+  },
+  "sporttech|st-2016-05-21-4b77cd|13−14才 男子|予選": {
+   "athletes": 23,
+   "rows": 45
+  },
+  "sporttech|st-2016-05-21-4b77cd|15−16才 女子|予選": {
+   "athletes": 21,
+   "rows": 42
+  },
+  "sporttech|st-2016-05-21-4b77cd|15−16才 男子|予選": {
+   "athletes": 23,
+   "rows": 46
+  },
+  "sporttech|st-2016-05-21-4b77cd|17−18才 女子|予選": {
+   "athletes": 26,
+   "rows": 51
+  },
+  "sporttech|st-2016-05-21-4b77cd|17−18才 男子|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2016-05-21-4b77cd|オープン 女子|予選": {
+   "athletes": 34,
+   "rows": 68
+  },
+  "sporttech|st-2016-05-21-4b77cd|オープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-05-21-4b77cd|オープン 男子|予選": {
+   "athletes": 64,
+   "rows": 127
+  },
+  "sporttech|st-2016-05-21-4b77cd|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-07-03-b0b7ab|女子 11−12才|予選": {
+   "athletes": 10,
+   "rows": 24
+  },
+  "sporttech|st-2016-07-03-b0b7ab|女子 11−12才|決勝": {
+   "athletes": 10,
+   "rows": 23
+  },
+  "sporttech|st-2016-07-03-b0b7ab|女子 13−14才|予選": {
+   "athletes": 6,
+   "rows": 16
+  },
+  "sporttech|st-2016-07-03-b0b7ab|女子 13−14才|決勝": {
+   "athletes": 6,
+   "rows": 16
+  },
+  "sporttech|st-2016-07-03-b0b7ab|女子 15−16才|予選": {
+   "athletes": 4,
+   "rows": 12
+  },
+  "sporttech|st-2016-07-03-b0b7ab|女子 15−16才|決勝": {
+   "athletes": 4,
+   "rows": 12
+  },
+  "sporttech|st-2016-07-03-b0b7ab|女子 17才以上|予選": {
+   "athletes": 6,
+   "rows": 20
+  },
+  "sporttech|st-2016-07-03-b0b7ab|女子 17才以上|決勝": {
+   "athletes": 6,
+   "rows": 19
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 11−12才|予選": {
+   "athletes": 4,
+   "rows": 9
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 11−12才|決勝": {
+   "athletes": 4,
+   "rows": 10
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 13-14才|予選": {
+   "athletes": 3,
+   "rows": 5
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 13-14才|決勝": {
+   "athletes": 3,
+   "rows": 5
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 13−14才|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 13−14才|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 15−16才|予選": {
+   "athletes": 3,
+   "rows": 8
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 15−16才|決勝": {
+   "athletes": 3,
+   "rows": 8
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 17才以上|予選": {
+   "athletes": 16,
+   "rows": 34
+  },
+  "sporttech|st-2016-07-03-b0b7ab|男子 17才以上|決勝": {
+   "athletes": 15,
+   "rows": 32
+  },
+  "sporttech|st-2016-08-06-8c745f|女子|予選": {
+   "athletes": 130,
+   "rows": 259
+  },
+  "sporttech|st-2016-08-06-8c745f|女子|決勝": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2016-08-06-8c745f|男子|予選": {
+   "athletes": 102,
+   "rows": 203
+  },
+  "sporttech|st-2016-08-06-8c745f|男子|決勝": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2016-11-12-3bf843|女子|予選": {
+   "athletes": 95,
+   "rows": 190
+  },
+  "sporttech|st-2016-11-12-3bf843|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2016-11-12-3bf843|女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2016-11-12-3bf843|男子|予選": {
+   "athletes": 91,
+   "rows": 180
+  },
+  "sporttech|st-2016-11-12-3bf843|男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2016-11-12-3bf843|男子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2016-12-16-309a10|10才以下 女子|予選": {
+   "athletes": 35,
+   "rows": 35
+  },
+  "sporttech|st-2016-12-16-309a10|10才以下 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|10才以下 男子|予選": {
+   "athletes": 25,
+   "rows": 25
+  },
+  "sporttech|st-2016-12-16-309a10|10才以下 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|11-12才 女子|予選": {
+   "athletes": 53,
+   "rows": 53
+  },
+  "sporttech|st-2016-12-16-309a10|11-12才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|11-12才 男子|予選": {
+   "athletes": 33,
+   "rows": 33
+  },
+  "sporttech|st-2016-12-16-309a10|11-12才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|13-14才 女子|予選": {
+   "athletes": 38,
+   "rows": 38
+  },
+  "sporttech|st-2016-12-16-309a10|13-14才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|13-14才 男子|予選": {
+   "athletes": 32,
+   "rows": 32
+  },
+  "sporttech|st-2016-12-16-309a10|13-14才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|15-16才 女子|予選": {
+   "athletes": 27,
+   "rows": 27
+  },
+  "sporttech|st-2016-12-16-309a10|15-16才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|15-16才 男子|予選": {
+   "athletes": 35,
+   "rows": 35
+  },
+  "sporttech|st-2016-12-16-309a10|15-16才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|17-18才 女子|予選": {
+   "athletes": 22,
+   "rows": 22
+  },
+  "sporttech|st-2016-12-16-309a10|17-18才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|17−18才 男子|予選": {
+   "athletes": 29,
+   "rows": 29
+  },
+  "sporttech|st-2016-12-16-309a10|17−18才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|ジャパンオープン 女子|予選": {
+   "athletes": 22,
+   "rows": 50
+  },
+  "sporttech|st-2016-12-16-309a10|ジャパンオープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|ジャパンオープン 男子|予選": {
+   "athletes": 44,
+   "rows": 107
+  },
+  "sporttech|st-2016-12-16-309a10|ジャパンオープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 19−29 女子|予選": {
+   "athletes": 9,
+   "rows": 10
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 19−29 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 19−29 男子|予選": {
+   "athletes": 11,
+   "rows": 11
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 19−29 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 30-39 女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 30−39 男子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 40-49 女子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 40−49 男子|決勝": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 50+ 女子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2016-12-16-309a10|マスターズ 50＋ 男子|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2016-12-16-309a10|社会人 女子|決勝": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2016-12-16-309a10|社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-01-29-cd58d4|女子 1 トリック A|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2017-01-29-cd58d4|女子 1 トリック A|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2017-01-29-cd58d4|女子 1 トリック B|予選": {
+   "athletes": 30,
+   "rows": 59
+  },
+  "sporttech|st-2017-01-29-cd58d4|女子 1 トリック B|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-01-29-cd58d4|女子 8 トリック|予選": {
+   "athletes": 13,
+   "rows": 26
+  },
+  "sporttech|st-2017-01-29-cd58d4|女子 8 トリック|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-01-29-cd58d4|男子 1 トリック A|予選": {
+   "athletes": 5,
+   "rows": 9
+  },
+  "sporttech|st-2017-01-29-cd58d4|男子 1 トリック A|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2017-01-29-cd58d4|男子 1 トリック B|予選": {
+   "athletes": 17,
+   "rows": 33
+  },
+  "sporttech|st-2017-01-29-cd58d4|男子 1 トリック B|決勝": {
+   "athletes": 8,
+   "rows": 15
+  },
+  "sporttech|st-2017-01-29-cd58d4|男子 8 トリック|予選": {
+   "athletes": 14,
+   "rows": 28
+  },
+  "sporttech|st-2017-01-29-cd58d4|男子 8 トリック|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-02-18-112468|女子 10才以下|予選": {
+   "athletes": 36,
+   "rows": 36
+  },
+  "sporttech|st-2017-02-18-112468|女子 10才以下|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|女子 10才以下|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|女子 10才以下|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|女子 11-12才|予選": {
+   "athletes": 58,
+   "rows": 58
+  },
+  "sporttech|st-2017-02-18-112468|女子 11-12才|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|女子 11-12才|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|女子 11-12才|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|女子 13-14才|予選": {
+   "athletes": 64,
+   "rows": 64
+  },
+  "sporttech|st-2017-02-18-112468|女子 13-14才|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|女子 13-14才|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|女子 13-14才|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|女子 15-16才|予選": {
+   "athletes": 35,
+   "rows": 35
+  },
+  "sporttech|st-2017-02-18-112468|女子 15-16才|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|女子 15-16才|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|女子 15-16才|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|女子 17才以上|予選": {
+   "athletes": 55,
+   "rows": 55
+  },
+  "sporttech|st-2017-02-18-112468|女子 17才以上|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|女子 17才以上|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|女子 17才以上|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|女子 オープン|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|女子 オープン|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|女子 オープン|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|男子 10才以下|予選": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2017-02-18-112468|男子 10才以下|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|男子 10才以下|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|男子 10才以下|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|男子 11-12才|予選": {
+   "athletes": 27,
+   "rows": 27
+  },
+  "sporttech|st-2017-02-18-112468|男子 11-12才|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|男子 11-12才|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|男子 11-12才|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|男子 13-14才|予選": {
+   "athletes": 33,
+   "rows": 33
+  },
+  "sporttech|st-2017-02-18-112468|男子 13-14才|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|男子 13-14才|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|男子 13-14才|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|男子 15-16才|予選": {
+   "athletes": 22,
+   "rows": 22
+  },
+  "sporttech|st-2017-02-18-112468|男子 15-16才|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|男子 15-16才|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|男子 15-16才|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|男子 17才以上|予選": {
+   "athletes": 66,
+   "rows": 66
+  },
+  "sporttech|st-2017-02-18-112468|男子 17才以上|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2017-02-18-112468|男子 17才以上|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|男子 17才以上|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|男子 オープン|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-02-18-112468|男子 オープン|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-02-18-112468|男子 オープン|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-03-05-a9beac|10才以下 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2017-03-05-a9beac|10才以下 女子|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2017-03-05-a9beac|10才以下 男子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2017-03-05-a9beac|10才以下 男子|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2017-03-05-a9beac|11-12才 女子|予選": {
+   "athletes": 6,
+   "rows": 11
+  },
+  "sporttech|st-2017-03-05-a9beac|11-12才 女子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2017-03-05-a9beac|11-12才 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2017-03-05-a9beac|11-12才 男子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2017-03-05-a9beac|13-14才 女子|予選": {
+   "athletes": 10,
+   "rows": 20
+  },
+  "sporttech|st-2017-03-05-a9beac|13-14才 女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-03-05-a9beac|13-14才 男子|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2017-03-05-a9beac|13-14才 男子|決勝": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2017-03-05-a9beac|15-16才 女子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2017-03-05-a9beac|15-16才 女子|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2017-03-05-a9beac|15-16才 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2017-03-05-a9beac|15-16才 男子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2017-03-05-a9beac|17才以上 女子|予選": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-03-05-a9beac|17才以上 女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-03-05-a9beac|17才以上 男子|予選": {
+   "athletes": 16,
+   "rows": 30
+  },
+  "sporttech|st-2017-03-05-a9beac|17才以上 男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-03-05-a9beac|オープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-03-05-a9beac|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 15
+  },
+  "sporttech|st-2017-03-05-a9beac|女子|予選": {
+   "athletes": 15,
+   "rows": 29
+  },
+  "sporttech|st-2017-03-05-a9beac|女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-03-05-a9beac|男子|予選": {
+   "athletes": 19,
+   "rows": 38
+  },
+  "sporttech|st-2017-03-05-a9beac|男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2017-05-12-f798bf|11-12才 女子|予選": {
+   "athletes": 29,
+   "rows": 57
+  },
+  "sporttech|st-2017-05-12-f798bf|11-12才 男子|予選": {
+   "athletes": 22,
+   "rows": 44
+  },
+  "sporttech|st-2017-05-12-f798bf|13-14才 男子|予選": {
+   "athletes": 26,
+   "rows": 52
+  },
+  "sporttech|st-2017-05-12-f798bf|13−14才 女子|予選": {
+   "athletes": 27,
+   "rows": 54
+  },
+  "sporttech|st-2017-05-12-f798bf|15−16才 女子|予選": {
+   "athletes": 24,
+   "rows": 48
+  },
+  "sporttech|st-2017-05-12-f798bf|15−16才 男子|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2017-05-12-f798bf|17−21才 女子|予選": {
+   "athletes": 31,
+   "rows": 62
+  },
+  "sporttech|st-2017-05-12-f798bf|17−21才 男子|予選": {
+   "athletes": 35,
+   "rows": 70
+  },
+  "sporttech|st-2017-05-12-f798bf|World Games MEN|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2017-05-12-f798bf|World Games WOMEN|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2017-05-12-f798bf|オープン 女子|予選": {
+   "athletes": 29,
+   "rows": 58
+  },
+  "sporttech|st-2017-05-12-f798bf|オープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-05-12-f798bf|オープン 男子|予選": {
+   "athletes": 38,
+   "rows": 76
+  },
+  "sporttech|st-2017-05-12-f798bf|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-05-13-23e91f|World Games udtagelse|決勝": {
+   "athletes": 12,
+   "rows": 24
+  },
+  "sporttech|st-2017-06-23-108a29|女子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2017-06-23-108a29|女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-06-23-108a29|男子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2017-06-23-108a29|男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 11-12才|予選": {
+   "athletes": 6,
+   "rows": 14
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 11-12才|決勝": {
+   "athletes": 6,
+   "rows": 14
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 13-14才|予選": {
+   "athletes": 6,
+   "rows": 16
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 13-14才|決勝": {
+   "athletes": 6,
+   "rows": 16
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 15-16才|予選": {
+   "athletes": 3,
+   "rows": 10
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 15-16才|決勝": {
+   "athletes": 3,
+   "rows": 9
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 17-21才|予選": {
+   "athletes": 2,
+   "rows": 6
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 17-21才|決勝": {
+   "athletes": 2,
+   "rows": 6
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 オープン|予選": {
+   "athletes": 1,
+   "rows": 4
+  },
+  "sporttech|st-2017-07-09-8c44b8|女子 オープン|決勝": {
+   "athletes": 1,
+   "rows": 4
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 11-12才|予選": {
+   "athletes": 4,
+   "rows": 10
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 11-12才|決勝": {
+   "athletes": 4,
+   "rows": 10
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 13-14才|予選": {
+   "athletes": 4,
+   "rows": 10
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 13-14才|決勝": {
+   "athletes": 4,
+   "rows": 10
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 15-16才|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 15-16才|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 17-21才|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 17-21才|決勝": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 オープン|予選": {
+   "athletes": 11,
+   "rows": 24
+  },
+  "sporttech|st-2017-07-09-8c44b8|男子 オープン|決勝": {
+   "athletes": 11,
+   "rows": 23
+  },
+  "sporttech|st-2017-07-28-db6c2f|女子 10才以下|予選": {
+   "athletes": 112,
+   "rows": 193
+  },
+  "sporttech|st-2017-07-28-db6c2f|女子 10才以下|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-07-28-db6c2f|女子 11-12才|予選": {
+   "athletes": 145,
+   "rows": 252
+  },
+  "sporttech|st-2017-07-28-db6c2f|女子 11-12才|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-07-28-db6c2f|女子 13-15才|予選": {
+   "athletes": 181,
+   "rows": 309
+  },
+  "sporttech|st-2017-07-28-db6c2f|女子 13-15才|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-07-28-db6c2f|男子 10才以下|予選": {
+   "athletes": 70,
+   "rows": 122
+  },
+  "sporttech|st-2017-07-28-db6c2f|男子 10才以下|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-07-28-db6c2f|男子 11-12才|予選": {
+   "athletes": 73,
+   "rows": 126
+  },
+  "sporttech|st-2017-07-28-db6c2f|男子 11-12才|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-07-28-db6c2f|男子 13-15才|予選": {
+   "athletes": 106,
+   "rows": 181
+  },
+  "sporttech|st-2017-07-28-db6c2f|男子 13-15才|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-08-05-d4ef3e|女子|予選": {
+   "athletes": 127,
+   "rows": 254
+  },
+  "sporttech|st-2017-08-05-d4ef3e|女子|決勝": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2017-08-05-d4ef3e|男子|予選": {
+   "athletes": 95,
+   "rows": 190
+  },
+  "sporttech|st-2017-08-05-d4ef3e|男子|決勝": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2017-08-16-e3aede|BOYS, 11-12|予選": {
+   "athletes": 18,
+   "rows": 31
+  },
+  "sporttech|st-2017-08-16-e3aede|BOYS, 11-12|決勝": {
+   "athletes": 13,
+   "rows": 13
+  },
+  "sporttech|st-2017-08-16-e3aede|BOYS, 13-14|予選": {
+   "athletes": 19,
+   "rows": 34
+  },
+  "sporttech|st-2017-08-16-e3aede|BOYS, 13-14|決勝": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2017-08-16-e3aede|BOYS, 15-16|予選": {
+   "athletes": 25,
+   "rows": 43
+  },
+  "sporttech|st-2017-08-16-e3aede|BOYS, 15-16|決勝": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2017-08-16-e3aede|GIRLS, 11-12|予選": {
+   "athletes": 22,
+   "rows": 41
+  },
+  "sporttech|st-2017-08-16-e3aede|GIRLS, 11-12|決勝": {
+   "athletes": 11,
+   "rows": 11
+  },
+  "sporttech|st-2017-08-16-e3aede|GIRLS, 13-14|予選": {
+   "athletes": 32,
+   "rows": 55
+  },
+  "sporttech|st-2017-08-16-e3aede|GIRLS, 13-14|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-08-16-e3aede|GIRLS, 15-16|予選": {
+   "athletes": 20,
+   "rows": 33
+  },
+  "sporttech|st-2017-08-16-e3aede|GIRLS, 15-16|決勝": {
+   "athletes": 14,
+   "rows": 14
+  },
+  "sporttech|st-2017-08-16-e3aede|SENIOR, MEN|予選": {
+   "athletes": 35,
+   "rows": 70
+  },
+  "sporttech|st-2017-08-16-e3aede|SENIOR, MEN|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-08-16-e3aede|SENIOR, WOMEN|予選": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "sporttech|st-2017-08-16-e3aede|SENIOR, WOMEN|決勝": {
+   "athletes": 14,
+   "rows": 14
+  },
+  "sporttech|st-2017-08-18-f16ada|MEN|予選": {
+   "athletes": 58,
+   "rows": 116
+  },
+  "sporttech|st-2017-08-18-f16ada|MEN|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-08-18-f16ada|WOMEN|予選": {
+   "athletes": 43,
+   "rows": 86
+  },
+  "sporttech|st-2017-08-18-f16ada|WOMEN|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2017-09-03-541e6c|女子|予選": {
+   "athletes": 34,
+   "rows": 67
+  },
+  "sporttech|st-2017-09-03-541e6c|男子|予選": {
+   "athletes": 29,
+   "rows": 58
+  },
+  "sporttech|st-2017-10-21-3093aa|シンクロナイズド競技 女子|予選": {
+   "athletes": 27,
+   "rows": 53
+  },
+  "sporttech|st-2017-10-21-3093aa|シンクロナイズド競技 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-10-21-3093aa|シンクロナイズド競技 男子|予選": {
+   "athletes": 24,
+   "rows": 47
+  },
+  "sporttech|st-2017-10-21-3093aa|シンクロナイズド競技 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-10-21-3093aa|個人競技 女子|予選": {
+   "athletes": 65,
+   "rows": 129
+  },
+  "sporttech|st-2017-10-21-3093aa|個人競技 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-10-21-3093aa|個人競技 女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2017-10-21-3093aa|個人競技 男子|予選": {
+   "athletes": 63,
+   "rows": 126
+  },
+  "sporttech|st-2017-10-21-3093aa|個人競技 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-10-21-3093aa|個人競技 男子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2017-11-16-b1e2fc|11-12 Boys|予選": {
+   "athletes": 100,
+   "rows": 212
+  },
+  "sporttech|st-2017-11-16-b1e2fc|11-12 Boys|決勝": {
+   "athletes": 30,
+   "rows": 40
+  },
+  "sporttech|st-2017-11-16-b1e2fc|11-12 Girls|予選": {
+   "athletes": 121,
+   "rows": 245
+  },
+  "sporttech|st-2017-11-16-b1e2fc|11-12 Girls|決勝": {
+   "athletes": 32,
+   "rows": 39
+  },
+  "sporttech|st-2017-11-16-b1e2fc|13-14 Boys|予選": {
+   "athletes": 136,
+   "rows": 292
+  },
+  "sporttech|st-2017-11-16-b1e2fc|13-14 Boys|決勝": {
+   "athletes": 32,
+   "rows": 40
+  },
+  "sporttech|st-2017-11-16-b1e2fc|13-14 Girls|予選": {
+   "athletes": 148,
+   "rows": 299
+  },
+  "sporttech|st-2017-11-16-b1e2fc|13-14 Girls|決勝": {
+   "athletes": 30,
+   "rows": 40
+  },
+  "sporttech|st-2017-11-16-b1e2fc|15-16 Boys|予選": {
+   "athletes": 169,
+   "rows": 336
+  },
+  "sporttech|st-2017-11-16-b1e2fc|15-16 Boys|決勝": {
+   "athletes": 31,
+   "rows": 40
+  },
+  "sporttech|st-2017-11-16-b1e2fc|15-16 Girls|予選": {
+   "athletes": 140,
+   "rows": 289
+  },
+  "sporttech|st-2017-11-16-b1e2fc|15-16 Girls|決勝": {
+   "athletes": 30,
+   "rows": 40
+  },
+  "sporttech|st-2017-11-16-b1e2fc|17-21 Boys|予選": {
+   "athletes": 138,
+   "rows": 279
+  },
+  "sporttech|st-2017-11-16-b1e2fc|17-21 Boys|決勝": {
+   "athletes": 32,
+   "rows": 39
+  },
+  "sporttech|st-2017-11-16-b1e2fc|17-21 Girls|予選": {
+   "athletes": 123,
+   "rows": 239
+  },
+  "sporttech|st-2017-11-16-b1e2fc|17-21 Girls|決勝": {
+   "athletes": 32,
+   "rows": 39
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子10才以下|予選": {
+   "athletes": 46,
+   "rows": 46
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子10才以下|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子11-12才|予選": {
+   "athletes": 45,
+   "rows": 45
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子11-12才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子13-14才|予選": {
+   "athletes": 37,
+   "rows": 37
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子13-14才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子15-16才|予選": {
+   "athletes": 27,
+   "rows": 27
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子15-16才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子17-18才|予選": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子17-18才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子ジャパンオープン|予選": {
+   "athletes": 30,
+   "rows": 59
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子ジャパンオープン|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子マスターズ19-29才|予選": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子マスターズ19-29才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子マスターズ30-39才|決勝": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子マスターズ40-49才|予選": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子マスターズ40-49才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子マスターズ50才以上|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-12-15-bb94f4|女子社会人|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子10才以下|予選": {
+   "athletes": 28,
+   "rows": 28
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子10才以下|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子11-12才|予選": {
+   "athletes": 30,
+   "rows": 30
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子11-12才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子13-14才|予選": {
+   "athletes": 29,
+   "rows": 29
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子13-14才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子15-16才|予選": {
+   "athletes": 31,
+   "rows": 31
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子15-16才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子17-18才|予選": {
+   "athletes": 30,
+   "rows": 30
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子17-18才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子ジャパンオープン|予選": {
+   "athletes": 43,
+   "rows": 86
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子ジャパンオープン|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子マスターズ 19-29才|予選": {
+   "athletes": 17,
+   "rows": 17
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子マスターズ 19-29才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子マスターズ30-39才|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子マスターズ40-49才|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子マスターズ50才以上|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2017-12-15-bb94f4|男子社会人|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|10才以下女子|予選": {
+   "athletes": 38,
+   "rows": 38
+  },
+  "sporttech|st-2018-02-17-8dd433|10才以下女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|10才以下女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|10才以下女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|10才以下男子|予選": {
+   "athletes": 28,
+   "rows": 28
+  },
+  "sporttech|st-2018-02-17-8dd433|10才以下男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|10才以下男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|10才以下男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|11−12才女子|予選": {
+   "athletes": 56,
+   "rows": 56
+  },
+  "sporttech|st-2018-02-17-8dd433|11−12才女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|11−12才女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|11−12才女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|11−12才男子|予選": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2018-02-17-8dd433|11−12才男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|11−12才男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|11−12才男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|13−14才女子|予選": {
+   "athletes": 59,
+   "rows": 59
+  },
+  "sporttech|st-2018-02-17-8dd433|13−14才女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|13−14才女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|13−14才女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|13−14才男子|予選": {
+   "athletes": 36,
+   "rows": 36
+  },
+  "sporttech|st-2018-02-17-8dd433|13−14才男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|13−14才男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|13−14才男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|15−16才女子|予選": {
+   "athletes": 34,
+   "rows": 34
+  },
+  "sporttech|st-2018-02-17-8dd433|15−16才女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|15−16才女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|15−16才女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|15−16才男子|予選": {
+   "athletes": 22,
+   "rows": 22
+  },
+  "sporttech|st-2018-02-17-8dd433|15−16才男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|15−16才男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|15−16才男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|17才以上女子|予選": {
+   "athletes": 71,
+   "rows": 71
+  },
+  "sporttech|st-2018-02-17-8dd433|17才以上女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|17才以上女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|17才以上女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|17才以上男子|予選": {
+   "athletes": 86,
+   "rows": 86
+  },
+  "sporttech|st-2018-02-17-8dd433|17才以上男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-02-17-8dd433|17才以上男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|17才以上男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|オープン女子|決勝": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2018-02-17-8dd433|オープン女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|オープン女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|オープン男子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-02-17-8dd433|オープン男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-02-17-8dd433|オープン男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-05-19-029173|11-12 Boys|予選": {
+   "athletes": 19,
+   "rows": 38
+  },
+  "sporttech|st-2018-05-19-029173|11-12 Girls|予選": {
+   "athletes": 40,
+   "rows": 80
+  },
+  "sporttech|st-2018-05-19-029173|13-14 Boys|予選": {
+   "athletes": 30,
+   "rows": 60
+  },
+  "sporttech|st-2018-05-19-029173|13-14 Girls|予選": {
+   "athletes": 29,
+   "rows": 57
+  },
+  "sporttech|st-2018-05-19-029173|15-16 Boys|予選": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "sporttech|st-2018-05-19-029173|15-16 Girls|予選": {
+   "athletes": 22,
+   "rows": 44
+  },
+  "sporttech|st-2018-05-19-029173|17-21 Men|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2018-05-19-029173|17-21 Women|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2018-05-19-029173|Open Men|予選": {
+   "athletes": 59,
+   "rows": 118
+  },
+  "sporttech|st-2018-05-19-029173|Open Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-05-19-029173|Open Women|予選": {
+   "athletes": 40,
+   "rows": 80
+  },
+  "sporttech|st-2018-05-19-029173|Open Women|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-05-19-02f2e8|Junior Men|予選": {
+   "athletes": 21,
+   "rows": 42
+  },
+  "sporttech|st-2018-05-19-02f2e8|Junior Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-05-19-02f2e8|Junior Women|予選": {
+   "athletes": 15,
+   "rows": 30
+  },
+  "sporttech|st-2018-05-19-02f2e8|Junior Women|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-05-19-02f2e8|Senior Men|予選": {
+   "athletes": 14,
+   "rows": 28
+  },
+  "sporttech|st-2018-05-19-02f2e8|Senior Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-05-19-02f2e8|Senior Women|決勝": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2018-06-29-428f79|個人競技 女子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2018-06-29-428f79|個人競技 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-06-29-428f79|個人競技 男子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2018-06-29-428f79|個人競技 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-07-06-44cef8|Ladies|予選": {
+   "athletes": 27,
+   "rows": 54
+  },
+  "sporttech|st-2018-07-06-44cef8|Ladies|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-07-06-44cef8|Men|予選": {
+   "athletes": 45,
+   "rows": 90
+  },
+  "sporttech|st-2018-07-06-44cef8|Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-07-06-44cef8|Synchro Men|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2018-07-06-44cef8|Synchro Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-07-06-44cef8|Synchro Women|予選": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "sporttech|st-2018-07-06-44cef8|Synchro Women|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2018-07-08-c79301|女子 11-12才|予選": {
+   "athletes": 11,
+   "rows": 25
+  },
+  "sporttech|st-2018-07-08-c79301|女子 11-12才|決勝": {
+   "athletes": 11,
+   "rows": 26
+  },
+  "sporttech|st-2018-07-08-c79301|女子 13-14才|予選": {
+   "athletes": 6,
+   "rows": 14
+  },
+  "sporttech|st-2018-07-08-c79301|女子 13-14才|決勝": {
+   "athletes": 6,
+   "rows": 14
+  },
+  "sporttech|st-2018-07-08-c79301|女子 15-16才|予選": {
+   "athletes": 6,
+   "rows": 16
+  },
+  "sporttech|st-2018-07-08-c79301|女子 15-16才|決勝": {
+   "athletes": 6,
+   "rows": 16
+  },
+  "sporttech|st-2018-07-08-c79301|女子 17-21才|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2018-07-08-c79301|女子 17-21才|決勝": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2018-07-08-c79301|女子 オープン|予選": {
+   "athletes": 1,
+   "rows": 4
+  },
+  "sporttech|st-2018-07-08-c79301|女子 オープン|決勝": {
+   "athletes": 1,
+   "rows": 3
+  },
+  "sporttech|st-2018-07-08-c79301|男子 11-12才|予選": {
+   "athletes": 12,
+   "rows": 26
+  },
+  "sporttech|st-2018-07-08-c79301|男子 11-12才|決勝": {
+   "athletes": 11,
+   "rows": 23
+  },
+  "sporttech|st-2018-07-08-c79301|男子 13-14才|予選": {
+   "athletes": 5,
+   "rows": 12
+  },
+  "sporttech|st-2018-07-08-c79301|男子 13-14才|決勝": {
+   "athletes": 5,
+   "rows": 12
+  },
+  "sporttech|st-2018-07-08-c79301|男子 15-16才|予選": {
+   "athletes": 5,
+   "rows": 11
+  },
+  "sporttech|st-2018-07-08-c79301|男子 15-16才|決勝": {
+   "athletes": 5,
+   "rows": 12
+  },
+  "sporttech|st-2018-07-08-c79301|男子 17-21才|予選": {
+   "athletes": 4,
+   "rows": 7
+  },
+  "sporttech|st-2018-07-08-c79301|男子 17-21才|決勝": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2018-07-08-c79301|男子 オープン|予選": {
+   "athletes": 14,
+   "rows": 29
+  },
+  "sporttech|st-2018-07-08-c79301|男子 オープン|決勝": {
+   "athletes": 14,
+   "rows": 29
+  },
+  "sporttech|st-2018-07-15-a8bf99|11-12才 女子|予選": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2018-07-15-a8bf99|11-12才 男子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2018-07-15-a8bf99|13-14才 女子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2018-07-15-a8bf99|13-14才 男子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2018-07-15-a8bf99|15-16才 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2018-07-15-a8bf99|15-16才 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2018-07-15-a8bf99|17-21才 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2018-07-15-a8bf99|17-21才 男子|決勝": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2018-07-27-cf1fe8|女子 10才以下|予選": {
+   "athletes": 99,
+   "rows": 173
+  },
+  "sporttech|st-2018-07-27-cf1fe8|女子 10才以下|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2018-07-27-cf1fe8|女子 11-12才|予選": {
+   "athletes": 145,
+   "rows": 250
+  },
+  "sporttech|st-2018-07-27-cf1fe8|女子 11-12才|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2018-07-27-cf1fe8|女子 13-15才|予選": {
+   "athletes": 214,
+   "rows": 362
+  },
+  "sporttech|st-2018-07-27-cf1fe8|女子 13-15才|決勝": {
+   "athletes": 14,
+   "rows": 14
+  },
+  "sporttech|st-2018-07-27-cf1fe8|男子 10才以下|予選": {
+   "athletes": 60,
+   "rows": 104
+  },
+  "sporttech|st-2018-07-27-cf1fe8|男子 10才以下|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2018-07-27-cf1fe8|男子 11-12才|予選": {
+   "athletes": 78,
+   "rows": 135
+  },
+  "sporttech|st-2018-07-27-cf1fe8|男子 11-12才|決勝": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2018-07-27-cf1fe8|男子 13-15才|予選": {
+   "athletes": 112,
+   "rows": 189
+  },
+  "sporttech|st-2018-07-27-cf1fe8|男子 13-15才|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2018-08-04-890397|Men|予選": {
+   "athletes": 67,
+   "rows": 134
+  },
+  "sporttech|st-2018-08-04-890397|Men|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2018-08-04-890397|Women|予選": {
+   "athletes": 53,
+   "rows": 106
+  },
+  "sporttech|st-2018-08-04-890397|Women|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2018-08-11-f54285|シンクロナイズド 女子|予選": {
+   "athletes": 23,
+   "rows": 46
+  },
+  "sporttech|st-2018-08-11-f54285|シンクロナイズド 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-08-11-f54285|シンクロナイズド 男子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2018-08-11-f54285|シンクロナイズド 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-08-11-f54285|個人競技 女子|予選": {
+   "athletes": 129,
+   "rows": 257
+  },
+  "sporttech|st-2018-08-11-f54285|個人競技 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-08-11-f54285|個人競技 男子|予選": {
+   "athletes": 80,
+   "rows": 154
+  },
+  "sporttech|st-2018-08-11-f54285|個人競技 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|オープン 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|オープン 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|一般 女子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2018-09-15-df0ab8|一般 女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2018-09-15-df0ab8|一般 男子|予選": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2018-09-15-df0ab8|一般 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-09-15-df0ab8|中学生 女子|予選": {
+   "athletes": 70,
+   "rows": 139
+  },
+  "sporttech|st-2018-09-15-df0ab8|中学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|中学生 男子|予選": {
+   "athletes": 41,
+   "rows": 82
+  },
+  "sporttech|st-2018-09-15-df0ab8|中学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|大学生 女子|予選": {
+   "athletes": 14,
+   "rows": 28
+  },
+  "sporttech|st-2018-09-15-df0ab8|大学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|大学生 男子|予選": {
+   "athletes": 26,
+   "rows": 52
+  },
+  "sporttech|st-2018-09-15-df0ab8|大学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|小学生低学年 女子|予選": {
+   "athletes": 21,
+   "rows": 42
+  },
+  "sporttech|st-2018-09-15-df0ab8|小学生低学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|小学生低学年 男子|予選": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "sporttech|st-2018-09-15-df0ab8|小学生低学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|小学生高学年 女子|予選": {
+   "athletes": 108,
+   "rows": 216
+  },
+  "sporttech|st-2018-09-15-df0ab8|小学生高学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|小学生高学年 男子|予選": {
+   "athletes": 40,
+   "rows": 80
+  },
+  "sporttech|st-2018-09-15-df0ab8|小学生高学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|高校生 女子|予選": {
+   "athletes": 47,
+   "rows": 94
+  },
+  "sporttech|st-2018-09-15-df0ab8|高校生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-09-15-df0ab8|高校生 男子|予選": {
+   "athletes": 36,
+   "rows": 72
+  },
+  "sporttech|st-2018-09-15-df0ab8|高校生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2018-10-05-808062|Individual Men|予選": {
+   "athletes": 54,
+   "rows": 108
+  },
+  "sporttech|st-2018-10-05-808062|Individual Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-10-05-808062|Individual Women|予選": {
+   "athletes": 47,
+   "rows": 94
+  },
+  "sporttech|st-2018-10-05-808062|Individual Women|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-10-05-808062|Synchro Men|予選": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "sporttech|st-2018-10-05-808062|Synchro Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-10-05-808062|Synchro Women|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2018-10-05-808062|Synchro Women|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-10-05-808062|Tumbling Men|予選": {
+   "athletes": 26,
+   "rows": 51
+  },
+  "sporttech|st-2018-10-05-808062|Tumbling Men|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2018-10-05-808062|Tumbling Women|予選": {
+   "athletes": 19,
+   "rows": 38
+  },
+  "sporttech|st-2018-10-05-808062|Tumbling Women|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2018-10-19-3c6db1|女子|予選": {
+   "athletes": 80,
+   "rows": 160
+  },
+  "sporttech|st-2018-10-19-3c6db1|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2018-10-19-3c6db1|女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2018-10-19-3c6db1|男子|予選": {
+   "athletes": 85,
+   "rows": 170
+  },
+  "sporttech|st-2018-10-19-3c6db1|男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2018-10-19-3c6db1|男子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Men 11-12|予選": {
+   "athletes": 22,
+   "rows": 43
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Men 11-12|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Men 13-14|予選": {
+   "athletes": 26,
+   "rows": 49
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Men 13-14|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Men 15-16|予選": {
+   "athletes": 33,
+   "rows": 63
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Men 15-16|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Men 17-21|予選": {
+   "athletes": 28,
+   "rows": 53
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Men 17-21|決勝": {
+   "athletes": 8,
+   "rows": 15
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Women 11-12|予選": {
+   "athletes": 29,
+   "rows": 57
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Women 11-12|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Women 13-14|予選": {
+   "athletes": 30,
+   "rows": 59
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Women 13-14|決勝": {
+   "athletes": 8,
+   "rows": 15
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Women 15-16|予選": {
+   "athletes": 24,
+   "rows": 46
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Women 15-16|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Women 17-21|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2018-11-15-95cde5|DMT Women 17-21|決勝": {
+   "athletes": 8,
+   "rows": 14
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Men 11-12|予選": {
+   "athletes": 53,
+   "rows": 106
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Men 11-12|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Men 13-14|予選": {
+   "athletes": 65,
+   "rows": 130
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Men 13-14|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Men 15-16|予選": {
+   "athletes": 63,
+   "rows": 126
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Men 15-16|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Men 17-21|予選": {
+   "athletes": 70,
+   "rows": 139
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Men 17-21|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Women 11-12|予選": {
+   "athletes": 55,
+   "rows": 110
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Women 11-12|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Women 13-14|予選": {
+   "athletes": 58,
+   "rows": 115
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Women 13-14|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Women 15-16|予選": {
+   "athletes": 59,
+   "rows": 118
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Women 15-16|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Women 17-21|予選": {
+   "athletes": 50,
+   "rows": 100
+  },
+  "sporttech|st-2018-11-15-95cde5|IND Women 17-21|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Men 11-12|予選": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Men 11-12|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Men 13-14|予選": {
+   "athletes": 26,
+   "rows": 26
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Men 13-14|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Men 15-16|予選": {
+   "athletes": 17,
+   "rows": 17
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Men 15-16|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Men 17-21|予選": {
+   "athletes": 28,
+   "rows": 28
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Men 17-21|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Women 11-12|予選": {
+   "athletes": 17,
+   "rows": 17
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Women 11-12|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Women 13-14|予選": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Women 13-14|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Women 15-16|予選": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Women 15-16|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Women 17-21|予選": {
+   "athletes": 22,
+   "rows": 22
+  },
+  "sporttech|st-2018-11-15-95cde5|SYN Women 17-21|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Men 11-12|予選": {
+   "athletes": 25,
+   "rows": 50
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Men 11-12|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Men 13-14|予選": {
+   "athletes": 25,
+   "rows": 50
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Men 13-14|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Men 15-16|予選": {
+   "athletes": 37,
+   "rows": 74
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Men 15-16|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Men 17-21|予選": {
+   "athletes": 27,
+   "rows": 54
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Men 17-21|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Women 11-12|予選": {
+   "athletes": 30,
+   "rows": 59
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Women 11-12|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Women 13-14|予選": {
+   "athletes": 30,
+   "rows": 60
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Women 13-14|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Women 15-16|予選": {
+   "athletes": 38,
+   "rows": 76
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Women 15-16|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Women 17-21|予選": {
+   "athletes": 25,
+   "rows": 50
+  },
+  "sporttech|st-2018-11-15-95cde5|TUM Women 17-21|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|10才以下 女子|予選": {
+   "athletes": 50,
+   "rows": 50
+  },
+  "sporttech|st-2018-12-14-f566ba|10才以下 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|10才以下 男子|予選": {
+   "athletes": 26,
+   "rows": 26
+  },
+  "sporttech|st-2018-12-14-f566ba|10才以下 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|11-12才 女子|予選": {
+   "athletes": 52,
+   "rows": 52
+  },
+  "sporttech|st-2018-12-14-f566ba|11-12才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|11-12才 男子|予選": {
+   "athletes": 33,
+   "rows": 33
+  },
+  "sporttech|st-2018-12-14-f566ba|11-12才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|13-14才 女子|予選": {
+   "athletes": 47,
+   "rows": 47
+  },
+  "sporttech|st-2018-12-14-f566ba|13-14才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|13-14才 男子|予選": {
+   "athletes": 27,
+   "rows": 27
+  },
+  "sporttech|st-2018-12-14-f566ba|13-14才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|15-16才 女子|予選": {
+   "athletes": 17,
+   "rows": 17
+  },
+  "sporttech|st-2018-12-14-f566ba|15-16才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|15-16才 男子|予選": {
+   "athletes": 29,
+   "rows": 29
+  },
+  "sporttech|st-2018-12-14-f566ba|15-16才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|17-18才 女子|予選": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2018-12-14-f566ba|17-18才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|17-18才 男子|予選": {
+   "athletes": 19,
+   "rows": 19
+  },
+  "sporttech|st-2018-12-14-f566ba|17-18才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|19-29才 女子|予選": {
+   "athletes": 14,
+   "rows": 14
+  },
+  "sporttech|st-2018-12-14-f566ba|19-29才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|19-29才 男子|予選": {
+   "athletes": 29,
+   "rows": 29
+  },
+  "sporttech|st-2018-12-14-f566ba|19-29才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|30-39才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|30-39才 男子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2018-12-14-f566ba|40-49才 女子|予選": {
+   "athletes": 11,
+   "rows": 11
+  },
+  "sporttech|st-2018-12-14-f566ba|40-49才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|40-49才 男子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2018-12-14-f566ba|50才以上 女子|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2018-12-14-f566ba|50才以上 男子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2018-12-14-f566ba|Japan Open MEN|予選": {
+   "athletes": 48,
+   "rows": 96
+  },
+  "sporttech|st-2018-12-14-f566ba|Japan Open MEN|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|Japan Open Special Contest|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2018-12-14-f566ba|Japan Open WOMEN|予選": {
+   "athletes": 38,
+   "rows": 76
+  },
+  "sporttech|st-2018-12-14-f566ba|Japan Open WOMEN|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2018-12-14-f566ba|全日本社会人 女子|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2018-12-14-f566ba|全日本社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|10才以下 女子|予選": {
+   "athletes": 40,
+   "rows": 40
+  },
+  "sporttech|st-2019-02-16-57cebd|10才以下 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|10才以下 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|10才以下 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|10才以下 男子|予選": {
+   "athletes": 28,
+   "rows": 28
+  },
+  "sporttech|st-2019-02-16-57cebd|10才以下 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|10才以下 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|10才以下 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|11−12才 女子|予選": {
+   "athletes": 71,
+   "rows": 71
+  },
+  "sporttech|st-2019-02-16-57cebd|11−12才 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|11−12才 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|11−12才 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|11−12才 男子|予選": {
+   "athletes": 31,
+   "rows": 31
+  },
+  "sporttech|st-2019-02-16-57cebd|11−12才 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|11−12才 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|11−12才 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|13−14才 女子|予選": {
+   "athletes": 62,
+   "rows": 62
+  },
+  "sporttech|st-2019-02-16-57cebd|13−14才 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|13−14才 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|13−14才 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|13−14才 男子|予選": {
+   "athletes": 45,
+   "rows": 45
+  },
+  "sporttech|st-2019-02-16-57cebd|13−14才 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|13−14才 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|13−14才 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|15−16才 女子|予選": {
+   "athletes": 41,
+   "rows": 41
+  },
+  "sporttech|st-2019-02-16-57cebd|15−16才 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|15−16才 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|15−16才 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|15−16才 男子|予選": {
+   "athletes": 31,
+   "rows": 31
+  },
+  "sporttech|st-2019-02-16-57cebd|15−16才 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|15−16才 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|15−16才 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|17才以上 女子|予選": {
+   "athletes": 74,
+   "rows": 74
+  },
+  "sporttech|st-2019-02-16-57cebd|17才以上 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|17才以上 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|17才以上 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|17才以上 男子|予選": {
+   "athletes": 80,
+   "rows": 80
+  },
+  "sporttech|st-2019-02-16-57cebd|17才以上 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2019-02-16-57cebd|17才以上 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|17才以上 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|オープン 女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|オープン 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|オープン 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|オープン 男子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-02-16-57cebd|オープン 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-02-16-57cebd|オープン 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-03-03-90801b|10才以下 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-03-03-90801b|10才以下 女子|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-03-03-90801b|10才以下 男子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2019-03-03-90801b|10才以下 男子|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2019-03-03-90801b|11−12才 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-03-03-90801b|11−12才 女子|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-03-03-90801b|11−12才 男子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2019-03-03-90801b|11−12才 男子|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2019-03-03-90801b|13−14才 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-03-03-90801b|13−14才 女子|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-03-03-90801b|13−14才 男子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2019-03-03-90801b|13−14才 男子|決勝": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2019-03-03-90801b|15−16才 女子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2019-03-03-90801b|15−16才 女子|決勝": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2019-03-03-90801b|15−16才 男子|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2019-03-03-90801b|15−16才 男子|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2019-03-03-90801b|17才以上 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-03-03-90801b|17才以上 女子|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-03-03-90801b|17才以上 男子|予選": {
+   "athletes": 16,
+   "rows": 29
+  },
+  "sporttech|st-2019-03-03-90801b|17才以上 男子|決勝": {
+   "athletes": 8,
+   "rows": 15
+  },
+  "sporttech|st-2019-03-03-90801b|オープン 女子|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2019-03-03-90801b|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2019-03-03-90801b|女子|予選": {
+   "athletes": 15,
+   "rows": 30
+  },
+  "sporttech|st-2019-03-03-90801b|女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2019-03-03-90801b|男子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2019-03-03-90801b|男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2019-05-11-9f734a|11-12 女子|予選": {
+   "athletes": 35,
+   "rows": 70
+  },
+  "sporttech|st-2019-05-11-9f734a|11-12 男子|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2019-05-11-9f734a|13-14 女子|予選": {
+   "athletes": 23,
+   "rows": 46
+  },
+  "sporttech|st-2019-05-11-9f734a|13-14 男子|予選": {
+   "athletes": 25,
+   "rows": 50
+  },
+  "sporttech|st-2019-05-11-9f734a|15-16 女子|予選": {
+   "athletes": 29,
+   "rows": 57
+  },
+  "sporttech|st-2019-05-11-9f734a|15-16 男子|予選": {
+   "athletes": 21,
+   "rows": 42
+  },
+  "sporttech|st-2019-05-11-9f734a|17-21 女子|予選": {
+   "athletes": 29,
+   "rows": 58
+  },
+  "sporttech|st-2019-05-11-9f734a|17-21 男子|予選": {
+   "athletes": 31,
+   "rows": 62
+  },
+  "sporttech|st-2019-05-11-9f734a|オープン 女子|予選": {
+   "athletes": 37,
+   "rows": 74
+  },
+  "sporttech|st-2019-05-11-9f734a|オープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-05-11-9f734a|オープン 男子|予選": {
+   "athletes": 55,
+   "rows": 110
+  },
+  "sporttech|st-2019-05-11-9f734a|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-06-21-2e03b6|個人競技 女子|予選": {
+   "athletes": 15,
+   "rows": 30
+  },
+  "sporttech|st-2019-06-21-2e03b6|個人競技 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-06-21-2e03b6|個人競技 男子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2019-06-21-2e03b6|個人競技 男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2019-07-06-a69cf0|11-12才 女子|予選": {
+   "athletes": 10,
+   "rows": 20
+  },
+  "sporttech|st-2019-07-06-a69cf0|11-12才 女子|決勝": {
+   "athletes": 10,
+   "rows": 20
+  },
+  "sporttech|st-2019-07-06-a69cf0|11-12才 男子|予選": {
+   "athletes": 9,
+   "rows": 21
+  },
+  "sporttech|st-2019-07-06-a69cf0|11-12才 男子|決勝": {
+   "athletes": 9,
+   "rows": 22
+  },
+  "sporttech|st-2019-07-06-a69cf0|13-14才 女子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2019-07-06-a69cf0|13-14才 女子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2019-07-06-a69cf0|13-14才 男子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-07-06-a69cf0|13-14才 男子|決勝": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-07-06-a69cf0|15-16才 女子|予選": {
+   "athletes": 6,
+   "rows": 14
+  },
+  "sporttech|st-2019-07-06-a69cf0|15-16才 女子|決勝": {
+   "athletes": 6,
+   "rows": 14
+  },
+  "sporttech|st-2019-07-06-a69cf0|15-16才 男子|予選": {
+   "athletes": 3,
+   "rows": 5
+  },
+  "sporttech|st-2019-07-06-a69cf0|15-16才 男子|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2019-07-06-a69cf0|17-21才 女子|予選": {
+   "athletes": 2,
+   "rows": 6
+  },
+  "sporttech|st-2019-07-06-a69cf0|17-21才 女子|決勝": {
+   "athletes": 2,
+   "rows": 6
+  },
+  "sporttech|st-2019-07-06-a69cf0|17-21才 男子|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2019-07-06-a69cf0|17-21才 男子|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2019-07-06-a69cf0|オープン 女子|予選": {
+   "athletes": 10,
+   "rows": 19
+  },
+  "sporttech|st-2019-07-06-a69cf0|オープン 女子|決勝": {
+   "athletes": 10,
+   "rows": 20
+  },
+  "sporttech|st-2019-07-06-a69cf0|オープン 男子|予選": {
+   "athletes": 9,
+   "rows": 17
+  },
+  "sporttech|st-2019-07-06-a69cf0|オープン 男子|決勝": {
+   "athletes": 9,
+   "rows": 17
+  },
+  "sporttech|st-2019-07-13-be154d|11-12才 女子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2019-07-13-be154d|11-12才 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2019-07-13-be154d|13-14才 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-07-13-be154d|13-14才 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2019-07-13-be154d|15-16才 女子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2019-07-13-be154d|15-16才 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2019-07-13-be154d|トライアウト 女子|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2019-07-13-be154d|トライアウト 男子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2019-07-25-6edaac|10才以下 女子|予選": {
+   "athletes": 105,
+   "rows": 183
+  },
+  "sporttech|st-2019-07-25-6edaac|10才以下 女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-07-25-6edaac|10才以下 男子|予選": {
+   "athletes": 52,
+   "rows": 92
+  },
+  "sporttech|st-2019-07-25-6edaac|10才以下 男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-07-25-6edaac|11-12才 女子|予選": {
+   "athletes": 158,
+   "rows": 273
+  },
+  "sporttech|st-2019-07-25-6edaac|11-12才 女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-07-25-6edaac|11-12才 男子|予選": {
+   "athletes": 58,
+   "rows": 101
+  },
+  "sporttech|st-2019-07-25-6edaac|11-12才 男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-07-25-6edaac|13-15才 女子|予選": {
+   "athletes": 158,
+   "rows": 267
+  },
+  "sporttech|st-2019-07-25-6edaac|13-15才 女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-07-25-6edaac|13-15才 男子|予選": {
+   "athletes": 106,
+   "rows": 182
+  },
+  "sporttech|st-2019-07-25-6edaac|13-15才 男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-09-08-5e5635|女子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2019-09-08-5e5635|女子|決勝": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2019-09-08-5e5635|男子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2019-09-08-5e5635|男子|決勝": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2019-09-18-66cafc|MEN|予選": {
+   "athletes": 103,
+   "rows": 202
+  },
+  "sporttech|st-2019-09-18-66cafc|MEN|決勝": {
+   "athletes": 28,
+   "rows": 40
+  },
+  "sporttech|st-2019-09-18-66cafc|WOMEN|予選": {
+   "athletes": 80,
+   "rows": 162
+  },
+  "sporttech|st-2019-09-18-66cafc|WOMEN|決勝": {
+   "athletes": 30,
+   "rows": 44
+  },
+  "sporttech|st-2019-11-01-4ddf47|女子|予選": {
+   "athletes": 91,
+   "rows": 182
+  },
+  "sporttech|st-2019-11-01-4ddf47|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-11-01-4ddf47|女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2019-11-01-4ddf47|男子|予選": {
+   "athletes": 94,
+   "rows": 187
+  },
+  "sporttech|st-2019-11-01-4ddf47|男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-11-01-4ddf47|男子|準決勝": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2019-12-14-b8f0bc|全日本社会人 女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-12-14-b8f0bc|全日本社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 10才以下|予選": {
+   "athletes": 46,
+   "rows": 46
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 10才以下|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 11−12才|予選": {
+   "athletes": 64,
+   "rows": 64
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 11−12才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 13−14才|予選": {
+   "athletes": 47,
+   "rows": 47
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 13−14才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 15−16才|予選": {
+   "athletes": 25,
+   "rows": 25
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 15−16才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 17−18才|予選": {
+   "athletes": 19,
+   "rows": 19
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 17−18才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 19−29才|予選": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 19−29才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 30−39才|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 40−49才|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 50才以上|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 ジャパンオープン 社会人|予選": {
+   "athletes": 30,
+   "rows": 60
+  },
+  "sporttech|st-2019-12-14-b8f0bc|女子 ジャパンオープン 社会人|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 10才以下|予選": {
+   "athletes": 27,
+   "rows": 27
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 10才以下|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 11−12才|予選": {
+   "athletes": 30,
+   "rows": 30
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 11−12才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 13−14才|予選": {
+   "athletes": 29,
+   "rows": 29
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 13−14才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 15−16才|予選": {
+   "athletes": 28,
+   "rows": 28
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 15−16才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 17−18才|予選": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 17−18才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 19-29才|予選": {
+   "athletes": 26,
+   "rows": 26
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 19-29才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 30−39才|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 40−49才|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 50才以上|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 ジャパンオープン 社会人|予選": {
+   "athletes": 46,
+   "rows": 92
+  },
+  "sporttech|st-2019-12-14-b8f0bc|男子 ジャパンオープン 社会人|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|10才以下 女子|予選": {
+   "athletes": 31,
+   "rows": 31
+  },
+  "sporttech|st-2020-02-15-1c398c|10才以下 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|10才以下 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|10才以下 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|10才以下 男子|予選": {
+   "athletes": 21,
+   "rows": 21
+  },
+  "sporttech|st-2020-02-15-1c398c|10才以下 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|10才以下 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|10才以下 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|11-12才 女子|予選": {
+   "athletes": 57,
+   "rows": 57
+  },
+  "sporttech|st-2020-02-15-1c398c|11-12才 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|11-12才 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|11-12才 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|11−12才 男子|予選": {
+   "athletes": 40,
+   "rows": 40
+  },
+  "sporttech|st-2020-02-15-1c398c|11−12才 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|11−12才 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|11−12才 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|13−14才 女子|予選": {
+   "athletes": 65,
+   "rows": 65
+  },
+  "sporttech|st-2020-02-15-1c398c|13−14才 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|13−14才 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|13−14才 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|13−14才 男子|予選": {
+   "athletes": 37,
+   "rows": 37
+  },
+  "sporttech|st-2020-02-15-1c398c|13−14才 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|13−14才 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|13−14才 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|15−16才 女子|予選": {
+   "athletes": 39,
+   "rows": 39
+  },
+  "sporttech|st-2020-02-15-1c398c|15−16才 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|15−16才 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|15−16才 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|15−16才 男子|予選": {
+   "athletes": 29,
+   "rows": 29
+  },
+  "sporttech|st-2020-02-15-1c398c|15−16才 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|15−16才 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|15−16才 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|17才以上 女子|予選": {
+   "athletes": 54,
+   "rows": 54
+  },
+  "sporttech|st-2020-02-15-1c398c|17才以上 女子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|17才以上 女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|17才以上 女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|17才以上 男子|予選": {
+   "athletes": 77,
+   "rows": 77
+  },
+  "sporttech|st-2020-02-15-1c398c|17才以上 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2020-02-15-1c398c|17才以上 男子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|17才以上 男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|オープン女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|オープン女子|準々決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-02-15-1c398c|オープン女子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|オープン男子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-02-15-1c398c|オープン男子|準々決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2020-02-15-1c398c|オープン男子|準決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-09-18-e40943|女子|予選": {
+   "athletes": 85,
+   "rows": 85
+  },
+  "sporttech|st-2020-09-18-e40943|男子|予選": {
+   "athletes": 88,
+   "rows": 88
+  },
+  "sporttech|st-2020-10-31-b39469|女子|予選": {
+   "athletes": 92,
+   "rows": 184
+  },
+  "sporttech|st-2020-10-31-b39469|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2020-10-31-b39469|女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2020-10-31-b39469|男子|予選": {
+   "athletes": 92,
+   "rows": 182
+  },
+  "sporttech|st-2020-10-31-b39469|男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2020-10-31-b39469|男子|準決勝": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 10才以下 (オープン参加)|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 10才以下 (オープン参加)|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 11-12才|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 11-12才|決勝": {
+   "athletes": 6,
+   "rows": 11
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 13-14才|予選": {
+   "athletes": 8,
+   "rows": 18
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 13-14才|決勝": {
+   "athletes": 8,
+   "rows": 18
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 15-16才|予選": {
+   "athletes": 5,
+   "rows": 12
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 15-16才|決勝": {
+   "athletes": 5,
+   "rows": 12
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 17-21才|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 17-21才|決勝": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 オープン|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2020-11-15-cbf6d6|女子 オープン|決勝": {
+   "athletes": 5,
+   "rows": 9
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 10才以下 (オープン参加)|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 10才以下 (オープン参加)|決勝": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 11-12才|予選": {
+   "athletes": 6,
+   "rows": 15
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 11-12才|決勝": {
+   "athletes": 6,
+   "rows": 16
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 13-14才|予選": {
+   "athletes": 8,
+   "rows": 19
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 13-14才|決勝": {
+   "athletes": 8,
+   "rows": 20
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 15-16才|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 15-16才|決勝": {
+   "athletes": 3,
+   "rows": 5
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 17-21才|予選": {
+   "athletes": 3,
+   "rows": 5
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 17-21才|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 オープン|予選": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2020-11-15-cbf6d6|男子 オープン|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2020-12-11-9b4443|10才以下 女子 (B台)|予選": {
+   "athletes": 37,
+   "rows": 37
+  },
+  "sporttech|st-2020-12-11-9b4443|10才以下 女子 (B台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|10才以下 男子 (C台)|予選": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2020-12-11-9b4443|10才以下 男子 (C台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|11-12才 女子 (A台)|予選": {
+   "athletes": 44,
+   "rows": 44
+  },
+  "sporttech|st-2020-12-11-9b4443|11-12才 女子 (A台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|11-12才 男子 (C台)|予選": {
+   "athletes": 28,
+   "rows": 28
+  },
+  "sporttech|st-2020-12-11-9b4443|11-12才 男子 (C台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|13-14才 女子 (B台)|予選": {
+   "athletes": 41,
+   "rows": 41
+  },
+  "sporttech|st-2020-12-11-9b4443|13-14才 女子 (B台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|13-14才 男子 (C台)|予選": {
+   "athletes": 22,
+   "rows": 22
+  },
+  "sporttech|st-2020-12-11-9b4443|13-14才 男子 (C台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|15-16才 女子 (A台)|予選": {
+   "athletes": 27,
+   "rows": 27
+  },
+  "sporttech|st-2020-12-11-9b4443|15-16才 女子 (A台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|15-16才 男子 (C台)|予選": {
+   "athletes": 22,
+   "rows": 22
+  },
+  "sporttech|st-2020-12-11-9b4443|15-16才 男子 (C台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|17-18才 女子 (C台)|予選": {
+   "athletes": 13,
+   "rows": 13
+  },
+  "sporttech|st-2020-12-11-9b4443|17-18才 女子 (C台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|17-18才 男子 (B台)|予選": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2020-12-11-9b4443|17-18才 男子 (B台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|19-29才 女子 (B台)|予選": {
+   "athletes": 19,
+   "rows": 19
+  },
+  "sporttech|st-2020-12-11-9b4443|19-29才 女子 (B台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|19-29才 男子 (A台)|予選": {
+   "athletes": 27,
+   "rows": 27
+  },
+  "sporttech|st-2020-12-11-9b4443|19-29才 男子 (A台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|30-39才 女子 (B台)|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-12-11-9b4443|30-39才 男子 (A台)|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-12-11-9b4443|40-49才 女子 (B台)|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2020-12-11-9b4443|40-49才 男子 (A台)|決勝": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2020-12-11-9b4443|50才以上 女子 (B台)|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2020-12-11-9b4443|50才以上 男子 (A台)|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2020-12-11-9b4443|ジャパンオープン/全日本社会人 女子 (B台)|予選": {
+   "athletes": 21,
+   "rows": 42
+  },
+  "sporttech|st-2020-12-11-9b4443|ジャパンオープン/全日本社会人 女子 (B台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|ジャパンオープン/全日本社会人 男子 (A台)|予選": {
+   "athletes": 37,
+   "rows": 74
+  },
+  "sporttech|st-2020-12-11-9b4443|ジャパンオープン/全日本社会人 男子 (A台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|全日本社会人 女子 (B台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2020-12-11-9b4443|全日本社会人 男子 (A台)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-05-08-4f23f1|11-12才 女子|決勝": {
+   "athletes": 26,
+   "rows": 52
+  },
+  "sporttech|st-2021-05-08-4f23f1|11-12才 男子|決勝": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2021-05-08-4f23f1|13-14才 女子|決勝": {
+   "athletes": 35,
+   "rows": 70
+  },
+  "sporttech|st-2021-05-08-4f23f1|13-14才 男子|決勝": {
+   "athletes": 20,
+   "rows": 39
+  },
+  "sporttech|st-2021-05-08-4f23f1|15-16才 女子|決勝": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "sporttech|st-2021-05-08-4f23f1|15-16才 男子|決勝": {
+   "athletes": 24,
+   "rows": 48
+  },
+  "sporttech|st-2021-05-08-4f23f1|17-21才 女子|決勝": {
+   "athletes": 33,
+   "rows": 66
+  },
+  "sporttech|st-2021-05-08-4f23f1|17-21才 男子|決勝": {
+   "athletes": 27,
+   "rows": 54
+  },
+  "sporttech|st-2021-05-08-4f23f1|オープン 女子|予選": {
+   "athletes": 27,
+   "rows": 54
+  },
+  "sporttech|st-2021-05-08-4f23f1|オープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-05-08-4f23f1|オープン 男子|予選": {
+   "athletes": 56,
+   "rows": 112
+  },
+  "sporttech|st-2021-05-08-4f23f1|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-06-04-abc215|女子|予選": {
+   "athletes": 13,
+   "rows": 26
+  },
+  "sporttech|st-2021-06-04-abc215|女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-06-04-abc215|男子|予選": {
+   "athletes": 13,
+   "rows": 26
+  },
+  "sporttech|st-2021-06-04-abc215|男子|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2021-06-26-40627c|Men|予選": {
+   "athletes": 66,
+   "rows": 135
+  },
+  "sporttech|st-2021-06-26-40627c|Men|決勝": {
+   "athletes": 24,
+   "rows": 32
+  },
+  "sporttech|st-2021-06-26-40627c|Women|予選": {
+   "athletes": 43,
+   "rows": 85
+  },
+  "sporttech|st-2021-06-26-40627c|Women|決勝": {
+   "athletes": 26,
+   "rows": 37
+  },
+  "sporttech|st-2021-07-16-a041f2|女子 10才以下|予選": {
+   "athletes": 59,
+   "rows": 118
+  },
+  "sporttech|st-2021-07-16-a041f2|女子 10才以下|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-07-16-a041f2|女子 11−12才|予選": {
+   "athletes": 76,
+   "rows": 152
+  },
+  "sporttech|st-2021-07-16-a041f2|女子 11−12才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-07-16-a041f2|女子 13−15才|予選": {
+   "athletes": 105,
+   "rows": 209
+  },
+  "sporttech|st-2021-07-16-a041f2|女子 13−15才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-07-16-a041f2|男子 10才以下|予選": {
+   "athletes": 34,
+   "rows": 68
+  },
+  "sporttech|st-2021-07-16-a041f2|男子 10才以下|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-07-16-a041f2|男子 11−12才|予選": {
+   "athletes": 40,
+   "rows": 80
+  },
+  "sporttech|st-2021-07-16-a041f2|男子 11−12才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-07-16-a041f2|男子 13−15才|予選": {
+   "athletes": 52,
+   "rows": 103
+  },
+  "sporttech|st-2021-07-16-a041f2|男子 13−15才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-08-27-a5121f|DEMO|予選": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2021-08-27-a5121f|女子|予選": {
+   "athletes": 87,
+   "rows": 87
+  },
+  "sporttech|st-2021-08-27-a5121f|男子|予選": {
+   "athletes": 75,
+   "rows": 75
+  },
+  "sporttech|st-2021-10-02-3bd85a|女子|予選": {
+   "athletes": 91,
+   "rows": 182
+  },
+  "sporttech|st-2021-10-02-3bd85a|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2021-10-02-3bd85a|女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2021-10-02-3bd85a|男子|予選": {
+   "athletes": 93,
+   "rows": 184
+  },
+  "sporttech|st-2021-10-02-3bd85a|男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2021-10-02-3bd85a|男子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2021-12-10-074143|10才以下 女子|予選": {
+   "athletes": 61,
+   "rows": 61
+  },
+  "sporttech|st-2021-12-10-074143|10才以下 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|10才以下 男子|予選": {
+   "athletes": 30,
+   "rows": 30
+  },
+  "sporttech|st-2021-12-10-074143|10才以下 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|11−12才 女子|予選": {
+   "athletes": 62,
+   "rows": 62
+  },
+  "sporttech|st-2021-12-10-074143|11−12才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|11−12才 男子|予選": {
+   "athletes": 33,
+   "rows": 33
+  },
+  "sporttech|st-2021-12-10-074143|11−12才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|13−14才 女子|予選": {
+   "athletes": 43,
+   "rows": 43
+  },
+  "sporttech|st-2021-12-10-074143|13−14才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|13−14才 男子|予選": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2021-12-10-074143|13−14才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|15−16才 女子|予選": {
+   "athletes": 28,
+   "rows": 28
+  },
+  "sporttech|st-2021-12-10-074143|15−16才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|15−16才 男子|予選": {
+   "athletes": 19,
+   "rows": 19
+  },
+  "sporttech|st-2021-12-10-074143|15−16才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|17−18才 女子|予選": {
+   "athletes": 21,
+   "rows": 21
+  },
+  "sporttech|st-2021-12-10-074143|17−18才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|17−18才 男子|予選": {
+   "athletes": 18,
+   "rows": 18
+  },
+  "sporttech|st-2021-12-10-074143|17−18才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|19−29 男子 マスターズ|予選": {
+   "athletes": 17,
+   "rows": 17
+  },
+  "sporttech|st-2021-12-10-074143|19−29 男子 マスターズ|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|19−29才 女子 マスターズ|予選": {
+   "athletes": 14,
+   "rows": 14
+  },
+  "sporttech|st-2021-12-10-074143|19−29才 女子 マスターズ|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|30−39才 女子 マスターズ|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2021-12-10-074143|30−39才 男子 マスターズ|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2021-12-10-074143|40−49才 女子 マスターズ|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2021-12-10-074143|40−49才 男子 マスターズ|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2021-12-10-074143|50才以上 女子 マスターズ|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2021-12-10-074143|50才以上 男子 マスターズ|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2021-12-10-074143|ジャパンオープン/社会人 女子|予選": {
+   "athletes": 21,
+   "rows": 42
+  },
+  "sporttech|st-2021-12-10-074143|ジャパンオープン/社会人 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|ジャパンオープン/社会人 男子|予選": {
+   "athletes": 42,
+   "rows": 83
+  },
+  "sporttech|st-2021-12-10-074143|ジャパンオープン/社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2021-12-10-074143|全日本社会人 女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2021-12-10-074143|全日本社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 10才以下|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 10才以下|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 10才以下|決勝2": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 11-12才|予選": {
+   "athletes": 5,
+   "rows": 12
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 11-12才|決勝": {
+   "athletes": 5,
+   "rows": 6
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 11-12才|決勝2": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 13-14才|予選": {
+   "athletes": 10,
+   "rows": 21
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 13-14才|決勝": {
+   "athletes": 10,
+   "rows": 11
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 13-14才|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 15-16才|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 15-16才|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 15-16才|決勝2": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 17-21才|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 17-21才|決勝": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 17-21才|決勝2": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 オープン|予選": {
+   "athletes": 7,
+   "rows": 15
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 オープン|決勝": {
+   "athletes": 6,
+   "rows": 7
+  },
+  "sporttech|st-2022-03-05-bf8896|女子 オープン|決勝2": {
+   "athletes": 5,
+   "rows": 6
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 10才以下|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 10才以下|決勝": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 10才以下|決勝2": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 11-12才|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 11-12才|決勝": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 11-12才|決勝2": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 13-14才|予選": {
+   "athletes": 8,
+   "rows": 20
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 13-14才|決勝": {
+   "athletes": 8,
+   "rows": 10
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 13-14才|決勝2": {
+   "athletes": 6,
+   "rows": 8
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 15-16才|予選": {
+   "athletes": 7,
+   "rows": 18
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 15-16才|決勝": {
+   "athletes": 7,
+   "rows": 9
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 15-16才|決勝2": {
+   "athletes": 6,
+   "rows": 8
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 オープン|予選": {
+   "athletes": 10,
+   "rows": 20
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 オープン|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-03-05-bf8896|男子 オープン|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-05-21-7d8f02|女子 11−12才|決勝": {
+   "athletes": 27,
+   "rows": 54
+  },
+  "sporttech|st-2022-05-21-7d8f02|女子 13-14才|決勝": {
+   "athletes": 29,
+   "rows": 58
+  },
+  "sporttech|st-2022-05-21-7d8f02|女子 15-16才|決勝": {
+   "athletes": 28,
+   "rows": 56
+  },
+  "sporttech|st-2022-05-21-7d8f02|女子 17-21才|決勝": {
+   "athletes": 34,
+   "rows": 68
+  },
+  "sporttech|st-2022-05-21-7d8f02|女子 オープン|予選": {
+   "athletes": 33,
+   "rows": 64
+  },
+  "sporttech|st-2022-05-21-7d8f02|女子 オープン|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-05-21-7d8f02|男子 11-12才|決勝": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2022-05-21-7d8f02|男子 13−14才|決勝": {
+   "athletes": 21,
+   "rows": 42
+  },
+  "sporttech|st-2022-05-21-7d8f02|男子 15-16才|決勝": {
+   "athletes": 24,
+   "rows": 48
+  },
+  "sporttech|st-2022-05-21-7d8f02|男子 17-21才|決勝": {
+   "athletes": 24,
+   "rows": 48
+  },
+  "sporttech|st-2022-05-21-7d8f02|男子 オープン|予選": {
+   "athletes": 56,
+   "rows": 108
+  },
+  "sporttech|st-2022-05-21-7d8f02|男子 オープン|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-06-04-4705a8|世界年齢別 日本代表選考会 AGE1|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2022-06-04-4705a8|女子|予選": {
+   "athletes": 24,
+   "rows": 50
+  },
+  "sporttech|st-2022-06-04-4705a8|女子|決勝": {
+   "athletes": 13,
+   "rows": 14
+  },
+  "sporttech|st-2022-06-04-4705a8|女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-06-04-4705a8|男子|予選": {
+   "athletes": 23,
+   "rows": 52
+  },
+  "sporttech|st-2022-06-04-4705a8|男子|決勝": {
+   "athletes": 15,
+   "rows": 16
+  },
+  "sporttech|st-2022-06-04-4705a8|男子|決勝2": {
+   "athletes": 7,
+   "rows": 8
+  },
+  "sporttech|st-2022-06-17-9d687c|女子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2022-06-17-9d687c|女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-06-17-9d687c|男子|予選": {
+   "athletes": 15,
+   "rows": 30
+  },
+  "sporttech|st-2022-06-17-9d687c|男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-06-25-1b6f68|Man|予選": {
+   "athletes": 52,
+   "rows": 109
+  },
+  "sporttech|st-2022-06-25-1b6f68|Man|決勝": {
+   "athletes": 28,
+   "rows": 29
+  },
+  "sporttech|st-2022-06-25-1b6f68|Man|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-06-25-1b6f68|Woman|予選": {
+   "athletes": 53,
+   "rows": 104
+  },
+  "sporttech|st-2022-06-25-1b6f68|Woman|決勝": {
+   "athletes": 25,
+   "rows": 25
+  },
+  "sporttech|st-2022-06-25-1b6f68|Woman|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-01-6b4f94|Individual Men|予選": {
+   "athletes": 39,
+   "rows": 74
+  },
+  "sporttech|st-2022-07-01-6b4f94|Individual Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-01-6b4f94|Individual Men|準決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2022-07-01-6b4f94|Individual Women|予選": {
+   "athletes": 39,
+   "rows": 77
+  },
+  "sporttech|st-2022-07-01-6b4f94|Individual Women|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-01-6b4f94|Individual Women|準決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2022-07-01-6b4f94|Synchro Men|予選": {
+   "athletes": 16,
+   "rows": 28
+  },
+  "sporttech|st-2022-07-01-6b4f94|Synchro Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-01-6b4f94|Synchro Women|予選": {
+   "athletes": 15,
+   "rows": 29
+  },
+  "sporttech|st-2022-07-01-6b4f94|Synchro Women|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-09-520e2d|女子 17+ (トライアウト)|決勝": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2022-07-09-520e2d|女子 AGE 1|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2022-07-09-520e2d|女子 AGE 2|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2022-07-09-520e2d|女子 AGE 3|決勝": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "sporttech|st-2022-07-09-520e2d|男子 17+ (トライアウト)|決勝": {
+   "athletes": 6,
+   "rows": 11
+  },
+  "sporttech|st-2022-07-09-520e2d|男子 AGE 1|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2022-07-09-520e2d|男子 AGE 2|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2022-07-09-520e2d|男子 AGE 3|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2022-07-29-496bdc|女子 10才以下|予選": {
+   "athletes": 80,
+   "rows": 159
+  },
+  "sporttech|st-2022-07-29-496bdc|女子 10才以下|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-29-496bdc|女子 11-12才|予選": {
+   "athletes": 94,
+   "rows": 187
+  },
+  "sporttech|st-2022-07-29-496bdc|女子 11-12才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-29-496bdc|女子 13-15才|予選": {
+   "athletes": 141,
+   "rows": 280
+  },
+  "sporttech|st-2022-07-29-496bdc|女子 13-15才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-29-496bdc|男子 10才以下|予選": {
+   "athletes": 49,
+   "rows": 98
+  },
+  "sporttech|st-2022-07-29-496bdc|男子 10才以下|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-29-496bdc|男子 11-12才|予選": {
+   "athletes": 45,
+   "rows": 88
+  },
+  "sporttech|st-2022-07-29-496bdc|男子 11-12才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-07-29-496bdc|男子 13-15才|予選": {
+   "athletes": 69,
+   "rows": 138
+  },
+  "sporttech|st-2022-07-29-496bdc|男子 13-15才|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-09-24-20e49f|オープン 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|オープン 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|一般 女子|予選": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2022-09-24-20e49f|一般 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-09-24-20e49f|一般 男子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|一般 男子|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2022-09-24-20e49f|中学生 女子|予選": {
+   "athletes": 70,
+   "rows": 140
+  },
+  "sporttech|st-2022-09-24-20e49f|中学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|中学生 男子|予選": {
+   "athletes": 33,
+   "rows": 66
+  },
+  "sporttech|st-2022-09-24-20e49f|中学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|大学生 女子|予選": {
+   "athletes": 21,
+   "rows": 42
+  },
+  "sporttech|st-2022-09-24-20e49f|大学生 女子|決勝": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "sporttech|st-2022-09-24-20e49f|大学生 男子|予選": {
+   "athletes": 19,
+   "rows": 38
+  },
+  "sporttech|st-2022-09-24-20e49f|大学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|小学生低学年 女子|予選": {
+   "athletes": 32,
+   "rows": 64
+  },
+  "sporttech|st-2022-09-24-20e49f|小学生低学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|小学生低学年 男子|予選": {
+   "athletes": 14,
+   "rows": 28
+  },
+  "sporttech|st-2022-09-24-20e49f|小学生低学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|小学生高学年 女子|予選": {
+   "athletes": 87,
+   "rows": 173
+  },
+  "sporttech|st-2022-09-24-20e49f|小学生高学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|小学生高学年 男子|予選": {
+   "athletes": 47,
+   "rows": 94
+  },
+  "sporttech|st-2022-09-24-20e49f|小学生高学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|高校生 女子|予選": {
+   "athletes": 38,
+   "rows": 76
+  },
+  "sporttech|st-2022-09-24-20e49f|高校生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-09-24-20e49f|高校生 男子|予選": {
+   "athletes": 19,
+   "rows": 38
+  },
+  "sporttech|st-2022-09-24-20e49f|高校生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2022-10-09-e0562c|女子|予選": {
+   "athletes": 18,
+   "rows": 35
+  },
+  "sporttech|st-2022-10-09-e0562c|女子|決勝": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2022-10-09-e0562c|男子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2022-10-09-e0562c|男子|決勝": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2022-10-15-777d3f|女子|予選": {
+   "athletes": 91,
+   "rows": 180
+  },
+  "sporttech|st-2022-10-15-777d3f|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2022-10-15-777d3f|女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2022-10-15-777d3f|男子|予選": {
+   "athletes": 88,
+   "rows": 172
+  },
+  "sporttech|st-2022-10-15-777d3f|男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2022-10-15-777d3f|男子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2022-12-09-06cd25|10才以下 女子|予選": {
+   "athletes": 65,
+   "rows": 65
+  },
+  "sporttech|st-2022-12-09-06cd25|10才以下 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|10才以下 男子|予選": {
+   "athletes": 46,
+   "rows": 46
+  },
+  "sporttech|st-2022-12-09-06cd25|10才以下 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|11-12才 女子|予選": {
+   "athletes": 76,
+   "rows": 76
+  },
+  "sporttech|st-2022-12-09-06cd25|11-12才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|11-12才 男子|予選": {
+   "athletes": 25,
+   "rows": 25
+  },
+  "sporttech|st-2022-12-09-06cd25|11-12才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|13-14才 女子|予選": {
+   "athletes": 47,
+   "rows": 47
+  },
+  "sporttech|st-2022-12-09-06cd25|13-14才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|13-14才 男子|予選": {
+   "athletes": 36,
+   "rows": 36
+  },
+  "sporttech|st-2022-12-09-06cd25|13-14才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|15-16才 女子|予選": {
+   "athletes": 33,
+   "rows": 33
+  },
+  "sporttech|st-2022-12-09-06cd25|15-16才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|15-16才 男子|予選": {
+   "athletes": 22,
+   "rows": 22
+  },
+  "sporttech|st-2022-12-09-06cd25|15-16才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|17-18才 女子|予選": {
+   "athletes": 30,
+   "rows": 30
+  },
+  "sporttech|st-2022-12-09-06cd25|17-18才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|17-18才 男子|予選": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2022-12-09-06cd25|17-18才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|ジャパンオープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|ジャパンオープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|ジャパンオープン/全日本社会人 女子|予選": {
+   "athletes": 31,
+   "rows": 61
+  },
+  "sporttech|st-2022-12-09-06cd25|ジャパンオープン/全日本社会人 男子|予選": {
+   "athletes": 54,
+   "rows": 106
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 19-29才 女子|予選": {
+   "athletes": 21,
+   "rows": 21
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 19-29才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 19-29才 男子|予選": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 19-29才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 30-39才 女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 30-39才 男子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 40-40才 女子|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 40-49才 男子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 50才以上 女子|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2022-12-09-06cd25|マスターズ 50才以上 男子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2022-12-09-06cd25|全日本社会人 女子|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2022-12-09-06cd25|全日本社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|10才以下 女子|予選": {
+   "athletes": 7,
+   "rows": 20
+  },
+  "sporttech|st-2023-03-11-428b1c|10才以下 女子|決勝": {
+   "athletes": 7,
+   "rows": 10
+  },
+  "sporttech|st-2023-03-11-428b1c|10才以下 女子|決勝2": {
+   "athletes": 6,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|10才以下 男子|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2023-03-11-428b1c|10才以下 男子|決勝": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2023-03-11-428b1c|10才以下 男子|決勝2": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2023-03-11-428b1c|11-12才 女子|予選": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "sporttech|st-2023-03-11-428b1c|11-12才 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2023-03-11-428b1c|11-12才 女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|11-12才 男子|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2023-03-11-428b1c|11-12才 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2023-03-11-428b1c|11-12才 男子|決勝2": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2023-03-11-428b1c|13-14才 女子|予選": {
+   "athletes": 19,
+   "rows": 42
+  },
+  "sporttech|st-2023-03-11-428b1c|13-14才 女子|決勝": {
+   "athletes": 15,
+   "rows": 16
+  },
+  "sporttech|st-2023-03-11-428b1c|13-14才 女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|13-14才 男子|予選": {
+   "athletes": 5,
+   "rows": 12
+  },
+  "sporttech|st-2023-03-11-428b1c|13-14才 男子|決勝": {
+   "athletes": 5,
+   "rows": 6
+  },
+  "sporttech|st-2023-03-11-428b1c|13-14才 男子|決勝2": {
+   "athletes": 5,
+   "rows": 6
+  },
+  "sporttech|st-2023-03-11-428b1c|15-16才 女子|予選": {
+   "athletes": 5,
+   "rows": 11
+  },
+  "sporttech|st-2023-03-11-428b1c|15-16才 女子|決勝": {
+   "athletes": 5,
+   "rows": 6
+  },
+  "sporttech|st-2023-03-11-428b1c|15-16才 女子|決勝2": {
+   "athletes": 5,
+   "rows": 6
+  },
+  "sporttech|st-2023-03-11-428b1c|15-16才 男子|予選": {
+   "athletes": 6,
+   "rows": 16
+  },
+  "sporttech|st-2023-03-11-428b1c|15-16才 男子|決勝": {
+   "athletes": 6,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|15-16才 男子|決勝2": {
+   "athletes": 6,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|17-21才 女子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|17-21才 女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2023-03-11-428b1c|17-21才 女子|決勝2": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2023-03-11-428b1c|17-21才 男子|予選": {
+   "athletes": 3,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|17-21才 男子|決勝": {
+   "athletes": 3,
+   "rows": 4
+  },
+  "sporttech|st-2023-03-11-428b1c|17-21才 男子|決勝2": {
+   "athletes": 3,
+   "rows": 4
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン 女子|予選": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン 女子|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン 女子|決勝2": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン 男子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン 男子|決勝2": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン男子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン男子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2023-03-11-428b1c|オープン男子|決勝2": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2023-05-13-0b9e7d|AGE1 女子|決勝": {
+   "athletes": 35,
+   "rows": 70
+  },
+  "sporttech|st-2023-05-13-0b9e7d|AGE1 男子|決勝": {
+   "athletes": 14,
+   "rows": 28
+  },
+  "sporttech|st-2023-05-13-0b9e7d|AGE2 女子|決勝": {
+   "athletes": 32,
+   "rows": 63
+  },
+  "sporttech|st-2023-05-13-0b9e7d|AGE2 男子|決勝": {
+   "athletes": 25,
+   "rows": 50
+  },
+  "sporttech|st-2023-05-13-0b9e7d|AGE3 女子|決勝": {
+   "athletes": 31,
+   "rows": 62
+  },
+  "sporttech|st-2023-05-13-0b9e7d|AGE3 男子|決勝": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "sporttech|st-2023-05-13-0b9e7d|AGE4 女子|決勝": {
+   "athletes": 35,
+   "rows": 70
+  },
+  "sporttech|st-2023-05-13-0b9e7d|AGE4 男子|決勝": {
+   "athletes": 26,
+   "rows": 52
+  },
+  "sporttech|st-2023-05-13-0b9e7d|オープン 女子|予選": {
+   "athletes": 33,
+   "rows": 66
+  },
+  "sporttech|st-2023-05-13-0b9e7d|オープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-05-13-0b9e7d|オープン 男子|予選": {
+   "athletes": 54,
+   "rows": 107
+  },
+  "sporttech|st-2023-05-13-0b9e7d|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-06-09-e28155|女子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2023-06-09-e28155|女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-06-09-e28155|男子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2023-06-09-e28155|男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-06-25-5f449d|世界年齢別選考会 AGE1 女子|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2023-06-25-5f449d|世界年齢別選考会 AGE1 男女|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2023-06-25-5f449d|女子|予選": {
+   "athletes": 40,
+   "rows": 90
+  },
+  "sporttech|st-2023-06-25-5f449d|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-06-25-5f449d|女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-06-25-5f449d|男子|予選": {
+   "athletes": 29,
+   "rows": 61
+  },
+  "sporttech|st-2023-06-25-5f449d|男子|決勝": {
+   "athletes": 14,
+   "rows": 16
+  },
+  "sporttech|st-2023-06-25-5f449d|男子|決勝2": {
+   "athletes": 7,
+   "rows": 8
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR FEMALE|予選": {
+   "athletes": 110,
+   "rows": 219
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR FEMALE|決勝": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR FEMALE|決勝1": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR FEMALE|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR FEMALE|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR MALE|予選": {
+   "athletes": 97,
+   "rows": 194
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR MALE|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR MALE|決勝1": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR MALE|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-07-01-475529|SENIOR MALE|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-07-07-ec7c35|FEMALE|予選": {
+   "athletes": 130,
+   "rows": 258
+  },
+  "sporttech|st-2023-07-07-ec7c35|FEMALE|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-07-ec7c35|FEMALE|決勝1": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-07-ec7c35|FEMALE|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-07-07-ec7c35|FEMALE|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-07-07-ec7c35|MALE|予選": {
+   "athletes": 144,
+   "rows": 285
+  },
+  "sporttech|st-2023-07-07-ec7c35|MALE|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-07-ec7c35|MALE|決勝1": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-07-ec7c35|MALE|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-07-07-ec7c35|MALE|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-07-14-74ea6b|AGE1 女子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2023-07-14-74ea6b|AGE1 男子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2023-07-14-74ea6b|AGE2 女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-14-74ea6b|AGE2 男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-14-74ea6b|AGE3 女子|決勝": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "sporttech|st-2023-07-14-74ea6b|AGE3 男子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2023-07-14-74ea6b|トライアウト 女子|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2023-07-14-74ea6b|トライアウト 男子|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2023-07-28-b5e58e|10才以下 女子|予選": {
+   "athletes": 82,
+   "rows": 140
+  },
+  "sporttech|st-2023-07-28-b5e58e|10才以下 女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-28-b5e58e|10才以下 男子|予選": {
+   "athletes": 52,
+   "rows": 91
+  },
+  "sporttech|st-2023-07-28-b5e58e|10才以下 男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-28-b5e58e|11-12才 女子|予選": {
+   "athletes": 114,
+   "rows": 196
+  },
+  "sporttech|st-2023-07-28-b5e58e|11-12才 女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-28-b5e58e|11-12才 男子|予選": {
+   "athletes": 61,
+   "rows": 104
+  },
+  "sporttech|st-2023-07-28-b5e58e|11-12才 男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-28-b5e58e|13-15才 女子|予選": {
+   "athletes": 129,
+   "rows": 218
+  },
+  "sporttech|st-2023-07-28-b5e58e|13-15才 女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-07-28-b5e58e|13-15才 男子|予選": {
+   "athletes": 83,
+   "rows": 140
+  },
+  "sporttech|st-2023-07-28-b5e58e|13-15才 男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-09-18-56f92e|女子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2023-09-18-56f92e|女子|決勝": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2023-09-18-56f92e|男子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2023-09-18-56f92e|男子|決勝": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2023-10-07-52e08f|Men|予選": {
+   "athletes": 80,
+   "rows": 156
+  },
+  "sporttech|st-2023-10-07-52e08f|Men|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-10-07-52e08f|Men|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-10-07-52e08f|Women|予選": {
+   "athletes": 84,
+   "rows": 165
+  },
+  "sporttech|st-2023-10-07-52e08f|Women|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-10-07-52e08f|Women|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-10-14-d6463f|女子|予選": {
+   "athletes": 85,
+   "rows": 169
+  },
+  "sporttech|st-2023-10-14-d6463f|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2023-10-14-d6463f|女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-10-14-d6463f|男子|予選": {
+   "athletes": 93,
+   "rows": 176
+  },
+  "sporttech|st-2023-10-14-d6463f|男子|決勝": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2023-10-14-d6463f|男子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-12-08-56e8e8|10才以下 女子|予選": {
+   "athletes": 60,
+   "rows": 60
+  },
+  "sporttech|st-2023-12-08-56e8e8|10才以下 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|10才以下 男子|予選": {
+   "athletes": 39,
+   "rows": 39
+  },
+  "sporttech|st-2023-12-08-56e8e8|10才以下 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|11-12才 女子|予選": {
+   "athletes": 73,
+   "rows": 73
+  },
+  "sporttech|st-2023-12-08-56e8e8|11-12才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|11-12才 男子|予選": {
+   "athletes": 37,
+   "rows": 37
+  },
+  "sporttech|st-2023-12-08-56e8e8|11-12才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|13-14才 女子|予選": {
+   "athletes": 63,
+   "rows": 63
+  },
+  "sporttech|st-2023-12-08-56e8e8|13-14才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|13-14才 男子|予選": {
+   "athletes": 41,
+   "rows": 41
+  },
+  "sporttech|st-2023-12-08-56e8e8|13-14才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|15-16才 女子|予選": {
+   "athletes": 39,
+   "rows": 39
+  },
+  "sporttech|st-2023-12-08-56e8e8|15-16才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|15-16才 男子|予選": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2023-12-08-56e8e8|15-16才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|17-18才 女子|予選": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2023-12-08-56e8e8|17-18才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|17-18才 男子|予選": {
+   "athletes": 14,
+   "rows": 14
+  },
+  "sporttech|st-2023-12-08-56e8e8|17-18才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|19-29才 女子|予選": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2023-12-08-56e8e8|19-29才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|19-29才 男子|予選": {
+   "athletes": 17,
+   "rows": 17
+  },
+  "sporttech|st-2023-12-08-56e8e8|19-29才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|30-39才 女子|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2023-12-08-56e8e8|30-39才 男子|決勝": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2023-12-08-56e8e8|40-49才 女子|予選": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2023-12-08-56e8e8|40-49才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|40-49才 男子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2023-12-08-56e8e8|50才以上 女子|予選": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "sporttech|st-2023-12-08-56e8e8|50才以上 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|50才以上 男子|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2023-12-08-56e8e8|JO/全日本社会人 女子|予選": {
+   "athletes": 31,
+   "rows": 62
+  },
+  "sporttech|st-2023-12-08-56e8e8|JO/全日本社会人 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|JO/全日本社会人 男子|予選": {
+   "athletes": 50,
+   "rows": 99
+  },
+  "sporttech|st-2023-12-08-56e8e8|JO/全日本社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|全日本社会人 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2023-12-08-56e8e8|全日本社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-03-03-e637ce|10才以下 女子|予選": {
+   "athletes": 8,
+   "rows": 22
+  },
+  "sporttech|st-2024-03-03-e637ce|10才以下 女子|決勝1": {
+   "athletes": 8,
+   "rows": 11
+  },
+  "sporttech|st-2024-03-03-e637ce|10才以下 女子|決勝2": {
+   "athletes": 6,
+   "rows": 8
+  },
+  "sporttech|st-2024-03-03-e637ce|10才以下 男子|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2024-03-03-e637ce|10才以下 男子|決勝1": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2024-03-03-e637ce|10才以下 男子|決勝2": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2024-03-03-e637ce|11-12才 女子|予選": {
+   "athletes": 9,
+   "rows": 16
+  },
+  "sporttech|st-2024-03-03-e637ce|11-12才 女子|決勝1": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "sporttech|st-2024-03-03-e637ce|11-12才 女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-03-03-e637ce|11-12才 男子|予選": {
+   "athletes": 4,
+   "rows": 10
+  },
+  "sporttech|st-2024-03-03-e637ce|11-12才 男子|決勝1": {
+   "athletes": 4,
+   "rows": 5
+  },
+  "sporttech|st-2024-03-03-e637ce|11-12才 男子|決勝2": {
+   "athletes": 4,
+   "rows": 5
+  },
+  "sporttech|st-2024-03-03-e637ce|13-14才 女子|予選": {
+   "athletes": 12,
+   "rows": 24
+  },
+  "sporttech|st-2024-03-03-e637ce|13-14才 女子|決勝1": {
+   "athletes": 12,
+   "rows": 14
+  },
+  "sporttech|st-2024-03-03-e637ce|13-14才 女子|決勝2": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2024-03-03-e637ce|13-14才 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2024-03-03-e637ce|13-14才 男子|決勝1": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2024-03-03-e637ce|13-14才 男子|決勝2": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2024-03-03-e637ce|15-16才 女子|予選": {
+   "athletes": 13,
+   "rows": 26
+  },
+  "sporttech|st-2024-03-03-e637ce|15-16才 女子|決勝1": {
+   "athletes": 13,
+   "rows": 13
+  },
+  "sporttech|st-2024-03-03-e637ce|15-16才 女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-03-03-e637ce|15-16才 男子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2024-03-03-e637ce|15-16才 男子|決勝1": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2024-03-03-e637ce|15-16才 男子|決勝2": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2024-03-03-e637ce|17-21才 女子|予選": {
+   "athletes": 6,
+   "rows": 14
+  },
+  "sporttech|st-2024-03-03-e637ce|17-21才 女子|決勝1": {
+   "athletes": 6,
+   "rows": 7
+  },
+  "sporttech|st-2024-03-03-e637ce|17-21才 女子|決勝2": {
+   "athletes": 6,
+   "rows": 7
+  },
+  "sporttech|st-2024-03-03-e637ce|17-21才 男子|予選": {
+   "athletes": 5,
+   "rows": 14
+  },
+  "sporttech|st-2024-03-03-e637ce|17-21才 男子|決勝1": {
+   "athletes": 5,
+   "rows": 7
+  },
+  "sporttech|st-2024-03-03-e637ce|17-21才 男子|決勝2": {
+   "athletes": 5,
+   "rows": 7
+  },
+  "sporttech|st-2024-03-03-e637ce|オープン 女子|予選": {
+   "athletes": 11,
+   "rows": 21
+  },
+  "sporttech|st-2024-03-03-e637ce|オープン 女子|決勝1": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "sporttech|st-2024-03-03-e637ce|オープン 女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-03-03-e637ce|オープン 男子|予選": {
+   "athletes": 8,
+   "rows": 20
+  },
+  "sporttech|st-2024-03-03-e637ce|オープン 男子|決勝1": {
+   "athletes": 8,
+   "rows": 10
+  },
+  "sporttech|st-2024-03-03-e637ce|オープン 男子|決勝2": {
+   "athletes": 7,
+   "rows": 8
+  },
+  "sporttech|st-2024-03-13-3a212b|IND Men|予選": {
+   "athletes": 27,
+   "rows": 53
+  },
+  "sporttech|st-2024-03-13-3a212b|IND Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-03-13-3a212b|IND Women|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2024-03-13-3a212b|IND Women|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-03-13-3a212b|SYN Men|予選": {
+   "athletes": 9,
+   "rows": 16
+  },
+  "sporttech|st-2024-03-13-3a212b|SYN Men|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2024-03-13-3a212b|SYN Women|予選": {
+   "athletes": 4,
+   "rows": 7
+  },
+  "sporttech|st-2024-03-13-3a212b|SYN Women|決勝": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2024-03-22-f94381|Men|予選": {
+   "athletes": 114,
+   "rows": 222
+  },
+  "sporttech|st-2024-03-22-f94381|Men|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-03-22-f94381|Men|準決勝": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2024-03-22-f94381|Women|予選": {
+   "athletes": 87,
+   "rows": 171
+  },
+  "sporttech|st-2024-03-22-f94381|Women|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-03-22-f94381|Women|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2024-05-11-38c7eb|AGE1 女子|決勝": {
+   "athletes": 32,
+   "rows": 64
+  },
+  "sporttech|st-2024-05-11-38c7eb|AGE1 男子|決勝": {
+   "athletes": 25,
+   "rows": 50
+  },
+  "sporttech|st-2024-05-11-38c7eb|AGE2 女子|決勝": {
+   "athletes": 25,
+   "rows": 50
+  },
+  "sporttech|st-2024-05-11-38c7eb|AGE2 男子|決勝": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2024-05-11-38c7eb|AGE3 女子|決勝": {
+   "athletes": 28,
+   "rows": 56
+  },
+  "sporttech|st-2024-05-11-38c7eb|AGE3 男子|決勝": {
+   "athletes": 26,
+   "rows": 52
+  },
+  "sporttech|st-2024-05-11-38c7eb|AGE4 女子|決勝": {
+   "athletes": 52,
+   "rows": 103
+  },
+  "sporttech|st-2024-05-11-38c7eb|AGE4 男子|決勝": {
+   "athletes": 29,
+   "rows": 58
+  },
+  "sporttech|st-2024-05-11-38c7eb|オープン 女子|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2024-05-11-38c7eb|オープン 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-38c7eb|オープン 男子|予選": {
+   "athletes": 46,
+   "rows": 91
+  },
+  "sporttech|st-2024-05-11-38c7eb|オープン 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Men Age Group 1 (Aged 11-12)|予選": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Men Age Group 1 (Aged 11-12)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Men Age Group 2 (Aged 13-14)|予選": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Men Age Group 2 (Aged 13-14)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Men Age Group 3 (Aged 15-16)|予選": {
+   "athletes": 21,
+   "rows": 21
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Men Age Group 3 (Aged 15-16)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Men Age Group 4 (Aged 17 or above)|予選": {
+   "athletes": 11,
+   "rows": 21
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Men Age Group 4 (Aged 17 or above)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Women Age Group 1 (Aged 11-12)|予選": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Women Age Group 1 (Aged 11-12)|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Women Age Group 2 (Aged 13-14)|予選": {
+   "athletes": 11,
+   "rows": 11
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Women Age Group 2 (Aged 13-14)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Women Age Group 3 (Aged 15-16)|予選": {
+   "athletes": 11,
+   "rows": 11
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Women Age Group 3 (Aged 15-16)|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Women Age Group 4 (Aged 17 or above)|予選": {
+   "athletes": 4,
+   "rows": 7
+  },
+  "sporttech|st-2024-05-11-c0ce8a|Women Age Group 4 (Aged 17 or above)|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2024-05-11-f43d0c|Men Semi-final|予選": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2024-05-11-f43d0c|Men Semi-final|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2024-05-11-f43d0c|Women Semi-final|予選": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-05-11-f43d0c|Women Semi-final|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-f6599c|Men Senior Qualification|予選": {
+   "athletes": 22,
+   "rows": 44
+  },
+  "sporttech|st-2024-05-11-f6599c|Men Senior Qualification|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-11-f6599c|Women Senior Qualification|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2024-05-11-f6599c|Women Senior Qualification|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-12-2aa623|女子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2024-05-12-2aa623|女子|決勝": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2024-05-12-2aa623|男子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "sporttech|st-2024-05-12-2aa623|男子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2024-06-02-066053|女子|予選": {
+   "athletes": 31,
+   "rows": 70
+  },
+  "sporttech|st-2024-06-02-066053|女子|決勝1": {
+   "athletes": 15,
+   "rows": 16
+  },
+  "sporttech|st-2024-06-02-066053|女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-06-02-066053|男子|予選": {
+   "athletes": 25,
+   "rows": 64
+  },
+  "sporttech|st-2024-06-02-066053|男子|決勝1": {
+   "athletes": 14,
+   "rows": 16
+  },
+  "sporttech|st-2024-06-02-066053|男子|決勝2": {
+   "athletes": 7,
+   "rows": 8
+  },
+  "sporttech|st-2024-06-08-26aa80|中学生 女子|決勝": {
+   "athletes": 108,
+   "rows": 108
+  },
+  "sporttech|st-2024-06-08-26aa80|中学生 男子|決勝": {
+   "athletes": 72,
+   "rows": 72
+  },
+  "sporttech|st-2024-06-08-26aa80|小学生 低学年 女子|決勝": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2024-06-08-26aa80|小学生 低学年 男子|決勝": {
+   "athletes": 14,
+   "rows": 14
+  },
+  "sporttech|st-2024-06-08-26aa80|小学生 高学年 女子|決勝": {
+   "athletes": 112,
+   "rows": 112
+  },
+  "sporttech|st-2024-06-08-26aa80|小学生 高学年 男子|決勝": {
+   "athletes": 78,
+   "rows": 78
+  },
+  "sporttech|st-2024-06-28-609062|Individual Men|予選": {
+   "athletes": 47,
+   "rows": 89
+  },
+  "sporttech|st-2024-06-28-609062|Individual Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-06-28-609062|Individual Men|準決勝": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2024-06-28-609062|Individual Women|予選": {
+   "athletes": 37,
+   "rows": 73
+  },
+  "sporttech|st-2024-06-28-609062|Individual Women|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-06-28-609062|Individual Women|準決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-06-28-609062|Synchro Men|予選": {
+   "athletes": 14,
+   "rows": 22
+  },
+  "sporttech|st-2024-06-28-609062|Synchro Men|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-06-28-609062|Synchro Women|予選": {
+   "athletes": 8,
+   "rows": 12
+  },
+  "sporttech|st-2024-06-28-609062|Synchro Women|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2024-07-06-675ca0|Female|予選": {
+   "athletes": 108,
+   "rows": 217
+  },
+  "sporttech|st-2024-07-06-675ca0|Female|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-07-06-675ca0|Female|決勝1": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-07-06-675ca0|Female|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-07-06-675ca0|Female|準決勝": {
+   "athletes": 23,
+   "rows": 23
+  },
+  "sporttech|st-2024-07-06-675ca0|Male|予選": {
+   "athletes": 117,
+   "rows": 234
+  },
+  "sporttech|st-2024-07-06-675ca0|Male|決勝": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2024-07-06-675ca0|Male|決勝1": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-07-06-675ca0|Male|決勝2": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2024-07-06-675ca0|Male|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2024-07-26-27b581|中学生 女子|予選": {
+   "athletes": 74,
+   "rows": 124
+  },
+  "sporttech|st-2024-07-26-27b581|中学生 女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-07-26-27b581|中学生 男子|予選": {
+   "athletes": 69,
+   "rows": 117
+  },
+  "sporttech|st-2024-07-26-27b581|中学生 男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-07-26-27b581|小学生低学年 女子|予選": {
+   "athletes": 25,
+   "rows": 44
+  },
+  "sporttech|st-2024-07-26-27b581|小学生低学年 女子|決勝": {
+   "athletes": 14,
+   "rows": 14
+  },
+  "sporttech|st-2024-07-26-27b581|小学生低学年 男子|予選": {
+   "athletes": 17,
+   "rows": 29
+  },
+  "sporttech|st-2024-07-26-27b581|小学生低学年 男子|決勝": {
+   "athletes": 13,
+   "rows": 13
+  },
+  "sporttech|st-2024-07-26-27b581|小学生高学年 女子|予選": {
+   "athletes": 71,
+   "rows": 120
+  },
+  "sporttech|st-2024-07-26-27b581|小学生高学年 女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-07-26-27b581|小学生高学年 男子|予選": {
+   "athletes": 71,
+   "rows": 121
+  },
+  "sporttech|st-2024-07-26-27b581|小学生高学年 男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-09-21-a1dc5b|オープン 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|オープン 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|一般 男子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|一般 男子|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2024-09-21-a1dc5b|一般女子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2024-09-21-a1dc5b|一般女子|決勝": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2024-09-21-a1dc5b|中学生 女子|予選": {
+   "athletes": 84,
+   "rows": 168
+  },
+  "sporttech|st-2024-09-21-a1dc5b|中学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|中学生 男子|予選": {
+   "athletes": 49,
+   "rows": 98
+  },
+  "sporttech|st-2024-09-21-a1dc5b|中学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|大学生 女子|予選": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "sporttech|st-2024-09-21-a1dc5b|大学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|大学生 男子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "sporttech|st-2024-09-21-a1dc5b|大学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|小学生低学年 女子|予選": {
+   "athletes": 39,
+   "rows": 78
+  },
+  "sporttech|st-2024-09-21-a1dc5b|小学生低学年 女子|決勝": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "sporttech|st-2024-09-21-a1dc5b|小学生低学年 男子|予選": {
+   "athletes": 23,
+   "rows": 46
+  },
+  "sporttech|st-2024-09-21-a1dc5b|小学生低学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|小学生高学年 女子|予選": {
+   "athletes": 116,
+   "rows": 232
+  },
+  "sporttech|st-2024-09-21-a1dc5b|小学生高学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|小学生高学年 男子|予選": {
+   "athletes": 64,
+   "rows": 128
+  },
+  "sporttech|st-2024-09-21-a1dc5b|小学生高学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|高校生 女子|予選": {
+   "athletes": 60,
+   "rows": 120
+  },
+  "sporttech|st-2024-09-21-a1dc5b|高校生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-09-21-a1dc5b|高校生 男子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "sporttech|st-2024-09-21-a1dc5b|高校生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-10-13-e01b77|女子|予選": {
+   "athletes": 93,
+   "rows": 184
+  },
+  "sporttech|st-2024-10-13-e01b77|女子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-10-13-e01b77|女子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2024-10-13-e01b77|男子|予選": {
+   "athletes": 90,
+   "rows": 175
+  },
+  "sporttech|st-2024-10-13-e01b77|男子|決勝": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2024-10-13-e01b77|男子|準決勝": {
+   "athletes": 24,
+   "rows": 24
+  },
+  "sporttech|st-2024-12-07-3f3260|10才以下 女子|予選": {
+   "athletes": 64,
+   "rows": 64
+  },
+  "sporttech|st-2024-12-07-3f3260|10才以下 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|10才以下 男子|予選": {
+   "athletes": 39,
+   "rows": 39
+  },
+  "sporttech|st-2024-12-07-3f3260|10才以下 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|11-12才 女子|予選": {
+   "athletes": 89,
+   "rows": 89
+  },
+  "sporttech|st-2024-12-07-3f3260|11-12才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|11-12才 男子|予選": {
+   "athletes": 50,
+   "rows": 50
+  },
+  "sporttech|st-2024-12-07-3f3260|11-12才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|13-14才 女子|予選": {
+   "athletes": 69,
+   "rows": 69
+  },
+  "sporttech|st-2024-12-07-3f3260|13-14才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|13-14才 男子|予選": {
+   "athletes": 38,
+   "rows": 38
+  },
+  "sporttech|st-2024-12-07-3f3260|13-14才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|15-16才 女子|予選": {
+   "athletes": 48,
+   "rows": 48
+  },
+  "sporttech|st-2024-12-07-3f3260|15-16才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|15-16才 男子|予選": {
+   "athletes": 39,
+   "rows": 39
+  },
+  "sporttech|st-2024-12-07-3f3260|15-16才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|17-18才 女子|予選": {
+   "athletes": 25,
+   "rows": 25
+  },
+  "sporttech|st-2024-12-07-3f3260|17-18才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|17-18才 男子|予選": {
+   "athletes": 13,
+   "rows": 13
+  },
+  "sporttech|st-2024-12-07-3f3260|17-18才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|19-29才 女子|予選": {
+   "athletes": 26,
+   "rows": 26
+  },
+  "sporttech|st-2024-12-07-3f3260|19-29才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|19-29才 男子|予選": {
+   "athletes": 20,
+   "rows": 20
+  },
+  "sporttech|st-2024-12-07-3f3260|19-29才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|30-39才 女子|決勝": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2024-12-07-3f3260|30-39才 男子|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2024-12-07-3f3260|40-49才 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|40-49才 男子|予選": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "sporttech|st-2024-12-07-3f3260|40-49才 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|50才以上 女子|予選": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "sporttech|st-2024-12-07-3f3260|50才以上 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|50才以上 男子|決勝": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2024-12-07-3f3260|JO/全日本社会人 女子|予選": {
+   "athletes": 37,
+   "rows": 72
+  },
+  "sporttech|st-2024-12-07-3f3260|JO/全日本社会人 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|JO/全日本社会人 男子|予選": {
+   "athletes": 54,
+   "rows": 107
+  },
+  "sporttech|st-2024-12-07-3f3260|JO/全日本社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|全日本社会人 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2024-12-07-3f3260|全日本社会人 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
   },
   "sporttech|st-2025-03-01-48a905|10才以下 女子|予選": {
    "athletes": 9,
    "rows": 24
   },
-  "sporttech|st-2025-03-01-48a905|10才以下 男子|": {
-   "athletes": 4,
+  "sporttech|st-2025-03-01-48a905|10才以下 女子|決勝1": {
+   "athletes": 9,
+   "rows": 12
+  },
+  "sporttech|st-2025-03-01-48a905|10才以下 女子|決勝2": {
+   "athletes": 6,
    "rows": 8
   },
   "sporttech|st-2025-03-01-48a905|10才以下 男子|予選": {
    "athletes": 4,
    "rows": 8
   },
-  "sporttech|st-2025-03-01-48a905|11-12才 女子|": {
-   "athletes": 12,
-   "rows": 22
+  "sporttech|st-2025-03-01-48a905|10才以下 男子|決勝1": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2025-03-01-48a905|10才以下 男子|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2025-03-01-48a905|11-12才 女子|予選": {
    "athletes": 13,
    "rows": 33
   },
-  "sporttech|st-2025-03-01-48a905|11-12才 男子|": {
-   "athletes": 6,
-   "rows": 12
+  "sporttech|st-2025-03-01-48a905|11-12才 女子|決勝1": {
+   "athletes": 12,
+   "rows": 14
+  },
+  "sporttech|st-2025-03-01-48a905|11-12才 女子|決勝2": {
+   "athletes": 7,
+   "rows": 8
   },
   "sporttech|st-2025-03-01-48a905|11-12才 男子|予選": {
    "athletes": 6,
    "rows": 12
   },
-  "sporttech|st-2025-03-01-48a905|13-14才 女子|": {
-   "athletes": 12,
-   "rows": 21
+  "sporttech|st-2025-03-01-48a905|11-12才 男子|決勝1": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "sporttech|st-2025-03-01-48a905|11-12才 男子|決勝2": {
+   "athletes": 6,
+   "rows": 6
   },
   "sporttech|st-2025-03-01-48a905|13-14才 女子|予選": {
    "athletes": 12,
    "rows": 25
   },
-  "sporttech|st-2025-03-01-48a905|13-14才 男子|": {
-   "athletes": 10,
-   "rows": 20
+  "sporttech|st-2025-03-01-48a905|13-14才 女子|決勝1": {
+   "athletes": 12,
+   "rows": 13
+  },
+  "sporttech|st-2025-03-01-48a905|13-14才 女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
   },
   "sporttech|st-2025-03-01-48a905|13-14才 男子|予選": {
    "athletes": 10,
    "rows": 24
   },
-  "sporttech|st-2025-03-01-48a905|15-16才 女子|": {
-   "athletes": 9,
-   "rows": 19
+  "sporttech|st-2025-03-01-48a905|13-14才 男子|決勝1": {
+   "athletes": 10,
+   "rows": 12
+  },
+  "sporttech|st-2025-03-01-48a905|13-14才 男子|決勝2": {
+   "athletes": 8,
+   "rows": 8
   },
   "sporttech|st-2025-03-01-48a905|15-16才 女子|予選": {
    "athletes": 9,
    "rows": 22
   },
-  "sporttech|st-2025-03-01-48a905|15-16才 男子|": {
-   "athletes": 5,
-   "rows": 10
+  "sporttech|st-2025-03-01-48a905|15-16才 女子|決勝1": {
+   "athletes": 9,
+   "rows": 11
+  },
+  "sporttech|st-2025-03-01-48a905|15-16才 女子|決勝2": {
+   "athletes": 7,
+   "rows": 8
   },
   "sporttech|st-2025-03-01-48a905|15-16才 男子|予選": {
    "athletes": 5,
    "rows": 10
   },
-  "sporttech|st-2025-03-01-48a905|17-21才 女子|": {
+  "sporttech|st-2025-03-01-48a905|15-16才 男子|決勝1": {
    "athletes": 5,
-   "rows": 10
+   "rows": 5
+  },
+  "sporttech|st-2025-03-01-48a905|15-16才 男子|決勝2": {
+   "athletes": 5,
+   "rows": 5
   },
   "sporttech|st-2025-03-01-48a905|17-21才 女子|予選": {
    "athletes": 5,
    "rows": 10
   },
-  "sporttech|st-2025-03-01-48a905|17-21才 男子|": {
-   "athletes": 4,
-   "rows": 7
+  "sporttech|st-2025-03-01-48a905|17-21才 女子|決勝1": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2025-03-01-48a905|17-21才 女子|決勝2": {
+   "athletes": 5,
+   "rows": 5
   },
   "sporttech|st-2025-03-01-48a905|17-21才 男子|予選": {
    "athletes": 4,
    "rows": 8
   },
-  "sporttech|st-2025-03-01-48a905|オープン 女子|": {
-   "athletes": 12,
-   "rows": 20
+  "sporttech|st-2025-03-01-48a905|17-21才 男子|決勝1": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2025-03-01-48a905|17-21才 男子|決勝2": {
+   "athletes": 3,
+   "rows": 3
   },
   "sporttech|st-2025-03-01-48a905|オープン 女子|予選": {
    "athletes": 12,
    "rows": 24
   },
-  "sporttech|st-2025-03-01-48a905|オープン男子|": {
-   "athletes": 9,
-   "rows": 17
+  "sporttech|st-2025-03-01-48a905|オープン 女子|決勝1": {
+   "athletes": 12,
+   "rows": 12
+  },
+  "sporttech|st-2025-03-01-48a905|オープン 女子|決勝2": {
+   "athletes": 8,
+   "rows": 8
   },
   "sporttech|st-2025-03-01-48a905|オープン男子|予選": {
    "athletes": 9,
    "rows": 20
+  },
+  "sporttech|st-2025-03-01-48a905|オープン男子|決勝1": {
+   "athletes": 9,
+   "rows": 10
+  },
+  "sporttech|st-2025-03-01-48a905|オープン男子|決勝2": {
+   "athletes": 6,
+   "rows": 7
   },
   "sporttech|st-2025-04-27-83b94b|女子|予選": {
    "athletes": 5,
@@ -629,10 +7021,6 @@
    "athletes": 6,
    "rows": 17
   },
-  "sporttech|st-2025-06-15-4ff1d8|女子|": {
-   "athletes": 8,
-   "rows": 8
-  },
   "sporttech|st-2025-06-15-4ff1d8|女子|予選": {
    "athletes": 24,
    "rows": 52
@@ -641,8 +7029,8 @@
    "athletes": 14,
    "rows": 16
   },
-  "sporttech|st-2025-06-15-4ff1d8|男子|": {
-   "athletes": 7,
+  "sporttech|st-2025-06-15-4ff1d8|女子|決勝2": {
+   "athletes": 8,
    "rows": 8
   },
   "sporttech|st-2025-06-15-4ff1d8|男子|予選": {
@@ -652,6 +7040,10 @@
   "sporttech|st-2025-06-15-4ff1d8|男子|決勝": {
    "athletes": 15,
    "rows": 16
+  },
+  "sporttech|st-2025-06-15-4ff1d8|男子|決勝2": {
+   "athletes": 7,
+   "rows": 8
   },
   "sporttech|st-2025-06-28-2426bd|AGE1 女子|決勝": {
    "athletes": 6,
@@ -693,10 +7085,6 @@
    "athletes": 8,
    "rows": 8
   },
-  "sporttech|st-2025-07-05-96120e|Female|": {
-   "athletes": 16,
-   "rows": 23
-  },
   "sporttech|st-2025-07-05-96120e|Female|予選": {
    "athletes": 121,
    "rows": 242
@@ -705,13 +7093,17 @@
    "athletes": 16,
    "rows": 16
   },
+  "sporttech|st-2025-07-05-96120e|Female|決勝1": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2025-07-05-96120e|Female|決勝2": {
+   "athletes": 7,
+   "rows": 7
+  },
   "sporttech|st-2025-07-05-96120e|Female|準決勝": {
    "athletes": 40,
    "rows": 40
-  },
-  "sporttech|st-2025-07-05-96120e|Male|": {
-   "athletes": 15,
-   "rows": 23
   },
   "sporttech|st-2025-07-05-96120e|Male|予選": {
    "athletes": 130,
@@ -720,6 +7112,14 @@
   "sporttech|st-2025-07-05-96120e|Male|決勝": {
    "athletes": 15,
    "rows": 15
+  },
+  "sporttech|st-2025-07-05-96120e|Male|決勝1": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2025-07-05-96120e|Male|決勝2": {
+   "athletes": 8,
+   "rows": 8
   },
   "sporttech|st-2025-07-05-96120e|Male|準決勝": {
    "athletes": 40,
@@ -1013,197 +7413,293 @@
    "athletes": 8,
    "rows": 8
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT女子 10才以下|": {
-   "athletes": 8,
-   "rows": 12
-  },
   "sporttech|st-2026-03-07-2b3d7d|DMT女子 10才以下|予選": {
    "athletes": 9,
    "rows": 18
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE1|": {
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 10才以下|決勝1": {
    "athletes": 8,
-   "rows": 12
+   "rows": 8
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 10才以下|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE1|予選": {
    "athletes": 12,
    "rows": 23
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE2|": {
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE1|決勝1": {
    "athletes": 8,
-   "rows": 12
+   "rows": 8
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE1|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE2|予選": {
    "athletes": 9,
    "rows": 18
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE3|": {
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE2|決勝1": {
    "athletes": 8,
-   "rows": 12
+   "rows": 8
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE2|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE3|予選": {
    "athletes": 8,
    "rows": 16
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT女子 オープン|": {
-   "athletes": 3,
-   "rows": 6
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE3|決勝1": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 AGE3|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT女子 オープン|予選": {
    "athletes": 3,
    "rows": 6
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT女子 ジュニア|": {
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 オープン|決勝1": {
    "athletes": 3,
-   "rows": 6
+   "rows": 3
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 オープン|決勝2": {
+   "athletes": 3,
+   "rows": 3
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT女子 ジュニア|予選": {
    "athletes": 3,
    "rows": 5
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT男子 10才以下|": {
-   "athletes": 2,
-   "rows": 4
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 ジュニア|決勝1": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT女子 ジュニア|決勝2": {
+   "athletes": 3,
+   "rows": 3
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT男子 10才以下|予選": {
    "athletes": 2,
    "rows": 4
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE1|": {
-   "athletes": 4,
-   "rows": 8
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 10才以下|決勝1": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 10才以下|決勝2": {
+   "athletes": 2,
+   "rows": 2
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE1|予選": {
    "athletes": 4,
    "rows": 8
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE2|": {
-   "athletes": 5,
-   "rows": 9
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE1|決勝1": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE1|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE2|予選": {
    "athletes": 5,
    "rows": 10
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE3|": {
-   "athletes": 2,
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE2|決勝1": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE2|決勝2": {
+   "athletes": 4,
    "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE3|予選": {
    "athletes": 2,
    "rows": 4
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT男子 オープン|": {
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE3|決勝1": {
    "athletes": 2,
-   "rows": 4
+   "rows": 2
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 AGE3|決勝2": {
+   "athletes": 2,
+   "rows": 2
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT男子 オープン|予選": {
    "athletes": 2,
    "rows": 4
   },
-  "sporttech|st-2026-03-07-2b3d7d|DMT男子 ジュニア|": {
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 オープン|決勝1": {
    "athletes": 2,
-   "rows": 4
+   "rows": 2
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 オープン|決勝2": {
+   "athletes": 2,
+   "rows": 2
   },
   "sporttech|st-2026-03-07-2b3d7d|DMT男子 ジュニア|予選": {
    "athletes": 2,
    "rows": 3
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM女子 10才以下|": {
-   "athletes": 7,
-   "rows": 11
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 ジュニア|決勝1": {
+   "athletes": 2,
+   "rows": 2
+  },
+  "sporttech|st-2026-03-07-2b3d7d|DMT男子 ジュニア|決勝2": {
+   "athletes": 2,
+   "rows": 2
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM女子 10才以下|予選": {
    "athletes": 7,
    "rows": 14
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE1|": {
-   "athletes": 8,
-   "rows": 12
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 10才以下|決勝1": {
+   "athletes": 7,
+   "rows": 7
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 10才以下|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE1|予選": {
    "athletes": 9,
    "rows": 18
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE2|": {
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE1|決勝1": {
    "athletes": 8,
-   "rows": 12
+   "rows": 8
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE1|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE2|予選": {
    "athletes": 9,
    "rows": 18
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE3|": {
-   "athletes": 5,
-   "rows": 9
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE2|決勝1": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE2|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE3|予選": {
    "athletes": 5,
    "rows": 10
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM女子 オープン|": {
-   "athletes": 3,
-   "rows": 6
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE3|決勝1": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 AGE3|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM女子 オープン|予選": {
    "athletes": 3,
    "rows": 6
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM女子 ジュニア|": {
-   "athletes": 4,
-   "rows": 8
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 オープン|決勝1": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 オープン|決勝2": {
+   "athletes": 3,
+   "rows": 3
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM女子 ジュニア|予選": {
    "athletes": 4,
    "rows": 8
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM男子 10才以下|": {
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 ジュニア|決勝1": {
    "athletes": 4,
-   "rows": 8
+   "rows": 4
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM女子 ジュニア|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM男子 10才以下|予選": {
    "athletes": 4,
    "rows": 8
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE1|": {
-   "athletes": 1,
-   "rows": 2
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 10才以下|決勝1": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 10才以下|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE1|予選": {
    "athletes": 1,
    "rows": 2
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE2|": {
-   "athletes": 4,
-   "rows": 8
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE1|決勝1": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE1|決勝2": {
+   "athletes": 1,
+   "rows": 1
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE2|予選": {
    "athletes": 4,
    "rows": 8
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE3|": {
-   "athletes": 3,
-   "rows": 6
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE2|決勝1": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE2|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE3|予選": {
    "athletes": 3,
    "rows": 6
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM男子 オープン|": {
-   "athletes": 4,
-   "rows": 8
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE3|決勝1": {
+   "athletes": 3,
+   "rows": 3
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 AGE3|決勝2": {
+   "athletes": 3,
+   "rows": 3
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM男子 オープン|予選": {
    "athletes": 4,
    "rows": 8
   },
-  "sporttech|st-2026-03-07-2b3d7d|TUM男子 ジュニア|": {
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 オープン|決勝1": {
    "athletes": 4,
-   "rows": 8
+   "rows": 4
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 オープン|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-03-07-2b3d7d|TUM男子 ジュニア|予選": {
    "athletes": 4,
    "rows": 8
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 ジュニア|決勝1": {
+   "athletes": 4,
+   "rows": 4
+  },
+  "sporttech|st-2026-03-07-2b3d7d|TUM男子 ジュニア|決勝2": {
+   "athletes": 4,
+   "rows": 4
   },
   "sporttech|st-2026-05-16-eae4d6|AGE1 女子|決勝": {
    "athletes": 32,
@@ -1497,10 +7993,6 @@
    "athletes": 8,
    "rows": 8
   },
-  "sporttech|st-2026-07-04-91cd39|Female|": {
-   "athletes": 15,
-   "rows": 23
-  },
   "sporttech|st-2026-07-04-91cd39|Female|予選": {
    "athletes": 116,
    "rows": 229
@@ -1509,13 +8001,17 @@
    "athletes": 16,
    "rows": 16
   },
+  "sporttech|st-2026-07-04-91cd39|Female|決勝1": {
+   "athletes": 15,
+   "rows": 15
+  },
+  "sporttech|st-2026-07-04-91cd39|Female|決勝2": {
+   "athletes": 8,
+   "rows": 8
+  },
   "sporttech|st-2026-07-04-91cd39|Female|準決勝": {
    "athletes": 40,
    "rows": 40
-  },
-  "sporttech|st-2026-07-04-91cd39|Male|": {
-   "athletes": 16,
-   "rows": 24
   },
   "sporttech|st-2026-07-04-91cd39|Male|予選": {
    "athletes": 109,
@@ -1524,6 +8020,14 @@
   "sporttech|st-2026-07-04-91cd39|Male|決勝": {
    "athletes": 16,
    "rows": 16
+  },
+  "sporttech|st-2026-07-04-91cd39|Male|決勝1": {
+   "athletes": 16,
+   "rows": 16
+  },
+  "sporttech|st-2026-07-04-91cd39|Male|決勝2": {
+   "athletes": 8,
+   "rows": 8
   },
   "sporttech|st-2026-07-04-91cd39|Male|準決勝": {
    "athletes": 24,
@@ -1576,6 +8080,114 @@
   "sporttech|st-2026-07-24-4e9796|小学生高学年 男子|決勝": {
    "athletes": 16,
    "rows": 16
+  },
+  "sporttech|st-2026-08-29-05a838|女子|予選": {
+   "athletes": 74,
+   "rows": 74
+  },
+  "sporttech|st-2026-08-29-05a838|男子|予選": {
+   "athletes": 74,
+   "rows": 74
+  },
+  "sporttech|st-2026-09-20-2116b3|5トリック 女子|予選": {
+   "athletes": 11,
+   "rows": 22
+  },
+  "sporttech|st-2026-09-20-2116b3|5トリック 女子|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2026-09-20-2116b3|5トリック 男子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2026-09-20-2116b3|5トリック 男子|決勝": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "sporttech|st-2026-09-20-2116b3|8トリック 女子|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "sporttech|st-2026-09-20-2116b3|8トリック 女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2026-09-20-2116b3|8トリック 男子|予選": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "sporttech|st-2026-09-20-2116b3|8トリック 男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2026-09-20-2116b3|DEMO|予選": {
+   "athletes": 1,
+   "rows": 1
+  },
+  "sporttech|st-2026-09-20-2116b3|DMTオープン女子|予選": {
+   "athletes": 13,
+   "rows": 26
+  },
+  "sporttech|st-2026-09-20-2116b3|DMTオープン女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2026-09-20-2116b3|DMTオープン男子|予選": {
+   "athletes": 10,
+   "rows": 19
+  },
+  "sporttech|st-2026-09-20-2116b3|DMTオープン男子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2026-09-20-2116b3|DMTジュニア女子|予選": {
+   "athletes": 12,
+   "rows": 24
+  },
+  "sporttech|st-2026-09-20-2116b3|DMTジュニア女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "sporttech|st-2026-09-20-2116b3|DMTジュニア男子|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2026-09-20-2116b3|DMTジュニア男子|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2026-09-20-2116b3|ワントリックA 女子|予選": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "sporttech|st-2026-09-20-2116b3|ワントリックA 女子|決勝": {
+   "athletes": 7,
+   "rows": 14
+  },
+  "sporttech|st-2026-09-20-2116b3|ワントリックA 男子|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2026-09-20-2116b3|ワントリックA 男子|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "sporttech|st-2026-09-20-2116b3|ワントリックB 女子|予選": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2026-09-20-2116b3|ワントリックB 女子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "sporttech|st-2026-09-20-2116b3|ワントリックB 男子|予選": {
+   "athletes": 2,
+   "rows": 4
+  },
+  "sporttech|st-2026-09-20-2116b3|ワントリックB 男子|決勝": {
+   "athletes": 2,
+   "rows": 4
   }
  }
 }

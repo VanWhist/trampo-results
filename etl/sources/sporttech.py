@@ -136,6 +136,9 @@ def extract(meet_dir, year, kind_label):
     """1大会ぶんの (competition, performances, judges, panels) を返す。"""
     meta = _load(os.path.join(meet_dir, '_meta.json'))
     model = _merge_meet(meet_dir)
+    rules = meta.get('rules') or ''
+    family = config.rules_family(rules, meta['date'])
+    old_rules = family == config.RULES_PRE2017
 
     group_stage = {int(gid): g.get('StageID') for gid, g in model['Groups'].items()}
     meet_id = 'st-%s' % meta['date'] + ('-%s' % _slug(meta['name']))
@@ -152,6 +155,8 @@ def extract(meet_dir, year, kind_label):
         'event_id': meta.get('event_id', ''),
         'fetched_at': meta.get('fetched_at', ''),
         'raw_dir': os.path.basename(meet_dir),
+        'rules': rules,
+        'rules_family': family,
     }
 
     # ---- 審判（Phase 2 の器。埋まる大会は今すぐ埋める） --------------------
@@ -237,6 +242,15 @@ def extract(meet_dir, year, kind_label):
         judge_e, judge_hd = _judges(frame)
         panel_key = stage_panel.get(stage_id)
 
+        # 演技していない枠（棄権など）。審判欄がすべて初期値（100）で、D・T・合計が0。
+        # E だけが初期値から満点に計算されて入っているが、採点ではないので空欄にする。
+        # 本物の演技ではこの組み合わせは起こらない（E満点なら合計は20点以上になる）。
+        # 2026-09-25、2015〜2026年の全大会で13件（State=4）を確認。
+        marks = [v for v in (frame.get('ETotalsT_G') or {}).values() if v]
+        no_execution = (individual and marks and all(v in config.JUDGE_PLACEHOLDERS for v in marks)
+                        and not frame.get('MarkTTT_G') and not frame.get('DifficultyT_G')
+                        and not frame.get('TimeTMS_G'))
+
         performances.append({
             'performance_id': '%s|f%s' % (meet_id, fid),
             'meet_id': meet_id,
@@ -258,9 +272,10 @@ def extract(meet_dir, year, kind_label):
             'rank': perf.get('Rank_G') if perf.get('Ranked') is not False else None,
             'total': scaled('MarkTTT_G', 1000.0),
             'D': scaled('DifficultyT_G', 10.0),
-            'E': scaled('ETotalT_G', 10.0),
+            'E': None if no_execution else scaled('ETotalT_G', 10.0),
             'T': scaled('TimeTMS_G', 1000.0),
-            'HD': scaled('Displacement_G', 100.0),
+            # 旧規則に HD は存在しない。生値は 0 で入っているが、0点ではなく「無い」
+            'HD': None if old_rules else scaled('Displacement_G', 100.0),
             'Bonus': scaled('BonusT', 10.0),
             'Pen': scaled('PenaltyT', 10.0),
             'DPen': scaled('DPenaltyT', 10.0),
@@ -269,7 +284,12 @@ def extract(meet_dir, year, kind_label):
             'deduct_landing': landing,
             'deduct_extra_a': extra_a,
             'deduct_unaccounted': unaccounted,
-            'deduct_unit': 'median2_sum_tenths',
+            # 旧規則の技ごとの減点は審判1人ぶんの尺度（E も同じ尺度）。
+            # 中央値か平均かは確かめていないので、単位名にはそう書かない。
+            'deduct_unit': 'pre2017_single_scale_tenths' if old_rules else 'median2_sum_tenths',
+            'rules': rules,
+            'rules_family': family,
+            'no_execution': bool(no_execution),
             'judge_E': judge_e,
             'judge_HD': judge_hd,
             'panel_key': panel_key,
@@ -323,7 +343,7 @@ def _slug(text):
 def load_all():
     """全大会を読み、(competitions, performances, judges, panels) を返す。"""
     competitions, performances, judges, panels = [], [], {}, {}
-    for year, folder, kind_label in config.SPORTTECH_DIRS:
+    for year, folder, kind_label in config.sporttech_dirs():
         base = os.path.join(config.RAW_ROOT, year, folder)
         if not os.path.isdir(base):
             continue

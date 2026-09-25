@@ -11,6 +11,10 @@ import statistics
 from . import config
 
 
+# 予選の次に進んだラウンド（ここに出た選手を「予選通過者」とする）
+ADVANCED_ROUNDS = ('準々決勝', '準決勝', '決勝', '決勝1', '決勝2')
+
+
 def _median(values):
     return statistics.median(values) if values else None
 
@@ -28,7 +32,7 @@ def judge_panel_diff(performances, panels, judges):
     # 決勝だけを見ると通過者を8名に絞りすぎてしまう。
     advanced = set()
     for p in performances:
-        if p['round'] in ('準決勝', '決勝') and p.get('athlete_id'):
+        if p['round'] in ADVANCED_ROUNDS and p.get('athlete_id'):
             advanced.add((p['meet_id'], p['category'], p['athlete_id']))
 
     populations = {'all': [], 'complete': [], 'qualified': []}
@@ -115,7 +119,7 @@ def judge_diff_rows(performances, panels, judges):
     """
     advanced = set()
     for p in performances:
-        if p['round'] in ('準決勝', '決勝') and p.get('athlete_id'):
+        if p['round'] in ADVANCED_ROUNDS and p.get('athlete_id'):
             advanced.add((p['meet_id'], p['category'], p['athlete_id']))
 
     judge_ids, meet_ids, categories, rounds = [], [], [], []
@@ -176,10 +180,16 @@ def athlete_summary(performances):
 
     out = {}
     for aid, items in by_athlete.items():
-        totals = [p['total'] for p in items if p['total'] is not None]
-        ds = [p['D'] for p in items if p['D'] is not None]
-        scored = [p for p in items if p['total'] is not None]
+        # 自己ベストは今の規則（2017年版以降）の演技だけで出す。旧規則は合計の組み立てが
+        # 違う（HDなし・Eを3倍）ので、同じ土俵で最大値を取ると意味が無い。
+        current = [p for p in items if _family(p) == config.RULES_CURRENT]
+        old = [p for p in items if _family(p) == config.RULES_PRE2017]
+        totals = [p['total'] for p in current if p['total'] is not None]
+        ds = [p['D'] for p in current if p['D'] is not None]
+        scored = [p for p in current if p['total'] is not None]
         best = max(scored, key=lambda p: p['total']) if scored else None
+        old_scored = [p for p in old if p['total'] is not None]
+        old_best = max(old_scored, key=lambda p: p['total']) if old_scored else None
         out[aid] = {
             'n_performances': len(items),
             'n_meets': len(set(p['meet_id'] for p in items)),
@@ -192,8 +202,16 @@ def athlete_summary(performances):
             'n_interrupted': sum(1 for p in items
                                  if p['n_elements'] is not None and p['n_elements'] < 10),
             'n_missing_total': sum(1 for p in items if p['total'] is None),
+            'n_pre2017': len(old),
+            'best_total_pre2017': old_best['total'] if old_best else None,
+            'best_total_pre2017_meet': old_best['meet_name'] if old_best else None,
+            'best_total_pre2017_date': old_best['date'] if old_best else None,
         }
     return out
+
+
+def _family(p):
+    return p.get('rules_family') or config.rules_family('', p['date'])
 
 
 def deduction_summary(performances):
@@ -203,9 +221,15 @@ def deduction_summary(performances):
     """
     used = collections.defaultdict(list)
     excluded = 0
+    other_unit = 0
     interrupted_at = collections.Counter()
     for p in performances:
         if p['discipline'] != config.PHASE1_DISCIPLINE:
+            continue
+        # 単位が違う減点（旧規則の1人ぶんの尺度など）を平均に混ぜると約半分に引っ張られる
+        if p.get('deduct_unit') != 'median2_sum_tenths':
+            if any(v is not None for v in p['deduct_positions']):
+                other_unit += 1
             continue
         n = p['n_elements']
         if n is None:
@@ -224,5 +248,7 @@ def deduction_summary(performances):
             'mean': round(sum(v) / len(v), 3) if v else None,
         } for k, v in sorted(used.items())},
         'n_excluded': excluded,
+        'n_other_unit': other_unit,
+        'unit': 'median2_sum_tenths',
         'interrupted_at': {str(k): v for k, v in sorted(interrupted_at.items())},
     }

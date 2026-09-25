@@ -12,6 +12,11 @@ import os
 
 from . import completeness, config, osaka_crosscheck
 
+# 検算で説明のつかない演技を、理由つきで登録したもの。検査は緩めずに、ここに載せた分だけ警告にする
+with io.open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'known_exceptions.json'),
+             encoding='utf-8') as _fh:
+    KNOWN = json.load(_fh)
+
 # 各ソースの期待件数（個人種目）。実装指示書 第9章の受け入れ基準の数字。
 # 大会が増えるとここは増えるので、判定は「大会ごとの件数」（etl/expected_counts.json）で行う。
 EXPECTED = {
@@ -89,6 +94,9 @@ def run(performances, athletes, competitions, judges, panels, name_variants_=Non
 
     # ---- 数値の検算 --------------------------------------------------------
     e_checked = e_flagged = 0
+    old_e_checked = old_e_flagged = 0
+    no_execution = 0
+    known_seen = set()
     total_checked = total_flagged = 0
     range_bad = 0
     for p in performances:
@@ -105,35 +113,71 @@ def run(performances, athletes, competitions, judges, panels, name_variants_=Non
             rep.passed += 1
             continue
 
+        # 演技していない枠（審判欄が初期値のまま）。記録は残すが検算はしない
+        if p.get('no_execution'):
+            no_execution += 1
+            p['check_flags'].append('演技なし')
+            rep.passed += 1
+            continue
+
+        # 規則の世代で式が違う（config.rules_family の説明を参照）
+        family = p.get('rules_family') or config.rules_family('', p['date'])
+        old_rules = family == config.RULES_PRE2017
+
         # E の検算（導出はしない）
+        #   今の規則:  E = 2N − (減点計)/10        （中央2審判の和の尺度）
+        #   旧規則:    E = N − (減点計)/10         （1人ぶんの尺度）
+        # 旧規則は約2%で成り立たない。理由が分からないので規則にせず、件数を数えて出す。
         n = p['n_elements']
         if n is not None and p['E'] is not None and p.get('data_quality') != 'corrupted':
             positions = [v for v in p['deduct_positions'] if v is not None]
             if len(positions) == n:
                 deduct = sum(positions) + (p['deduct_landing'] or 0)
-                calc = 2 * n - deduct / 10.0
-                e_checked += 1
+                calc = (n if old_rules else 2 * n) - deduct / 10.0
+                if old_rules:
+                    old_e_checked += 1
+                else:
+                    e_checked += 1
                 if abs(calc - p['E']) > config.TOL_E:
-                    e_flagged += 1
+                    if old_rules:
+                        old_e_flagged += 1
+                    else:
+                        e_flagged += 1
                     p['check_flags'].append('E要確認')
 
         # 合計の検算
-        if None not in (p['total'], p['D'], p['E'], p['T'], p['HD']):
-            calc = (p['D'] + p['E'] + p['T'] + p['HD']
-                    + (p['Bonus'] or 0) - (p['Pen'] or 0) - (p['DPen'] or 0))
+        #   今の規則:  合計 = D + E + T + HD + Bonus − Pen − DPen
+        #   旧規則:    合計 = D + T + 3×E + Bonus − Pen − DPen   （HD は存在しない）
+        if old_rules:
+            parts_ok = None not in (p['total'], p['D'], p['E'], p['T'])
+        else:
+            parts_ok = None not in (p['total'], p['D'], p['E'], p['T'], p['HD'])
+        if parts_ok:
+            if old_rules:
+                calc = (p['D'] + p['T'] + 3 * p['E']
+                        + (p['Bonus'] or 0) - (p['Pen'] or 0) - (p['DPen'] or 0))
+            else:
+                calc = (p['D'] + p['E'] + p['T'] + p['HD']
+                        + (p['Bonus'] or 0) - (p['Pen'] or 0) - (p['DPen'] or 0))
             total_checked += 1
             gap = abs(calc - p['total'])
             if gap > config.TOL_TOTAL:
                 total_flagged += 1
                 p['check_flags'].append('合計要確認')
-                if gap > config.TOL_TOTAL_WARN:
+                known = KNOWN['total_mismatch'].get(p['performance_id'])
+                if known:
+                    known_seen.add(p['performance_id'])
+                    rep.warn('既知の例外', '%s %s 合計%.2f 計算%.2f（%s）' % (
+                        p['date'], p['athlete_name'], p['total'], calc, known['status']))
+                elif gap > config.TOL_TOTAL_WARN:
                     rep.error('合計', '%s %s 合計%.2f 計算%.2f' % (
                         p['date'], p['athlete_name'], p['total'], calc))
                 else:
                     rep.warn('合計', '%s %s 差 %.3f' % (p['date'], p['athlete_name'], gap))
 
         # 値域
-        for field, lo, hi in (('D', 0, 30), ('E', 0, 20), ('T', 0, 25), ('HD', 0, 10)):
+        for field, lo, hi in (('D', 0, 30), ('E', 0, 10 if old_rules else 20), ('T', 0, 25),
+                              ('HD', 0, 10)):
             v = p[field]
             if v is not None and not (lo <= v <= hi):
                 range_bad += 1
@@ -156,6 +200,21 @@ def run(performances, athletes, competitions, judges, panels, name_variants_=Non
     rep.checks['E検算'] = e_checked
     rep.checks['合計検算'] = total_checked
     rep.note('E検算', '%d件中 %d件が要確認' % (e_checked, e_flagged))
+    # 既知の例外に載せたのに、今回は食い違いとして現れなかったもの（直った・消えた）
+    for pid in sorted(set(KNOWN['total_mismatch']) - known_seen):
+        rep.warn('既知の例外', '%s は登録済みだが今回は現れなかった。'
+                 '直ったか演技が無くなったので、etl/known_exceptions.json から外すか確認する' % pid)
+    if no_execution:
+        rep.note('演技なし(sporttech)', '%d件（審判欄がすべて初期値・D/T/合計が0。E は空欄にして検算から外した）'
+                 % no_execution)
+    if old_e_checked:
+        rep.checks['E検算(旧規則)'] = old_e_checked
+        rep.note('E検算(旧規則)', '%d件中 %d件が式と合わない（理由未解明。合計の式は別に検算している）'
+                 % (old_e_checked, old_e_flagged))
+        if old_e_flagged:
+            rep.warn('旧規則のE', '2017年より前の規則で、E = 技数 − 減点計/10 が %d件で合いません。'
+                     '合計の式（D+T+3E）は成り立っています。理由が分かるまで規則にはしません'
+                     % old_e_flagged)
     rep.note('合計検算', '%d件中 %d件が要確認' % (total_checked, total_flagged))
 
     # 実行件数ゲート：検証が1件も走っていないのに緑、という状態を作らない

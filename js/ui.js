@@ -17,6 +17,16 @@ export function scrollToTop(node) {
 }
 
 
+/** 2017年より前の規則の演技に付ける印。E の尺度が違う（1人ぶん・10点満点）ことを知らせる。 */
+export const PRE2017_NOTE = '2017年より前の規則です。水平移動（HD）はありません。'
+  + 'E は審判1人ぶんの尺度（10点満点）で、合計には3倍して入ります。'
+  + '技ごとの減点（S1〜S10）も1人ぶんの尺度なので、今の規則の大会とは比べられません。';
+
+export function rulesBadge(p) {
+  return p.pre2017 ? el('span', { class: 'badge plain', text: '旧規則', title: PRE2017_NOTE }) : null;
+}
+
+
 export function el(tag, attrs = {}, children = []) {
   const node = document.createElement(tag);
   for (const [k, v] of Object.entries(attrs)) {

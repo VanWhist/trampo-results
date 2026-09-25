@@ -72,10 +72,19 @@ def run(performances, rep, write_doc=True):
         return {}
 
     csv_idx = _csv_index(performances)
+    # 突き合わせるのは中間CSVにもある大会だけ。自前で新しく取得した大会（中間CSVに無い）は
+    # 食い違いではないので、別に件数を出す（取り込みは元HTMLの経路で別途行う）。
+    csv_dates = {k[0] for k in csv_idx}
+    html_only_meets = collections.Counter(r['date'] for r in records if r['date'] not in csv_dates)
+    records = [r for r in records if r['date'] in csv_dates]
     html_idx = _html_index(records)
     only_csv = sorted(set(csv_idx) - set(html_idx))
     only_html = sorted(set(html_idx) - set(csv_idx))
     both = sorted(set(csv_idx) & set(html_idx))
+    if html_only_meets:
+        rep.note('大阪府_元HTMLのみの大会',
+                 '%d大会・%d演技（中間CSVに無いので突き合わせの対象外）'
+                 % (len(html_only_meets), sum(html_only_meets.values())))
 
     for key in only_csv:
         rep.error('大阪府_突合', '中間CSVにあって元HTMLに無い演技: %s' % (key,))

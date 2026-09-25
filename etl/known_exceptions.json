@@ -1,0 +1,14 @@
+{
+ "_comment": "検算で説明のつかない演技を、理由つきで1件ずつ登録する。検査そのものは緩めない。ここに載せた演技が見つからない・食い違いが消えた場合は、それも報告する（載せっぱなしにしない）。",
+ "total_mismatch": {
+  "st-2017-11-16-b1e2fc|f1810": {
+   "athlete": "ZIMMERHACKEL Jana",
+   "meet": "25th FIG Trampoline Gymnastics World Age Group Competitions",
+   "date": "2017-11-16",
+   "observed": "公表合計0.00。E審判のうち2人が1技目に減点（9.9）を付けており、採点は行われている。D・Tは0",
+   "status": "理由未解明（規則違反による0点などが考えられるが、データに根拠が無い）",
+   "if_broken": "sporttech の同大会ページで該当演技の表示を確認する。合計が0以外に変わっていれば取得し直す",
+   "registered": "2026-09-25"
+  }
+ }
+}
