@@ -33,7 +33,7 @@ let rows = [];
 let details = {};
 let manifest = null;
 
-const ROUND_ORDER = ['予選', '準々決勝', '準決勝', '決勝', '決勝1', '決勝2', '団体準決勝', '団体決勝'];
+const ROUND_ORDER = ['予選', '予選2', '準々決勝', '準決勝', '決勝', '決勝1', '決勝2', '団体準決勝', '団体決勝'];
 
 // S値の単位はソースで違う。表の下に必ず出す。
 const UNIT_NOTE = {

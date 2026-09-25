@@ -1,6 +1,6 @@
 # ETL検証レポート
 
-dataVersion: `2026-09-25-04`
+dataVersion: `2026-09-25-05`
 
 ```
 62063 records passed / 173 warnings / 0 errors

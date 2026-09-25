@@ -69,14 +69,16 @@ def main():
             if len(samples['discipline']) < 5:
                 samples['discipline'].append((key, p['athlete_name'], p['discipline'], csv_disc))
         # 意図的な差異:
-        #  ・CSV は Stage.Kind=6 を "Kind6" のまま出力している。こちらは「準決勝」と判定する
-        #    （予選→24名→決勝8名の構造で確認済み）
+        #  ・CSV は 予選・決勝以外の Stage.Kind を "Kind6" "Kind7" のまま出力している。
+        #    こちらは sporttech の公式の対応表（config.STAGE_KIND）で名前を付けているので、
+        #    CSV の "Kind<n>" は対応表の名前と同じものとして比べる
         #  ・CSV は NElements キーの無い失格フレームの技数を 0 と書いている。
         #    指示書どおり「技数は空欄」にするので None のままにする
         csv_round = r['ラウンド'] or ''
         our_round = p['round'] or ('Kind%s' % p['round_raw'])
-        if csv_round == 'Kind6' and p['round'] == '準決勝':
-            our_round = 'Kind6'
+        kind_label = config.STAGE_KIND.get(p['round_raw'])
+        if csv_round == 'Kind%s' % p['round_raw'] and p['round'] == kind_label:
+            our_round = csv_round
         if csv_round != our_round:
             diffs['round'] += 1
             if len(samples['round']) < 5:
