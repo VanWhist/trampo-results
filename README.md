@@ -347,6 +347,7 @@ about.html      … データについて（注記の第3層。出典・欠測�
 css/style.css
 js/             … 素のES modules。ビルドもnpmも使いません
 tools/          … 生データの取得（sporttech・大阪府）。既存の原本には書き込まず、新しいフォルダを足すだけ
+                  verify_published.py … 公開データが原本と一致しているかを、ETLとは別の読み方で確かめる
 etl/            … Python（標準ライブラリのみ）。生データ→data/*.json
   build.py               ETL本体（--accept-counts で件数の基準を更新）
   acceptance.py          受け入れ基準の自動確認
