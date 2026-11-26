@@ -32,6 +32,7 @@ import re
 import unicodedata
 
 from .. import config
+from .radicals import check_no_radicals, to_unified
 
 FILES_JSON = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                           'higashinihon_files.json')
@@ -56,19 +57,7 @@ def load_manifest():
         return json.load(fh)
 
 
-# 2022・2026年版のPDFは、一部の漢字を「部首」の文字コード（CJK部首補助）で持っている。
-# 見た目は同じだが NFKC では統合漢字に戻らないため、同じ選手が別人になってしまう
-# （⻑澤 と 長澤）。実データに現れたものだけを対応させる（2026-11-27 確認）。
-RADICALS = {'\u2ed1': '\u9577',   # ⻑ → 長
-            '\u2ec4': '\u897f',   # ⻄ → 西
-            '\u2eeb': '\u6589',   # ⻫ → 斉
-            '\u2ed8': '\u9752',    # ⻘ → 青
-            '\u2ea0': '\u6c11'}   # ⺠ → 民（会場名 ヤマト市民体育館）
-
-
-# 康熙部首は NFKC で統合漢字に戻るが、U+2F3E（戸の部首）だけは日本の「戸」（U+6238）ではなく
-# 「戶」（U+6236）になる（保戸塚・瀬戸・戸田・江戸崎が別表記になった）。NFKC の前に置き換える。
-KANGXI_JP = {chr(0x2F3E): chr(0x6238)}
+# 部首の文字コード（⻑ ⻄ ⼾ など）は radicals.py でふつうの漢字に戻す（西日本と共通）。
 SOFT_HYPHEN = chr(0x00AD)                # Pen 空欄の印
 
 
@@ -89,22 +78,7 @@ def _n(text):
     # 見出しの Diff は 'Di' + NUL のように制御文字が混じる。先に落とす。
     text = ''.join(ch for ch in text if ch == ' ' or ch >= ' ')
     text = text.replace(SOFT_HYPHEN, '')
-    for old, new in list(KANGXI_JP.items()) + list(RADICALS.items()):
-        text = text.replace(old, new)
-    # 部首の文字（康熙部首・CJK部首補助）のうち、NFKC で日本で使わない字形になるもの
-    # （戸→戶、黑・黃・靑、⻳→龟 など）が残っていたら止める。
-    # 判定は「NFKC 後の字が Shift_JIS（JIS X 0208）で書けるか」。
-    for ch in set(text):
-        if 0x2E80 <= ord(ch) <= 0x2FDF:
-            try:
-                unicodedata.normalize('NFKC', ch).encode('shift_jis')
-            except UnicodeEncodeError:
-                raise ValueError('日本で使わない字形になる部首の文字があります（KANGXI_JP に追加が必要）: '
-                                 '%r' % ch)
-    text = unicodedata.normalize('NFKC', text)       # ⽇ ⼈ ⼥（康熙部首）はここで戻る
-    for old, new in RADICALS.items():
-        text = text.replace(old, new)
-    return text.strip()
+    return to_unified(text).strip()
 
 
 def _f(text):
@@ -349,18 +323,12 @@ def _performed(rt):
     return (_f(rt.get('Score')) or 0) > 0
 
 
-RADICAL_RANGE = re.compile(r'[\u2e80-\u2eff\u2f00-\u2fdf]')   # CJK部首補助・康熙部首
-
-
 def clean_name(raw):
     """氏名から読み仮名「（…）」と棄権の印を外す。"""
     name = re.sub(r'\(.*?\)', '', raw or '')
     name = re.sub(r'\s*DNS$', '', name)
     name = name.strip()
-    if RADICAL_RANGE.search(name):
-        # RADICALS に無い部首の文字が残っていると、同じ選手が別人として登録される。
-        # 黙って進めず止める（対応表に足してから回し直す）。
-        raise ValueError('部首の文字コードが氏名に残っています（RADICALS に追加が必要）: %r' % name)
+    check_no_radicals(name, '氏名')
     return name
 
 
@@ -448,9 +416,7 @@ def _record(meet, seq, athlete, rt, routine_no, category, round_label, pdf_name)
     diff = _f(rt.get('Diff'))
     d_implicit_zero = diff is None
     name = clean_name(athlete['name'])
-    if RADICAL_RANGE.search(athlete['club'] or ''):
-        raise ValueError('部首の文字コードが所属に残っています（RADICALS に追加が必要）: %r'
-                         % athlete['club'])
+    check_no_radicals(athlete['club'], '所属')
     flags = []
     if d_implicit_zero:
         flags.append('D空欄を0として採用')

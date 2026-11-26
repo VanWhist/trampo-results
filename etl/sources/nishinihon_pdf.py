@@ -23,9 +23,9 @@
 import collections
 import os
 import re
-import unicodedata
 
 from .. import config
+from .radicals import check_no_radicals, to_unified
 
 PDF_DIR_2026 = os.path.join(config.RAW_ROOT, '2026', '西日本トランポリン協会_PDF')
 
@@ -56,7 +56,8 @@ DATE_RE = re.compile(r'\d{4}/\d{2}/\d{2}$')      # 継続ページ上端の日�
 def _n(text):
     # 見出しの Diff は 'Di' + NUL のように制御文字が混じる。先に落とす。
     text = ''.join(ch for ch in (text or '') if ch == ' ' or ch >= ' ')
-    return unicodedata.normalize('NFKC', text).strip()
+    # ⻄ ⻑ ⻘ ⼾ など部首の文字コードで入っている漢字も戻す（radicals.py、東日本と共通）
+    return to_unified(text).strip()
 
 
 def _f(text):
@@ -339,6 +340,8 @@ def _record(seq, athlete, rt, index, category, round_label, pdf_name, n_routines
 
     # PDFは0を印字しないので、空欄のDiffは欠測ではなく0（予選1本目＝規定演技）
     d_implicit_zero = rt['Diff'] is None
+    check_no_radicals(athlete['name'], '氏名')
+    check_no_radicals(athlete['club'], '所属')
     return {
         'performance_id': '%s|%04d' % (MEET['meet_id'], seq),
         'meet_id': MEET['meet_id'], 'date': MEET['date'], 'meet_name': MEET['name'],

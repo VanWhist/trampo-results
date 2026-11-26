@@ -233,6 +233,23 @@ def check_nishi53(rows):
 DEC = re.compile(r'^\d+\.\d+$')
 
 
+# 東日本・西日本 第54回の PDF は一部の漢字を「部首」の文字コードで持っている。公開側は ETL が
+# 統合漢字に直している（etl/sources/radicals.py の RADICALS・KANGXI_JP と同じものを書き写した）。
+PDF_RADICALS = {'⻑': '長', '⻄': '西', '⻫': '斉', '⻘': '青', '⺠': '民',
+                '⻁': '虎', '⻤': '鬼', '⻯': '竜'}
+# 康熙部首のうち NFKC で日本の字にならないもの（戸→戶、黒→黑）。NFKC の前に置き換える
+PDF_KANGXI_JP = {chr(0x2F3E): chr(0x6238), chr(0x2FCA): chr(0x9ED2)}
+
+
+def _unradical(s):
+    for a, b in PDF_KANGXI_JP.items():
+        s = s.replace(a, b)
+    s = unicodedata.normalize('NFKC', s)
+    for a, b in PDF_RADICALS.items():
+        s = s.replace(a, b)
+    return s
+
+
 def _pdf_lines(path, nfkc=True):
     import logging
     logging.getLogger('pdfminer').setLevel(logging.ERROR)
@@ -240,7 +257,7 @@ def _pdf_lines(path, nfkc=True):
     out = []
     with pdfplumber.open(path) as pdf:
         for page in pdf.pages:
-            out += [unicodedata.normalize('NFKC', l) if nfkc else l
+            out += [_unradical(l) if nfkc else l
                     for l in (page.extract_text() or '').splitlines()]
     return out
 
@@ -332,9 +349,6 @@ def check_nishi54(rows):
 
 # ---- 2b. 東日本 --------------------------------------------------------------------
 
-# 2022・2026年版のPDFは一部の漢字を「部首」の文字コードで持っている。公開側は ETL が
-# 統合漢字に直している（etl/sources/higashinihon_pdf.py の RADICALS と同じ4つを書き写した）。
-HIGASHI_RADICALS = {'⻑': '長', '⻄': '西', '⻫': '斉', '⻘': '青'}
 INT_TOKEN = re.compile(r'^\d{1,2}$')
 
 
@@ -364,11 +378,8 @@ def _higashi_text(s):
     for a, b in HIGASHI_TEXT_FIXES.items():
         s = s.replace(a, b)
     s = ''.join(ch for ch in s if ch == ' ' or ch >= ' ').replace(chr(0xAD), ' ')
-    # U+2F3E（戸の部首）は NFKC で「戶」になる。公開側は ETL が日本の「戸」にしている
-    # （etl/sources/higashinihon_pdf.py の KANGXI_JP と同じ）
-    s = s.replace(chr(0x2F3E), chr(0x6238))
-    s = unicodedata.normalize('NFKC', s)
-    for a, b in list(HIGASHI_RADICALS.items()) + list(VARIANTS.items()):
+    s = _unradical(s)                    # 部首の文字コード（PDF_RADICALS・PDF_KANGXI_JP）
+    for a, b in VARIANTS.items():
         s = s.replace(a, b)
     return s
 
