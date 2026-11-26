@@ -1,9 +1,9 @@
 # ETL検証レポート
 
-dataVersion: `2026-11-26-03`
+dataVersion: `2026-11-26-05`
 
 ```
-65688 records passed / 167 warnings / 0 errors
+65688 records passed / 161 warnings / 0 errors
 ```
 
 ## 集計
@@ -37,19 +37,19 @@ dataVersion: `2026-11-26-03`
 | 審判別Eあり | 46297件 |
 | 審判名まで特定 | 6886件 |
 | 審判の表記ゆれ候補 | 6名（ローマ字表記で所属JPN） |
-| 選手の表記ゆれ候補 | 78名（うち候補が1人に絞れたもの 43名／統合済み 73名） |
-| 選手数 | 7016名 |
+| 選手の表記ゆれ候補 | 72名（うち候補が1人に絞れたもの 37名／統合済み 79名） |
+| 選手数 | 7007名 |
 | 大会数 | 144 |
 | 審判数 | 315名 |
 | パネル数 | 310 |
-| 選手数_sporttech | 5271名 |
+| 選手数_sporttech | 5265名 |
 | 選手数_osaka_pweb | 234名 |
 | 選手数_nishinihon | 568名 |
 
-## 警告（167件）
+## 警告（161件）
 
-- 選手の表記ゆれ … 78件
 - 審判人数 … 77件
+- 選手の表記ゆれ … 72件
 - 審判の表記ゆれ … 6件
 - 完全性 … 2件
 - 所属の切り詰め … 1件
@@ -159,16 +159,11 @@ dataVersion: `2026-11-26-03`
 - 選手の表記ゆれ Ishida Takashi は 石田 孝 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ KIRYU Risa は 桐生 莉沙 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ KISHI Ayano は 岸 彩乃 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
-- 選手の表記ゆれ Kitaori Eri は 北折 愛里 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ MASUZAKI Serina は 増崎 セリナ と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ MATSUNAMI Airi は 松波 愛里 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ MIYANO Toma は 宮野 冬馬 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ MURAKAMI Haruto は 村上 遥音 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ Masutani Yuki は 升谷 優希 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
-- 選手の表記ゆれ Matayoshi Kento は 又吉 健斗 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
-- 選手の表記ゆれ Mita Yasufumi は 美田 靖文 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
-- 選手の表記ゆれ Miyano Hayato は 宮野 隼人 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
-- 選手の表記ゆれ Mori Hikaru は 森 ひかる と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ Munetomo Ginga は 棟朝 銀河 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ Murakami Haruto は 村上 遥音 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ NAGATA Shinya は 永田 信弥 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
@@ -185,7 +180,6 @@ dataVersion: `2026-11-26-03`
 - 選手の表記ゆれ TSUJITA Karin は 辻田 花凜 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ TSUZUKU Kanato は 都竹 奏翔 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ Takagi Jumpei は 高木 惇平 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
-- 選手の表記ゆれ Tanaka Kiko は 田中 希湖 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ Tsuzuku Yuka は 都竹 結花 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ UYAMA Megu は 宇山 芽紅 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます
 - 選手の表記ゆれ Ueyama Yasuhiro は 上山 容弘 と同一人物の可能性があります（生年月日一致・出場日の重なりなし）。athlete_overrides.json で統合できます

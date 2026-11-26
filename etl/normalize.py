@@ -122,8 +122,14 @@ def build_athletes(performances, overrides):
     （選手名が「A / B」の連結になっていて、そのまま登録すると架空の選手ができる）。
     """
     merge_map = {}
+    # 統合した選手の表示名は、overrides の names の先頭の表記にする。
+    # 何もしないと最初に読んだ演技の表記になり、古い異体字（渡辺→渡邉など）が表示名になってしまう。
+    display_name = {}
     for entry in overrides['merge']:
-        for name in entry.get('names', []):
+        names = entry.get('names', [])
+        if names:
+            display_name[entry['athlete_id']] = normalize_name(names[0])
+        for name in names:
             merge_map[normalize_name(name)] = entry['athlete_id']
 
     split_map = {}
@@ -172,6 +178,8 @@ def build_athletes(performances, overrides):
 
     out = []
     for a in athletes.values():
+        if display_name.get(a['athlete_id']) in a['names_seen']:
+            a['name'] = display_name[a['athlete_id']]
         entry = {
             'athlete_id': a['athlete_id'],
             'name': a['name'],

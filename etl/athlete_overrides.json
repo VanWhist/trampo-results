@@ -1,5 +1,5 @@
 {
-  "_comment": "同姓同名の別人を分ける / 表記ゆれで分かれた同一人物をまとめる。自動判定はしない。候補は docs/選手の表記ゆれ候補.md（ETLが毎回生成）にある。",
+  "_comment": "同姓同名の別人を分ける / 表記ゆれで分かれた同一人物をまとめる。自動判定はしない。merge の names の先頭の表記が選手ページの表示名になる。候補は docs/選手の表記ゆれ候補.md（ETLが毎回生成）にある。",
   "_split_example": {
     "name": "山田 太郎",
     "groups": [
@@ -13,8 +13,8 @@
     { "athlete_id": "a-kishi-daiki",      "names": ["岸 大貴", "KISHI Daiki"] },
     { "athlete_id": "a-matsumoto-yusei",  "names": ["松本 悠生", "MATSUMOTO Yusei"] },
     { "athlete_id": "a-misawa-yuka",      "names": ["三澤 優華", "MISAWA Yuka"] },
-    { "athlete_id": "a-miyano-hayato",    "names": ["宮野 隼人", "MIYANO Hayato"] },
-    { "athlete_id": "a-mori-hikaru",      "names": ["森 ひかる", "MORI Hikaru"] },
+    { "athlete_id": "a-miyano-hayato",    "names": ["宮野 隼人", "MIYANO Hayato", "Miyano Hayato"] },
+    { "athlete_id": "a-mori-hikaru",      "names": ["森 ひかる", "MORI Hikaru", "Mori Hikaru"] },
     { "athlete_id": "a-nishioka-ryusei",  "names": ["西岡 隆成", "NISHIOKA Ryusei"] },
     { "athlete_id": "a-sakurai-ena",      "names": ["櫻井 愛菜", "SAKURAI Ena"] },
     { "athlete_id": "a-sawada-momo",      "names": ["澤田 守杏", "SAWADA Momo"] },
@@ -22,9 +22,9 @@
     { "athlete_id": "a-unno-hiroto",      "names": ["海野 大透", "UNNO Hiroto"] },
 
     { "athlete_id": "a-ishida-misaki",    "names": ["石田 美咲希", "ISHIDA Misaki"] },
-    { "athlete_id": "a-mita-yasufumi",    "names": ["美田 靖文", "MITA Yasufumi"] },
+    { "athlete_id": "a-mita-yasufumi",    "names": ["美田 靖文", "MITA Yasufumi", "Mita Yasufumi"] },
     { "athlete_id": "a-yamazaki-riku",    "names": ["山崎 凌空", "YAMAZAKI Riku"] },
-    { "athlete_id": "a-tanaka-kiko",      "names": ["田中 希湖", "TANAKA Kiko"] },
+    { "athlete_id": "a-tanaka-kiko",      "names": ["田中 希湖", "TANAKA Kiko", "Tanaka Kiko"] },
 
     { "athlete_id": "a-iida-mayu",        "names": ["飯田 麻友", "IIDA Mayu"] },
     { "athlete_id": "a-minami-takuto",    "names": ["南 拓斗", "MINAMI Takuto"] },
@@ -37,9 +37,9 @@
     { "athlete_id": "a-watanabe-kotomi",  "names": ["渡邊 琴美", "WATANABE Kotomi"] },
 
     { "athlete_id": "a-kusagaya-takeshi", "names": ["草ケ谷 剛", "KUSAGAYA Takeshi"] },
-    { "athlete_id": "a-matayoshi-kento",  "names": ["又吉 健斗", "MATAYOSHI Kento"] },
+    { "athlete_id": "a-matayoshi-kento",  "names": ["又吉 健斗", "MATAYOSHI Kento", "Matayoshi Kento"] },
     { "athlete_id": "a-fukai-takumi",     "names": ["深井 拓海", "FUKAI Takumi"] },
-    { "athlete_id": "a-kitaori-eri",      "names": ["北折 愛里", "KITAORI Eri"] },
+    { "athlete_id": "a-kitaori-eri",      "names": ["北折 愛里", "KITAORI Eri", "Kitaori Eri"] },
 
     { "athlete_id": "a-88ef185d99", "names": ["有村 颯眞", "ARIMURA Soma"] },
     { "athlete_id": "a-54f8f3884e", "names": ["菊川 結月", "KIKUKAWA Yuzuki"] },
@@ -51,7 +51,7 @@
     { "athlete_id": "a-dc68320a06", "names": ["室野 尊", "MURONO Takeru"] },
     { "athlete_id": "a-ebbe8a23fc", "names": ["城 瑛斗", "JO Akito"] },
     { "athlete_id": "a-a4fd1345c4", "names": ["梶原 聖太", "KAJIHARA Shota"] },
-    { "athlete_id": "a-2810c2aa67", "names": ["渡邉 聖来", "WATANABE Seira"] },
+    { "athlete_id": "a-2810c2aa67", "names": ["渡邉 聖来", "WATANABE Seira", "渡辺 聖来"] },
     { "athlete_id": "a-871bd196ad", "names": ["冨田 媛佳令", "TOMITA Hikari"] },
     { "athlete_id": "a-e3e8a1ba3b", "names": ["岩佐 玲那", "IWASA Rena"] },
     { "athlete_id": "a-7958b49bd3", "names": ["横石 塁", "YOKOISHI Rui", "Yokoishi Rui"] },
@@ -60,7 +60,7 @@
     { "athlete_id": "a-d452a08f2d", "names": ["谷好 健琉", "TANIYOSHI Takeru"] },
     { "athlete_id": "a-ceaf04a304", "names": ["吉田 朱里", "YOSHIDA Akari"] },
     { "athlete_id": "a-3946d56806", "names": ["松本 陽葵", "MATSUMOTO Himari"] },
-    { "athlete_id": "a-7909469a09", "names": ["中山 偉斗", "NAKAYAMA Yorito"] },
+    { "athlete_id": "a-7909469a09", "names": ["中山 偉斗", "NAKAYAMA Yorito", "中山 偉人"] },
     { "athlete_id": "a-be0a91cf3a", "names": ["寺沢 健太", "TERASAWA Kenta"] },
     { "athlete_id": "a-a89e2644b7", "names": ["中田 悠暉", "NAKATA Yuki"] },
     { "athlete_id": "a-4789f560df", "names": ["神山 空駕", "KAMIYAMA Kuga", "Kamiyama Kuga"] },
@@ -80,9 +80,10 @@
     { "athlete_id": "a-a51200fc49", "names": ["早川 天恵", "HAYAKAWA Tenkei"] },
     { "athlete_id": "a-f7b0a2d5e8", "names": ["高野 瑞基", "TAKANO Mizuki"] },
     { "athlete_id": "a-e64d6c9311", "names": ["清水 澪", "SHIMIZU Rei"] },
-    { "athlete_id": "a-e4623fa4b5", "names": ["綱嶋 愛実", "TSUNASHIMA Megumi"] },
+    { "athlete_id": "a-e4623fa4b5", "names": ["綱嶋 愛実", "TSUNASHIMA Megumi", "綱島 愛実"] },
     { "athlete_id": "a-e346c4a1c5", "names": ["市村 優真", "ICHIMURA Yuma"] }
   ],
   "_merge_note_20261126": "2026-11-26 Vanさん承認（「瑛斗以外も結びつけて」）。第3回世界ジュニア・第32回世界年齢別（2026-11-12、南京）の日本代表。日本体操協会の日本代表名簿（TRA_2026_JrWCH_WAGC_national_team_rev03.pdf）の種目・年齢区分・男女ごとの漢字氏名と所属を、sporttech の同じ区分の日本選手と姓で1対1に対応させ、生年・性別の一致と出場日が重ならないことを確かめた。athlete_id は漢字表記の選手が使っていたIDをそのまま使い、選手ページのURLを変えない。うち5名（横石 塁・白須 篤人・神山 空駕・酒谷 風花・勝森 天音）は 2024-05-11 のアジア選手権の先頭だけ大文字の表記も、生年月日の一致を確かめて同じ行に足した。SAKAI Ryosuke（W杯コットブス）は名簿の裏付けが無く、候補の堺 亮介 側の生年月日が5通りあるため結合していない。",
+  "_merge_note_20261126b": "2026-11-26 Vanさん承認（「残りの表記もまとめて」）。(1) 先頭だけ大文字の表記6件（Kitaori Eri・Matayoshi Kento・Mita Yasufumi・Miyano Hayato・Mori Hikaru・Tanaka Kiko）を、2026-08-14 に結合済みの行に足した。Miyano Hayato だけは生年月日が 2002-01-01（生年のみ）で、宮野 隼人（2002-04-25）とは生年の一致・同姓同生年に他候補なしで判断。ほかの5件は生年月日が日まで一致。いずれも出場日の重なりなし。(2) 漢字の書き分け3件。渡辺 聖来→渡邉 聖来（同じフリーエアースポーツクラブ、2018〜2022 と 2023〜 で時期が続き、10才以下→11-12才と区分も生年月日 2012-01-20 に合う）。綱島 愛実→綱嶋 愛実（同じキタイスポーツクラブ、2017〜2018 と 2019〜 で時期が続く。2018-07 の区分 11-12才は年末の年齢10才より上で、ここだけは完全には合わない）。中山 偉人→中山 偉斗（2021-10-02 の1大会だけの表記、所属 星稜クラブ・生年 2005 が一致、偉斗はその大会に別に出ていない）。athlete_id は漢字（多い方）の選手のIDのまま。",
   "_pending": "SEKIGUCHI Yuina（関口 結菜が有力だがDMTに同生年が7名）は保留。タンブリング・DMTのみで、Phase 1の画面には出ない。warningsに残す。SHIMIZU Rei は 2026-11-26 に日本代表名簿（清水 澪・静岡産業大学クラブ）で確認でき、結合した。"
 }
