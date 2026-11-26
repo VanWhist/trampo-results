@@ -65,11 +65,17 @@ RADICALS = {'\u2ed1': '\u9577',   # ⻑ → 長
             '\u2ed8': '\u9752'}   # ⻘ → 青
 
 
+# 康熙部首は NFKC で統合漢字に戻るが、U+2F3E（戸の部首）だけは日本の「戸」（U+6238）ではなく
+# 「戶」（U+6236）になる（保戸塚・瀬戸・戸田・江戸崎が別表記になった）。NFKC の前に置き換える。
+KANGXI_JP = {chr(0x2F3E): chr(0x6238)}
+SOFT_HYPHEN = chr(0x00AD)                # Pen 空欄の印
+
+
 # 合字「fi」が NUL として取り出される語（PDFの画面表示で確認、2026-11-27）。見出しの
 # 'Di'+NUL（Diff の ff）以外で、ここに無い NUL が氏名・所属に出たら止める。
 LIGATURES = {'s\x00da': 'sfida', 'bon\x00re': 'bonfire'}
 # PDFの文字データそのものが化けている所属（画面にも「?」と出る）。正しい表記に直す。
-CLUB_FIXES = {'Fiert?s': 'Fiertés'}
+CLUB_FIXES = {'Fiert?s': 'Fiertés', 'PiCTuRES:qu?': 'PiCTuRES:quÉ'}
 
 
 def _n(text):
@@ -81,7 +87,9 @@ def _n(text):
         raise ValueError('合字の取り出しに失敗した語があります（LIGATURES に追加が必要）: %r' % bad)
     # 見出しの Diff は 'Di' + NUL のように制御文字が混じる。先に落とす。
     text = ''.join(ch for ch in text if ch == ' ' or ch >= ' ')
-    text = text.replace('­', '')              # ソフトハイフン（Pen 空欄の印）
+    text = text.replace(SOFT_HYPHEN, '')
+    for old, new in KANGXI_JP.items():
+        text = text.replace(old, new)
     text = unicodedata.normalize('NFKC', text)       # ⽇ ⼈ ⼥（康熙部首）はここで戻る
     for old, new in RADICALS.items():
         text = text.replace(old, new)
