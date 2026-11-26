@@ -90,6 +90,15 @@ def _n(text):
     text = text.replace(SOFT_HYPHEN, '')
     for old, new in KANGXI_JP.items():
         text = text.replace(old, new)
+    # 康熙部首のうち NFKC で日本で使わない字形になるもの（戸→戶 のような）が残っていたら止める。
+    # 判定は「NFKC 後の字が Shift_JIS（JIS X 0208）で書けるか」。黑・黃・靑などはここで止まる。
+    for ch in set(text):
+        if 0x2F00 <= ord(ch) <= 0x2FDF:
+            try:
+                unicodedata.normalize('NFKC', ch).encode('shift_jis')
+            except UnicodeEncodeError:
+                raise ValueError('日本で使わない字形になる部首の文字があります（KANGXI_JP に追加が必要）: '
+                                 '%r' % ch)
     text = unicodedata.normalize('NFKC', text)       # ⽇ ⼈ ⼥（康熙部首）はここで戻る
     for old, new in RADICALS.items():
         text = text.replace(old, new)

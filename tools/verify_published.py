@@ -378,79 +378,120 @@ def _flat(s):
 
 
 ROUND_MARK = re.compile(r'(?:Q|予選|決勝)(\d)')
+HIGASHI_SKIP = re.compile(r'T-product|signature|All Rights Reserved|https?://|順位表_|^\d+/\d+$'
+                          r'|^\d{4}/\d{1,2}/\d{1,2} \d{1,2}:\d{2}')
 
 
-def _text_only(tokens):
-    """行の語から、数値・ラウンド記号・通過の印「Q」・読み仮名を除いた文字だけを返す。"""
+def _higashi_lines(path):
+    """ページごとに、列見出しより下の行だけを返す（ページの上下の見出し・URL・印刷日時は除く）。
+    行は extract_text の y_tolerance=4 でまとめる（珍しい漢字の姓が別の字体で3pt上に出る・
+    ページ末尾で減点と点数が2.6pt離れて印字される、を同じ行にするため）。"""
+    import logging
+    logging.getLogger('pdfminer').setLevel(logging.ERROR)
+    import pdfplumber
+    out, header, heading = [], [], ''
+    with pdfplumber.open(path) as pdf:
+        for n, page in enumerate(pdf.pages):
+            lines = [_higashi_text(l) for l in (page.extract_text(y_tolerance=4) or '').splitlines()]
+            if n == 0:
+                heading = ' '.join(lines[:8])
+            h = next((k for k, l in enumerate(lines) if 'S1' in l.split() and 'Score' in l.split()), None)
+            if h is not None:
+                header = lines[h].split()
+            for l in lines[(h + 1) if h is not None else 0:]:
+                if re.search(r'T-product|signature|All Rights Reserved', l):
+                    break
+                if HIGASHI_SKIP.search(l):
+                    continue
+                out.append(l)
+    return out, header, heading
+
+
+def _is_num(t):
+    return re.fullmatch(r'-?\d+(?:\.\d+)?', t) is not None
+
+
+def _parse_routine(tokens, header, rank_first):
+    """演技の行を読む。減点（整数）と点数（小数）を分け、点数の列は
+    「Score = Exe + Diff + ToF + HD − Pen」が成り立つ当てはめ方で決める（ETL は座標で決めている）。
+    当てはめ方が1通りに決まらなければ None。"""
+    m = next((k for k, t in enumerate(tokens) if ROUND_MARK.fullmatch(t)), None)
+    if m is None:
+        m = next((k for k, t in enumerate(tokens) if t == 'Q'), None)
+    body = tokens[m + 1:] if m is not None else (tokens[1:] if rank_first else tokens)
+    body = [t for t in body if _is_num(t)]
+    first_dec = next((k for k, t in enumerate(body) if '.' in t), len(body))
+    ints = [int(t) for t in body[:first_dec]]
+    decs = [round(float(t), 2) for t in body[first_dec:]]
+    order = [c for c in ('Exe', 'Diff', 'ToF', 'HD', 'Pen', 'Score') if c in header or
+             (c == 'Diff' and any(h.startswith('Di') for h in header))]
+    agg = next((c for c in ('Best', 'Total') if c in header), None)
+    optional = [c for c in order if c not in ('Exe', 'Score')]
+    found = []
+    for mask in range(1 << len(optional)):
+        cols = [c for c in order if c in ('Exe', 'Score') or (optional.index(c) >= 0 and
+                                                              mask >> optional.index(c) & 1)]
+        for with_agg in ((False, True) if agg else (False,)):
+            names = cols + ([agg] if with_agg else [])
+            if len(names) != len(decs):
+                continue
+            v = dict(zip(names, decs))
+            # ペナルティは小さい（数点まで）。選手の Best/Total はこの演技の Score 以上
+            if v.get('Pen', 0) > 2.0 or (agg in v and v[agg] < v['Score'] - 0.005):
+                continue
+            calc = v['Exe'] + v.get('Diff', 0) + v.get('ToF', 0) + v.get('HD', 0) - v.get('Pen', 0)
+            if abs(calc - v['Score']) <= 0.011:          # 原本の丸めで 0.01 ずれる演技がある
+                found.append((abs(calc - v['Score']), v))
+    # いちばん式に近い当てはめだけを残す（偶然 0.01 差で合う別の当てはめを外す）
+    best = min((g for g, _ in found), default=None)
+    found = [v for g, v in found if g <= best + 0.0001] if found else []
+    distinct = {tuple(sorted(v.items())) for v in found}
+    if len(distinct) != 1:
+        return None
+    v = found[0]
+    # 整数は S1〜Sn、着地（L）、A の順。0 の L・A は印字されないことがあり、中断した演技は
+    # 技数も分からないので、位置では決められない。E = 2n − (S の和 ＋ 着地（n=10のとき）)/10
+    # が成り立つ読み方を候補として残す（成り立つものが無ければ全部残し、公開と同じものがあれば可）。
+    cands = []
+    for extra in (0, 1, 2):
+        n = len(ints) - extra
+        if n < 0 or (extra == 2 and 'A' not in header):
+            continue
+        S, L = ints[:n], (ints[n] if extra >= 1 else 0)
+        e = 2 * n - (sum(S) + (L if n == 10 else 0)) / 10.0
+        cands.append((abs(e - v['Exe']) <= 0.051, S, L))
+    good = [(S, L) for ok, S, L in cands if ok]
+    v['readings'] = good or [(S, L) for _, S, L in cands]
+    v['mark'] = ROUND_MARK.fullmatch(tokens[m]).group(1) if m is not None and tokens[m] != 'Q' else None
+    return v
+
+
+def _text_part(tokens, rank_first):
     out = []
-    for t in tokens:
-        if re.fullmatch(r'-?[\d.]+', t) or t == 'Q' or ROUND_MARK.fullmatch(t):
+    for k, t in enumerate(tokens):
+        if k == 0 and rank_first:
+            continue
+        if _is_num(t) or t == 'Q' or ROUND_MARK.fullmatch(t):
             continue
         out.append(ROUND_MARK.sub('', t))
-    return re.sub(r'\([^)]*\)?', '', ''.join(out))
+    return ' '.join(out)
 
 
-def _name_then_club(toks, i, athlete, club):
-    """順位の行 i（または1つ上）から始まる文字の並びで、氏名の直後に所属が続くか。"""
-    nm = _flat(norm_name(athlete))
-    club = _flat(re.sub(r'\([^)]*\)?', '', club).replace('慶應', '慶応'))
-    for j in (i, i - 1):
-        if j < 0:
-            continue
-        stream = _flat(_text_only(sum(toks[j:i + 4], []))).replace('慶應', '慶応')
-        pos = stream.find(nm)
-        if pos < 0:
-            continue
-        if j == i - 1 and pos != 0:
-            continue                               # 1つ上の行なら、その行の先頭が氏名
-        if club and stream[pos + len(nm):].startswith(club):
-            return True
-    return False
-
-
-def _owner_of(i, anchors, centered, mark):
-    before = [a for a in anchors if a[0] <= i]
-    after = [a for a in anchors if a[0] >= i]
-    if not centered:
-        return before[-1] if before else None
-    if mark == '1' and after:
-        return after[0]
-    if mark == '2' and before:
-        return before[-1]
-    return min(anchors, key=lambda a: abs(a[0] - i)) if anchors else None
-
-
-def _s_matches(toks, i, s_seq):
-    """減点の並び。ラウンド記号の直後（無い行は先頭の順位を除いた最初の整数）から
-    S1〜と着地がそのまま続くか。ページ末尾で減点だけ隣の行に分かれることがあるので前後も見る。"""
-    if not s_seq:
-        return True
-    for j in (i, i - 1, i + 1):
-        if not (0 <= j < len(toks)):
-            continue
-        ts = toks[j]
-        m = next((k for k, t in enumerate(ts) if ROUND_MARK.search(t)), None)
-        if m is not None:
-            starts = [[t for t in ts[m + 1:] if INT_TOKEN.match(t)]]
-        else:
-            # 印の無い行：先頭が順位の行と、減点だけの行（2行に分かれた版）がある
-            ints = [t for t in ts if INT_TOKEN.match(t)]
-            starts = [ints, ints[1:]]
-        if any(seq[:len(s_seq)] == s_seq for seq in starts):
-            return True
-    return False
+def _strip_reading(s):
+    return re.sub(r'\([^)]*\)?', '', s or '')
 
 
 def check_higashi(comps, rows):
     """PDFを行テキストで読み直す。ETL は語の座標で読んでいるので、読み方が違う。
 
-    区分ごと：PDF の演技の行の数と公開の演技数、列見出しの Best/Total と公開の見出しが同じか。
-    選手ごと：行頭が順位で、Best/Total（予選の選手の値）が印字された行があり、その行か1つ上に
-              氏名、氏名の直後に所属が続くか。Best/Total が各本の最大（Best）／合計（Total）か。
-    演技ごと：その選手のまとまりの中に、小数（E・D・T・HD・Pen・Score）と減点 S1〜S10＋着地が
-              そのまま並ぶ行が1本ずつあるか。何本目の印が合うか（印が無ければ行の順）。
-              まとまり：2026年版（氏名が上・順位が中・所属が下）は、予選1は次の順位、予選2は前の順位、
-              印の無い行はいちばん近い順位。それ以外の版は、順位の行から次の順位の行の手前まで。
+    行を「順位の行」ごとのまとまりに分け（2026年版は順位が氏名と所属の間に中央揃え：
+    予選1は次の順位、予選2は前の順位、ほかの行はいちばん近い順位。それ以外の版は順位の行から
+    次の順位の行の手前まで）、まとまりごとに次を確かめる。
+      ・まとまりの文字（数値・ラウンド記号・読み仮名を除く）が「氏名＋所属」とちょうど同じ
+      ・演技の行と公開の演技が1対1で、Exe・Diff・ToF・HD・Pen・Score・S1〜S10・着地が同じ
+        （列は Score の式が成り立つ当てはめ方で決める）。何本目の印が合う
+      ・Best/Total の印字が公開の値と同じで、各本の最大（Best）／合計（Total）になっている
+    区分ごとに、列見出しの Best/Total と公開の見出し、まとまりと公開の選手が1対1かも見る。
     """
     res = Result('東日本：PDF（行テキストで読み直し）と公開')
     manifest = jload(os.path.join(REPO, 'etl', 'higashinihon_files.json'))
@@ -472,111 +513,168 @@ def check_higashi(comps, rows):
             key = (meet['meet_id'], cat, rnd)
             seen_sections.add(key)
             where = '%s %s %s' % key
-            # 正規化は _higashi_text でする（先に NFKC をかけると U+2F3E が「戶」になってしまう）
-            lines = [_higashi_text(l) for l in _pdf_lines(os.path.join(folder, name), nfkc=False)]
-            toks = [l.split() for l in lines]
-            decs = [[round(float(t), 2) for t in ts if DEC.match(t)] for ts in toks]
-            centered = 'Hirotaka' in ' '.join(lines[:8])
-            header = next((ts for ts in toks if 'S1' in ts and 'Score' in ts), [])
-            printed = 'Best' if 'Best' in header else ('Total' if 'Total' in header else None)
+            lines, header, heading = _higashi_lines(os.path.join(folder, name))
+            centered = 'Hirotaka' in heading
+            printed = next((c for c in ('Best', 'Total') if c in header), None)
             shown = labels.get(meet['meet_id'], {}).get('%s|%s' % (cat, rnd))
             if printed != shown:
                 res.fail('%s：PDFの列見出しは %s、公開は %s' % (where, printed, shown))
-            # 演技の行：小数が3つ以上あり、0でない小数が2つ以上ある。演技していない・技0本の
-            # 演技は全部 0.00 で、同じ行に選手の Best だけが印字されることがある（0でないのは1つ）
-            routine_lines = [i for i, d in enumerate(decs)
-                             if len(d) >= 3 and sum(1 for x in d if x > 0) >= 2]
-            mine = pub.get(key, [])
-            if len(routine_lines) != len(mine):
-                res.fail('%s：PDFの演技の行 %d／公開 %d' % (where, len(routine_lines), len(mine)))
-            groups = collections.defaultdict(list)
-            for r in mine:
-                groups[(r.get('rank'), r['athlete_name'])].append(r)
 
-            # ---- 選手ごと：順位の行を決め、氏名・所属・予選の値を見る
-            rank_line, taken = {}, set()
-            for (rank, athlete), rs in sorted(groups.items(), key=lambda kv: kv[0][0] or 0):
-                label = '%s %s位 %s' % (where, rank, athlete)
+            # ---- 行の種類
+            items = []
+            last_rank, block_has_routine = None, False
+            for l in lines:
+                ts = l.split()
+                if not ts:
+                    continue
+                if centered:
+                    is_rank = re.fullmatch(r'\d+', ts[0]) is not None
+                else:
+                    is_rank = (re.fullmatch(r'\d+', ts[0]) is not None and len(ts) > 1
+                               and not _is_num(ts[1]))
+                    # 氏名が上にはみ出した選手の順位の行は「順位 減点…」で始まる。次の順位の数字で、
+                    # 今の選手にもう演技の行があるときだけ順位の行とみなす（減点だけの行と区別する）
+                    if (not is_rank and re.fullmatch(r'\d+', ts[0]) and last_rank is not None
+                            and int(ts[0]) == last_rank + 1 and block_has_routine):
+                        is_rank = True
+                dns = any(t.endswith('DNS') for t in ts)
+                decs = [float(t) for t in ts if re.fullmatch(r'\d+\.\d+', t)]
+                is_routine = len(decs) >= 3 and sum(1 for x in decs if x > 0) >= 2
+                rt = _parse_routine(ts, header, is_rank) if is_routine else None
+                if is_routine and rt is None:
+                    res.fail('%s：点数の列が決まらない行「%s」' % (where, l[:60]))
+                if is_rank:
+                    last_rank, block_has_routine = int(ts[0]), False
+                if is_routine:
+                    block_has_routine = True
+                items.append({'tokens': ts, 'rank': int(ts[0]) if is_rank else None,
+                              'anchor': is_rank or dns, 'dns': dns, 'routine': rt,
+                              'text': _text_part(ts, is_rank),
+                              'agg': (round(float(ts[-1]), 2)
+                                      if (is_rank and re.fullmatch(r'\d+\.\d+', ts[-1])) else None)})
+
+            # ---- まとまりに分ける
+            anchors = [k for k, it in enumerate(items) if it['anchor']]
+            blocks = {k: [] for k in anchors}
+            if not centered:
+                cur = 'pre'
+                blocks['pre'] = []                     # 最初の順位の行より上
+                for k, it in enumerate(items):
+                    if it['anchor']:
+                        cur = k
+                    blocks[cur].append(k)
+                # 順位の行に氏名が無い（2行の氏名が上にはみ出した）なら、直前の文字だけの行を引き取る
+                prev = 'pre'
+                for a in anchors:
+                    last = items[blocks[prev][-1]] if blocks[prev] else None
+                    if (last is not None and last['routine'] is None and not last['anchor']
+                            and (not items[a]['text'] or last['text'].count('(') > last['text'].count(')'))):
+                        blocks[a].insert(0, blocks[prev].pop())
+                    prev = a
+            else:
+                for k, it in enumerate(items):
+                    if it['anchor']:
+                        blocks[k].append(k)
+                        continue
+                    mark = it['routine']['mark'] if it['routine'] else None
+                    before = [a for a in anchors if a < k]
+                    after = [a for a in anchors if a > k]
+                    if mark == '1' and after:
+                        o = after[0]
+                    elif mark == '2' and before:
+                        o = before[-1]
+                    elif before or after:
+                        o = min(before[-1:] + after[:1], key=lambda a: (abs(a - k), a > k))
+                    else:
+                        continue
+                    blocks[o].append(k)
+
+            # ---- 公開の選手とまとまりを1対1に
+            groups = collections.defaultdict(list)
+            for r in pub.get(key, []):
+                groups[(r.get('rank'), r['athlete_name'])].append(r)
+            unmatched = set(groups)
+            for a in anchors:
+                its = [items[k] for k in sorted(blocks[a])]
+                perfs = [it['routine'] for it in its if it['routine']]
+                text = _flat(_strip_reading(' '.join(it['text'] for it in its)))
+                text = re.sub(r'DNS$', '', text).replace('慶應', '慶応')
+                cand = [g for g in unmatched if g[0] == items[a]['rank']
+                        and text == _flat(_strip_reading(norm_name(g[1])))
+                        + _flat(_strip_reading(groups[g][0].get('club') or '')).replace('慶應', '慶応')]
+                if not perfs:
+                    if cand:
+                        res.fail('%s %s位 %s：PDFでは演技が無いのに公開されている' % (where, items[a]['rank'], cand[0][1]))
+                    continue
+                label = '%s %s位「%s」' % (where, items[a]['rank'], text[:20])
+                if not cand:
+                    res.fail(label + '：公開に、同じ順位で「氏名＋所属」がちょうど同じ選手が無い')
+                    continue
+                g = cand[0]
+                unmatched.discard(g)
+                rs = groups[g]
+                if len(rs) != len(perfs):
+                    res.fail(label + '：PDFの演技 %d本／公開 %d本' % (len(perfs), len(rs)))
+                    continue
+                # Best/Total
                 q = rs[0].get('qualifying_total')
-                totals = [x['total'] for x in rs if x.get('total') is not None]
-                if q is not None and totals and printed:
+                aggs = [it['agg'] for it in its if it['agg'] is not None] + \
+                       [p[printed] for p in perfs if printed and printed in p]
+                if printed and aggs:
+                    if q is None or round(q, 2) != round(aggs[0], 2):
+                        res.fail(label + '：%s がPDFは %s、公開は %s' % (printed, aggs[0], q))
+                        continue
+                    totals = [x['total'] for x in rs]
                     want = max(totals) if printed == 'Best' else sum(totals)
                     if abs(want - q) > 0.006:
                         res.fail(label + '：%s %.2f が各本 %s と合わない' % (printed, q, totals))
                         continue
-                cands = [i for i, ts in enumerate(toks)
-                         if i not in taken and ts and ts[0] == str(rank)
-                         and (q is None or round(q, 2) in decs[i])]
-                hit = next((i for i in cands
-                            if _name_then_club(toks, i, athlete, rs[0].get('club') or '')), None)
-                if hit is None:
-                    res.fail(label + '：順位と予選の値の行の近くに「氏名＋所属」が並んでいない')
-                    continue
-                taken.add(hit)
-                rank_line[(rank, athlete)] = hit
-                res.ok()
-
-            # ---- 演技ごと：選手のまとまりの中で照合する
-            anchors = sorted((i, k) for k, i in rank_line.items())
-            owner = collections.defaultdict(list)
-            for i in routine_lines:
-                mark = ROUND_MARK.search(lines[i])
-                o = _owner_of(i, anchors, centered, mark.group(1) if mark else None)
-                if o:
-                    owner[o[1]].append(i)
-            for gk, rs in groups.items():
-                if gk not in rank_line:
-                    continue
-                mine_lines = owner.get(gk, [])
-                if len(mine_lines) != len(rs):
-                    res.fail('%s %s位 %s：PDFのまとまりの演技 %d本／公開 %d本'
-                             % (where, gk[0], gk[1], len(mine_lines), len(rs)))
-                    continue
+                # 演技
                 used = set()
-                for r in sorted(rs, key=lambda x: x.get('routine') or 0):
-                    label = '%s %s位 %s %s本目' % (where, gk[0], gk[1], r.get('routine'))
-                    missing = [k for k in ('E', 'HD', 'total') if r.get(k) is None]
-                    if r.get('T') is None and '園児' not in cat:
-                        missing.append('T')
-                    if missing:
-                        res.fail(label + '：%s が空' % '・'.join(missing))
-                        continue
+                ok = True
+                for order, r in enumerate(sorted(rs, key=lambda x: x.get('routine') or 0), start=1):
                     det = details.get(r['performance_id']) or {}
-                    s_seq = [str(int(v)) for v in (det.get('positions') or []) if v is not None]
-                    if det.get('landing') is not None:
-                        s_seq.append(str(int(det['landing'])))
-                    if not s_seq and r.get('n_elements') != 0:
-                        res.fail(label + '：公開の詳細に減点（S1〜）が無い')
-                        continue
-                    want = [round(r[k], 2) for k in ('E', 'total', 'HD')]
-                    want += [round(r[k], 2) for k in ('D', 'T', 'Pen') if r.get(k)]
+                    pos = [int(v) for v in (det.get('positions') or []) if v is not None]
+                    n = len(pos)
+                    want_l = det.get('landing') if n == 10 else det.get('unaccounted')
                     hit = None
-                    for i in mine_lines:
-                        if i in used:
+                    for k, p in enumerate(perfs):
+                        if k in used:
                             continue
-                        have = collections.Counter(decs[i])
-                        if any(have[v] < c for v, c in collections.Counter(want).items()):
-                            continue
-                        if _s_matches(toks, i, s_seq):
-                            hit = i
+                        same = all(_same(p.get(c), r.get(f)) for c, f in
+                                   (('Exe', 'E'), ('Diff', 'D'), ('HD', 'HD'), ('Pen', 'Pen'), ('Score', 'total')))
+                        same = same and (_same(p.get('ToF'), r.get('T')) if 'ToF' in header
+                                         else r.get('T') is None)
+                        same = same and r.get('n_elements') == n and any(
+                            S == pos and (want_l or 0) == L for S, L in p['readings'])
+                        if same:
+                            hit = k
                             break
                     if hit is None:
-                        res.fail(label + '：同じ値・同じ減点の行がまとまりの中に無い')
+                        res.fail(label + ' %s本目：同じ点数・同じ減点の演技がまとまりの中に無い' % r.get('routine'))
+                        ok = False
                         continue
                     used.add(hit)
-                    m = ROUND_MARK.search(lines[hit])
-                    if m and int(m.group(1)) != r.get('routine'):
-                        res.fail(label + '：PDFでは %s本目' % m.group(1))
-                        continue
+                    mark = perfs[hit]['mark']
+                    want_no = int(mark) if mark else (order if len(rs) > 1 else 1)
+                    if r.get('routine') != want_no:
+                        res.fail(label + '：本目の番号 公開 %s／PDF %s' % (r.get('routine'), want_no))
+                        ok = False
+                if ok:
                     res.ok()
-                # 印の無い区分：本目は 1, 2, … と並ぶ（1本だけなら 1）
-                if not any(ROUND_MARK.search(lines[i]) for i in mine_lines):
-                    nums = sorted(r.get('routine') for r in rs)
-                    if nums != list(range(1, len(rs) + 1)):
-                        res.fail('%s %s位 %s：本目の番号 %s' % (where, gk[0], gk[1], nums))
+            for g in unmatched:
+                res.fail('%s %s位 %s：PDFに対応するまとまりが無い' % (where, g[0], g[1]))
     for key in set(pub) - seen_sections:
         res.fail('読むファイルに無い区分が公開されている：%s' % (key,))
     return res
+
+
+def _same(pdf_value, published):
+    """PDF は 0 の列を印字しないことがある（Diff・Pen）。印字なし＝0。公開の空（None）は 0 と同じに
+    扱わない（Diff の空欄は ETL が 0.0 にしている。None なら取りこぼし）。"""
+    if published is None:
+        return pdf_value is None
+    return abs((pdf_value or 0.0) - published) <= 0.0051
 
 
 # ---- 3. 大阪府 --------------------------------------------------------------------

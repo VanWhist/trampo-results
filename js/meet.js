@@ -277,8 +277,12 @@ function renderCards(groups) {
         const S = (det.positions || []).map((v) => (v === null || v === undefined ? '·' : v));
         return el('div', { class: 'rec-routine' }, [
           el('div', { class: 'rec-routine-head' }, [
-            // 2本目だけの選手（1本目が0点で載っていない）も Q2 と出す
-            el('span', { text: g.length > 1 || (r.routine || 1) > 1 ? 'Q' + r.routine : '演技' }),
+            // 予選で2本目だけの選手（1本目が0点で載っていない）も Q2 と出す。
+            // 決勝は1本なので「演技」のまま（大阪府の決勝は本目の番号が 3 になっている）
+            el('span', {
+              text: g.length > 1 || ((r.routine || 1) > 1 && r.round !== '決勝')
+                ? 'Q' + r.routine : '演技',
+            }),
             el('span', { class: 'num', text: num(r.total, 2) ?? '—' }),
             r.interrupted ? el('span', { class: 'badge flag', text: '中断' }) : null,
             rulesBadge(r),
