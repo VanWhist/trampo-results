@@ -62,7 +62,8 @@ def load_manifest():
 RADICALS = {'\u2ed1': '\u9577',   # ⻑ → 長
             '\u2ec4': '\u897f',   # ⻄ → 西
             '\u2eeb': '\u6589',   # ⻫ → 斉
-            '\u2ed8': '\u9752'}   # ⻘ → 青
+            '\u2ed8': '\u9752',    # ⻘ → 青
+            '\u2ea0': '\u6c11'}   # ⺠ → 民（会場名 ヤマト市民体育館）
 
 
 # 康熙部首は NFKC で統合漢字に戻るが、U+2F3E（戸の部首）だけは日本の「戸」（U+6238）ではなく
@@ -88,12 +89,13 @@ def _n(text):
     # 見出しの Diff は 'Di' + NUL のように制御文字が混じる。先に落とす。
     text = ''.join(ch for ch in text if ch == ' ' or ch >= ' ')
     text = text.replace(SOFT_HYPHEN, '')
-    for old, new in KANGXI_JP.items():
+    for old, new in list(KANGXI_JP.items()) + list(RADICALS.items()):
         text = text.replace(old, new)
-    # 康熙部首のうち NFKC で日本で使わない字形になるもの（戸→戶 のような）が残っていたら止める。
-    # 判定は「NFKC 後の字が Shift_JIS（JIS X 0208）で書けるか」。黑・黃・靑などはここで止まる。
+    # 部首の文字（康熙部首・CJK部首補助）のうち、NFKC で日本で使わない字形になるもの
+    # （戸→戶、黑・黃・靑、⻳→龟 など）が残っていたら止める。
+    # 判定は「NFKC 後の字が Shift_JIS（JIS X 0208）で書けるか」。
     for ch in set(text):
-        if 0x2F00 <= ord(ch) <= 0x2FDF:
+        if 0x2E80 <= ord(ch) <= 0x2FDF:
             try:
                 unicodedata.normalize('NFKC', ch).encode('shift_jis')
             except UnicodeEncodeError:
@@ -439,7 +441,7 @@ def _record(meet, seq, athlete, rt, routine_no, category, round_label, pdf_name)
             positions.append(v)
     L = _f(rt.get('L'))
     if n == 10:
-        landing = L
+        landing = 0.0 if L is None else L   # 0 は印字されない版がある（Diff と同じ）
     else:
         landing = None                # 中断した演技は着地減点が乗らない（§19.9）
         unaccounted += L or 0

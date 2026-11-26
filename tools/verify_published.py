@@ -597,16 +597,15 @@ def check_higashi(comps, rows):
             for a in anchors:
                 its = [items[k] for k in sorted(blocks[a])]
                 perfs = [it['routine'] for it in its if it['routine']]
-                text = _flat(_strip_reading(' '.join(it['text'] for it in its)))
-                text = re.sub(r'DNS$', '', text).replace('慶應', '慶応')
+                spaced = re.sub(r'\s+', ' ', ' '.join(it['text'] for it in its)).strip()
+                spaced = re.sub(r'\s*DNS$', '', spaced)
                 cand = [g for g in unmatched if g[0] == items[a]['rank']
-                        and text == _flat(_strip_reading(norm_name(g[1])))
-                        + _flat(_strip_reading(groups[g][0].get('club') or '')).replace('慶應', '慶応')]
+                        and _name_club_ok(spaced, g[1], groups[g])]
                 if not perfs:
                     if cand:
                         res.fail('%s %s位 %s：PDFでは演技が無いのに公開されている' % (where, items[a]['rank'], cand[0][1]))
                     continue
-                label = '%s %s位「%s」' % (where, items[a]['rank'], text[:20])
+                label = '%s %s位「%s」' % (where, items[a]['rank'], spaced[:20])
                 if not cand:
                     res.fail(label + '：公開に、同じ順位で「氏名＋所属」がちょうど同じ選手が無い')
                     continue
@@ -616,8 +615,15 @@ def check_higashi(comps, rows):
                 if len(rs) != len(perfs):
                     res.fail(label + '：PDFの演技 %d本／公開 %d本' % (len(perfs), len(rs)))
                     continue
+                # 2本目の行も同じ所属・同じ予選の値か
+                if len({x.get('club') for x in rs}) != 1 or len({x.get('qualifying_total') for x in rs}) != 1:
+                    res.fail(label + '：選手の行ごとに所属か予選の値が違う')
+                    continue
                 # Best/Total
                 q = rs[0].get('qualifying_total')
+                if not printed and q is not None:
+                    res.fail(label + '：PDFに Best/Total が無いのに公開に %s がある' % q)
+                    continue
                 aggs = [it['agg'] for it in its if it['agg'] is not None] + \
                        [p[printed] for p in perfs if printed and printed in p]
                 if printed and aggs:
@@ -633,20 +639,43 @@ def check_higashi(comps, rows):
                 used = set()
                 ok = True
                 for order, r in enumerate(sorted(rs, key=lambda x: x.get('routine') or 0), start=1):
-                    det = details.get(r['performance_id']) or {}
-                    pos = [int(v) for v in (det.get('positions') or []) if v is not None]
+                    det = details.get(r['performance_id'])
+                    if det is None and r.get('n_elements') == 0:
+                        # 技0本の演技（E は0、ToF だけ）は減点の詳細を持たない
+                        det = {'positions': [None] * 10, 'landing': None, 'unaccounted': 0,
+                               'n_elements': 0}
+                    det = det or {}
+                    raw_pos = list(det.get('positions') or [])
+                    pos = [v for v in raw_pos if v is not None]
                     n = len(pos)
-                    want_l = det.get('landing') if n == 10 else det.get('unaccounted')
+                    # 跳んだ位置は先頭から詰まっていて、値は整数（0.1点単位）
+                    shape_ok = (len(raw_pos) == 10 and raw_pos[:n] == pos
+                                and all(v is None for v in raw_pos[n:])
+                                and all(float(v) == int(v) for v in pos)
+                                and det.get('n_elements') == n == r.get('n_elements')
+                                and bool(r.get('interrupted')) == (n < 10))
+                    if n == 10:
+                        shape_ok = shape_ok and det.get('landing') is not None and not det.get('unaccounted')
+                        want_l = det.get('landing')
+                    else:
+                        shape_ok = shape_ok and det.get('landing') is None
+                        want_l = det.get('unaccounted')
+                    if not shape_ok:
+                        res.fail(label + ' %s本目：減点の並び・着地・技数・中断の印の形がおかしい' % r.get('routine'))
+                        ok = False
+                        continue
+                    pos = [int(v) for v in pos]
                     hit = None
                     for k, p in enumerate(perfs):
                         if k in used:
                             continue
-                        same = all(_same(p.get(c), r.get(f)) for c, f in
+                        same = all(_same(p.get(c), r.get(f), c) for c, f in
                                    (('Exe', 'E'), ('Diff', 'D'), ('HD', 'HD'), ('Pen', 'Pen'), ('Score', 'total')))
                         same = same and (_same(p.get('ToF'), r.get('T')) if 'ToF' in header
                                          else r.get('T') is None)
                         same = same and r.get('n_elements') == n and any(
-                            S == pos and (want_l or 0) == L for S, L in p['readings'])
+                            S == pos and want_l is not None and float(want_l) == L
+                            for S, L in p['readings'])
                         if same:
                             hit = k
                             break
@@ -669,11 +698,34 @@ def check_higashi(comps, rows):
     return res
 
 
-def _same(pdf_value, published):
-    """PDF は 0 の列を印字しないことがある（Diff・Pen）。印字なし＝0。公開の空（None）は 0 と同じに
-    扱わない（Diff の空欄は ETL が 0.0 にしている。None なら取りこぼし）。"""
+
+def _name_club_ok(spaced, name, rs):
+    """まとまりの文字（空白区切りのまま）が「氏名［読み仮名］ 所属」になっているか。
+    氏名は語の境目で終わること、読み仮名は氏名の直後の括弧だけを外すこと、所属は括弧も含めて
+    そのまま同じこと、を見る（つないだ文字だけで比べると境目のずれを見逃す）。"""
+    name = re.sub(r'\s+', ' ', unicodedata.normalize('NFKC', name or '')).strip()
+    club = (rs[0].get('club') or '').replace('慶應', '慶応')
+    for a, b in VARIANTS.items():
+        name, club = name.replace(a, b), club.replace(a, b)
+    if '(' in name or not spaced.startswith(name):
+        return False
+    rest = spaced[len(name):]
+    if rest and rest[0] not in ' (':
+        return False                                  # 氏名の途中で切れている
+    rest = rest.lstrip()
+    if rest.startswith('('):
+        close = rest.find(')')
+        rest = rest[close + 1:] if close >= 0 else ''
+    return _flat(rest).replace('慶應', '慶応') == _flat(club)
+
+def _same(pdf_value, published, column=''):
+    """PDF は 0 の列を印字しないことがある（Diff・Pen）。印字なし＝0。
+    Diff は公開でも 0.0 で持つ（ETL が空欄を 0.0 にしている）ので、公開の None は取りこぼし。
+    Pen は印字が無ければ公開も None（0.0 にすると画面に 0.0 の列が出てしまう）。"""
     if published is None:
-        return pdf_value is None
+        return pdf_value is None and column != 'Diff'
+    if column == 'Pen' and pdf_value is None:
+        return False
     return abs((pdf_value or 0.0) - published) <= 0.0051
 
 
