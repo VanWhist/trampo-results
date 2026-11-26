@@ -21,7 +21,7 @@ import sys
 sys.stdout.reconfigure(encoding='utf-8')
 
 from .. import completeness, normalize, osaka_crosscheck, validate
-from ..sources import nishinihon, nishinihon_pdf, osaka, osaka_html, sporttech
+from ..sources import higashinihon_pdf, nishinihon, nishinihon_pdf, osaka, osaka_html, sporttech
 
 
 def load_baseline():
@@ -30,8 +30,9 @@ def load_baseline():
     _, os_perfs = osaka.load_all()
     _, nw_perfs = nishinihon.load_all()
     _, n54_perfs = nishinihon_pdf.load_all()
+    _, ej_perfs = higashinihon_pdf.load_all()
     osaka_html.fill_missing(os_perfs)      # 本番と同じく元HTMLで穴を埋める
-    perfs = st_perfs + os_perfs + nw_perfs + n54_perfs
+    perfs = st_perfs + os_perfs + nw_perfs + n54_perfs + ej_perfs
     normalize.build_athletes(perfs, normalize.load_overrides())   # 氏名の正規化を先に効かせる
     return perfs
 

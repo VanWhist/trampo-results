@@ -1,6 +1,214 @@
 {
  "_comment": "区分×ラウンドごとの行数と選手数。人が確認して固定した基準値。元の変換が正しいことは保証しないが、次回以降の取りこぼしは止まる。`python -m etl.build --accept-sections` で更新する。",
  "sections": {
+  "higashinihon|ej-2022-09-09|Aクラス 女子|予選": {
+   "athletes": 23,
+   "rows": 45
+  },
+  "higashinihon|ej-2022-09-09|Aクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2022-09-09|Aクラス 男子|予選": {
+   "athletes": 32,
+   "rows": 59
+  },
+  "higashinihon|ej-2022-09-09|Aクラス 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2022-09-09|Bクラス 女子|予選": {
+   "athletes": 70,
+   "rows": 70
+  },
+  "higashinihon|ej-2022-09-09|Bクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2022-09-09|Bクラス 男子|予選": {
+   "athletes": 44,
+   "rows": 44
+  },
+  "higashinihon|ej-2022-09-09|Bクラス 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2022-09-09|Cクラス 女子|予選": {
+   "athletes": 87,
+   "rows": 87
+  },
+  "higashinihon|ej-2022-09-09|Cクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2022-09-09|Cクラス 男子|予選": {
+   "athletes": 40,
+   "rows": 40
+  },
+  "higashinihon|ej-2022-09-09|Cクラス 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2024-11-02|Cクラス 女子|予選": {
+   "athletes": 43,
+   "rows": 86
+  },
+  "higashinihon|ej-2024-11-02|Cクラス 男子|予選": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "higashinihon|ej-2024-11-02|DJクラス 女子|決勝": {
+   "athletes": 30,
+   "rows": 60
+  },
+  "higashinihon|ej-2024-11-02|DJクラス 男子|決勝": {
+   "athletes": 20,
+   "rows": 40
+  },
+  "higashinihon|ej-2024-11-02|DSクラス 女子|決勝": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "higashinihon|ej-2024-11-02|DSクラス 男子|決勝": {
+   "athletes": 6,
+   "rows": 12
+  },
+  "higashinihon|ej-2024-11-02|Eクラス 女子|決勝": {
+   "athletes": 28,
+   "rows": 55
+  },
+  "higashinihon|ej-2024-11-02|Eクラス 男子|決勝": {
+   "athletes": 22,
+   "rows": 44
+  },
+  "higashinihon|ej-2024-11-02|園児クラス 男子|決勝": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "higashinihon|ej-2025-09-12|Aクラス 女子|予選": {
+   "athletes": 29,
+   "rows": 56
+  },
+  "higashinihon|ej-2025-09-12|Aクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2025-09-12|Aクラス 男子|予選": {
+   "athletes": 37,
+   "rows": 71
+  },
+  "higashinihon|ej-2025-09-12|Aクラス 男子|決勝": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "higashinihon|ej-2025-09-12|Bクラス 女子|予選": {
+   "athletes": 95,
+   "rows": 184
+  },
+  "higashinihon|ej-2025-09-12|Bクラス 女子|決勝": {
+   "athletes": 9,
+   "rows": 9
+  },
+  "higashinihon|ej-2025-09-12|Bクラス 男子|予選": {
+   "athletes": 46,
+   "rows": 89
+  },
+  "higashinihon|ej-2025-09-12|Bクラス 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2025-11-22|Cクラス 女子|予選": {
+   "athletes": 26,
+   "rows": 52
+  },
+  "higashinihon|ej-2025-11-22|Cクラス 男子|予選": {
+   "athletes": 12,
+   "rows": 23
+  },
+  "higashinihon|ej-2025-11-22|DJクラス 女子|予選": {
+   "athletes": 51,
+   "rows": 102
+  },
+  "higashinihon|ej-2025-11-22|DJクラス 男子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "higashinihon|ej-2025-11-22|DSクラス 女子|予選": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "higashinihon|ej-2025-11-22|DSクラス 男子|予選": {
+   "athletes": 13,
+   "rows": 26
+  },
+  "higashinihon|ej-2025-11-22|Eクラス 女子|予選": {
+   "athletes": 19,
+   "rows": 38
+  },
+  "higashinihon|ej-2025-11-22|Eクラス 男子|予選": {
+   "athletes": 17,
+   "rows": 34
+  },
+  "higashinihon|ej-2026-09-11|Aクラス 女子|予選": {
+   "athletes": 32,
+   "rows": 63
+  },
+  "higashinihon|ej-2026-09-11|Aクラス 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "higashinihon|ej-2026-09-11|Aクラス 男子|予選": {
+   "athletes": 41,
+   "rows": 80
+  },
+  "higashinihon|ej-2026-09-11|Aクラス 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "higashinihon|ej-2026-09-11|Bクラス 女子|予選": {
+   "athletes": 78,
+   "rows": 153
+  },
+  "higashinihon|ej-2026-09-11|Bクラス 女子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "higashinihon|ej-2026-09-11|Bクラス 男子|予選": {
+   "athletes": 33,
+   "rows": 64
+  },
+  "higashinihon|ej-2026-09-11|Bクラス 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "higashinihon|ej-2026-10-24|Cクラス 女子|予選": {
+   "athletes": 26,
+   "rows": 52
+  },
+  "higashinihon|ej-2026-10-24|Cクラス 男子|予選": {
+   "athletes": 11,
+   "rows": 22
+  },
+  "higashinihon|ej-2026-10-24|DJクラス 女子|予選": {
+   "athletes": 27,
+   "rows": 53
+  },
+  "higashinihon|ej-2026-10-24|DJクラス 男子|予選": {
+   "athletes": 19,
+   "rows": 38
+  },
+  "higashinihon|ej-2026-10-24|DSクラス 女子|予選": {
+   "athletes": 1,
+   "rows": 2
+  },
+  "higashinihon|ej-2026-10-24|Eクラス 女子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "higashinihon|ej-2026-10-24|Eクラス 男子|予選": {
+   "athletes": 7,
+   "rows": 14
+  },
   "nishinihon|nw-2025-09-12|オープン 女子|決勝": {
    "athletes": 10,
    "rows": 10

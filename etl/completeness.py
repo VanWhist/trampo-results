@@ -527,7 +527,7 @@ def check_baseline(perfs, rep, accept=False):
     for p in perfs:
         meets[p['source']].add(p['meet_id'])
     current = {}
-    for source in ('nishinihon', 'osaka_pweb', 'sporttech'):
+    for source in ('higashinihon', 'nishinihon', 'osaka_pweb', 'sporttech'):
         for meet_id in sorted(meets.get(source, ())):
             for (cat, rnd), s in _sections_from_perfs(perfs, source, meet_id).items():
                 current['%s|%s|%s|%s' % (source, meet_id, cat, rnd)] = {

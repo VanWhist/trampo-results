@@ -82,6 +82,11 @@ SOURCES = {
         'official': True,
         'base_url': 'https://trampoline-west.jp/',
     },
+    'higashinihon': {
+        'label': '東日本トランポリン協会',
+        'official': True,
+        'base_url': 'https://trampoline-east.jp/',
+    },
 }
 
 # ---- 種目 ------------------------------------------------------------------

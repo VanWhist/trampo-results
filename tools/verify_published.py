@@ -9,6 +9,7 @@
   sporttech   … 生JSONを自前で合体して読む（etl/sources/sporttech.py とは別に書いた）
   西日本 第53回 … 変換済みCSVを直接読む
   西日本 第54回 … PDFを**行テキストと小数の桁の形**で読む（ETLは語の座標で読んでいる）
+  東日本       … PDFを行テキストで読み、演技ごとに同じ小数と減点の並びを持つ行を探す
   大阪府       … 元HTMLを自前の正規表現で読む
 ほかに、公開データ同士の整合（年別・大会別・選手別のファイルが同じ中身か、合計の式）、
 本番サイトのファイルが手元と同じか、保存した原本がいまの sporttech と同じか（抜き取り）を見る。
@@ -328,6 +329,164 @@ def check_nishi54(rows):
     return res
 
 
+# ---- 2b. 東日本 --------------------------------------------------------------------
+
+# 2022・2026年版のPDFは一部の漢字を「部首」の文字コードで持っている。公開側は ETL が
+# 統合漢字に直している（etl/sources/higashinihon_pdf.py の RADICALS と同じ4つを書き写した）。
+HIGASHI_RADICALS = {'⻑': '長', '⻄': '西', '⻫': '斉', '⻘': '青'}
+INT_TOKEN = re.compile(r'^\d{1,2}$')
+
+
+def _higashi_section(filename):
+    """ファイル名から (区分, ラウンド)。ETL とは別に書いた読み方。"""
+    stem = unicodedata.normalize('NFKC', os.path.splitext(filename)[0])
+    m = re.match(r'^\d{4}([ab])([mw])([qf])result$', stem)
+    if m:
+        return ('%sクラス %s' % (m.group(1).upper(), '男子' if m.group(2) == 'm' else '女子'),
+                '予選' if m.group(3) == 'q' else '決勝')
+    sex = '男子' if '男子' in stem else '女子'
+    rnd = '予選' if '予選' in stem else '決勝'
+    body = stem.split('個人', 1)[1].replace('男子', '').replace('女子', '').replace('予選', '') \
+        .replace('決勝', '').replace('クラス', '').replace('_', '')
+    cls = re.match(r'(園児|DJ|DS|[A-E])', body).group(1)
+    return '%sクラス %s' % (cls, sex), rnd
+
+
+# 合字「fi」が NUL で取り出される所属と、PDF の文字データが化けている所属。公開側は ETL が
+# 直している（etl/sources/higashinihon_pdf.py の LIGATURES・CLUB_FIXES と同じものを書き写した）
+HIGASHI_TEXT_FIXES = {'s\x00da': 'sfida', 'bon\x00re': 'bonfire', 'Fiert?s': 'Fiertés'}
+
+
+def _higashi_text(s):
+    s = s or ''
+    for a, b in HIGASHI_TEXT_FIXES.items():
+        s = s.replace(a, b)
+    s = ''.join(ch for ch in s if ch == ' ' or ch >= ' ').replace('\u00ad', ' ')
+    s = unicodedata.normalize('NFKC', s)
+    for a, b in list(HIGASHI_RADICALS.items()) + list(VARIANTS.items()):
+        s = s.replace(a, b)
+    return s
+
+
+def _flat(s):
+    return re.sub(r'\s+', '', s or '')
+
+
+def check_higashi(rows):
+    """PDFを行テキストで読み直す。ETL は語の座標で読んでいるので、読み方が違う。
+
+    演技ごと：その演技の小数（E・D・T・HD・Pen・Score）と減点 S1〜S10 の並びを持つ行が
+              1本ずつ対応し、行に印字された何本目（Q2・予選2）が公開と同じか。
+    選手ごと：行頭が順位で、その行に Best/Total（予選の選手の値）が印字されている行があり、
+              その行か1つ上の行に氏名、近く（2行上〜3行下）に所属があるか。
+    区分ごと：PDF の演技の行の数と公開の演技数が同じか。
+    """
+    res = Result('東日本：PDF（行テキストで読み直し）と公開')
+    manifest = jload(os.path.join(REPO, 'etl', 'higashinihon_files.json'))
+    pub = collections.defaultdict(list)
+    for r in rows:
+        if r['meet_id'].startswith('ej-'):
+            pub[(r['meet_id'], r['category'], r['round'])].append(r)
+    seen_sections = set()
+    for meet in manifest['meets']:
+        if not meet['include']:
+            if any(k[0] == meet['meet_id'] for k in pub):
+                res.fail('%s は取り込まない設定なのに公開されている' % meet['meet_id'])
+            continue
+        details = jload(os.path.join(DATA, 'details', '%s.json' % meet['meet_id']))
+        folder = os.path.join(RAW, *meet['raw_dir'].split('/'))
+        for name in meet['files']:
+            cat, rnd = _higashi_section(name)
+            key = (meet['meet_id'], cat, rnd)
+            seen_sections.add(key)
+            lines = [_higashi_text(l) for l in _pdf_lines(os.path.join(folder, name))]
+            toks = [l.split() for l in lines]
+            decs = [[round(float(t), 2) for t in ts if DEC.match(t)] for ts in toks]
+            # 演技の行：小数が3つ以上あり、0でない小数が2つ以上ある。演技していない・技0本の
+            # 演技は全部 0.00 で、同じ行に選手の Best だけが印字されることがある（0でないのは1つ）
+            routine_lines = [i for i, d in enumerate(decs)
+                             if len(d) >= 3 and sum(1 for x in d if x > 0) >= 2]
+            used = set()
+            mine = pub.get(key, [])
+            where = '%s %s %s' % (meet['meet_id'], cat, rnd)
+            if len(routine_lines) != len(mine):
+                res.fail('%s：PDFの演技の行 %d／公開 %d' % (where, len(routine_lines), len(mine)))
+            # ---- 演技ごと
+            for r in mine:
+                want = [round(r[k], 2) for k in ('E', 'total', 'HD') if r.get(k) is not None]
+                if r.get('D'):
+                    want.append(round(r['D'], 2))
+                if r.get('T') is not None:
+                    want.append(round(r['T'], 2))
+                if r.get('Pen'):
+                    want.append(round(r['Pen'], 2))
+                det = details.get(r['performance_id']) or {}
+                s_seq = [str(int(v)) for v in (det.get('positions') or []) if v is not None]
+                label = '%s %s位 %s %s本目' % (where, r.get('rank'), r['athlete_name'], r.get('routine'))
+                if not s_seq and r.get('n_elements') != 0:
+                    res.fail(label + '：公開の詳細に減点（S1〜）が無い')
+                    continue
+                hit = None
+                for i in routine_lines:
+                    if i in used:
+                        continue
+                    have = collections.Counter(decs[i])
+                    if any(have[v] < c for v, c in collections.Counter(want).items()):
+                        continue
+                    # 減点の並び。ページ末尾で減点だけ隣の行に分かれることがあるので前後も見る
+                    ok_s = not s_seq                # 技0本の演技（Eは0、ToFだけ）は減点が無い
+                    for j in (i, i - 1, i + 1):
+                        if ok_s or not (0 <= j < len(toks)):
+                            continue
+                        ints = [t for t in toks[j] if INT_TOKEN.match(t)]
+                        ok_s = any(ints[k:k + len(s_seq)] == s_seq for k in range(len(ints)))
+                    if ok_s:
+                        hit = i
+                        break
+                if hit is None:
+                    res.fail(label + '：同じ値の行がPDFに無い')
+                    continue
+                used.add(hit)
+                m = re.search(r'(?:Q|予選|決勝)(\d)', lines[hit])
+                if m and int(m.group(1)) != r.get('routine'):
+                    res.fail(label + '：PDFでは %s本目' % m.group(1))
+                    continue
+                res.ok()
+            # ---- 選手ごと（順位・氏名・所属・予選の値）
+            groups = collections.defaultdict(list)
+            for r in mine:
+                groups[(r.get('rank'), r['athlete_name'])].append(r)
+            taken = set()
+            for (rank, athlete), rs in groups.items():
+                label = '%s %s位 %s' % (where, rank, athlete)
+                q = rs[0].get('qualifying_total')
+                cands = [i for i, ts in enumerate(toks)
+                         if i not in taken and ts and ts[0] == str(rank)
+                         and (q is None or round(q, 2) in decs[i])]
+                ok_name = [i for i in cands
+                           if any(_flat(norm_name(athlete)) in _flat(norm_name(lines[j]))
+                                  for j in (i, i - 1) if j >= 0)]
+                if not ok_name:
+                    res.fail(label + '：順位と予選の値の行の隣に氏名が無い')
+                    continue
+                i = ok_name[0]
+                taken.add(i)
+                club = rs[0].get('club') or ''
+                # 行テキストでは、折り返した所属の間にラウンド記号や得点が入る。外してからつなぐ
+                near = _flat(re.sub(r'(?:Q|予選|決勝)\d', '', ''.join(
+                    ' '.join(t for t in ts if not re.fullmatch(r'[\d.]+', t))
+                    for ts in toks[max(0, i - 2):i + 4])))
+                # 所属は ETL が「慶應→慶応」もそろえている（etl/normalize.py の CLUB_VARIANTS を書き写した）
+                near = near.replace('慶應', '慶応')
+                if club and _flat(club) not in near:
+                    res.fail(label + '：所属「%s」が近くに無い' % club)
+                    continue
+                res.ok()
+    for key in set(pub) - seen_sections:
+        res.fail('読むファイルに無い区分が公開されている：%s' % (key,))
+    return res
+
+
 # ---- 3. 大阪府 --------------------------------------------------------------------
 
 def _cells(tr):
@@ -571,7 +730,8 @@ def main(argv=None):
     sys.stdout.reconfigure(encoding='utf-8')
     comps, rows = published()
     checks = [lambda: check_sporttech(comps, rows), lambda: check_nishi53(rows),
-              lambda: check_nishi54(rows), lambda: check_osaka(comps, rows),
+              lambda: check_nishi54(rows), lambda: check_higashi(rows),
+              lambda: check_osaka(comps, rows),
               lambda: check_internal(comps, rows)]
     if not args.no_live:
         checks += [check_live, check_sporttech_live]

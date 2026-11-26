@@ -38,6 +38,7 @@ const ROUND_ORDER = ['予選', '予選2', '準々決勝', '準決勝', '決勝',
 // S値の単位はソースで違う。表の下に必ず出す。
 const UNIT_NOTE = {
   nishinihon: 'S1〜S10 と着地は、技ごとの減点（0.1点単位）です。公式PDFの印字と同じ並びです。',
+  higashinihon: 'S1〜S10 と着地は、技ごとの減点（0.1点単位）です。公式PDFの印字と同じ並びです。',
   sporttech: 'S1〜S10 と着地は「中央2審判の減点の和」（0.1点単位）です。'
     + '西日本のS値（技ごとの減点）とは意味が違うので、そのまま比べないでください。',
   osaka_pweb: 'S1〜S10 と着地は「中央2審判の減点の和」（0.1点単位）です。'
@@ -144,6 +145,31 @@ function activeColumns(list) {
   };
 }
 
+/**
+ * 予選の選手の値の見出し。2本の合計（Total）の大会と、良いほう（Best）の大会がある
+ * （東日本のA・Bクラスなど）。大会データに PDF の列見出し（qualifying_labels）があれば
+ * それを使う。無い大会は、2本そろった選手が全員「良いほう」と一致し、合計とは
+ * 一致しないときだけ Best と推定する。判断できないときは従来どおり Total。
+ */
+function qualifyingLabel(groups) {
+  const first = groups.length ? groups[0][0] : null;
+  const printed = first && meet && meet.qualifying_labels
+    ? meet.qualifying_labels[first.category + '|' + first.round] : null;
+  if (printed) return printed;
+  const close = (a, b) => Math.abs(a - b) < 0.006;
+  let pairs = 0;
+  for (const g of groups) {
+    const q = g[0].qualifying_total;
+    const scores = g.map((r) => r.total).filter((v) => v !== null && v !== undefined);
+    if (q === null || q === undefined || scores.length < 2) continue;
+    const best = Math.max(...scores);
+    const sum = scores.reduce((a, b) => a + b, 0);
+    if (!close(q, best) || close(q, sum)) return 'Total';
+    pairs += 1;
+  }
+  return pairs ? 'Best' : 'Total';
+}
+
 function cellNum(v, digits) {
   const t = num(v, digits);
   return el('td', { class: t === null ? 'num blank' : 'num', text: t === null ? '—' : t });
@@ -166,7 +192,7 @@ function renderTable(list) {
   if (col.Bonus) head.push(el('th', { class: 'no-sort num', text: 'Bonus' }));
   if (col.Pen) head.push(el('th', { class: 'no-sort num', text: 'Pen' }));
   if (col.total) head.push(el('th', { class: 'no-sort num', text: 'Score' }));
-  if (col.qualifying) head.push(el('th', { class: 'no-sort num', text: 'Total' }));
+  if (col.qualifying) head.push(el('th', { class: 'no-sort num', text: qualifyingLabel(groups) }));
   head.push(el('th', { class: 'no-sort' }));
 
   const body = el('tbody');
@@ -312,7 +338,7 @@ function renderResult() {
   document.getElementById('csv').onclick = () => downloadCsv(
     meet.name + '_' + state.category + '_' + state.round + '.csv',
     ['順位', '選手', '所属', '演技', ...Array.from({ length: 10 }, (_, i) => 'S' + (i + 1)),
-      '着地', 'Exe', 'Diff', 'ToF', 'HD', 'Pen', 'Score', 'Total'],
+      '着地', 'Exe', 'Diff', 'ToF', 'HD', 'Pen', 'Score', qualifyingLabel(groupByAthlete(list))],
     groupByAthlete(list).flatMap((g) => g.map((r) => {
       const det = details[r.performance_id] || {};
       return [r.rank || '', r.athlete_name, r.club || '', r.routine || '',
