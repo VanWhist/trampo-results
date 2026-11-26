@@ -235,8 +235,8 @@ DEC = re.compile(r'^\d+\.\d+$')
 
 # 東日本・西日本 第54回の PDF は一部の漢字を「部首」の文字コードで持っている。公開側は ETL が
 # 統合漢字に直している（etl/sources/radicals.py の RADICALS・KANGXI_JP と同じものを書き写した）。
-PDF_RADICALS = {'⻑': '長', '⻄': '西', '⻫': '斉', '⻘': '青', '⺠': '民',
-                '⻁': '虎', '⻤': '鬼', '⻯': '竜'}
+PDF_RADICALS = {'\u2ed1': '長', '\u2ec4': '西', '\u2eeb': '斉', '\u2ed8': '青', '\u2ea0': '民',
+                '\u2ec1': '虎', '\u2ee4': '鬼', '\u2eef': '竜'}
 # 康熙部首のうち NFKC で日本の字にならないもの（戸→戶、黒→黑）。NFKC の前に置き換える
 PDF_KANGXI_JP = {chr(0x2F3E): chr(0x6238), chr(0x2FCA): chr(0x9ED2)}
 
