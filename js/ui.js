@@ -50,9 +50,14 @@ export function clear(node) {
 }
 
 // 取れなかった値は「0」ではなく空欄にする。推測で埋めない。
+// digits 桁で表しきれない値（2017〜2020年の規則の T・合計は 13.195 のように小数3桁）は、
+// 丸めずに3桁まで桁を増やして出す。丸めると予選の値が2本の合計と合わなく見える。
 export function num(v, digits = 2) {
   if (v === null || v === undefined || v === '') return null;
-  return Number(v).toFixed(digits);
+  const x = Number(v);
+  let d = digits;
+  while (d < 3 && Math.abs(x * 10 ** d - Math.round(x * 10 ** d)) > 1e-6) d += 1;
+  return x.toFixed(d);
 }
 
 export function cell(value, digits = 2) {
