@@ -13,7 +13,7 @@ def risky(r):
     if r['status']!='ok' or len(r['cand'])<2 or r['cand'][1][0]>1: return False
     a,b=r['cand'][0][3],r['cand'][1][3]
     return bool(clubs_of[a] & clubs_of[b])
-done={tuple(map(int,l.split('\t')[:2])) for l in open(os.path.join(S,'q51_visual_pb.tsv'),encoding='utf-8') if l.strip()}
+done={tuple(map(int,l.split('\t')[:2])) for l in open(os.path.join(S,'visual_names.tsv'),encoding='utf-8') if l.strip()}
 todo=[r for r in res if (r['status']!='ok' or risky(r)) and (r['page'],r['band']) not in done]
 json.dump(todo,open(os.path.join(S,'q51_todo_new.json'),'w',encoding='utf-8'),ensure_ascii=False)
 font=ImageFont.truetype('C:/Windows/Fonts/meiryo.ttc',22)

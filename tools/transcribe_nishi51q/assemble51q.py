@@ -29,7 +29,7 @@ reps = pickle.load(open(os.path.join(S, 'digits51.pkl'), 'rb'))['reps']
 raw = {(b['page'], b['band']): b for b in json.load(open(os.path.join(S, 'q51_raw.json'), encoding='utf-8'))}
 names = {(r['page'], r['band']): r for r in json.load(open(os.path.join(S, 'q51_names.json'), encoding='utf-8'))}
 visual = {}
-for line in open(os.path.join(S, 'q51_visual_pb.tsv'), encoding='utf-8'):
+for line in open(os.path.join(S, 'visual_names.tsv'), encoding='utf-8'):
     p, b, n, c = line.rstrip('\n').split('\t')
     visual[(int(p), int(b))] = (n.rstrip('?'), c)
 

@@ -12,11 +12,11 @@ sys.stdout.reconfigure(encoding='utf-8')
 S, REPO, OUT = sys.argv[1], sys.argv[2], sys.argv[3]
 a = json.load(open(os.path.join(S, 'q51_assembled.json'), encoding='utf-8'))
 cvis = {}
-for line in open(os.path.join(S, 'q51_clubvisual_pb.tsv'), encoding='utf-8'):
+for line in open(os.path.join(S, 'visual_clubs.tsv'), encoding='utf-8'):
     p, b, c = line.rstrip('\n').split('\t')
     cvis[(int(p), int(b))] = c
 
-TRUNC = {'神辺スポーツセンタ*': '神辺スポーツセンター'}
+TRUNC = {}   # 欄で切れて印字された所属（このPDFには無かった）
 # 既存の所属から自動で選んだときに、空白の有無だけ印字と違う表記を選んでしまうもの。
 # このPDFの印字は空白なし（49ページ 長澤 萌栞、2・5・13・33ページで画像を見て確認）
 SPACING = {'forte TC': 'forteTC'}

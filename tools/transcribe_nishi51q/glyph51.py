@@ -61,13 +61,13 @@ def words(gs, gap=GAP):
 def page_layout(page):
     rules = sorted({round(r['top'], 2) for r in page.rects if r['width'] > 300})
     cs = contours(page)
-    if len(rules) < 2:
-        return None
+    if not rules:
+        return None                                   # 白紙のページ
     # 列名の行：最初の罫線のすぐ上（12pt 以内）にある輪郭
     head = [c for c in cs if rules[0] - 12 < (c['top'] + c['bottom']) / 2 < rules[0]]
     hw = words(glyphs(head), gap=4.0)        # 列名は字間が広い（「T ime」）
-    if len(rules) < 2 or len(hw) < len(HEADERS):
-        return None                                   # 白紙のページなど
+    if len(hw) < len(HEADERS):
+        return None
     hw = hw[-len(HEADERS):]                           # 列名の行は S1〜Score だけ（ページで位置が違う）
     if len(hw) != len(HEADERS):
         raise ValueError('列名の語の数が %d（%d のはず）' % (len(hw), len(HEADERS)))
@@ -81,7 +81,8 @@ def page_layout(page):
         lower = [c for c in inside if (c['top'] + c['bottom']) / 2 >= mid]
         bands.append({'top': top, 'bot': bot, 'a': words(glyphs(upper)), 'b': words(glyphs(lower))})
     # 表の最後の行の下には罫線が無い。最後の罫線より下（下端の注記より上）に字があれば、帯を1つ足す
-    h = rules[1] - rules[0]
+    # （選手が1人だけのページは、罫線が列名の下の1本しかない。帯の高さは他のページと同じ 33.6pt）
+    h = rules[1] - rules[0] if len(rules) > 1 else 33.6
     top = rules[-1]
     rest = [c for c in cs if c['top'] > top + 0.5 and c['bottom'] < 490]
     if rest:
