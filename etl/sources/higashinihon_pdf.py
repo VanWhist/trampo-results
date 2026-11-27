@@ -2,7 +2,8 @@
 """東日本トランポリン協会のリザルトPDFを読む（東日本選手権・イーストジャパン、2022〜）。
 
 読むファイルは etl/higashinihon_files.json に固定してある（協会サイトの各大会の結果ページから
-リンクされているものだけ。古いアップロードや画像だけのPDFは読まない）。
+リンクされているものだけ。古いアップロードは読まない）。文字が図形の輪郭になっているPDF
+（image_only_files）は、書き起こした etl/higashinihon_img_transcription.csv を読む（_image_athletes）。
 
 集計ソフトの世代で、表の形が3通りある。どれも列見出しの行があるので、**列は見出しの
 x座標で決める**（値が0の列が印字されないことがあるため、空白で分けると列がずれる）。
@@ -63,9 +64,11 @@ SOFT_HYPHEN = chr(0x00AD)                # Pen 空欄の印
 
 # 合字「fi」が NUL として取り出される語（PDFの画面表示で確認、2026-11-27）。見出しの
 # 'Di'+NUL（Diff の ff）以外で、ここに無い NUL が氏名・所属に出たら止める。
-LIGATURES = {'s\x00da': 'sfida', 'bon\x00re': 'bonfire'}
+LIGATURES = {'s\x00da': 'sfida', 'S\x00da': 'Sfida', 'bon\x00re': 'bonfire'}
 # PDFの文字データそのものが化けている所属（画面にも「?」と出る）。正しい表記に直す。
 CLUB_FIXES = {'Fiert?s': 'Fiertés', 'PiCTuRES:qu?': 'PiCTuRES:quÉ'}
+# 2023年の結果表は所属の後ろに都道府県「[東京都]」が付く（他の年・他の大会には無い）。表示をそろえるため外す。
+PREF_RE = re.compile(r'\s*\[[^\[\]]*[都道府県]\]$')
 
 
 def _n(text):
@@ -93,6 +96,8 @@ def _f(text):
 _SHORT = re.compile(r'^\d{4}([ab])([mw])([qf])result$')      # 2025: 2025amqresult
 _LONG = re.compile(r'個人_?([A-E]|DJ|DS|園児)(?:クラス)?_?(男子|女子)_?(予選|決勝)'
                    r'|個人_?(男子|女子)_?([A-E]|DJ|DS|園児)クラス_?(予選|決勝)')
+# 2023年のイーストジャパン（学年別の区分。2023ejtf_個人女子小学校1-2年生予選）
+_AGE = re.compile(r'個人_?(男子|女子)_?(園児|小学校\d-\d年生|中学生|高校生以上)_?(予選|決勝)')
 
 
 def section_of(filename):
@@ -107,7 +112,17 @@ def section_of(filename):
         if m.group(1):
             return m.group(1), m.group(2), m.group(3)
         return m.group(5), m.group(4), m.group(6)
+    m = _AGE.search(stem)
+    if m:
+        return m.group(2), m.group(1), m.group(3)
     return None
+
+
+def category_of(cls, sex):
+    """区分の表示名。クラス（A〜E・DJ・DS・園児）は「Aクラス 女子」、学年別は「中学生 女子」。"""
+    if cls in ('A', 'B', 'C', 'D', 'E', 'DJ', 'DS', '園児'):
+        return '%sクラス %s' % (cls, sex)
+    return '%s %s' % (cls, sex)
 
 
 # ---- PDFの読み取り ------------------------------------------------------------
@@ -296,6 +311,7 @@ def parse_pdf(pdf):
         club = _join_wrapped(frags[1:])
         for old, new in CLUB_FIXES.items():
             club = club.replace(old, new)
+        club = PREF_RE.sub('', club)
         out.append({'rank': a['rank'], 'name': frags[0] if frags else '',
                     'club': club,
                     'routines': [r for r in routines if _performed(r)], 'agg': _f(agg)})
@@ -358,7 +374,7 @@ def load_all():
             if sec is None:
                 raise ValueError('区分が読めないファイル名: %s' % name)
             cls, sex, rnd = sec
-            category = '%sクラス %s' % (cls, sex)
+            category = category_of(cls, sex)
             with pdfplumber.open(os.path.join(folder, name)) as pdf:
                 _, cols, athletes = parse_pdf(pdf)
             if not cols:
@@ -373,6 +389,17 @@ def load_all():
                     seq += 1
                     perfs.append(_record(meet, seq, a, rt, _routine_no(rt, i, len(a['routines'])),
                                          category, rnd, name))
+        # 文字が図形の輪郭になっているPDF（Microsoft Print To PDF）は、書き起こしたCSVを読む
+        for name in meet.get('image_only_files', []):
+            _check_sha256(os.path.join(folder, name), meet['image_sha256'][name])
+            for (category, rnd, kind), athletes in _image_athletes(meet['meet_id'], name):
+                if kind:
+                    labels['%s|%s' % (category, rnd)] = kind
+                for a in athletes:
+                    for i, rt in enumerate(a['routines'], start=1):
+                        seq += 1
+                        perfs.append(_record(meet, seq, a, rt, _routine_no(rt, i, len(a['routines'])),
+                                             category, rnd, name, extra_flags=(IMG_FLAG,)))
         if perfs:
             competitions.append({
                 'meet_id': meet['meet_id'], 'date': meet['date'], 'name': meet['name'],
@@ -387,6 +414,48 @@ def load_all():
     return competitions, performances
 
 
+IMG_CSV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                       'higashinihon_img_transcription.csv')
+IMG_FLAG = '図形の文字を書き起こした（tools/transcribe_higashi_img）'
+
+
+def _check_sha256(path, expected):
+    import hashlib
+    with open(path, 'rb') as fh:
+        got = hashlib.sha256(fh.read()).hexdigest()
+    if got != expected:
+        raise ValueError('書き起こしたPDFが変わっている（SHA-256 不一致）: %s' % path)
+
+
+def _image_athletes(meet_id, pdf_name):
+    """書き起こしCSVから、1ファイル分の選手を parse_pdf と同じ形で返す。
+    返り値 [((区分, ラウンド, 'Best'|'Total'|''), [選手…])]（ファイルは1区分）。棄権・演技なしの選手は除く。"""
+    import csv
+    with io.open(IMG_CSV, encoding='utf-8', newline='') as fh:
+        rows = [r for r in csv.DictReader(fh) if r['meet_id'] == meet_id and r['file'] == pdf_name]
+    if not rows:
+        raise ValueError('書き起こしCSVに行が無い: %s %s' % (meet_id, pdf_name))
+    athletes = []
+    key = None
+    for r in rows:
+        k = (r['rank'], r['name'], r['club'], r['agg'])
+        if k != key:
+            athletes.append({'rank': int(r['rank']), 'name': r['name'], 'club': r['club'],
+                             'agg': _f(r['agg']), 'routines': []})
+            key = k
+        if r['status']:
+            continue                                      # 棄権（DNS）・演技なし
+        rt = {c: r[c] for c in VALUE_KEYS if r.get(c)}
+        rt['rnd'] = '%s%s' % (r['round'], r['routine']) if r['round'] == '予選' else None
+        rt['page'] = int(r['page'])
+        athletes[-1]['routines'].append(rt)
+    first = rows[0]
+    category = category_of(first['category'], first['sex'])
+    for r in rows:
+        check_no_radicals(r['name'], '氏名')
+    return [((category, first['round'], first['agg_kind']), [a for a in athletes if a['routines']])]
+
+
 def _routine_no(rt, index, n_routines):
     """何本目か。PDFの印（Q2・予選2・決勝2）を正とする。1本目が0点で落ちた選手の
     2本目を「1本目」にしないため。印が無ければ並び順（1本だけなら1）。"""
@@ -396,7 +465,7 @@ def _routine_no(rt, index, n_routines):
     return index if n_routines > 1 else 1
 
 
-def _record(meet, seq, athlete, rt, routine_no, category, round_label, pdf_name):
+def _record(meet, seq, athlete, rt, routine_no, category, round_label, pdf_name, extra_flags=()):
     s = [_f(rt.get('S%d' % i)) for i in range(1, 11)]
     n = sum(1 for v in s if v is not None)
     positions, unaccounted = [], 0
@@ -422,6 +491,7 @@ def _record(meet, seq, athlete, rt, routine_no, category, round_label, pdf_name)
         flags.append('D空欄を0として採用')
     if '-手作業' in pdf_name:
         flags.append('協会が手作業で作った結果表')
+    flags.extend(extra_flags)
     return {
         'performance_id': '%s|%04d' % (meet['meet_id'], seq),
         'meet_id': meet['meet_id'], 'date': meet['date'], 'meet_name': meet['name'],

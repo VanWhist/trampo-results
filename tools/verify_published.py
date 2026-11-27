@@ -28,6 +28,7 @@ import re
 import sys
 import unicodedata
 import urllib.request
+from decimal import Decimal
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(REPO, 'data')
@@ -363,14 +364,20 @@ def _higashi_section(filename):
     rnd = '予選' if '予選' in stem else '決勝'
     body = stem.split('個人', 1)[1].replace('男子', '').replace('女子', '').replace('予選', '') \
         .replace('決勝', '').replace('クラス', '').replace('_', '')
+    age = re.match(r'(小学校\d-\d年生|中学生|高校生以上)', body)   # 2023 イーストジャパンの学年別
+    if age:
+        return '%s %s' % (age.group(1), sex), rnd
     cls = re.match(r'(園児|DJ|DS|[A-E])', body).group(1)
     return '%sクラス %s' % (cls, sex), rnd
 
 
 # 合字「fi」が NUL で取り出される所属と、PDF の文字データが化けている所属。公開側は ETL が
 # 直している（etl/sources/higashinihon_pdf.py の LIGATURES・CLUB_FIXES と同じものを書き写した）
-HIGASHI_TEXT_FIXES = {'s\x00da': 'sfida', 'bon\x00re': 'bonfire', 'Fiert?s': 'Fiertés',
+HIGASHI_TEXT_FIXES = {'s\x00da': 'sfida', 'S\x00da': 'Sfida', 'bon\x00re': 'bonfire', 'Fiert?s': 'Fiertés',
                       'PiCTuRES:qu?': 'PiCTuRES:quÉ'}
+# 2023年の結果表は所属の後ろに「[東京都]」のような都道府県が付く。公開は ETL が外している
+# （etl/sources/higashinihon_pdf.py の PREF_RE と同じ扱い。折り返しで「[東京 都]」にもなる）
+HIGASHI_PREF = re.compile(r'\s*\[[^\[\]]*[都道府県]\s*\]')
 
 
 def _higashi_text(s):
@@ -391,6 +398,11 @@ def _flat(s):
 ROUND_MARK = re.compile(r'(?:Q|予選|決勝)(\d)')
 HIGASHI_SKIP = re.compile(r'T-product|signature|All Rights Reserved|https?://|順位表_|^\d+/\d+$'
                           r'|^\d{4}/\d{1,2}/\d{1,2} \d{1,2}:\d{2}')
+
+
+# 行テキストだけでは列を1つに決められないことを許す区分（ToF が空欄。PDFの画像で公開が正しいことを確認済み）。
+# ほかの区分で同じことが起きたら不一致にする
+AMBIGUOUS_OK = {('ej-2023-11-26', '園児クラス 女子', '予選')}
 
 
 def _higashi_lines(path):
@@ -456,10 +468,14 @@ def _parse_routine(tokens, header, rank_first):
     # いちばん式に近い当てはめだけを残す（偶然 0.01 差で合う別の当てはめを外す）
     best = min((g for g, _ in found), default=None)
     found = [v for g, v in found if g <= best + 0.0001] if found else []
-    distinct = {tuple(sorted(v.items())) for v in found}
-    if len(distinct) != 1:
+    distinct = sorted({tuple(sorted(v.items())) for v in found})
+    if not distinct:
         return None
-    v = found[0]
+    # 式を満たす当てはめが複数ある行（2023イーストジャパンの園児クラスは ToF が空欄で、0.40 を Diff とも
+    # ToF とも、10.00 を HD とも ToF とも読める）は、どれも候補として残す。公開がそのどれかと同じなら可とし、
+    # 件数を報告に出す（行テキストだけでは列を1つに決められないため）
+    v = dict(distinct[0])
+    v['alts'] = [dict(d) for d in distinct]
     # 整数は S1〜Sn、着地（L）、A の順。0 の L・A は印字されないことがあり、中断した演技は
     # 技数も分からないので、位置では決められない。E = 2n − (S の和 ＋ 着地（n=10のとき）)/10
     # が成り立つ読み方を候補として残す（成り立つものが無ければ全部残し、公開と同じものがあれば可）。
@@ -505,6 +521,7 @@ def check_higashi(comps, rows):
     区分ごとに、列見出しの Best/Total と公開の見出し、まとまりと公開の選手が1対1かも見る。
     """
     res = Result('東日本：PDF（行テキストで読み直し）と公開')
+    ambiguous = [0]                   # 列の当てはめが1つに決まらず、候補のどれかと一致した演技の数
     manifest = jload(os.path.join(REPO, 'etl', 'higashinihon_files.json'))
     labels = {c['meet_id']: c.get('qualifying_labels') or {} for c in comps}
     pub = collections.defaultdict(list)
@@ -610,6 +627,7 @@ def check_higashi(comps, rows):
                 perfs = [it['routine'] for it in its if it['routine']]
                 spaced = re.sub(r'\s+', ' ', ' '.join(it['text'] for it in its)).strip()
                 spaced = re.sub(r'\s*DNS$', '', spaced)
+                spaced = HIGASHI_PREF.sub('', spaced)
                 cand = [g for g in unmatched if g[0] == items[a]['rank']
                         and _name_club_ok(spaced, g[1], groups[g])]
                 if not perfs:
@@ -680,15 +698,23 @@ def check_higashi(comps, rows):
                     for k, p in enumerate(perfs):
                         if k in used:
                             continue
-                        same = all(_same(p.get(c), r.get(f), c) for c, f in
-                                   (('Exe', 'E'), ('Diff', 'D'), ('HD', 'HD'), ('Pen', 'Pen'), ('Score', 'total')))
-                        same = same and (_same(p.get('ToF'), r.get('T')) if 'ToF' in header
-                                         else r.get('T') is None)
+                        same = False
+                        for alt in p['alts']:
+                            same = all(_same(alt.get(c), r.get(f), c) for c, f in
+                                       (('Exe', 'E'), ('Diff', 'D'), ('HD', 'HD'), ('Pen', 'Pen'), ('Score', 'total')))
+                            same = same and (_same(alt.get('ToF'), r.get('T')) if 'ToF' in header
+                                             else r.get('T') is None)
+                            if same:
+                                break
                         same = same and r.get('n_elements') == n and any(
                             S == pos and want_l is not None and float(want_l) == L
                             for S, L in p['readings'])
                         if same:
                             hit = k
+                            if len(p['alts']) > 1:
+                                ambiguous[0] += 1
+                                if key not in AMBIGUOUS_OK:
+                                    res.fail(label + '：列の当てはめが1つに決まらない（許可していない区分）')
                             break
                     if hit is None:
                         res.fail(label + ' %s本目：同じ点数・同じ減点の演技がまとまりの中に無い' % r.get('routine'))
@@ -704,8 +730,15 @@ def check_higashi(comps, rows):
                     res.ok()
             for g in unmatched:
                 res.fail('%s %s位 %s：PDFに対応するまとまりが無い' % (where, g[0], g[1]))
+        # 文字が図形のPDFの区分は、書き起こしCSV で別に照合する（check_higashi_img）
+        for name in meet.get('image_only_files', []):
+            for cat, rnd in _higashi_img_sections(meet['meet_id'], name):
+                seen_sections.add((meet['meet_id'], cat, rnd))
     for key in set(pub) - seen_sections:
         res.fail('読むファイルに無い区分が公開されている：%s' % (key,))
+    if ambiguous[0]:
+        print('      （ToF が空欄で列を行テキストだけでは1つに決められない演技 %d 本は、'
+              '式を満たす読み方のどれかと公開が一致することを確認）' % ambiguous[0])
     return res
 
 
@@ -1022,6 +1055,178 @@ def check_nishi51q(rows):
     return res
 
 
+HIGASHI_IMG_CSV = os.path.join(REPO, 'etl', 'higashinihon_img_transcription.csv')
+
+
+def _higashi_img_rows():
+    import csv
+    with io.open(HIGASHI_IMG_CSV, encoding='utf-8', newline='') as fh:
+        return list(csv.DictReader(fh))
+
+
+def _higashi_img_cat(cls, sex):
+    if re.fullmatch(r'[A-E]|DJ|DS|園児', cls):
+        return '%sクラス %s' % (cls, sex)
+    return '%s %s' % (cls, sex)
+
+
+def _higashi_img_sections(meet_id, pdf_name):
+    return {(_higashi_img_cat(r['category'], r['sex']), r['round'])
+            for r in _higashi_img_rows() if r['meet_id'] == meet_id and r['file'] == pdf_name}
+
+
+def check_higashi_img(comps, rows):
+    """東日本の文字が図形のPDF（Microsoft Print To PDF）：書き起こし CSV
+    （etl/higashinihon_img_transcription.csv）と公開を突き合わせる。CSV 自体の点の式
+    （Exe と減点・Score の式・Best＝良いほう／Total＝合計・順位の並び）もここで別に確かめる。
+    PDF は文字が図形なので読み直さない（SHA-256 が取り込み設定と同じかだけ確かめる）。"""
+    import hashlib
+    res = Result('東日本 文字が図形のPDF：書き起こしCSV と公開（点の式も検算）')
+    manifest = jload(os.path.join(REPO, 'etl', 'higashinihon_files.json'))
+    labels = {c['meet_id']: c.get('qualifying_labels') or {} for c in comps}
+    csv_rows = _higashi_img_rows()
+    files = set()
+    for meet in manifest['meets']:
+        for name in meet.get('image_only_files', []) if meet['include'] else []:
+            path = os.path.join(RAW, *meet['raw_dir'].split('/'), name)
+            if hashlib.sha256(open(path, 'rb').read()).hexdigest() != meet['image_sha256'][name]:
+                res.fail('%s %s：PDF が書き起こしたときと違う' % (meet['meet_id'], name))
+            files.add((meet['meet_id'], name))
+    if {(r['meet_id'], r['file']) for r in csv_rows} != files:
+        res.fail('CSV のファイルと取り込み設定の image_only_files が合わない')
+    D = lambda v: Decimal(v) if v not in ('', None) else None
+    pub = collections.defaultdict(list)
+    for r in rows:
+        pub[(r['meet_id'], r['category'], r['round'], r.get('rank'), norm_name(r['athlete_name']))].append(r)
+    details = {}
+    # 選手ごとにまとめる（CSV の並びのまま。同じ順位・氏名・所属・選手の値が続く行が1人）
+    athletes, key = [], None
+    for r in csv_rows:
+        k = (r['meet_id'], r['file'], r['rank'], r['name'], r['club'], r['agg'])
+        if k != key:
+            athletes.append([])
+            key = k
+        athletes[-1].append(r)
+    seen = set()
+    by_file = collections.defaultdict(list)
+    for rs in athletes:
+        by_file[(rs[0]['meet_id'], rs[0]['file'])].append(rs)
+    for (meet_id, fname), group in by_file.items():
+        kind = group[0][0]['agg_kind']
+        cat = _higashi_img_cat(group[0][0]['category'], group[0][0]['sex'])
+        rnd = group[0][0]['round']
+        # 1ファイルは1区分：全行の区分・男女・ラウンド・見出しが同じ
+        if len({(r['category'], r['sex'], r['round'], r['agg_kind']) for rs in group for r in rs}) != 1:
+            res.fail('%s %s：CSV の中で区分・ラウンド・見出しが行ごとに違う' % (meet_id, fname))
+        # ファイル名から区分が読めるもの（bmqresult.pdf などは読めない）は、それと同じ
+        try:
+            fcat, frnd = _higashi_section(fname)
+        except (AttributeError, IndexError):
+            fcat = frnd = None
+        if not re.search('予選|決勝', fname):
+            frnd = rnd          # ラウンドが名前に無い（2023ejtf_個人女子中学生.pdf。表題は「…予選」）
+        if fcat is not None and (fcat, frnd) != (cat, rnd):
+            res.fail('%s %s：ファイル名の区分 %s %s／CSV %s %s' % (meet_id, fname, fcat, frnd, cat, rnd))
+        shown = labels.get(meet_id, {}).get('%s|%s' % (cat, rnd))
+        if shown != kind:
+            res.fail('%s %s %s：CSV の見出しは %s、公開は %s' % (meet_id, cat, rnd, kind, shown))
+        prev = None
+        for i, rs in enumerate(group):
+            rank, agg = int(rs[0]['rank']), D(rs[0]['agg'])
+            label = '%s %s %s %d位 %s' % (meet_id, cat, rnd, rank, rs[0]['name'])
+            # 順位：選手の値の大きい順。同点は同順位か、規則で付けた順位（並び順の番号）
+            if prev is not None:
+                prank, pagg = prev
+                if agg > pagg or (agg < pagg and rank != i + 1) or (agg == pagg and rank not in (prank, i + 1)):
+                    res.fail(label + '：順位と選手の値の並びが合わない')
+            elif rank != 1:
+                res.fail(label + '：1位から始まらない')
+            prev = (rank, agg)
+            perf = [r for r in rs if not r['status']]
+            pkey = (meet_id, cat, rnd, rank, norm_name(rs[0]['name']))
+            got = sorted(pub.get(pkey, []), key=lambda x: x.get('routine') or 0)
+            seen.add(pkey)
+            if not perf:
+                if got:
+                    res.fail(label + '：CSV では棄権・演技なしなのに公開されている')
+                elif agg != 0:
+                    res.fail(label + '：演技が無いのに選手の値がある')
+                continue
+            scores = []
+            bad = []
+            for row in perf:
+                S = [int(row['S%d' % k]) for k in range(1, 11) if row['S%d' % k] != '']
+                if [row['S%d' % k] != '' for k in range(1, 11)] != [k < len(S) for k in range(10)]:
+                    bad.append('%s本目 S の途中に空欄' % row['routine'])
+                L = int(row['L'] or 0)
+                A = int(row['A'] or 0)
+                exe, diff, tof, hd, pen, sc = (D(row[c]) for c in ('Exe', 'Diff', 'ToF', 'HD', 'Pen', 'Score'))
+                n = len(S)
+                calc_full = 2 * n - Decimal(sum(S) + (L if n == 10 else 0) + A) / 10
+                calc_cut = 2 * n - Decimal(sum(S) + L + A) / 10
+                if exe not in (calc_full, calc_cut if n < 10 else calc_full):
+                    bad.append('%s本目 Exe と減点' % row['routine'])
+                if exe + (diff or 0) + tof + hd - (pen or 0) != sc:
+                    bad.append('%s本目 Score の式' % row['routine'])
+                scores.append(sc)
+            want = max(scores) if kind == 'Best' else sum(scores)
+            if want != agg:
+                bad.append('%s が各本と合わない' % kind)
+            if len(got) != len(perf):
+                res.fail(label + '：CSV %d本／公開 %d本 %s' % (len(perf), len(got), '・'.join(bad)))
+                continue
+            if meet_id not in details:
+                details[meet_id] = jload(os.path.join(DATA, 'details', '%s.json' % meet_id))
+            for row, r in zip(sorted(perf, key=lambda x: int(x['routine'])), got):
+                S = [int(row['S%d' % k]) for k in range(1, 11) if row['S%d' % k] != '']
+                L = int(row['L'] or 0)
+                for c, f in (('Exe', 'E'), ('Diff', 'D'), ('ToF', 'T'), ('HD', 'HD'), ('Score', 'total')):
+                    if not close(float(row[c] or 0), r.get(f)):
+                        bad.append('%s本目 %s' % (row['routine'], c))
+                if not _same(float(row['Pen']) if row['Pen'] else None, r.get('Pen'), 'Pen'):
+                    bad.append('%s本目 Pen' % row['routine'])
+                if not close(float(agg), r.get('qualifying_total')):
+                    bad.append('選手の値')
+                if r.get('routine') != int(row['routine']):
+                    bad.append('本目')
+                club = (r.get('club') or '').replace('慶應', '慶応')
+                want_club = row['club'].replace('慶應', '慶応')
+                for a, b in VARIANTS.items():
+                    club, want_club = club.replace(a, b), want_club.replace(a, b)
+                if _flat(club) != _flat(unicodedata.normalize('NFKC', want_club)):
+                    bad.append('所属')
+                det = details[meet_id].get(r['performance_id']) or {}
+                pos = [x for x in (det.get('positions') or []) if x is not None]
+                land = det.get('landing') if len(S) == 10 else det.get('unaccounted')
+                if pos != S or (land or 0) != L or r.get('n_elements') != len(S):
+                    bad.append('%s本目 減点の並び・着地・技数' % row['routine'])
+            if bad:
+                res.fail(label + '：' + '・'.join(sorted(set(bad))))
+            else:
+                res.ok()
+    img_sections = {(m, _higashi_img_cat(r['category'], r['sex']), r['round'])
+                    for r in csv_rows for m in [r['meet_id']]}
+    for k in pub:
+        if k[:3] in img_sections and k not in seen:
+            res.fail('%s %s %s %s位 %s が CSV に無い' % k)
+    # 予選と決勝の名簿：決勝に出た選手は、同じ区分の予選の上位10名（同点を含む）に入っている。
+    # どちらかが書き起こし（画像のPDF）の区分だけを見る（2023は決勝が文字のPDF、2024は両方とも画像）
+    names = collections.defaultdict(set)
+    for (m, c, rd, rank, nm) in pub:
+        if m in {k[0] for k in img_sections}:
+            names[(m, c, rd)].add((rank, nm))
+    for (m, c, rd) in list(names):
+        if rd != '決勝' or not ((m, c, '予選') in img_sections or (m, c, '決勝') in img_sections):
+            continue
+        final = {nm for _, nm in names[(m, c, '決勝')]}
+        top = {nm for rank, nm in names.get((m, c, '予選'), set()) if rank is not None and rank <= 10}
+        if len(final) < 9 or not final <= top:
+            res.fail('%s %s：決勝の選手が予選の上位10名に無い %s' % (m, c, sorted(final - top)))
+        else:
+            res.ok()
+    return res
+
+
 def _name_club_ok(spaced, name, rs):
     """まとまりの文字（空白区切りのまま）が「氏名［読み仮名］ 所属」になっているか。
     氏名は語の境目で終わること、読み仮名は氏名の直後の括弧だけを外すこと、所属は括弧も含めて
@@ -1296,7 +1501,7 @@ def main(argv=None):
     comps, rows = published()
     checks = [lambda: check_sporttech(comps, rows), lambda: check_nishi53(rows),
               lambda: check_nishi54(rows), lambda: check_nishi_old(rows), lambda: check_nishi51q(rows),
-              lambda: check_higashi(comps, rows),
+              lambda: check_higashi(comps, rows), lambda: check_higashi_img(comps, rows),
               lambda: check_osaka(comps, rows),
               lambda: check_internal(comps, rows)]
     if not args.no_live:

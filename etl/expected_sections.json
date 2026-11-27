@@ -49,6 +49,130 @@
    "athletes": 10,
    "rows": 10
   },
+  "higashinihon|ej-2023-09-08|Aクラス 女子|予選": {
+   "athletes": 22,
+   "rows": 42
+  },
+  "higashinihon|ej-2023-09-08|Aクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2023-09-08|Aクラス 男子|予選": {
+   "athletes": 36,
+   "rows": 70
+  },
+  "higashinihon|ej-2023-09-08|Aクラス 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2023-09-08|Bクラス 女子|予選": {
+   "athletes": 67,
+   "rows": 67
+  },
+  "higashinihon|ej-2023-09-08|Bクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2023-09-08|Bクラス 男子|予選": {
+   "athletes": 31,
+   "rows": 31
+  },
+  "higashinihon|ej-2023-09-08|Bクラス 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2023-09-08|Cクラス 女子|予選": {
+   "athletes": 90,
+   "rows": 90
+  },
+  "higashinihon|ej-2023-09-08|Cクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2023-09-08|Cクラス 男子|予選": {
+   "athletes": 45,
+   "rows": 45
+  },
+  "higashinihon|ej-2023-09-08|Cクラス 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2023-11-26|中学生 女子|予選": {
+   "athletes": 11,
+   "rows": 22
+  },
+  "higashinihon|ej-2023-11-26|中学生 男子|予選": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "higashinihon|ej-2023-11-26|園児クラス 女子|予選": {
+   "athletes": 4,
+   "rows": 8
+  },
+  "higashinihon|ej-2023-11-26|小学校1-2年生 女子|予選": {
+   "athletes": 9,
+   "rows": 18
+  },
+  "higashinihon|ej-2023-11-26|小学校1-2年生 男子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "higashinihon|ej-2023-11-26|小学校3-4年生 女子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "higashinihon|ej-2023-11-26|小学校3-4年生 男子|予選": {
+   "athletes": 12,
+   "rows": 23
+  },
+  "higashinihon|ej-2023-11-26|小学校5-6年生 女子|予選": {
+   "athletes": 33,
+   "rows": 66
+  },
+  "higashinihon|ej-2023-11-26|小学校5-6年生 男子|予選": {
+   "athletes": 16,
+   "rows": 32
+  },
+  "higashinihon|ej-2023-11-26|高校生以上 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "higashinihon|ej-2023-11-26|高校生以上 男子|予選": {
+   "athletes": 3,
+   "rows": 6
+  },
+  "higashinihon|ej-2024-09-20|Aクラス 女子|予選": {
+   "athletes": 27,
+   "rows": 53
+  },
+  "higashinihon|ej-2024-09-20|Aクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2024-09-20|Aクラス 男子|予選": {
+   "athletes": 42,
+   "rows": 84
+  },
+  "higashinihon|ej-2024-09-20|Aクラス 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2024-09-20|Bクラス 女子|予選": {
+   "athletes": 89,
+   "rows": 176
+  },
+  "higashinihon|ej-2024-09-20|Bクラス 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "higashinihon|ej-2024-09-20|Bクラス 男子|予選": {
+   "athletes": 39,
+   "rows": 77
+  },
+  "higashinihon|ej-2024-09-20|Bクラス 男子|決勝": {
+   "athletes": 9,
+   "rows": 9
+  },
   "higashinihon|ej-2024-11-02|Cクラス 女子|予選": {
    "athletes": 43,
    "rows": 86

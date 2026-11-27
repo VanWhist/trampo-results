@@ -1,5 +1,5 @@
 {
- "_comment": "東日本トランポリン協会の結果PDFのうち、ETLが読むもの。協会サイトの各大会の結果ページ（post_url）からリンクされているファイルだけを正とする（同じ区分を差し替えた古いアップロードは読まない。ファイル名の -1・-2 は差し替え後のこともあるので、名前ではなく結果ページのリンクで決めている）。個人競技のみ。シンクロ・特別賞・最優秀選手賞は読まない。include=false の大会は、個人競技の一部が画像のPDF（文字が無い）で、全区分をそろえて読めないため取り込んでいない。",
+ "_comment": "東日本トランポリン協会の結果PDFのうち、ETLが読むもの。協会サイトの各大会の結果ページ（post_url）からリンクされているファイルだけを正とする（同じ区分を差し替えた古いアップロードは読まない。ファイル名の -1・-2 は差し替え後のこともあるので、名前ではなく結果ページのリンクで決めている）。個人競技のみ。シンクロ・特別賞・最優秀選手賞は読まない。image_only_files は文字が図形の輪郭になっているPDF（Microsoft Print To PDF）。tools/transcribe_higashi_img で書き起こした etl/higashinihon_img_transcription.csv を読む（image_sha256 が変わっていたら止まる）。include=false の大会は取り込まない。",
  "meets": [
   {
    "meet_id": "ej-2022-09-09",
@@ -32,7 +32,7 @@
    "venue": "ヤマト市民体育館前橋",
    "post_url": "https://trampoline-east.jp/index.php/2023/07/24/20230724/",
    "raw_dir": "2023/東日本トランポリン協会_PDF/2023-09-08_第47回東日本トランポリン競技選手権大会",
-   "include": false,
+   "include": true,
    "files": [
     "2023個人Aクラス女子決勝.pdf",
     "2023個人Aクラス男子決勝.pdf",
@@ -48,7 +48,15 @@
     "2023個人Bクラス女子予選.pdf",
     "2023個人Bクラス男子予選.pdf",
     "2023個人Cクラス男子予選.pdf"
-   ]
+   ],
+   "image_sha256": {
+    "2023-2個人Cクラス女子予選.pdf": "b83dd31fd7a122dfc26af9cddb71e7e56ba6a5bb9634f20744b7b33deba60be5",
+    "2023個人Aクラス女子予選.pdf": "2450875a26c13f2b7b5fb211ab9f6b145e67567ac0380e36ea6e20caf3af0ace",
+    "2023個人Aクラス男子予選.pdf": "700be9274c2c54f9c65c6de320240af67ca5e642d2addb7d98eab823e314f215",
+    "2023個人Bクラス女子予選.pdf": "cd6f387693081e160c79148b5860238e8e517dde09af3d034e073e5c2b962808",
+    "2023個人Bクラス男子予選.pdf": "4f57c6d303999b70c9a1f8db96a10d5e2af42b6822a6ff4d3ef394886d85f6d3",
+    "2023個人Cクラス男子予選.pdf": "31e1091003f499dfad039d8e877a97b43b99debd2a31d621fb6aedb7a04b53ab"
+   }
   },
   {
    "meet_id": "ej-2023-11-26",
@@ -57,7 +65,7 @@
    "venue": "COREヴィレッジ体育館",
    "post_url": "https://trampoline-east.jp/index.php/2023/09/19/2023ejtf/",
    "raw_dir": "2023/東日本トランポリン協会_PDF/2023-11-26_第31回イーストジャパントランポリンフェスタ",
-   "include": false,
+   "include": true,
    "files": [
     "2023ejtf_個人女子園児予選.pdf",
     "2023ejtf_個人女子小学校1-2年生予選.pdf",
@@ -72,16 +80,23 @@
     "2023ejtf_個人女子高校生以上.pdf",
     "2023ejtf_個人男子中学生.pdf",
     "2023ejtf_個人男子高校生以上.pdf"
-   ]
+   ],
+   "image_sha256": {
+    "2023ejtf_個人女子中学生.pdf": "ad54140b17f29567a3ba92998eef496f7d3658e2b0500de9b60accf7f21f8408",
+    "2023ejtf_個人女子小学校5-6年生予選.pdf": "b11d86acfe14c0d6205424e03b3a6c43b6bfe232538820fd37318f79d1af65e0",
+    "2023ejtf_個人女子高校生以上.pdf": "9559b2a03ed134248b416e85bd0bde884e30a1fb0ca0199d476d8ae089004c0f",
+    "2023ejtf_個人男子中学生.pdf": "29d6cc1213e419f71cbdf0cc7ab2b95075eb938d81bb68f15a12120723f49494",
+    "2023ejtf_個人男子高校生以上.pdf": "611e6d01e5363f4372a09363b3b5f8952297786dc552c46e4eee267c9e600564"
+   }
   },
   {
    "meet_id": "ej-2024-09-20",
    "date": "2024-09-20",
    "name": "第48回東日本トランポリン競技選手権大会",
-   "venue": "",
+   "venue": "ヤマト市民体育館前橋",
    "post_url": "https://trampoline-east.jp/index.php/2024/08/03/48east/",
    "raw_dir": "2024/東日本トランポリン協会_PDF/2024-09-20_第48回東日本トランポリン競技選手権大会",
-   "include": false,
+   "include": true,
    "files": [],
    "image_only_files": [
     "bmqresult.pdf",
@@ -92,7 +107,17 @@
     "個人男子Aクラス予選.pdf",
     "個人男子Aクラス決勝.pdf",
     "個人男子Bクラス決勝.pdf"
-   ]
+   ],
+   "image_sha256": {
+    "bmqresult.pdf": "9fb88d6d868d69c080fe67c58c74358f649ca042e11454c8baac9887bf92fd7f",
+    "bwqresult.pdf": "a3c86e7bf4bdce5e1217cd8a4e8738d36ccc3b18d482374fead1e640abccfff4",
+    "個人女子Aクラス予選.pdf": "1f5cd04673f262e47905682a72aaa8dd405709c517e91a3e085b92dc30905bb8",
+    "個人女子Aクラス決勝.pdf": "2be9910bd19e2390f69b2a668934da0a85a5e7e026c51381c0cb47d302daa415",
+    "個人女子Bクラス決勝.pdf": "171dde7e36100fbb7418603d6da6a9986526aa19abf9b19361efb6fcf710ae76",
+    "個人男子Aクラス予選.pdf": "0a4bd70b4c67beacce9f1c542973a7855192f35e901671f971458df475011800",
+    "個人男子Aクラス決勝.pdf": "97362a4af66713ae9d5470eb3d9efb55ab401fe6707d912515bdf95b3ccff336",
+    "個人男子Bクラス決勝.pdf": "ddca37c0ea927951733e3ed0f00163c9677a0f333ab1221a6c1fa3d78b57a851"
+   }
   },
   {
    "meet_id": "ej-2024-11-02",
