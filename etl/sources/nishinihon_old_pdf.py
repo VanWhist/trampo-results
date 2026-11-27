@@ -21,7 +21,9 @@ PC の同じ書体と照らして作った対応表（etl/nishinihon_cid_maps.js
   英字の書体と日本語の書体で字の上端が 3.7pt ずれるので、順位の行と氏名の行は同じ1行として読む
   （所属「焼津高校Saltar」も、日本語の部分と英字の部分が別の行に見える）。
   減点のある演技は Total が「–0.2→6.380」の形になる。
-  予選のPDFは画像だけで文字が無いので、ここでは読まない。
+  予選のPDFは文字が図形の輪郭（ベクター）になっていて取り出せないので、書き起こした CSV
+  （etl/nishinihon_51q_transcription.csv、手順は tools/transcribe_nishi51q/README.md）を読む。
+  PDF の SHA-256 が書き起こしたときと違えば止める。読むときにも点の式を全部確かめる。
 """
 import collections
 import hashlib
@@ -372,6 +374,59 @@ def _check_51(a):
         raise ValueError('E+D+H+T−Pen が Total・Score と合わない: ' + where)
 
 
+# ---- 第51回予選（書き起こし CSV） ----------------------------------------------
+
+QUAL51 = {'rel': '2023/西日本トランポリン協会_PDF/51th_WestJapanTRA_Qualification_results.pdf',
+          'sha256': '62ef6b14073bb319af68026bcca2f716c32287f750cfd18d396bdcb521d97d0c',
+          'csv': os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                              'nishinihon_51q_transcription.csv')}
+
+
+def athletes_51q():
+    """書き起こし CSV から予選の選手（2本ずつ）を返す。点の式が合わなければ止める。"""
+    import csv
+    path = os.path.join(config.RAW_ROOT, *QUAL51['rel'].split('/'))
+    if not os.path.exists(path):
+        return []
+    if hashlib.sha256(open(path, 'rb').read()).hexdigest() != QUAL51['sha256']:
+        raise ValueError('第51回予選のPDFが書き起こしたときと違います（tools/transcribe_nishi51q で作り直す）')
+    by = collections.OrderedDict()
+    with io.open(QUAL51['csv'], encoding='utf-8') as fh:
+        for row in csv.DictReader(fh):
+            if row['dns'] == '1':
+                continue
+            key = (row['category'], int(row['rank']), row['name'])
+            by.setdefault(key, []).append(row)
+    out = []
+    for (cat, rank, name), rows in by.items():
+        where = '第51回予選 %s %d位 %s' % (cat, rank, name)
+        if len({r['club'] for r in rows}) != 1 or len({r['Score'] for r in rows}) != 1:
+            raise ValueError('所属か予選の値が行で違う: ' + where)
+        score = float(rows[0]['Score'])
+        routines = []
+        for r in rows:
+            s = [int(r['S%d' % i]) if r['S%d' % i] != '' else None for i in range(1, 11)]
+            n = sum(1 for v in s if v is not None)
+            if s[:n] != [v for v in s if v is not None]:
+                raise ValueError('減点の並びに空きがある: ' + where)
+            L = int(r['L']) if r['L'] != '' else None
+            e, h, t, tot = float(r['E']), float(r['H']), float(r['Time']), float(r['Total'])
+            d = float(r['D']) if r['D'] != '' else None
+            if abs(2 * n - (sum(v for v in s if v is not None) + (L or 0)) / 10 - e) > 0.0015:
+                raise ValueError('E が減点の合計と合わない: ' + where)
+            if abs(e + (d or 0.0) + h + t - tot) > 0.0015:
+                raise ValueError('E+D+H+T が Total と合わない: ' + where)
+            routines.append({'routine': int(r['routine']), 'S': s, 'Lnd': L, 'A': None, 'Exe': e,
+                             'Diff': d, 'ToF': t, 'HD': h, 'Pen': None, 'Score': tot, 'Total': tot,
+                             'page': int(r['page']), 'how': r['how'], 'note': r['note']})
+        # 1本目を演技していない選手（合計 0）は1本目の行が無い。予選の値は残りの合計と同じ
+        if abs(sum(x['Total'] for x in routines) - score) > 0.0015:
+            raise ValueError('2本の合計が予選の値と合わない: ' + where)
+        out.append({'category': cat, 'round': '予選', 'rank': rank, 'name': name,
+                    'club': rows[0]['club'], 'routines': routines, 'qualifying_total': score})
+    return out
+
+
 # ---- まとめ ------------------------------------------------------------------
 
 def load_all():
@@ -412,6 +467,20 @@ def load_all():
                               flags=['字形番号を対応表で文字に戻して読んだ'])
                 rec['provenance']['source_url'] = config.SOURCES['nishinihon']['base_url']
                 performances.append(rec)
+        if meet['layout'] == '51':
+            # 予選は書き起こし CSV から。演技の番号は決勝のあとに続ける（決勝の ID を変えない）
+            for a in athletes_51q():
+                for rt in a['routines']:
+                    seq += 1
+                    how = ('文字読み取りが既存の選手名と一致' if rt['how'] == 'ocr+db'
+                           else '氏名・所属を画像で確認')
+                    flags = ['図形の文字を書き起こした（数字は字の形の照合、%s）' % how]
+                    if rt['note']:
+                        flags.append(rt['note'])
+                    rec = _record(seq, a, rt, rt['routine'], a['category'], '予選',
+                                  QUAL51['rel'].split('/')[-1], 2, meet=meet, flags=flags)
+                    rec['provenance']['source_url'] = config.SOURCES['nishinihon']['base_url']
+                    performances.append(rec)
         competitions.append({
             'meet_id': meet['meet_id'], 'date': meet['date'], 'name': meet['name'],
             'level': meet['level'], 'season': meet['season'],

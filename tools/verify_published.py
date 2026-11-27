@@ -902,7 +902,8 @@ def check_nishi_old(rows):
         details = jload(os.path.join(DATA, 'details', '%s.json' % meet_id))
         pub = collections.defaultdict(list)
         for r in rows:
-            if r['meet_id'] == meet_id:
+            # 第51回の予選は書き起こし CSV で別に照合する（check_nishi51q）
+            if r['meet_id'] == meet_id and not (layout == '51' and r['round'] == '予選'):
                 pub[(r['category'], r['round'], r['rank'], norm_name(r['athlete_name']))].append(r)
         seen = set()
         for a in read:
@@ -946,6 +947,78 @@ def check_nishi_old(rows):
                     res.ok()
         for key in set(pub) - seen:
             res.fail('%s %s %s %s位 %s が PDF に無い' % ((meet_id,) + key))
+    return res
+
+
+def check_nishi51q(rows):
+    """第51回予選：書き起こし CSV（etl/nishinihon_51q_transcription.csv）と公開を突き合わせる。
+    CSV 自体の点の式（E と減点・E+D+H+T=Total・2本の合計＝予選の値）もここで別に確かめる。
+    PDF は文字が図形なので、ここでは PDF を読み直さない（SHA-256 だけ確かめる）。"""
+    import csv
+    import hashlib
+    res = Result('西日本 第51回予選：書き起こしCSV と公開（点の式も検算）')
+    pdf = os.path.join(RAW, '2023', '西日本トランポリン協会_PDF', '51th_WestJapanTRA_Qualification_results.pdf')
+    if hashlib.sha256(open(pdf, 'rb').read()).hexdigest() != \
+            '62ef6b14073bb319af68026bcca2f716c32287f750cfd18d396bdcb521d97d0c':
+        res.fail('PDF が書き起こしたときと違う')
+        return res
+    details = jload(os.path.join(DATA, 'details', 'nw-2023-09-29.json'))
+    pub = collections.defaultdict(list)
+    for r in rows:
+        if r['meet_id'] == 'nw-2023-09-29' and r['round'] == '予選':
+            pub[(r['category'], r['rank'], norm_name(r['athlete_name']))].append(r)
+    fl = lambda v: float(v) if v not in ('', None) else None
+    groups = collections.defaultdict(list)
+    dns = 0
+    with io.open(os.path.join(REPO, 'etl', 'nishinihon_51q_transcription.csv'), encoding='utf-8') as fh:
+        for row in csv.DictReader(fh):
+            if row['dns'] == '1':
+                dns += 1
+                continue
+            groups[(row['category'], int(row['rank']), norm_name(row['name']))].append(row)
+    seen = set()
+    for key, rs in groups.items():
+        label = '%s %d位 %s' % key
+        seen.add(key)
+        got = sorted(pub.get(key, []), key=lambda r: r['routine'])
+        if len(got) != len(rs):
+            res.fail('%s：CSV %d本／公開 %d本' % (label, len(rs), len(got)))
+            continue
+        score = fl(rs[0]['Score'])
+        if abs(sum(fl(r['Total']) for r in rs) - score) > 0.0015:
+            res.fail(label + '：CSV の2本の合計が予選の値と合わない')
+            continue
+        for row, r in zip(sorted(rs, key=lambda x: int(x['routine'])), got):
+            S = [int(row['S%d' % i]) for i in range(1, 11) if row['S%d' % i] != '']
+            L = int(row['L']) if row['L'] != '' else 0
+            e, d, h, t, tot = fl(row['E']), fl(row['D']) or 0.0, fl(row['H']), fl(row['Time']), fl(row['Total'])
+            bad = []
+            if abs(2 * len(S) - (sum(S) + L) / 10 - e) > 0.0015:
+                bad.append('CSV の E と減点')
+            if abs(e + d + h + t - tot) > 0.0015:
+                bad.append('CSV の合計の式')
+            for c, x, y in (('E', e, r.get('E')), ('D', d, r.get('D')), ('HD', h, r.get('HD')),
+                            ('T', t, r.get('T')), ('合計', tot, r.get('total')),
+                            ('予選の値', score, r.get('qualifying_total'))):
+                if not close(x, y):
+                    bad.append(c)
+            if r.get('Pen') is not None:
+                bad.append('Pen')
+            if (r.get('club') or '').replace(' ', '') != row['club'].replace(' ', ''):
+                bad.append('所属')
+            if r.get('routine') != int(row['routine']):
+                bad.append('本目')
+            det = details.get(r['performance_id']) or {}
+            pos = [x for x in (det.get('positions') or []) if x is not None]
+            land = det.get('landing') if len(S) == 10 else det.get('unaccounted')
+            if pos != S or (land or 0) != L or r.get('n_elements') != len(S):
+                bad.append('減点の並び・着地・技数')
+            if bad:
+                res.fail('%s %s本目：%s' % (label, row['routine'], '・'.join(bad)))
+            else:
+                res.ok()
+    for key in set(pub) - seen:
+        res.fail('%s %d位 %s が CSV に無い' % key)
     return res
 
 
@@ -1222,7 +1295,7 @@ def main(argv=None):
     sys.stdout.reconfigure(encoding='utf-8')
     comps, rows = published()
     checks = [lambda: check_sporttech(comps, rows), lambda: check_nishi53(rows),
-              lambda: check_nishi54(rows), lambda: check_nishi_old(rows),
+              lambda: check_nishi54(rows), lambda: check_nishi_old(rows), lambda: check_nishi51q(rows),
               lambda: check_higashi(comps, rows),
               lambda: check_osaka(comps, rows),
               lambda: check_internal(comps, rows)]

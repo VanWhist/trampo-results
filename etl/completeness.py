@@ -247,6 +247,9 @@ def check_nishinihon_pairs(perfs, rep):
     for (label, cat, name), rs in sorted(by.items()):
         counts['構造'] += 1
         routines = sorted(r['routine'] for r in rs if r['routine'])
+        if routines == [2] and rs[0].get('qualifying_total') is not None                 and abs(rs[0]['total'] - rs[0]['qualifying_total']) <= 0.0015:
+            counts['合計照合'] += 1        # 1本目を演技していない（合計 0）。予選の値＝2本目
+            continue
         if routines != [1, 2]:
             rep.error('完全性', '%s %s %s の予選が1本目・2本目でそろっていません（%s）'
                       % (label, cat, name, routines))
