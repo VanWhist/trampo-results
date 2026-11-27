@@ -14,7 +14,8 @@ import sys
 import time
 
 from . import aggregate, config, name_variants, normalize, validate
-from .sources import higashinihon_pdf, nishinihon, nishinihon_pdf, osaka, osaka_html, sporttech
+from .sources import (higashinihon_pdf, nishinihon, nishinihon_old_pdf, nishinihon_pdf, osaka,
+                      osaka_html, sporttech)
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -108,9 +109,10 @@ def main(argv=None):
     nw_comps, nw_perfs = nishinihon.load_all()
     n54_comps, n54_perfs = nishinihon_pdf.load_all()   # 第54回はPDFを直接読む
     ej_comps, ej_perfs = higashinihon_pdf.load_all()   # 東日本（2022〜、文字のあるPDFのみ）
+    nwo_comps, nwo_perfs = nishinihon_old_pdf.load_all()   # 西日本 第47回・第51回決勝（字形の対応表で読む）
 
-    competitions = st_comps + os_comps + nw_comps + n54_comps + ej_comps
-    performances = st_perfs + os_perfs + nw_perfs + n54_perfs + ej_perfs
+    competitions = st_comps + os_comps + nw_comps + n54_comps + ej_comps + nwo_comps
+    performances = st_perfs + os_perfs + nw_perfs + n54_perfs + ej_perfs + nwo_perfs
     print('  大会 %d / 演技 %d（全種目）' % (len(competitions), len(performances)))
 
     # 大会の level を演技側にも持たせる（ジャッジ分析のフィルタで使う）

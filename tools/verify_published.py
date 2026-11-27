@@ -710,6 +710,245 @@ def check_higashi(comps, rows):
 
 
 
+# ---- 2c. 西日本 第47回・第51回決勝（字形番号の PDF） ------------------------------------
+
+# 日本語の字が「(cid:番号)」としか取り出せない PDF。字の対応表 etl/nishinihon_cid_maps.json
+# （tools/build_cid_maps.py が字形の輪郭の完全一致で作ったもの）だけは ETL と共有する。
+# 行のまとめ方・値の読み方（列の位置ではなく、値の並びと小数の桁の形）はここで別に書く。
+OLD_NISHI = [('nw-2019-09-20', '2019/西日本トランポリン協会_PDF/47th_WestJapanTRA_Final_results.pdf', '47'),
+             ('nw-2023-09-29', '2023/西日本トランポリン協会_PDF/51th_WestJapanTRA_Final_results.pdf', '51')]
+OLD_CAT = re.compile(r'(小学生低学年|小学生高学年|中学生|高校生|大学生|一般|オープン)\s*(男子|女子)')
+
+
+def _old_lines(path, rel, tol):
+    """字を対応表で文字に戻し、上端が tol 以内の字を1行にして、字の間が 1.5pt を超えたら空白を入れる。"""
+    import hashlib
+    import logging
+    logging.getLogger('pdfminer').setLevel(logging.ERROR)
+    import pdfplumber
+    maps = jload(os.path.join(REPO, 'etl', 'nishinihon_cid_maps.json'))['pdfs'][rel]
+    if hashlib.sha256(open(path, 'rb').read()).hexdigest() != maps['sha256']:
+        raise SystemExit('PDF が字の対応表を作ったときと違う: ' + rel)
+    pages = []
+    with pdfplumber.open(path) as pdf:
+        for page in pdf.pages:
+            chars = []
+            for c in page.chars:
+                m = re.fullmatch(r'\(cid:(\d+)\)', c['text'])
+                t = maps['fonts'][c['fontname']][m.group(1)] if m else c['text']
+                chars.append((c['top'], c['x0'], c['x1'], t))
+            chars.sort()
+            rows = []
+            for ch in chars:
+                if rows and ch[0] - rows[-1][0] <= tol:
+                    rows[-1][1].append(ch)
+                else:
+                    rows.append([ch[0], [ch]])
+            lines = []
+            for _, cs in rows:
+                cs.sort(key=lambda c: c[1])
+                s, last = '', None
+                for _, x0, x1, t in cs:
+                    if last is not None and x0 - last > 1.5:
+                        s += ' '
+                    s += t
+                    last = x1
+                lines.append(_unradical(re.sub(r'\s+', ' ', s).strip()))
+            pages.append([l for l in lines if l])
+    return pages
+
+
+OLD_SCR = {'Escr': ('E', 1), 'Hscr': ('HD', 2), 'Dscr': ('D', 1), 'Tscr': ('T', 3)}
+
+
+def _old_values_47(tokens, order):
+    """第47回の値：整数（S1..Sn・L・A）のあとに、小数が4つの得点（並びはページの列名の行のとおり。
+    「Escr Hscr Dscr」のページと「Escr Dscr Hscr」のページがある。E・D は1桁、HD は2桁、T は3桁）、
+    R.Total(3桁)［Pen(1桁) Total(3桁)］と並ぶ。形が合わなければ None。"""
+    ints = [t for t in tokens if re.fullmatch(r'\d+', t)]
+    decs = [t for t in tokens if re.fullmatch(r'\d+\.\d+', t)]
+    shape = [len(d.split('.')[1]) for d in decs]
+    base = [OLD_SCR[c][1] for c in order] + [3]
+    if shape not in (base, base + [1, 3]) or len(ints) < 2:
+        return None
+    v = {'S': [int(t) for t in ints[:-2]], 'L': int(ints[-2]), 'A': int(ints[-1]), 'RT': float(decs[4])}
+    for c, d in zip(order, decs):
+        v[OLD_SCR[c][0]] = float(d)
+    if len(decs) == 7:
+        v['Pen'], v['Total'] = float(decs[5]), float(decs[6])
+    return v
+
+
+def _read_old_47(pages):
+    """(区分, ラウンド, 順位, 氏名, 所属, [値…]) を返す。"""
+    out, cat, rnd, order = [], None, None, None
+    for lines in pages:
+        if not any(re.match(r'\d{4}/\d+/\d+ 西日本トランポリン協会 \d+ / \d+$', l) for l in lines):
+            continue                                   # 賞の発表・オープンの予選合計の一覧
+        pending, cur = [], None
+        started = not any('個人競技' in l for l in lines)   # 続きのページは最初から選手の行
+        for l in lines:
+            if '個人競技' in l:
+                m = OLD_CAT.search(l)
+                cat = '%s %s' % (m.group(1), m.group(2))
+                rnd = '予選' if '予選' in l else '決勝'
+                continue
+            if l.startswith('Rank Name'):
+                started = True
+                order = [t for t in l.split() if t in OLD_SCR]
+                continue
+            if not started or re.match(r'\d{4}/\d+/\d+ ', l):
+                continue
+            tokens = l.split()
+            head = tokens[0]
+            body = tokens[1:] if head in ('Q1', 'Q2', 'F') else tokens
+            is_rank = (len(body) > 1 and re.fullmatch(r'\d+|棄権', body[0]) is not None
+                       and not re.fullmatch(r'\d+(\.\d+)?', body[1]))
+            if is_rank:
+                # 順位と氏名の行（決勝は同じ行に F と値が付く）
+                k = 1
+                while k < len(body) and body[k] not in ('F', 'Q1', 'Q2') \
+                        and not re.fullmatch(r'\d+(\.\d+)?', body[k]):
+                    k += 1
+                rest = [t for t in body[k:] if t not in ('F', 'Q1', 'Q2')]
+                v = _old_values_47(rest, order) if rest else None
+                if rest and v is None:
+                    raise ValueError('値の形が違う: %r' % l)
+                cur = {'cat': cat, 'rnd': rnd, 'rank': body[0], 'name': ' '.join(body[1:k]),
+                       'club': None, 'vals': pending[:]}
+                pending = []
+                if v:
+                    cur['vals'].append(v)
+                out.append(cur)
+                continue
+            v = _old_values_47(body, order)
+            if v is not None:
+                if cur is not None and cur['club'] is None and (head == 'Q2' or cur['rnd'] == '決勝'):
+                    cur['vals'].append(v)
+                else:
+                    pending.append(v)                  # 次の選手の Q1
+            elif head in ('Q1', 'Q2', 'F') and len(tokens) == 1:
+                continue                               # 印だけの行（値は別の行に出ている）
+            elif cur is not None and cur['club'] is None:
+                cur['club'] = l.replace(' ', '')
+            else:
+                raise ValueError('読めない行: %r' % l)
+        if pending:
+            raise ValueError('どの選手のものか分からない値が残った')
+    return out
+
+
+def _read_old_51(pages):
+    out = []
+    for lines in pages:
+        cat, started = None, False
+        for l in lines:
+            m = OLD_CAT.search(l)
+            if not started and m:
+                cat = '%s %s' % (m.group(1), m.group(2))
+                continue
+            if l.startswith('S1 S2'):
+                started = True
+                continue
+            if not started or l.startswith('Generated by'):
+                continue
+            tokens = l.split()
+            if not re.fullmatch(r'\d+\.', tokens[0]):
+                raise ValueError('読めない行: %r' % l)
+            first_num = next(k for k, t in enumerate(tokens[1:], 1) if re.fullmatch(r'\d+', t))
+            text = tokens[1:first_num]
+            nums = tokens[first_num:]
+            pen = None
+            if re.fullmatch(r'[–-]\d+\.\d→\d+\.\d+', nums[-2]):
+                pen, total = nums[-2][1:].split('→')
+                nums = nums[:-2] + [total, nums[-1]]
+            ints = [t for t in nums if re.fullmatch(r'\d+', t)]
+            decs = [t for t in nums if re.fullmatch(r'\d+\.\d+', t)]
+            shape = [len(d.split('.')[1]) for d in decs]
+            if shape == [1, 1, 2, 2, 3, 3]:
+                e, d, h, t, total, score = decs
+            elif shape == [1, 2, 2, 3, 3]:
+                (e, h, t, total, score), d = decs, None
+            else:
+                raise ValueError('値の形が違う: %r' % l)
+            out.append({'cat': cat, 'rnd': '決勝', 'rank': tokens[0][:-1],
+                        'name': ' '.join(text[:2]), 'club': ''.join(text[2:]),
+                        # 着地 L は10本跳んだ演技にだけ印字される（中断した演技は S だけ）
+                        'vals': [{'S': [int(x) for x in (ints[:10] if len(ints) == 11 else ints)],
+                                  'L': int(ints[10]) if len(ints) == 11 else 0, 'A': None,
+                                  'E': float(e), 'HD': float(h), 'D': None if d is None else float(d),
+                                  'T': float(t), 'RT': None,
+                                  'Pen': None if pen is None else float(pen),
+                                  'Total': float(total), 'Score': float(score)}]})
+    return out
+
+
+def _old_club(s):
+    """所属は空白の有無と、ETL が揃えている異体字（VARIANTS・慶應）を除いて比べる。"""
+    s = re.sub(r'\s+', '', s or '').replace('慶應', '慶応')
+    for x, y in VARIANTS.items():
+        s = s.replace(x, y)
+    return s
+
+
+def check_nishi_old(rows):
+    res = Result('西日本 第47回・第51回決勝：PDF（字の対応表＋行テキストで読み直し）と公開')
+    for meet_id, rel, layout in OLD_NISHI:
+        path = os.path.join(RAW, *rel.split('/'))
+        if layout == '47':
+            read = _read_old_47(_old_lines(path, rel, 2.5))
+        else:
+            read = _read_old_51(_old_lines(path, rel, 4.5))
+        details = jload(os.path.join(DATA, 'details', '%s.json' % meet_id))
+        pub = collections.defaultdict(list)
+        for r in rows:
+            if r['meet_id'] == meet_id:
+                pub[(r['category'], r['round'], r['rank'], norm_name(r['athlete_name']))].append(r)
+        seen = set()
+        for a in read:
+            label = '%s %s %s %s位 %s' % (meet_id, a['cat'], a['rnd'], a['rank'], a['name'])
+            if a['rank'] == '棄権':
+                if a['vals']:
+                    res.fail(label + '：棄権なのに値がある')
+                continue
+            key = (a['cat'], a['rnd'], int(a['rank']), norm_name(a['name']))
+            rs = sorted(pub.get(key, []), key=lambda r: r['routine'])
+            seen.add(key)
+            want = 2 if a['rnd'] == '予選' else 1
+            if len(a['vals']) != want or len(rs) != want:
+                res.fail('%s：PDF %d本／公開 %d本（%d本のはず）' % (label, len(a['vals']), len(rs), want))
+                continue
+            club_pub = {_old_club(r.get('club')) for r in rs}
+            if club_pub != {_old_club(a['club'])}:
+                res.fail('%s：所属 PDF %s／公開 %s' % (label, a['club'], sorted(club_pub)))
+                continue
+            qt = a['vals'][-1].get('Total') if a['rnd'] == '予選' else None
+            for k, (v, r) in enumerate(zip(a['vals'], rs), 1):
+                score = v['RT'] - (v.get('Pen') or 0.0) if v['RT'] is not None else v['Score']
+                det = details.get(r['performance_id']) or {}
+                pos = [x for x in (det.get('positions') or []) if x is not None]
+                n = len(v['S'])
+                land = det.get('landing') if n == 10 else det.get('unaccounted')
+                checks = [('E', v['E'], r.get('E')), ('HD', v['HD'], r.get('HD')),
+                          ('D', v['D'] if v['D'] is not None else 0.0, r.get('D')),
+                          ('T', v['T'], r.get('T')), ('合計', score, r.get('total')),
+                          ('Pen', v.get('Pen'), r.get('Pen')),
+                          ('予選の値', qt, r.get('qualifying_total'))]
+                bad = [c for c, x, y in checks if not close(x, y)]
+                if r.get('routine') != (k if want > 1 else 1):
+                    bad.append('本目')
+                if pos != v['S'] or r.get('n_elements') != n or (land or 0) != v['L'] \
+                        or bool(r.get('interrupted')) != (n < 10):
+                    bad.append('減点の並び・着地・技数')
+                if bad:
+                    res.fail('%s %d本目：%s' % (label, k, '・'.join(bad)))
+                else:
+                    res.ok()
+        for key in set(pub) - seen:
+            res.fail('%s %s %s %s位 %s が PDF に無い' % ((meet_id,) + key))
+    return res
+
+
 def _name_club_ok(spaced, name, rs):
     """まとまりの文字（空白区切りのまま）が「氏名［読み仮名］ 所属」になっているか。
     氏名は語の境目で終わること、読み仮名は氏名の直後の括弧だけを外すこと、所属は括弧も含めて
@@ -983,7 +1222,8 @@ def main(argv=None):
     sys.stdout.reconfigure(encoding='utf-8')
     comps, rows = published()
     checks = [lambda: check_sporttech(comps, rows), lambda: check_nishi53(rows),
-              lambda: check_nishi54(rows), lambda: check_higashi(comps, rows),
+              lambda: check_nishi54(rows), lambda: check_nishi_old(rows),
+              lambda: check_higashi(comps, rows),
               lambda: check_osaka(comps, rows),
               lambda: check_internal(comps, rows)]
     if not args.no_live:

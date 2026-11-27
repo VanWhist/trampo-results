@@ -258,9 +258,11 @@ def check_nishinihon_pairs(perfs, rep):
             continue
         counts['合計照合'] += 1
         want = totals.pop()
-        got = round(sum(scores), 2)
-        if abs(want - got) > 0.005:
-            rep.error('完全性', '%s %s %s の予選合計が合いません：印字 %.2f / 1本目+2本目 %.2f。'
+        # 第47回（2019）は点が小数3桁（T が 13.195 など）。2桁に丸めてから比べると丸めの向きで
+        # 0.005 ずれるので、丸めずに比べる（浮動小数の誤差だけ許す）。
+        got = sum(scores)
+        if abs(want - got) > 0.0015:
+            rep.error('完全性', '%s %s %s の予選合計が合いません：印字 %.3f / 1本目+2本目 %.3f。'
                                 '2行目（所属とQ2）が別の選手に付いている可能性があります'
                       % (label, cat, name, want, got))
     return counts

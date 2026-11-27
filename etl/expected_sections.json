@@ -209,6 +209,166 @@
    "athletes": 7,
    "rows": 14
   },
+  "nishinihon|nw-2019-09-20|オープン 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|オープン 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|一般 女子|予選": {
+   "athletes": 5,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|一般 女子|決勝": {
+   "athletes": 5,
+   "rows": 5
+  },
+  "nishinihon|nw-2019-09-20|一般 男子|予選": {
+   "athletes": 8,
+   "rows": 16
+  },
+  "nishinihon|nw-2019-09-20|一般 男子|決勝": {
+   "athletes": 8,
+   "rows": 8
+  },
+  "nishinihon|nw-2019-09-20|中学生 女子|予選": {
+   "athletes": 62,
+   "rows": 124
+  },
+  "nishinihon|nw-2019-09-20|中学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|中学生 男子|予選": {
+   "athletes": 44,
+   "rows": 88
+  },
+  "nishinihon|nw-2019-09-20|中学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|大学生 女子|予選": {
+   "athletes": 18,
+   "rows": 36
+  },
+  "nishinihon|nw-2019-09-20|大学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|大学生 男子|予選": {
+   "athletes": 25,
+   "rows": 50
+  },
+  "nishinihon|nw-2019-09-20|大学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|小学生低学年 女子|予選": {
+   "athletes": 26,
+   "rows": 52
+  },
+  "nishinihon|nw-2019-09-20|小学生低学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|小学生低学年 男子|予選": {
+   "athletes": 14,
+   "rows": 28
+  },
+  "nishinihon|nw-2019-09-20|小学生低学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|小学生高学年 女子|予選": {
+   "athletes": 113,
+   "rows": 226
+  },
+  "nishinihon|nw-2019-09-20|小学生高学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|小学生高学年 男子|予選": {
+   "athletes": 40,
+   "rows": 80
+  },
+  "nishinihon|nw-2019-09-20|小学生高学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|高校生 女子|予選": {
+   "athletes": 42,
+   "rows": 84
+  },
+  "nishinihon|nw-2019-09-20|高校生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2019-09-20|高校生 男子|予選": {
+   "athletes": 32,
+   "rows": 64
+  },
+  "nishinihon|nw-2019-09-20|高校生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|オープン 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|オープン 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|一般 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|一般 男子|決勝": {
+   "athletes": 6,
+   "rows": 6
+  },
+  "nishinihon|nw-2023-09-29|中学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|中学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|大学生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|大学生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|小学生低学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|小学生低学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|小学生高学年 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|小学生高学年 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|高校生 女子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
+  "nishinihon|nw-2023-09-29|高校生 男子|決勝": {
+   "athletes": 10,
+   "rows": 10
+  },
   "nishinihon|nw-2025-09-12|オープン 女子|決勝": {
    "athletes": 10,
    "rows": 10

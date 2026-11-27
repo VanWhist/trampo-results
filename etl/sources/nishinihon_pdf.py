@@ -322,7 +322,9 @@ def load_all():
     return ([competition] if performances else []), performances
 
 
-def _record(seq, athlete, rt, index, category, round_label, pdf_name, n_routines):
+def _record(seq, athlete, rt, index, category, round_label, pdf_name, n_routines,
+            meet=MEET, extra_a=None, flags=()):
+    """1演技のレコード。第47回・第51回（nishinihon_old_pdf.py）も meet を渡して使う。"""
     n = sum(1 for v in rt['S'] if v is not None)
     positions, unaccounted = [], 0
     for k in range(10):
@@ -343,8 +345,8 @@ def _record(seq, athlete, rt, index, category, round_label, pdf_name, n_routines
     check_no_radicals(athlete['name'], '氏名')
     check_no_radicals(athlete['club'], '所属')
     return {
-        'performance_id': '%s|%04d' % (MEET['meet_id'], seq),
-        'meet_id': MEET['meet_id'], 'date': MEET['date'], 'meet_name': MEET['name'],
+        'performance_id': '%s|%04d' % (meet['meet_id'], seq),
+        'meet_id': meet['meet_id'], 'date': meet['date'], 'meet_name': meet['name'],
         'source': 'nishinihon', 'official': config.SOURCES['nishinihon']['official'],
         'discipline': '個人', 'category': category,
         'sex': 'female' if '女子' in category else ('male' if '男子' in category else ''),
@@ -358,7 +360,7 @@ def _record(seq, athlete, rt, index, category, round_label, pdf_name, n_routines
         'Bonus': None, 'Pen': rt['Pen'], 'DPen': None,
         'n_elements': n,
         'deduct_positions': positions, 'deduct_landing': landing,
-        'deduct_extra_a': None, 'deduct_unaccounted': unaccounted,
+        'deduct_extra_a': extra_a, 'deduct_unaccounted': unaccounted,
         'deduct_unit': 'median2_sum_tenths',
         'judge_E': {}, 'judge_HD': {}, 'panel_key': None,
         'state': None, 'stage_id': None, 'frame_id': None, 'perf_id_raw': None,
@@ -369,7 +371,8 @@ def _record(seq, athlete, rt, index, category, round_label, pdf_name, n_routines
             'source_url': config.SOURCES['nishinihon']['base_url'],
             'raw_filename': '%s p%d' % (pdf_name, rt['page']),
             'imported_at': '', 'parser_version': config.PARSER_VERSION,
-            'correction_flag': ('訂正版を採用' if '_訂正' in pdf_name else '')
-                               + ('／D空欄を0として採用（規定演技）' if d_implicit_zero else ''),
+            'correction_flag': '／'.join(
+                (['訂正版を採用'] if '_訂正' in pdf_name else [])
+                + (['D空欄を0として採用（規定演技）'] if d_implicit_zero else []) + list(flags)),
         },
     }
